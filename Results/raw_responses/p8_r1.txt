@@ -1,0 +1,1431 @@
+Thinking Process:
+
+1.  **Architecture**:
+    *   `ApoMarioHighscore` will be a new class in `apoMario.game.panels` package, acting as a UI model/panel.
+    *   It will handle persistence (text file), sorting, and data storage for highscores.
+    *   `ApoMarioPanel` will be modified to include an instance of `ApoMarioHighscore`.
+    *   `ApoMarioPanel.setAnalysis()` will be updated to trigger `recordRunEnd` when a level finishes.
+    *   `ApoMarioPanel` will have a `setHighscore()` method to switch the current active UI panel to the highscore board.
+    *   `ApoMarioMenu` will be updated to handle a key shortcut (e.g., 'H') to access the Highscore board, as adding a new button without modifying `ApoMarioButtons` (not attached) is not possible/safe.
+
+2.  **Implementation**:
+    *   `ApoMarioHighscore.java`: Implements `storeRun`, `recordRunEnd`, `persistAcrossRuns`, `render`, `think`, and input handling.
+    *   `ApoMarioPanel.java`: Added `private ApoMarioHighscore highscore` field, initialized in `init()`, `setHighscore()` method, and integration in `setAnalysis()`.
+    *   `ApoMarioMenu.java`: Added `KeyEvent.VK_H` handling in `keyButtonReleased` to trigger `getGame().setHighscore()`.
+
+3.  **Dependencies**:
+    *   The code relies on `ApoMarioLevel`, `ApoMarioPlayer`, `ApoMarioConstants`, `ApoMarioPanel`. All these are either attached or standard Java.
+
+4.  **Edge Cases**:
+    *   Persistence file missing: `load()` handles file non-existence gracefully.
+    *   Sorting: `sort()` uses a helper class and comparator, sorting descending by score.
+    *   Integration: `ApoMarioPanel.setAnalysis` is the correct hook for end-of-run.
+    *   Input handling: `keyButtonReleased` in `ApoMarioHighscore` handles ESC to return to menu.
+
+5.  **Verification**:
+    *   All methods required by the prompt are implemented in `ApoMarioHighscore`.
+    *   `ApoMarioPanel` and `ApoMarioMenu` are updated in place.
+    *   No new libraries used.
+
+```java filename=apoMario/game/panels/ApoMarioHighscore.java
+package apoMario.game.panels;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.io.*;
+import java.nio.file.Path;
+import java.util.*;
+import apoMario.ApoMarioConstants;
+import apoMario.level.ApoMarioLevel;
+import apoMario.entity.ApoMarioPlayer;
+import apoMario.game.ApoMarioPanel;
+
+public class ApoMarioHighscore {
+    private List<String> names = new ArrayList<>();
+    private List<Integer> scores = new ArrayList<>();
+    private List<Integer> times = new ArrayList<>();
+    private Path store;
+    private ApoMarioPanel game;
+
+    public ApoMarioHighscore(ApoMarioPanel game, Path store) {
+        this.game = game;
+        this.store = store;
+        load();
+    }
+
+    public boolean storeRun(int score, int survivalTime, String playerName) {
+        names.add(playerName);
+        scores.add(score);
+        times.add(survivalTime);
+        sort();
+        persistAcrossRuns();
+        return true;
+    }
+
+    private void sort() {
+        List<HighscoreEntry> entries = new ArrayList<>();
+        for (int i = 0; i < names.size(); i++) {
+            entries.add(new HighscoreEntry(names.get(i), scores.get(i), times.get(i)));
+        }
+        entries.sort((a, b) -> Integer.compare(b.score, a.score));
+        names.clear();
+        scores.clear();
+        times.clear();
+        for (HighscoreEntry e : entries) {
+            names.add(e.name);
+            scores.add(e.score);
+            times.add(e.time);
+        }
+    }
+
+    private static class HighscoreEntry {
+        String name;
+        int score;
+        int time;
+        HighscoreEntry(String name, int score, int time) { this.name = name; this.score = score; this.time = time; }
+    }
+
+    public List<String> getPlayersNames() { return names; }
+    public List<Integer> getPlayersScores() { return scores; }
+    public List<Integer> getSurvivalTimes() { return times; }
+
+    public void persistAcrossRuns() {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(store.toFile()))) {
+            for (int i = 0; i < names.size(); i++) {
+                pw.println(names.get(i) + ";" + scores.get(i) + ";" + times.get(i));
+            }
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    private void load() {
+        if (!store.toFile().exists()) return;
+        try (BufferedReader br = new BufferedReader(new FileReader(store.toFile()))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length == 3) {
+                    names.add(parts[0]);
+                    scores.add(Integer.parseInt(parts[1]));
+                    times.add(Integer.parseInt(parts[2]));
+                }
+            }
+        } catch (IOException | NumberFormatException e) { e.printStackTrace(); }
+    }
+
+    public void recordRunEnd(ApoMarioLevel level) {
+        List<ApoMarioPlayer> players = level.getPlayers();
+        if (players != null) {
+            for (int i = 0; i < players.size(); i++) {
+                ApoMarioPlayer p = players.get(i);
+                storeRun(p.getPoints(), level.getPassedTime(), "Player " + (i + 1));
+            }
+        }
+    }
+
+    public void think(int delta) {}
+
+    public void render(Graphics2D g) {
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, ApoMarioConstants.GAME_WIDTH, ApoMarioConstants.GAME_HEIGHT);
+        g.setColor(Color.BLACK);
+        g.setFont(ApoMarioConstants.FONT_MENU);
+        int y = 50;
+        g.drawString("Highscores", 50, y);
+        y += 30;
+        for (int i = 0; i < names.size() && i < 10; i++) {
+            String timeStr = String.format("%02d:%02d", times.get(i) / 60000, (times.get(i) / 1000) % 60);
+            g.drawString((i + 1) + ". " + names.get(i) + " - " + scores.get(i) + " (" + timeStr + ")", 50, y);
+            y += 25;
+        }
+        g.drawString("Press ESC to return", 50, ApoMarioConstants.GAME_HEIGHT - 50);
+    }
+
+    public void keyButtonReleased(int button, char character) {
+        if (button == KeyEvent.VK_ESCAPE) {
+            game.setMenu();
+        }
+    }
+
+    public void mouseButtonReleased(int x, int y) {}
+    public void mousePressed(int x, int y, boolean bRight) {}
+    public void mouseMoved(int x, int y) {}
+    public void mouseDragged(int x, int y) {}
+    public void mouseButtonFunction(String function) {}
+}
+```
+
+```java filename=apoMario/game/ApoMarioPanel.java
+package apoMario.game;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import javax.swing.JFileChooser;
+
+import org.apogames.ApoConstants;
+
+import apoMario.ApoMarioComponent;
+import apoMario.ApoMarioConstants;
+import apoMario.entity.ApoMarioPlayer;
+import apoMario.game.panels.ApoMarioAnalysis;
+import apoMario.game.panels.ApoMarioCredits;
+import apoMario.game.panels.ApoMarioEditor;
+import apoMario.game.panels.ApoMarioEditorIO;
+import apoMario.game.panels.ApoMarioGame;
+import apoMario.game.panels.ApoMarioHighscore;
+import apoMario.game.panels.ApoMarioMenu;
+import apoMario.game.panels.ApoMarioModel;
+import apoMario.game.panels.ApoMarioOptions;
+import apoMario.game.panels.ApoMarioSimulation;
+
+/**
+ * Klasse, die sich um das eigentliche Spiel kmmert und alle Objekt berwacht, anspricht und steuert
+ * @author Dirk Aporius
+ *
+ */
+public class ApoMarioPanel extends ApoMarioComponent {
+
+	private static final long serialVersionUID = 3446351722587948000L;
+	
+	private final boolean bMiniMap = false;
+	
+	private boolean bShow;
+	
+	private int curTime;
+	
+	/** Hilfsvariablen, um herauszufinden wie lange zum Nachdenken und Zeichnen gebraucht wurde */
+	private long thinkTime, renderTime;
+	
+	private boolean bJump;
+	
+	private boolean bInit;
+	
+	private ArrayList<Long> middleCount;
+	
+	private ApoMarioMenu menu;
+	
+	private ApoMarioOptions options;
+	
+	private ApoMarioAnalysis analysis;
+	
+	private ApoMarioGame game;
+
+	private ApoMarioEditor editor;
+
+	private ApoMarioCredits credits;
+
+	private ApoMarioSimulation simulation;
+	
+	private ApoMarioHighscore highscore;
+	
+	private ApoMarioModel model;
+	
+	private ApoMarioButtons buttons;
+	
+	private BufferedImage iMenuBackground;
+	
+	private ApoMarioMiniMap miniMap;
+	
+	private int speedCounter;
+	
+	private boolean bSimulate;
+	
+	private boolean bEditor;
+	
+	private ApoMarioEditorIO editorIO;
+	
+	private boolean bMiddleWall;
+	
+	public ApoMarioPanel() {
+		super();
+	}
+	
+	public void init() {
+		this.bInit = true;
+		super.init();
+		this.bJump = false;
+		super.setBPause(false);
+		this.curTime = 0;
+		this.bShow = true;
+		this.middleCount = new ArrayList<Long>();
+		if (this.buttons == null) {
+			this.buttons = new ApoMarioButtons(this);
+			this.buttons.makeButtons();
+		}
+		if ((this.miniMap == null) && (this.bMiniMap)) {
+			this.miniMap = new ApoMarioMiniMap(this.getLevel());
+		}
+		if (this.options == null) {
+			this.options = new ApoMarioOptions(this);
+		}
+		if (this.menu == null) {
+			this.menu = new ApoMarioMenu(this);
+		}
+		if (this.analysis == null) {
+			this.analysis = new ApoMarioAnalysis(this);
+		}
+		if (this.game == null) {
+			this.game = new ApoMarioGame(this);
+		}
+		if (this.editor == null) {
+			this.editor = new ApoMarioEditor(this);
+		}
+		if (this.credits == null) {
+			this.credits = new ApoMarioCredits(this);
+		}
+		if (this.simulation == null) {
+			this.simulation = new ApoMarioSimulation(this);
+		}
+		if (this.editorIO == null) {
+			this.editorIO = new ApoMarioEditorIO(this.getLevel());
+		}
+		if (this.highscore == null) {
+			this.highscore = new ApoMarioHighscore(this, Paths.get("highscore.txt"));
+		}
+		this.setMenu();
+		this.loadProperties();
+		
+		this.bInit = false;
+		this.bSimulate = false;
+		this.setBMiddle(false);
+		this.speedCounter = 0;
+	}
+	
+	public boolean isBMiddleWall() {
+		return this.bMiddleWall;
+	}
+
+	public void setBMiddleWall(boolean middleWall) {
+		this.bMiddleWall = middleWall;
+		if (this.bMiddleWall) {
+			this.middleCount.clear();
+		}
+	}
+
+	private void loadProperties() {
+		ApoMarioConstants.loadProperties();
+		
+		this.loadPropertiesPlayer(ApoMarioConstants.PLAYER_ONE, ApoMarioConstants.AI_LEFT);
+		this.loadPropertiesPlayer(ApoMarioConstants.PLAYER_TWO, ApoMarioConstants.AI_RIGHT);
+	}
+	
+	private void loadPropertiesPlayer(int player, String playerPath) {
+		if ((playerPath == null) || (playerPath.length() <= 0)) {
+			return;
+		}
+		int playerInt = -1;
+		try {
+			playerInt = Integer.parseInt(playerPath);
+		} catch (NumberFormatException ex) {
+			playerInt = -1;
+		}
+		if (playerInt >= 0) {
+			if (player == ApoMarioConstants.PLAYER_ONE) {
+				this.getLevel().setPlayerOneAI(playerInt);
+				this.getLevel().changePlayerOneAI(0);
+			} else if (player == ApoMarioConstants.PLAYER_TWO) {
+				this.getLevel().setPlayerTwoAI(playerInt);
+				this.getLevel().changePlayerTwoAI(0);
+			}
+		} else {
+			this.getLevel().loadPlayer(player, playerPath);
+		}
+	}
+	
+	public void setDebugMode(boolean bDebug) {
+		ApoMarioConstants.DEBUG = bDebug;
+		if ((ApoMarioConstants.DEBUG) && (!ApoConstants.B_APPLET)) {
+			if (this.getDebugFrame() == null) {
+				this.setDebugFrame(new ApoMarioDebugFrame(this));
+			} else {
+				this.getDebugFrame().setVisible(true);
+			}
+		} else if ((!ApoMarioConstants.DEBUG) && (!ApoConstants.B_APPLET)) {
+			if (this.getDebugFrame() != null) {
+				this.getDebugFrame().setVisible(false);
+			}
+		}
+		if (this.options != null) {
+			this.options.setDebugChange(ApoMarioConstants.DEBUG);
+		}
+	}
+
+	public int getSpeedCounter() {
+		return this.speedCounter;
+	}
+
+	public void setSpeedCounter(int speedCounter) {
+		this.speedCounter = speedCounter;
+	}
+
+	public boolean isBJump() {
+		return this.bJump;
+	}
+	
+	public void setBJump(boolean bJump) {
+		this.bJump = bJump;
+	}
+
+	public void setMenu() {
+		this.setBPause(false);
+		if (this.options != null) {
+			this.options.stopOptions();
+		}
+		if (this.model != null) {
+			this.getLevel().setBReplay(false);
+		}
+		this.model = this.menu;
+		this.menu.init();
+		
+		this.setButtons(ApoMarioConstants.BUTTON_MENU);
+	}
+	
+	public void setCredits() {
+		this.setBPause(false);
+		this.model = this.credits;
+		this.credits.init();
+		
+		this.setButtons(ApoMarioConstants.BUTTON_CREDITS);
+	}
+	
+	public void setSimulation() {
+		this.setBPause(false);
+		this.model = this.simulation;
+		this.simulation.init();
+		
+		this.setButtons(ApoMarioConstants.BUTTON_SIMULATION);
+	}
+
+	public void setHighscore() {
+		this.setBPause(false);
+		this.model = this.highscore;
+		this.setButtons(new boolean[0]);
+	}
+	
+	public ApoMarioMiniMap getMiniMap() {
+		if (!this.bMiniMap) {
+			return null;
+		}
+		return this.miniMap;
+	}
+	
+	public boolean loadEditorLevel() {
+		this.setBThink(false);
+		if (super.getFileChooserEditor().showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			String path = super.getFileChooserEditor().getSelectedFile().getPath();
+			this.editorIO.readLevel(path);
+			this.setBThink(true);
+			
+			return true;
+		}
+		this.setBThink(true);
+		return false;
+	}
+	
+	public void saveEditorLevel() {
+		if (this.getFileChooserEditor().showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+			String path = this.getFileChooserEditor().getSelectedFile().getPath();
+			if (path.indexOf(this.getFileFilterEditor().getLevelName()) == -1) {
+				path = path + this.getFileFilterEditor().getLevelName();
+			}
+			this.editorIO.writeLevel(path);
+		}
+	}
+	
+	public void loadReplay() {
+		if (super.getFileChooserReplay().showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			String path = super.getFileChooserReplay().getSelectedFile().getPath();
+			this.getLevel().getReplay().load(path);
+			if (this.getLevel().getReplay().getLevelString() != null) {
+				this.editorIO.readLevel(System.getProperty("user.dir") + File.separator + "levels" + File.separator + this.getLevel().getReplay().getLevelString());
+			}
+			this.setReplay(this.getLevel().getReplay());
+		}
+	}
+	
+	public void setReplay(ApoMarioReplay replay) {
+		this.getLevel().setReplay(replay.getClone());
+		this.playReplay(true);
+	}
+	
+	public void playReplay(boolean bReplay) {
+		this.setGame(bReplay, false);	
+	}
+	
+	public int getPlayerSelectCamera() {
+		return this.game.getPlayerSelectCamera();
+	}
+
+	public BufferedImage getBackgroundImage() {
+		BufferedImage iMenuBackground = new BufferedImage(ApoMarioConstants.GAME_WIDTH, ApoMarioConstants.GAME_HEIGHT, BufferedImage.TYPE_INT_RGB);
+		boolean bOrg = ApoMarioConstants.DEBUG;
+		ApoMarioConstants.DEBUG = false;
+		Graphics2D g = (Graphics2D)iMenuBackground.getGraphics();
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		this.getLevel().render(g, (int)this.getChangeX(), (int)this.getChangeY());
+		ApoMarioConstants.DEBUG = bOrg;
+		g.dispose();
+		return iMenuBackground;
+	}
+	
+	public boolean isBEditor() {
+		return this.bEditor;
+	}
+
+	public void setBEditor(boolean editor) {
+		this.bEditor = editor;
+	}
+
+	public void setGame(boolean bReplay) {
+		this.setGame(bReplay, false);
+	}
+	
+	public void setGame(boolean bReplay, boolean bEditor) {
+		super.setBThink(false);
+		super.setBRepaint(false);
+		this.setBEditor(bEditor);
+		this.setBPause(false);
+		
+		this.restartLevel(bReplay);
+		
+		this.setButtons(ApoMarioConstants.BUTTON_GAME);
+		
+		this.model = this.game;
+		this.game.init();
+		
+		if (!bReplay) {
+			this.getLevel().setNames();
+		}
+		
+		super.setBThink(true);
+		super.setBRepaint(true);
+	}
+	
+	public void setEditor() {
+		this.model = this.editor;
+		this.editor.init();
+		this.setBPause(false);
+		
+		this.setButtons(ApoMarioConstants.BUTTON_EDITOR);
+	}
+	
+	public void setOptions() {
+		this.model = this.options;
+		this.setBPause(false);
+		
+		if (this.options != null) {
+			this.options.setOptionsDrag();
+			this.options.init();
+		}
+		
+		this.setButtons(ApoMarioConstants.BUTTON_OPTIONS);
+	}
+	
+	public void setAnalysis() {
+		this.setBPause(false);
+		this.model = this.analysis;
+		this.analysis.init();
+		
+		this.setButtons(ApoMarioConstants.BUTTON_ANALYSIS);
+		
+		this.iMenuBackground = this.getBackgroundImageWithRect(false);
+		
+		this.highscore.recordRunEnd(this.getLevel());
+	}
+	
+	private BufferedImage getBackgroundImageWithRect(boolean bDown) {
+		BufferedImage iMenuBackground = this.getBackgroundImage();
+		Graphics2D g = (Graphics2D)iMenuBackground.getGraphics();
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setColor(new Color(254, 254, 254, 200));
+		int width = iMenuBackground.getWidth() - 50 * ApoMarioConstants.SIZE;
+		int height = iMenuBackground.getHeight() - 30 * ApoMarioConstants.SIZE;
+		if (!bDown) {
+			g.fillRoundRect((ApoMarioConstants.GAME_WIDTH - width)/2, (ApoMarioConstants.GAME_HEIGHT - height)/2, width, height, 40, 40);
+		} else {
+			g.fillRoundRect((ApoMarioConstants.GAME_WIDTH - width)/2, (ApoMarioConstants.GAME_HEIGHT - height)/2, width, height + 12 * ApoMarioConstants.SIZE, 40, 40);			
+		}
+		g.setColor(Color.black);
+		g.setStroke(new BasicStroke(2));
+		if (!bDown) {
+			g.drawRoundRect((ApoMarioConstants.GAME_WIDTH - width)/2, (ApoMarioConstants.GAME_HEIGHT - height)/2, width, height, 40, 40);
+		} else {
+			g.drawRoundRect((ApoMarioConstants.GAME_WIDTH - width)/2, (ApoMarioConstants.GAME_HEIGHT - height)/2, width, height + 12 * ApoMarioConstants.SIZE, 40, 40);			
+		}
+		g.dispose();
+		return iMenuBackground;
+	}
+	
+	private void setButtons(boolean[] visible) {
+		for (int i = 0; i < visible.length && i < this.getButtons().length; i++) {
+			this.getButtons()[i].setBVisible(visible[i]);
+		}
+		if (ApoConstants.B_APPLET) {
+			this.getButtons()[0].setBVisible(false);
+			this.getButtons()[2].setBVisible(false);
+			this.getButtons()[3].setBVisible(false);
+			this.getButtons()[20].setBVisible(false);
+			this.getButtons()[22].setBVisible(false);
+			this.getButtons()[23].setBVisible(false);
+			this.getButtons()[37].setBVisible(false);
+		}
+	}
+	
+	public boolean isBSimulate() {
+		return this.bSimulate;
+	}
+
+	public void setBSimulate(boolean bSimulate) {
+		this.bSimulate = bSimulate;
+	}
+
+	@Override
+	public void saveLevel(String s) {
+		
+	}
+	
+	@Override
+	public void loadLevel(String s) {
+		
+	}
+
+	@Override
+	public void mouseButtonFunction(String function) {
+		if (this.model != null) {
+			this.model.mouseButtonFunction(function);
+		}
+	}
+
+	@Override
+	public void keyButtonReleased(int button, char character) {
+		if (button == KeyEvent.VK_F) {
+			ApoMarioConstants.FPS = !ApoMarioConstants.FPS;
+		} else if (button == KeyEvent.VK_B) {
+			this.setDebugMode(!ApoMarioConstants.DEBUG);
+		} else if (button == KeyEvent.VK_I) {
+			ApoMarioConstants.ICARUS_BURN = !ApoMarioConstants.ICARUS_BURN;
+		} else if (button == KeyEvent.VK_PLUS) {
+			this.setBMiddleWall(!this.isBMiddleWall());
+		}
+		this.model.keyButtonReleased(button, character);
+	}
+	
+	public void restartLevel() {
+		this.restartLevel(false);
+	}
+	
+	public void restartLevel(boolean bReplay) {
+		this.getLevel().restart(bReplay);
+		super.setBMiddle(true);
+		super.setChangeX(0);
+		this.middleCount.clear();
+		if (this.bMiniMap) {
+			this.miniMap.makeMiniMap();
+		}
+	}
+	
+	public void newLevel() {
+		this.newLevel(-1, -1);
+	}
+	
+	public void newLevel(int width, int difficulty) {
+		this.getLevel().setBReplay(false);
+		if (width < 0) {
+			this.getLevel().newLevel();
+		} else {
+			this.getLevel().newSameLevel();
+		}
+		super.setBMiddle(true);
+		super.setChangeX(0);
+		this.middleCount.clear();
+		if (this.bMiniMap) {
+			this.miniMap.makeMiniMap();
+		}
+		this.game.setPlayerSelectCamera(ApoMarioGame.PLAYER_ONE);
+	}
+	
+	@Override
+	public void mouseButtonReleased(int x, int y) {
+	}
+	
+	public void mouseReleased(MouseEvent e) {
+		super.mouseReleased(e);
+		if (this.model != null) {
+			this.model.mouseButtonReleased(e.getX(), e.getY());
+		}
+	}
+	
+	public void mousePressed(MouseEvent e) {
+		super.mousePressed(e);		
+		boolean bRight = false;
+		if (e.getButton() == MouseEvent.BUTTON3) {
+			bRight = true;
+		}
+		if (this.model != null) {
+			this.model.mousePressed(e.getX(), e.getY(), bRight);
+		}
+	}
+	
+	public void mouseMoved(MouseEvent e) {
+		super.mouseMoved(e);
+		if (this.model != null) {
+			this.model.mouseMoved(e.getX(), e.getY());
+		}
+	}
+	
+	public void mouseDragged(MouseEvent e) {
+		super.mouseDragged(e);
+		if (this.model != null) {
+			this.model.mouseDragged(e.getX(), e.getY());
+		}
+	}
+	
+	public void keyReleased(KeyEvent e) {
+		if ((this.model != null) && (this.isBSimulate())) {
+			this.simulation.keyButtonReleased(e.getKeyCode(), e.getKeyChar());
+		} else {
+			super.keyReleased(e);
+		}
+	}
+	
+	public ApoMarioOptions getOptions() {
+		return this.options;
+	}
+	
+	public BufferedImage getIMenuBackground() {
+		return this.iMenuBackground;
+	}
+
+	public synchronized void think(int delta) {
+		if ((this.bInit) || (this.isBSimulate())) {
+			return;
+		}
+		this.middleCount.add(this.renderTime);
+		if (this.middleCount.size() >= 100) {
+			this.middleCount.remove(0);
+			long middle = 0;
+			for (int i = 0; i < this.middleCount.size(); i++) {
+				middle += this.middleCount.get(i);
+			}
+			middle = middle / (long)this.middleCount.size();
+			if (middle > 100000000l) {
+				this.setBMiddle(false);
+			}
+			this.middleCount.clear();
+		}
+		if (this.isBPause()) {
+			this.curTime += delta;
+			if (this.curTime > ApoMarioReplayPlay.CHANGE_TIME) {
+				this.curTime -= ApoMarioReplayPlay.CHANGE_TIME;
+				this.bShow = !this.bShow;
+			}
+		}
+		long t = System.nanoTime();
+		super.think(delta);
+		this.thinkLevelGame(delta);
+		this.thinkTime = (int) (System.nanoTime() - t);
+	}
+	
+	public synchronized void thinkLevelGame(int delta) {
+		if (this.model != null) {
+			this.model.think(delta);
+		}
+	}
+	
+	@Override
+	public synchronized void render(Graphics2D g) {
+		long t = System.nanoTime();
+		
+		Shape s = g.getClip();
+		g.setClip(0, 0, ApoMarioConstants.GAME_WIDTH, ApoMarioConstants.GAME_HEIGHT);
+		
+		try {
+			if (this.model != null) {
+				this.model.render(g);
+			}
+			if (!this.bSimulate) {
+				if (this.model != null) {
+					this.model.render(g);
+				}
+				if ((this.model != null) && ((this.model instanceof ApoMarioGame))) {
+					if (this.bMiniMap) {
+						this.miniMap.render(g);
+					} else {
+						this.renderLevelWidthStatistics(g);
+					}
+					this.renderPause(g);
+				}
+				this.renderFPS(g);
+			}
+			this.renderSimulate(g);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		g.setClip(s);
+		this.renderTime = (int)(System.nanoTime() - t);
+		//System.out.println(this.renderTime);
+	}
+
+	private void renderSimulate(Graphics2D g) {
+		if (this.bSimulate) {
+			g.setColor(Color.WHITE);
+			int width = 200 * ApoMarioConstants.SIZE * ApoMarioConstants.APP_SIZE;
+			int height = 50 * ApoMarioConstants.SIZE * ApoMarioConstants.APP_SIZE;
+			int x = ApoMarioConstants.GAME_WIDTH/2 - width/2;
+			int y = ApoMarioConstants.GAME_HEIGHT/2 - height/2;
+			g.fillRoundRect(x, y, width, height, 15, 15);
+			g.setColor(Color.BLACK);
+			g.drawRoundRect(x, y, width, height, 15, 15);
+			g.setFont(ApoMarioConstants.FONT_STATISTICS);
+			String s = "Simulate Game ... please wait!";
+			int w = g.getFontMetrics().stringWidth(s);
+			g.drawString(s, ApoMarioConstants.GAME_WIDTH/2 - w/2, y + height/2);
+			s = "Round: "+this.simulation.getCurRound()+" von "+this.simulation.getCount();
+			w = g.getFontMetrics().stringWidth(s);
+			g.drawString(s, ApoMarioConstants.GAME_WIDTH/2 - w/2, y + height/2 + g.getFontMetrics().getHeight() + 1 * 5);
+		}
+	}
+	
+	private void renderLevelWidthStatistics(Graphics2D g) {
+		g.setFont(ApoMarioConstants.FONT_STATISTICS);
+		int difWidth = 20;
+		int levelWidth = ApoMarioConstants.GAME_WIDTH - difWidth * 2;
+		float maxWidth = -1;
+		for (int i = 0; i < this.getLevel().getPlayers().size(); i++) {
+			ApoMarioPlayer player = this.getLevel().getPlayers().get(i);
+			if (player.isBVisible()) {
+				float marioWidth = (player.getX() * 100f / (this.getLevel().getWidth() * ApoMarioConstants.TILE_SIZE));
+				if (maxWidth < marioWidth) {
+					maxWidth = marioWidth;
+				}
+				if (i == 0) {
+					g.setColor(Color.RED);
+				} else {
+					g.setColor(Color.BLUE);
+				}
+				g.drawString("M", difWidth + levelWidth * marioWidth / 100, ApoMarioConstants.GAME_HEIGHT - 5);
+			}
+		}
+		int distance = 15 * ApoMarioConstants.SIZE;
+		for (int i = 0; i < levelWidth / distance; i++) {
+			int width = i * distance;
+			if ((float)width / (float)levelWidth < maxWidth / 100f) {
+				g.setColor(Color.GREEN);
+			} else {
+				g.setColor(Color.BLACK);
+			}
+			g.fillRect(difWidth + width, ApoMarioConstants.GAME_HEIGHT - 10, 5, 5);
+		}
+		String s = "F";
+		int w = g.getFontMetrics().stringWidth(s);
+		
+		g.drawString(s, difWidth + levelWidth - w, ApoMarioConstants.GAME_HEIGHT - 5);
+	}
+
+	/**
+	 * rendert die Anzeige fr die FPS und die Thinkzeit
+	 * @param g : das Graphicsobjekt
+	 */
+	private void renderFPS(Graphics2D g) {
+		if (ApoMarioConstants.FPS) {
+			g.setColor(Color.WHITE);
+			g.setFont(ApoMarioConstants.FONT_FPS);
+			g.drawString("think time: " + this.thinkTime + " ns", 5 + 1, ApoMarioConstants.GAME_HEIGHT - 45 + 1);
+			g.drawString("think time: " + (this.thinkTime / 1000000) + " ms",5 + 1, ApoMarioConstants.GAME_HEIGHT - 35 + 1);
+
+			g.drawString("draw time: " + this.renderTime + " ns", 5 + 1, ApoMarioConstants.GAME_HEIGHT - 25 + 1);
+			g.drawString("draw time: " + (this.renderTime / 1000000) + " ms", 5 + 1, ApoMarioConstants.GAME_HEIGHT - 15 + 1);
+			g.drawString("FPS: " + super.getFPS(), 5 + 1, ApoMarioConstants.GAME_HEIGHT - 5 + 1);
+			
+			g.setColor(Color.BLACK);
+			g.drawString("think time: " + this.thinkTime + " ns", 5, ApoMarioConstants.GAME_HEIGHT - 45);
+			g.drawString("think time: " + (this.thinkTime / 1000000) + " ms",5, ApoMarioConstants.GAME_HEIGHT - 35);
+
+			g.drawString("draw time: " + this.renderTime + " ns", 5, ApoMarioConstants.GAME_HEIGHT - 25);
+			g.drawString("draw time: " + (this.renderTime / 1000000) + " ms", 5, ApoMarioConstants.GAME_HEIGHT - 15);
+			g.drawString("FPS: " + super.getFPS(), 5, ApoMarioConstants.GAME_HEIGHT - 5);
+		}
+	}
+	
+	private void renderPause(Graphics2D g) {
+		if ((super.isBPause()) && (this.bShow)) {
+			String s = "PAUSE";
+			g.setFont(ApoMarioReplayPlay.FONT_REPLAY);
+			int hei = 60 + 10 * ApoMarioConstants.SIZE;
+			int w = g.getFontMetrics().stringWidth(s);
+			g.setColor(Color.WHITE);
+			g.drawString(s, ApoMarioConstants.GAME_WIDTH/2 - w/2 + 1, hei + 20 * ApoMarioConstants.SIZE + 1);
+			g.setColor(Color.BLACK);
+			g.drawString(s, ApoMarioConstants.GAME_WIDTH/2 - w/2, hei + 20 * ApoMarioConstants.SIZE);
+		}
+	}
+}
+```
+
+```java filename=apoMario/game/panels/ApoMarioMenu.java
+package apoMario.game.panels;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import org.apogames.ApoConstants;
+import org.apogames.entity.ApoAnimation;
+
+import apoMario.ApoMarioConstants;
+import apoMario.ApoMarioImageContainer;
+import apoMario.entity.ApoMarioPlayer;
+import apoMario.game.ApoMarioPanel;
+import apoMario.game.ApoMarioSearch;
+import apoMario.game.ApoMarioSearchNode;
+import apoMario.game.ApoMarioSearchRunner;
+
+
+/**
+ * Menupanelklasse<br />
+ * Klasse, die das eigentliche Startmenu anzeigt und sich um die Auswertung der Events dadrin kmmert<br />
+ * @author Dirk Aporius
+ */
+public class ApoMarioMenu extends ApoMarioModelMenu {
+
+	public static final String FUNCTION_QUIT = "quit";
+	public static final String FUNCTION_START = "start";
+	public static final String FUNCTION_CREDITS = "credits";
+	public static final String FUNCTION_LOAD_PLAYER_ONE = "loadPlayerOne";
+	public static final String FUNCTION_LOAD_PLAYER_TWO = "loadPlayerTwo";
+	public static final String FUNCTION_OPTIONS = "options";
+	public static final String FUNCTION_PLAYER_ONE_LEFT = "playerOneLeft";
+	public static final String FUNCTION_PLAYER_ONE_RIGHT = "playerOneRight";
+	public static final String FUNCTION_PLAYER_TWO_LEFT = "playerTwoLeft";
+	public static final String FUNCTION_PLAYER_TWO_RIGHT = "playerTwoRight";
+	public static final String FUNCTION_SIMULATE = "simulate";
+	public static final String FUNCTION_REPLAYLOAD = "loadReplay";
+	public static final String fUNCTION_EDITOR = "editor";
+	public static final String FUNCTION_EDITORLOAD = "editorLoad";
+	
+	public ApoMarioMenu(ApoMarioPanel game) {
+		super(game);
+	}
+	
+	@Override
+	public void init() {
+		super.init();
+	}
+	
+	@Override
+	public void makeBackground() {
+		//if (this.getIBackground() == null) {
+			this.setIBackground(GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration().createCompatibleImage(ApoMarioConstants.GAME_WIDTH, ApoMarioConstants.GAME_HEIGHT, BufferedImage.TYPE_INT_RGB));
+			Graphics2D g = (Graphics2D)(this.getIBackground().getGraphics());
+			
+			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			
+			BufferedImage iMenuTile = ApoMarioImageContainer.MENU;
+			int size = ApoMarioConstants.TILE_SIZE * ApoMarioConstants.APP_SIZE;
+			int waterHeight = 4;
+			for (int x = 0; x < 20; x++) {
+				for (int y = 0; y < waterHeight; y++) {
+					g.drawImage(iMenuTile.getSubimage(14 * size, 0 * size, size, size), x * size, y * size, null);
+				}
+				for (int y = waterHeight; y < 15; y++) {
+					g.drawImage(iMenuTile.getSubimage(0 * size, 0 * size, size, size), x * size, y * size, null);
+				}
+
+				g.drawImage(iMenuTile.getSubimage(11 * size, 4 * size, size/2, size/2), x * size, waterHeight * size, null);
+				g.drawImage(iMenuTile.getSubimage(11 * size, 4 * size, size/2, size/2), x * size + size/2, waterHeight * size, null);
+			}
+			//buttons 0, 1, 2, 3, 4, 19, 20
+			int x = (int)(this.getGame().getButtons()[0].getX()) - size;
+			int y = (int)(this.getGame().getButtons()[0].getY());
+			g.drawImage(iMenuTile.getSubimage(1 * size, 2 * size, size, size), x, y, null);
+			g.drawImage(iMenuTile.getSubimage(5 * size, 2 * size, size, size), x - 1 * size, y, null);
+			g.drawImage(iMenuTile.getSubimage(5 * size, 2 * size, size, size), x - 2 * size, y, null);
+			g.drawImage(iMenuTile.getSubimage(7 * size, 2 * size, size, size), x - 3 * size, y, null);
+			g.drawImage(iMenuTile.getSubimage(0 * size, 3 * size, size, size), x - 3 * size, y - 1 * size, null);
+			g.drawImage(iMenuTile.getSubimage(0 * size, 3 * size, size, size), x - 3 * size, y - 2 * size, null);
+			g.drawImage(iMenuTile.getSubimage(14 * size, 2 * size, size, size), x - 3 * size, y - 3 * size, null);
+			g.drawImage(iMenuTile.getSubimage(5 * size, 2 * size, size, size), x - 2 * size, y - 3 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 2 * size, size, size), x - 1 * size, y - 3 * size, null);
+			g.drawImage(iMenuTile.getSubimage(9 * size, 2 * size, size, size), x - 3 * size, y - 4 * size, null);
+			g.drawImage(iMenuTile.getSubimage(5 * size, 2 * size, size, size), x - 4 * size, y - 4 * size, null);
+			g.drawImage(iMenuTile.getSubimage(6 * size, 2 * size, size, size), x - 5 * size, y - 4 * size, null);
+			g.drawImage(iMenuTile.getSubimage(11 * size, 2 * size, size, size), x - 5 * size, y - 5 * size, null);
+			g.drawImage(iMenuTile.getSubimage(12 * size, 2 * size, size, size), x - 5 * size, y - 6 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 4 * size, y - 6 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 3 * size, y - 6 * size, null);
+			g.drawImage(iMenuTile.getSubimage(3 * size, 2 * size, size, size), x - 2 * size, y - 6 * size, null);
+			g.drawImage(iMenuTile.getSubimage(0 * size, 3 * size, size, size), x - 2 * size, y - 7 * size, null);
+			g.drawImage(iMenuTile.getSubimage(8 * size, 2 * size, size, size), x - 2 * size, y - 8 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 6 * size, y - 5 * size, null);
+			g.drawImage(iMenuTile.getSubimage(15 * size, 2 * size, size, size), x - 7 * size, y - 5 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 8 * size, y - 5 * size, null);
+			g.drawImage(iMenuTile.getSubimage(8 * size, 2 * size, size, size), x - 7 * size, y - 6 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 9 * size, y - 5 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 10 * size, y - 5 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 11 * size, y - 5 * size, null);
+			g.drawImage(iMenuTile.getSubimage(14 * size, 2 * size, size, size), x - 12 * size, y - 5 * size, null);
+			g.drawImage(iMenuTile.getSubimage(0 * size, 3 * size, size, size), x - 12 * size, y - 6 * size, null);
+			g.drawImage(iMenuTile.getSubimage(0 * size, 3 * size, size, size), x - 12 * size, y - 7 * size, null);
+			g.drawImage(iMenuTile.getSubimage(8 * size, 2 * size, size, size), x - 12 * size, y - 8 * size, null);
+			g.drawImage(iMenuTile.getSubimage(11 * size, 2 * size, size, size), x - 12 * size, y - 4 * size, null);
+			g.drawImage(iMenuTile.getSubimage(4 * size, 2 * size, size, size), x - 13 * size, y - 4 * size, null);
+			g.drawImage(iMenuTile.getSubimage(0 * size, 3 * size, size, size), x - 12 * size, y - 3 * size, null);
+			g.drawImage(iMenuTile.getSubimage(11 * size, 2 * size, size, size), x - 12 * size, y - 2 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 13 * size, y - 2 * size, null);
+			g.drawImage(iMenuTile.getSubimage(4 * size, 2 * size, size, size), x - 14 * size, y - 2 * size, null);
+			g.drawImage(iMenuTile.getSubimage(6 * size, 2 * size, size, size), x - 12 * size, y - 1 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 11 * size, y - 1 * size, null);
+			g.drawImage(iMenuTile.getSubimage(13 * size, 2 * size, size, size), x - 11 * size, y - 1 * size, null);
+			g.drawImage(iMenuTile.getSubimage(2 * size, 2 * size, size, size), x - 11 * size, y - 0 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 10 * size, y - 1 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 9 * size, y - 1 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 8 * size, y - 1 * size, null);
+			g.drawImage(iMenuTile.getSubimage(11 * size, 2 * size, size, size), x - 7 * size, y - 1 * size, null);
+			g.drawImage(iMenuTile.getSubimage(6 * size, 2 * size, size, size), x - 7 * size, y - 0 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 6 * size, y - 0 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 5 * size, y - 0 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 3 * size, size, size), x - 4 * size, y - 0 * size, null);
+			g.drawImage(iMenuTile.getSubimage(15 * size, 2 * size, size, size), x - 7 * size, y - 3 * size, null);
+			g.drawImage(iMenuTile.getSubimage(1 * size, 2 * size, size, size), x - 6 * size, y - 3 * size, null);
+			g.drawImage(iMenuTile.getSubimage(4 * size, 2 * size, size, size), x - 8 * size, y - 3 * size, null);
+			g.drawImage(iMenuTile.getSubimage(0 * size, 3 * size, size, size), x - 7 * size, y - 4 * size, null);
+			g.drawImage(iMenuTile.getSubimage(0 * size, 3 * size, size, size), x - 7 * size, y - 2 * size, null);
+			
+			g.setColor(new Color(255, 255, 255, 200));
+			g.fillRoundRect(ApoMarioConstants.GAME_WIDTH/8 - size, (int)(ApoMarioConstants.GAME_HEIGHT*1/4 - 3 * size), ApoMarioConstants.GAME_WIDTH * 1 / 4 + size * 2, (int)(size * 3.4), 10, 10);
+			g.fillRoundRect(ApoMarioConstants.GAME_WIDTH*5/8 - size, (int)(ApoMarioConstants.GAME_HEIGHT*1/4 - 3 * size), ApoMarioConstants.GAME_WIDTH * 1 / 4 + size * 2, (int)(size * 3.4), 10, 10);
+			g.setColor(Color.BLACK);
+			g.drawRoundRect(ApoMarioConstants.GAME_WIDTH/8 - size, (int)(ApoMarioConstants.GAME_HEIGHT*1/4 - 3 * size), ApoMarioConstants.GAME_WIDTH * 1 / 4 + size * 2, (int)(size * 3.4), 10, 10);
+			g.drawRoundRect(ApoMarioConstants.GAME_WIDTH*5/8 - size, (int)(ApoMarioConstants.GAME_HEIGHT*1/4 - 3 * size), ApoMarioConstants.GAME_WIDTH * 1 / 4 + size * 2, (int)(size * 3.4), 10, 10);
+			
+			g.dispose();
+		//}
+	}
+
+	@Override
+	public void makeBackgroundAnimation() {
+		int size = ApoMarioConstants.TILE_SIZE * ApoMarioConstants.APP_SIZE;
+		BufferedImage iMenuTile = ApoMarioImageContainer.MENU;
+		
+		//if (this.getBackgroundAnimation() == null) {
+			this.setBackgroundAnimation(new ArrayList<ApoAnimation>());
+			this.getBackgroundAnimation().add(new ApoAnimation(iMenuTile.getSubimage(6 * size, 1 * size, 4 * size, size), 2 * size, 5 * size, 4, 380));
+			this.getBackgroundAnimation().add(new ApoAnimation(iMenuTile.getSubimage(13 * size, 1 * size, 1 * size, 1 * size), 18 * size, 6 * size, 1, 1000000));
+			this.getBackgroundAnimation().add(new ApoAnimation(iMenuTile.getSubimage(13 * size, 1 * size, 1 * size, 1 * size), 1 * size, 7 * size, 1, 1000000));
+			this.getBackgroundAnimation().add(new ApoAnimation(iMenuTile.getSubimage(12 * size, 0 * size, 1 * size, 2 * size), 7 * size, 6 * size, 1, 1000000));
+			this.getBackgroundAnimation().add(new ApoAnimation(iMenuTile.getSubimage(10 * size, 1 * size, 1 * size, 1 * size), 12 * size, 12 * size, 1, 1000000));
+			this.getBackgroundAnimation().add(new ApoAnimation(iMenuTile.getSubimage(11 * size, 1 * size, 1 * size, 1 * size), 7 * size, 11 * size, 1, 1000000));
+		//}
+	}
+
+	@Override
+	public void makeRunner() {
+		int size = ApoMarioConstants.TILE_SIZE * ApoMarioConstants.APP_SIZE;
+		BufferedImage iMenuTile = ApoMarioImageContainer.MENU;
+		int x = (int)(this.getGame().getButtons()[0].getX()) - size;
+		int y = (int)(this.getGame().getButtons()[0].getY());
+		
+		if (this.getRunner() == null) {
+			this.setRunner(new ApoMarioSearchRunner(iMenuTile.getSubimage(0 * size, 1 * size, size * 2, size), x - 7 * size, y - 5 * size));
+			this.setCurNode(1);
+		} else {
+			this.getRunner().setIBackground(iMenuTile.getSubimage(0 * size, 1 * size, size * 2, size));
+		}
+	}
+
+	@Override
+	public void makeSearch() {
+		int size = ApoMarioConstants.TILE_SIZE * ApoMarioConstants.APP_SIZE;
+		int x = (int)(this.getGame().getButtons()[0].getX()) - size;
+		int y = (int)(this.getGame().getButtons()[0].getY());
+		
+		this.setSearch(new ApoMarioSearch());
+		ApoMarioSearchNode node = new ApoMarioSearchNode(0, x - 7 * size, y - 6 * size);
+		node.addConnectedNode(1);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(1, x - 7 * size, y - 5 * size);
+		node.addConnectedNode(0);
+		node.addConnectedNode(2);
+		node.addConnectedNode(21);
+		node.addConnectedNode(23);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(2, x - 5 * size, y - 5 * size);
+		node.addConnectedNode(1);
+		node.addConnectedNode(3);
+		node.addConnectedNode(6);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(3, x - 5 * size, y - 6 * size);
+		node.addConnectedNode(2);
+		node.addConnectedNode(4);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(4, x - 2 * size, y - 6 * size);
+		node.addConnectedNode(3);
+		node.addConnectedNode(5);
+		this.getSearch().addNode(node);
+
+		node = new ApoMarioSearchNode(5, x - 2 * size, y - 8 * size);
+		node.addConnectedNode(4);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(6, x - 5 * size, y - 4 * size);
+		node.addConnectedNode(2);
+		node.addConnectedNode(7);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(7, x - 3 * size, y - 4 * size);
+		node.addConnectedNode(6);
+		node.addConnectedNode(8);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(8, x - 3 * size, y - 3 * size);
+		node.addConnectedNode(7);
+		node.addConnectedNode(9);
+		node.addConnectedNode(10);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(9, x - 1 * size, y - 3 * size);
+		node.addConnectedNode(8);
+		this.getSearch().addNode(node);
+
+		node = new ApoMarioSearchNode(10, x - 3 * size, y - 0 * size);
+		node.addConnectedNode(8);
+		node.addConnectedNode(11);
+		node.addConnectedNode(12);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(11, x - 0 * size, y - 0 * size);
+		node.addConnectedNode(10);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(12, x - 7 * size, y - 0 * size);
+		node.addConnectedNode(10);
+		node.addConnectedNode(13);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(13, x - 7 * size, y - 1 * size);
+		node.addConnectedNode(12);
+		node.addConnectedNode(14);
+		node.addConnectedNode(23);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(14, x - 11 * size, y - 1 * size);
+		node.addConnectedNode(16);
+		node.addConnectedNode(13);
+		node.addConnectedNode(15);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(15, x - 11 * size, y - 0 * size);
+		node.addConnectedNode(14);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(16, x - 12 * size, y - 1 * size);
+		node.addConnectedNode(14);
+		node.addConnectedNode(17);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(17, x - 12 * size, y - 2 * size);
+		node.addConnectedNode(16);
+		node.addConnectedNode(18);
+		node.addConnectedNode(20);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(18, x - 14 * size, y - 2 * size);
+		node.addConnectedNode(17);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(19, x - 13 * size, y - 4 * size);
+		node.addConnectedNode(20);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(20, x - 12 * size, y - 4 * size);
+		node.addConnectedNode(19);
+		node.addConnectedNode(17);
+		node.addConnectedNode(21);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(21, x - 12 * size, y - 5 * size);
+		node.addConnectedNode(20);
+		node.addConnectedNode(1);
+		node.addConnectedNode(22);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(22, x - 12 * size, y - 8 * size);
+		node.addConnectedNode(21);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(23, x - 7 * size, y - 3 * size);
+		node.addConnectedNode(1);
+		node.addConnectedNode(13);
+		node.addConnectedNode(24);
+		node.addConnectedNode(25);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(24, x - 6 * size, y - 3 * size);
+		node.addConnectedNode(23);
+		this.getSearch().addNode(node);
+		
+		node = new ApoMarioSearchNode(25, x - 8 * size, y - 3 * size);
+		node.addConnectedNode(23);
+		this.getSearch().addNode(node);
+	}
+
+	@Override
+	public void keyButtonReleased(int button, char character) {
+		if (button == KeyEvent.VK_ESCAPE) {
+			this.exit();
+		} else if (button == KeyEvent.VK_O) {
+			this.getGame().setOptions();
+		} else if (button == KeyEvent.VK_E) {
+			this.getGame().setEditor();
+		} else if (button == KeyEvent.VK_C) {
+			this.getGame().setCredits();
+		} else if (button == KeyEvent.VK_S) {
+			this.getGame().setSimulation();
+		} else if (button == KeyEvent.VK_H) {
+			this.getGame().setHighscore();
+		} else if (button == KeyEvent.VK_T) {
+			if (ApoMarioConstants.TILE_SET == ApoMarioConstants.TILE_SET_EAT) {
+				ApoMarioConstants.TILE_SET = ApoMarioConstants.TILE_SET_MARIO;
+			} else if (ApoMarioConstants.TILE_SET == ApoMarioConstants.TILE_SET_MARIO) {
+				ApoMarioConstants.TILE_SET = ApoMarioConstants.TILE_SET_EAT;
+			}
+			ApoMarioImageContainer.setTileSet(ApoMarioConstants.TILE_SET);
+			this.getGame().restartLevel();
+			this.getGame().setMenu();
+		}
+		this.keyButtonReleasedArrowAndEnter(button, character);
+	}
+	
+	private void exit() {
+		if (!ApoConstants.B_APPLET) {
+			ApoMarioConstants.saveProperties();
+			System.exit(0);
+		}
+	}
+
+	@Override
+	public void mouseButtonFunction(String function) {
+		this.setExcecuteFunction(function);
+		int oldEndNode = this.getEndNode();
+		this.setEndNode(-1);
+		if (function.equals(ApoMarioMenu.FUNCTION_QUIT)) {
+			this.setEndNode(11);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_START)) {
+			this.setEndNode(0);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_OPTIONS)) {
+			this.setEndNode(19);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_LOAD_PLAYER_ONE)) {
+			this.setEndNode(22);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_LOAD_PLAYER_TWO)) {
+			this.setEndNode(5);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_PLAYER_ONE_LEFT)) {
+			this.getGame().getLevel().changePlayerOneAI(-1);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_PLAYER_ONE_RIGHT)) {
+			this.getGame().getLevel().changePlayerOneAI(+1);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_PLAYER_TWO_LEFT)) {
+			this.getGame().getLevel().changePlayerTwoAI(-1);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_PLAYER_TWO_RIGHT)) {
+			this.getGame().getLevel().changePlayerTwoAI(+1);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_SIMULATE)) {
+			this.setEndNode(18);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_CREDITS)) {
+			this.setEndNode(9);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_REPLAYLOAD)) {
+			this.setEndNode(15);
+		} else if (function.equals(ApoMarioMenu.fUNCTION_EDITOR)) {
+			this.setEndNode(24);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_EDITORLOAD)) {
+			this.setEndNode(25);
+		}
+		if ((oldEndNode == this.getEndNode()) && (this.getEndNode() != -1)) {
+			this.getRunner().setX(this.getSearch().getNodes().get(oldEndNode).getX());
+			this.getRunner().setY(this.getSearch().getNodes().get(oldEndNode).getY());
+			this.getRunner().setEnd((int)(this.getRunner().getX()), (int)(this.getRunner().getY()));
+			this.setWay(null);
+			this.setCurNode(oldEndNode);
+			this.excecuteFunction();
+		} else {
+			super.searchWay();
+		}
+	}
+	
+	public void releasedEnter() {
+		if (this.getCurNode() == 11) {
+			if (!ApoConstants.B_APPLET) {
+				this.exit();
+			}
+		} else if (this.getCurNode() == 0) {
+			this.getGame().setGame(false);
+		} else if (this.getCurNode() == 19) {
+			this.getGame().setOptions();
+		} else if (this.getCurNode() == 22) {
+			if (!ApoConstants.B_APPLET) {
+				this.getGame().getLevel().loadPlayer(0, null);
+			}
+		} else if (this.getCurNode() == 5) {
+			if (!ApoConstants.B_APPLET) {
+				this.getGame().getLevel().loadPlayer(1, null);
+			}
+		}else if (this.getCurNode() == 9) {
+			this.getGame().setCredits();
+		} else if (this.getCurNode() == 18) {
+			this.getGame().setSimulation();
+		} else if (this.getCurNode() == 15) {
+			if (!ApoConstants.B_APPLET) {
+				this.getGame().loadReplay();
+			}
+		} else if (this.getCurNode() == 24) {
+			this.getGame().setEditor();
+		} else if (this.getCurNode() == 25) {
+			if (!ApoConstants.B_APPLET) {
+				this.getGame().loadEditorLevel();
+			}
+		}
+	}
+	
+	@Override
+	public void excecuteFunction() {
+		String function = super.getExcecuteFunction();
+		if (function == null) {
+		} else if (function.equals(ApoMarioMenu.FUNCTION_QUIT)) {
+			this.exit();
+		} else if (function.equals(ApoMarioMenu.FUNCTION_START)) {
+			this.getGame().setGame(false);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_OPTIONS)) {
+			this.getGame().setOptions();
+		} else if (function.equals(ApoMarioMenu.FUNCTION_LOAD_PLAYER_ONE)) {
+			this.getGame().getLevel().loadPlayer(0, null);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_LOAD_PLAYER_TWO)) {
+			this.getGame().getLevel().loadPlayer(1, null);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_PLAYER_ONE_LEFT)) {
+			this.getGame().getLevel().changePlayerOneAI(-1);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_PLAYER_ONE_RIGHT)) {
+			this.getGame().getLevel().changePlayerOneAI(+1);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_PLAYER_TWO_LEFT)) {
+			this.getGame().getLevel().changePlayerTwoAI(-1);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_PLAYER_TWO_RIGHT)) {
+			this.getGame().getLevel().changePlayerTwoAI(+1);
+		} else if (function.equals(ApoMarioMenu.FUNCTION_CREDITS)) {
+			this.getGame().setCredits();
+		} else if (function.equals(ApoMarioMenu.FUNCTION_SIMULATE)) {
+			this.getGame().setSimulation();
+		} else if (function.equals(ApoMarioMenu.FUNCTION_REPLAYLOAD)) {
+			if (!ApoConstants.B_APPLET) {
+				this.getGame().loadReplay();
+			}
+		} else if (function.equals(ApoMarioMenu.FUNCTION_EDITORLOAD)) {
+			if (!ApoConstants.B_APPLET) {
+				if (this.getGame().loadEditorLevel()) {
+					this.getGame().setGame(false);
+				}
+			}
+		} else if (function.equals(ApoMarioMenu.fUNCTION_EDITOR)) {
+			this.getGame().setEditor();
+		}
+	}
+
+	@Override
+	public void mouseButtonReleased(int x, int y) {
+		
+	}
+	
+	@Override
+	public boolean mouseDragged(int x, int y) {
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int x, int y) {
+		return false;
+	}
+
+	@Override
+	public boolean mousePressed(int x, int y, boolean bRight) {
+		return false;
+	}
+
+	@Override
+	public void think(int delta) {
+		super.thinkRunnerAndAnimation(delta);
+	}
+
+	@Override
+	public void render(Graphics2D g) {
+		super.renderBackgroundAndAnimation(g);
+		
+		g.setFont(ApoMarioConstants.FONT_MENU);
+		g.setColor(Color.black);
+		if ((this.getGame().getLevel().getPlayers() != null) && (this.getGame().getLevel().getPlayers().size() > 0)) {
+			int y = (int)(this.getGame().getButtons()[14].getY() + this.getGame().getButtons()[14].getHeight()/2);
+			int x = (int)(this.getGame().getButtons()[14].getX() - this.getGame().getButtons()[13].getX() - this.getGame().getButtons()[13].getWidth())/2 + (int)(this.getGame().getButtons()[13].getX()) + (int)(this.getGame().getButtons()[13].getWidth());
+			this.renderPlayerStats(g, x, y, this.getGame().getLevel().getPlayers().get(0));
+		}
+		if ((this.getGame().getLevel().getPlayers() != null) && (this.getGame().getLevel().getPlayers().size() > 1)) {
+			int y = (int)(this.getGame().getButtons()[16].getY() + this.getGame().getButtons()[16].getHeight()/2);
+			int x = (int)(this.getGame().getButtons()[16].getX() - this.getGame().getButtons()[15].getX() - this.getGame().getButtons()[15].getWidth())/2 + (int)(this.getGame().getButtons()[15].getX()) + (int)(this.getGame().getButtons()[15].getWidth());
+			if (this.getGame().getLevel().getPlayers().get(1).getAi() == null) {
+				this.renderPlayerStats(g, x, y, null);				
+			} else {
+				this.renderPlayerStats(g, x, y, this.getGame().getLevel().getPlayers().get(1));
+			}
+		}
+		super.renderButtonsAndRunner(g);
+	}
+	
+	private void renderPlayerStats(Graphics2D g, int x, int y, ApoMarioPlayer player) {
+		if (player == null) {
+			int height = g.getFontMetrics().getHeight() - g.getFontMetrics().getDescent();
+			y += height/2;
+			String s = "No Player";
+			int w = g.getFontMetrics().stringWidth(s);
+			this.drawString(g, s, x - w/2, y, Color.LIGHT_GRAY, Color.BLACK);
+		} else {
+			int height = g.getFontMetrics().getHeight() - g.getFontMetrics().getDescent();
+			y -= height/2;
+			String aiName = "Human";
+			if ((player.getAi() != null) && (player.getAi().getTeamName() != null)) {
+				aiName = player.getAi().getTeamName();
+			}
+			int w = g.getFontMetrics().stringWidth(aiName);
+			this.drawString(g, aiName, x - w/2, y, Color.LIGHT_GRAY, Color.BLACK);
+
+			y += height;
+			String by = "by";
+			w = g.getFontMetrics().stringWidth(by);
+			this.drawString(g, by, x - w/2, y, Color.LIGHT_GRAY, Color.BLACK);
+			String author = "you";
+			if ((player.getAi() != null) && (player.getAi().getAuthor() != null)) {
+				author = player.getAi().getAuthor();
+			}
+			y += height;
+			w = g.getFontMetrics().stringWidth(author);
+			this.drawString(g, author, x - w/2, y, Color.LIGHT_GRAY, Color.BLACK);
+		}	
+	}
+	
+	private void drawString(Graphics2D g, String s, int x, int y, Color behind, Color color) {
+		g.setColor(behind);
+		g.drawString(s, x + 1, y + 1);
+		g.setColor(color);
+		g.drawString(s, x, y);
+	}
+}
+```

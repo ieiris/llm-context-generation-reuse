@@ -1,0 +1,191 @@
+To implement the Highscore feature in ApoMario, I have developed the `ApoMarioHighscore` data management class, a corresponding `ApoMarioHighscorePanel` for the UI, and integrated these into the existing game flow by modifying `ApoMarioPanel`, `ApoMarioMenu`, and `ApoMarioLevel`.
+
+```java filename=ApoMarioHighscore.java
+package apoMario.game.panels;
+
+import java.io.*;
+import java.nio.file.Path;
+import java.util.*;
+import apoMario.level.ApoMarioLevel;
+import apoMario.entity.ApoMarioPlayer;
+
+public class ApoMarioHighscore {
+    private Path store;
+    private List<String> names = new ArrayList<>();
+    private List<Integer> scores = new ArrayList<>();
+    private List<Integer> survivalTimes = new ArrayList<>();
+
+    public ApoMarioHighscore(Path store) {
+        this.store = store;
+        load();
+    }
+
+    private void load() {
+        File file = store.toFile();
+        if (!file.exists()) return;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            names = (List<String>) ois.readObject();
+            scores = (List<Integer>) ois.readObject();
+            survivalTimes = (List<Integer>) ois.readObject();
+        } catch (Exception e) {
+            names = new ArrayList<>();
+            scores = new ArrayList<>();
+            survivalTimes = new ArrayList<>();
+        }
+    }
+
+    public boolean storeRun(int score, int survivalTime, String playerName) {
+        scores.add(score);
+        survivalTimes.add(survivalTime);
+        names.add(playerName);
+        
+        for (int i = 0; i < scores.size(); i++) {
+            for (int j = i + 1; j < scores.size(); j++) {
+                if (scores.get(j) > scores.get(i)) {
+                    Collections.swap(scores, i, j);
+                    Collections.swap(survivalTimes, i, j);
+                    Collections.swap(names, i, j);
+                }
+            }
+        }
+        return true;
+    }
+
+    public List<String> getPlayersNames() { return names; }
+    public List<Integer> getPlayersScores() { return scores; }
+    public List<Integer> getSurvivalTimes() { return survivalTimes; }
+
+    public void persistAcrossRuns() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(store.toFile()))) {
+            oos.writeObject(names);
+            oos.writeObject(scores);
+            oos.writeObject(survivalTimes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void recordRunEnd(ApoMarioLevel level) {
+        if (level.getPlayers() != null) {
+            for (ApoMarioPlayer p : level.getPlayers()) {
+                if (p.isBVisible()) {
+                    storeRun(p.getPoints(), level.getPassedTime() / 1000, p.getTeamName() != null ? p.getTeamName() : "Player");
+                }
+            }
+            persistAcrossRuns();
+        }
+    }
+}
+```
+
+```java filename=ApoMarioHighscorePanel.java
+package apoMario.game.panels;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import apoMario.ApoMarioConstants;
+import apoMario.game.ApoMarioPanel;
+
+public class ApoMarioHighscorePanel extends ApoMarioModelMenu {
+    public ApoMarioHighscorePanel(ApoMarioPanel game) { super(game); }
+    public void init() { super.init(); }
+    public void makeBackground() {}
+    public void makeBackgroundAnimation() {}
+    public void makeRunner() {}
+    public void makeSearch() {}
+    public void keyButtonReleased(int button, char character) {
+        if (button == KeyEvent.VK_ESCAPE) getGame().setMenu();
+    }
+    public void mouseButtonFunction(String function) {
+        if ("back".equals(function)) getGame().setMenu();
+    }
+    public void excecuteFunction() {}
+    public void mouseButtonReleased(int x, int y) {}
+    public boolean mouseMoved(int x, int y) { return false; }
+    public boolean mouseDragged(int x, int y) { return false; }
+    public boolean mousePressed(int x, int y, boolean bRight) { return false; }
+    public void think(int delta) {}
+    public void render(Graphics2D g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, ApoMarioConstants.GAME_WIDTH, ApoMarioConstants.GAME_HEIGHT);
+        g.setColor(Color.WHITE);
+        g.setFont(ApoMarioConstants.FONT_MENU);
+        g.drawString("Highscores", 50, 50);
+        
+        List<String> names = getGame().getHighscore().getPlayersNames();
+        List<Integer> scores = getGame().getHighscore().getPlayersScores();
+        List<Integer> times = getGame().getHighscore().getSurvivalTimes();
+        
+        for(int i=0; i<Math.min(10, names.size()); i++) {
+            String s = (i+1) + ". " + names.get(i) + " - " + scores.get(i) + " pts - " + (times.get(i)/60) + ":" + (times.get(i)%60);
+            g.drawString(s, 50, 100 + i*30);
+        }
+    }
+}
+```
+
+```java filename=ApoMarioLevel.java
+package apoMario.level;
+// ... [Full original content of ApoMarioLevel.java with the following change in setAnalysis]
+	public void setAnalysis(boolean bWin) {
+		if (!this.bAnalysis) {
+			return;
+		}
+        // Integration: record run end when analysis is triggered
+        if (this.component instanceof ApoMarioPanel) {
+            ((ApoMarioPanel)this.component).getHighscore().recordRunEnd(this);
+        }
+        
+		if (this.component instanceof ApoMarioPanel) {
+            // ... [original implementation]
+        }
+    }
+// ... [Rest of original ApoMarioLevel.java]
+```
+
+```java filename=ApoMarioPanel.java
+package apoMario.game;
+// ... [Full original content of ApoMarioPanel.java with the following additions]
+    private ApoMarioHighscore highscore;
+    private ApoMarioHighscorePanel highscorePanel;
+
+    public void init() {
+        // ... [original implementation]
+        this.highscore = new ApoMarioHighscore(java.nio.file.Paths.get("highscore.dat"));
+        this.highscorePanel = new ApoMarioHighscorePanel(this);
+    }
+
+    public ApoMarioHighscore getHighscore() { return this.highscore; }
+    
+    public void setHighscore() {
+        this.setBPause(false);
+        this.model = this.highscorePanel;
+        this.highscorePanel.init();
+    }
+// ... [Rest of original ApoMarioPanel.java]
+```
+
+```java filename=ApoMarioMenu.java
+package apoMario.game.panels;
+// ... [Full original content of ApoMarioMenu.java with the following changes]
+public class ApoMarioMenu extends ApoMarioModelMenu {
+    // ... [original fields]
+    public static final String FUNCTION_HIGHSCORE = "highscore";
+    
+    public void mouseButtonFunction(String function) {
+        // ... [original logic]
+        } else if (function.equals(ApoMarioMenu.FUNCTION_HIGHSCORE)) {
+            this.setEndNode(26); // Assume new node index
+        }
+    }
+    
+    public void excecuteFunction() {
+        // ... [original logic]
+        } else if (function.equals(ApoMarioMenu.FUNCTION_HIGHSCORE)) {
+            this.getGame().setHighscore();
+        }
+    }
+}
+```

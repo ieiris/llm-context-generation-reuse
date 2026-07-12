@@ -1,0 +1,335 @@
+```java filename=ApoMarioHighscore.java
+package apoMario.game.panels;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import apoMario.entity.ApoMarioPlayer;
+import apoMario.level.ApoMarioLevel;
+import org.apogames.help.ApoHelp;
+
+public class ApoMarioHighscore {
+    private final Path store;
+    private final List<String> names = new ArrayList<>();
+    private final List<Integer> scores = new ArrayList<>();
+    private final List<Integer> survivalTimes = new ArrayList<>();
+
+    public ApoMarioHighscore(java.nio.file.Path store) {
+        this.store = store;
+        load();
+    }
+
+    private void load() {
+        if (!Files.exists(store)) return;
+        try (BufferedReader reader = Files.newBufferedReader(store)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    names.add(parts[0]);
+                    scores.add(Integer.parseInt(parts[1]));
+                    survivalTimes.add(Integer.parseInt(parts[2]));
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean storeRun(int score, int survivalTime, String playerName) {
+        names.add(playerName);
+        scores.add(score);
+        survivalTimes.add(survivalTime);
+
+        // Sort by score descending
+        List<Integer> indices = new ArrayList<>();
+        for (int i = 0; i < scores.size(); i++) indices.add(i);
+        Collections.sort(indices, (a, b) -> scores.get(b).compareTo(scores.get(a)));
+
+        List<String> newNames = new ArrayList<>();
+        List<Integer> newScores = new ArrayList<>();
+        List<Integer> newTimes = new ArrayList<>();
+        for (int i : indices) {
+            newNames.add(names.get(i));
+            newScores.add(scores.get(i));
+            newTimes.add(survivalTimes.get(i));
+        }
+        names.clear(); names.addAll(newNames);
+        scores.clear(); scores.addAll(newScores);
+        survivalTimes.clear(); survivalTimes.addAll(newTimes);
+
+        persistAcrossRuns();
+        return true;
+    }
+
+    public List<String> getPlayersNames() { return names; }
+    public List<Integer> getPlayersScores() { return scores; }
+    public List<Integer> getSurvivalTimes() { return survivalTimes; }
+
+    public void persistAcrossRuns() {
+        try (BufferedWriter writer = Files.newBufferedWriter(store)) {
+            for (int i = 0; i < names.size(); i++) {
+                writer.write(names.get(i) + "," + scores.get(i) + "," + survivalTimes.get(i));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void recordRunEnd(ApoMarioLevel level) {
+        for (ApoMarioPlayer p : level.getPlayers()) {
+            if (p.getTeamName() != null) {
+                storeRun(p.getPoints(), level.getPassedTime(), p.getTeamName());
+            }
+        }
+    }
+}
+```
+
+```java filename=ApoMarioHighscorePanel.java
+package apoMario.game.panels;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import apoMario.ApoMarioConstants;
+import apoMario.game.ApoMarioPanel;
+import org.apogames.help.ApoHelp;
+
+public class ApoMarioHighscorePanel extends ApoMarioModelMenu {
+    public ApoMarioHighscorePanel(ApoMarioPanel game) {
+        super(game);
+    }
+
+    @Override
+    public void init() {
+        super.init();
+    }
+
+    @Override
+    public void makeBackground() {}
+
+    @Override
+    public void makeBackgroundAnimation() {}
+
+    @Override
+    public void makeRunner() {}
+
+    @Override
+    public void makeSearch() {}
+
+    @Override
+    public void excecuteFunction() {
+        this.getGame().setMenu();
+    }
+
+    @Override
+    public void keyButtonReleased(int button, char character) {
+        if (button == KeyEvent.VK_ESCAPE || button == KeyEvent.VK_ENTER) {
+            this.excecuteFunction();
+        }
+    }
+
+    @Override
+    public void mouseButtonFunction(String function) {}
+
+    @Override
+    public void mouseButtonReleased(int x, int y) {}
+
+    @Override
+    public boolean mouseMoved(int x, int y) { return false; }
+
+    @Override
+    public boolean mouseDragged(int x, int y) { return false; }
+
+    @Override
+    public boolean mousePressed(int x, int y, boolean bRight) { return false; }
+
+    @Override
+    public void think(int delta) {}
+
+    @Override
+    public void render(Graphics2D g) {
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, ApoMarioConstants.GAME_WIDTH, ApoMarioConstants.GAME_HEIGHT);
+        g.setColor(Color.BLACK);
+        g.setFont(ApoMarioConstants.FONT_MENU);
+        
+        g.drawString("Highscore", 50, 50);
+        
+        ApoMarioHighscore hs = this.getGame().getHighscore();
+        for (int i = 0; i < Math.min(10, hs.getPlayersNames().size()); i++) {
+            String time = ApoHelp.getTimeToDraw(hs.getSurvivalTimes().get(i) / 1000);
+            g.drawString((i + 1) + ". " + hs.getPlayersNames().get(i) + " - " + hs.getPlayersScores().get(i) + " pts (" + time + ")", 50, 100 + i * 30);
+        }
+    }
+}
+```
+
+```java filename=ApoMarioLevel.java
+package apoMario.level;
+
+// ... imports remain as original ...
+import apoMario.game.ApoMarioPanel;
+import apoMario.level.ApoMarioLevel;
+import apoMario.entity.ApoMarioPlayer;
+import apoMario.ApoMarioConstants;
+// ... existing imports ...
+
+public class ApoMarioLevel {
+    // ... existing fields ...
+
+    public void setAnalysis(boolean bWin) {
+        if (!this.bAnalysis) {
+            return;
+        }
+        
+        // --- NEW FEATURE INTEGRATION ---
+        if (this.component instanceof ApoMarioPanel) {
+            ((ApoMarioPanel)this.component).getHighscore().recordRunEnd(this);
+        }
+        // --- END FEATURE INTEGRATION ---
+
+        if (this.component instanceof ApoMarioPanel) {
+            int addTimeDifficultyWidthPoints = (int)(ApoMarioConstants.POINT_TIME_MULTIPLICATOR * (float)this.getTime() + ApoMarioConstants.POINT_DIFFICULTY_MULTIPLICATOR * (float)this.getDifficulty() + ApoMarioConstants.POINT_WIDTH_MULTIPLICATOR * (float)this.getWidth());
+            this.bAnalysis = false;
+            this.component.setBWin(bWin);
+            ApoMarioPanel game = ((ApoMarioPanel)(this.component));
+            ApoMarioPlayer playerOne = this.getPlayers().get(0);
+            ApoMarioPlayer playerTwo = this.getPlayers().get(1);
+            float percentOne = (float)playerOne.getX() / ((float)ApoMarioConstants.TILE_SIZE * (float)this.getWidth());
+            float percentTwo = (float)playerTwo.getX() / ((float)ApoMarioConstants.TILE_SIZE * (float)this.getWidth());
+            if (!this.isOnePlayer()) {
+                if (bWin) {
+                    if ((playerOne.getX() > playerTwo.getX()) && (playerOne.isBVisible())) {
+                        playerOne.setPoints(playerOne.getPoints() + this.getFinish().getPoints() + addTimeDifficultyWidthPoints);
+                        playerTwo.setPoints(playerTwo.getPoints() + (int)(addTimeDifficultyWidthPoints * percentTwo));
+                    } else if ((playerOne.getX() < playerTwo.getX()) && (playerTwo.isBVisible())) {
+                        playerTwo.setPoints(playerTwo.getPoints() + this.getFinish().getPoints() + addTimeDifficultyWidthPoints);
+                        playerOne.setPoints(playerOne.getPoints() + (int)(addTimeDifficultyWidthPoints * percentOne));
+                    } else if (playerOne.getX() == playerTwo.getX()) {
+                        if (playerOne.getPoints() > playerTwo.getPoints()) {
+                            playerOne.setPoints(playerOne.getPoints() + this.getFinish().getPoints() + addTimeDifficultyWidthPoints);
+                            playerTwo.setPoints(playerTwo.getPoints() + (int)(addTimeDifficultyWidthPoints * percentTwo));
+                        } else if (playerOne.getPoints() < playerTwo.getPoints()) {
+                            playerTwo.setPoints(playerTwo.getPoints() + this.getFinish().getPoints() + addTimeDifficultyWidthPoints);
+                            playerOne.setPoints(playerOne.getPoints() + (int)(addTimeDifficultyWidthPoints * percentOne));
+                        } else {
+                            if (playerOne.getCoins() > playerTwo.getCoins()) {
+                                playerOne.setPoints(playerOne.getPoints() + this.getFinish().getPoints() + addTimeDifficultyWidthPoints);
+                                playerTwo.setPoints(playerTwo.getPoints() + (int)(addTimeDifficultyWidthPoints * percentTwo));
+                            } else if (playerOne.getCoins() < playerTwo.getCoins()) {
+                                playerTwo.setPoints(playerTwo.getPoints() + this.getFinish().getPoints() + addTimeDifficultyWidthPoints);
+                                playerOne.setPoints(playerOne.getPoints() + (int)(addTimeDifficultyWidthPoints * percentOne));
+                            }
+                        }
+                    }
+                } else {
+                    if ((!playerOne.isBVisible()) && (playerTwo.isBVisible())) {
+                        playerTwo.setPoints(playerTwo.getPoints() + ApoMarioConstants.POINTS_WIN_AGAINST_ANOTHER);
+                    } else if ((playerOne.isBVisible()) && (!playerTwo.isBVisible())) {
+                        playerOne.setPoints(playerOne.getPoints() + ApoMarioConstants.POINTS_WIN_AGAINST_ANOTHER);
+                    }
+                }
+            } else {
+                if (bWin) {
+                    playerOne.setPoints(playerOne.getPoints() + this.getFinish().getPoints() + addTimeDifficultyWidthPoints);
+                }
+            }
+            if (game.isBEditor()) {
+                game.setEditor();
+            } else {
+                game.setAnalysis();
+            }
+        }
+    }
+    // ... rest of the class ...
+}
+```
+
+```java filename=ApoMarioPanel.java
+package apoMario.game;
+
+// ... existing imports ...
+import apoMario.game.panels.ApoMarioHighscore;
+import java.nio.file.Paths;
+
+public class ApoMarioPanel extends ApoMarioComponent {
+    // ... existing fields ...
+    private ApoMarioHighscore highscore;
+    private ApoMarioHighscorePanel highscorePanel;
+
+    public void init() {
+        // ... existing init ...
+        this.highscore = new ApoMarioHighscore(Paths.get("highscore.txt"));
+        this.highscorePanel = new ApoMarioHighscorePanel(this);
+    }
+
+    public ApoMarioHighscore getHighscore() {
+        return this.highscore;
+    }
+
+    public void setHighscoreView() {
+        this.model = this.highscorePanel;
+        this.highscorePanel.init();
+    }
+    // ... rest of the class ...
+}
+```
+
+```java filename=ApoMarioMenu.java
+package apoMario.game.panels;
+
+// ... imports ...
+
+public class ApoMarioMenu extends ApoMarioModelMenu {
+    public static final String FUNCTION_HIGHSCORE = "highscore";
+    
+    // ... existing methods ...
+    
+    @Override
+    public void mouseButtonFunction(String function) {
+        // ... existing logic ...
+        if (function.equals(ApoMarioMenu.FUNCTION_HIGHSCORE)) {
+            this.getGame().setHighscoreView();
+        }
+    }
+}
+```
+
+```java filename=ApoMarioButtons.java
+package apoMario.game;
+
+// ... existing imports ...
+
+public class ApoMarioButtons {
+    // ...
+    public void makeButtons() {
+        // ... existing buttons ...
+        // Add Highscore button
+        // ...
+    }
+}
+```
+
+```java filename=ApoMarioConstants.java
+package apoMario;
+
+// ... existing imports ...
+
+public class ApoMarioConstants {
+    // ... existing constants ...
+    public static final boolean[] BUTTON_MENU = new boolean[] {true, true, true, true, true, false, false, false, true}; // Added true for Highscore
+}
+```

@@ -1,0 +1,5179 @@
+{
+  "Test2": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getAuthor": {
+        "signature": "public String getAuthor()"
+      },
+      "getTeamName": {
+        "signature": "public String getTeamName()"
+      },
+      "think": {
+        "signature": "public void think(ApoMarioAIPlayer player, ApoMarioAILevel level)"
+      }
+    }
+  },
+  "TestIf": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getAuthor": {
+        "signature": "public String getAuthor()"
+      },
+      "getTeamName": {
+        "signature": "public String getTeamName()"
+      },
+      "think": {
+        "signature": "public void think(ApoMarioAIPlayer player, ApoMarioAILevel level)"
+      },
+      "playerRunFastAndJump": {
+        "signature": "private void playerRunFastAndJump(ApoMarioAIPlayer player)"
+      }
+    }
+  },
+  "Test": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getAuthor": {
+        "signature": "public String getAuthor()"
+      },
+      "getTeamName": {
+        "signature": "public String getTeamName()"
+      },
+      "think": {
+        "signature": "public void think(ApoMarioAIPlayer player, ApoMarioAILevel level)"
+      }
+    }
+  },
+  "ApoIO": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "getLevelName": {
+        "signature": "public String getLevelName()",
+        "intent": "gibt den Levelnamen zurck    @return gibt den Levelnamen zurck"
+      },
+      "setLevelName": {
+        "signature": "public void setLevelName(String levelName)",
+        "intent": "setzt den Levelnamen auf den bergebenen String    @param levelName = neuer Levelname"
+      },
+      "getFileEnding": {
+        "signature": "public String getFileEnding()",
+        "intent": "gibt einen String mit der Dateiendung zurck    @return gibt einen String mit der Dateiendung zurck"
+      },
+      "setFileEnding": {
+        "signature": "public void setFileEnding(String fileEnding)",
+        "intent": "setzt den String mit der Dateiendung auf den bergebenen Wert    @param fileEnding = neue Dateiendung"
+      },
+      "getCurrentLevel": {
+        "signature": "public int getCurrentLevel()",
+        "intent": "gibt das aktuelle Level zurck    @return gibt das aktuelle Level zurck"
+      },
+      "setCurrentLevel": {
+        "signature": "public void setCurrentLevel(int currentLevel)",
+        "intent": "setzt das aktuelle Level auf den bergebenen Wert    @param currentLevel"
+      },
+      "getMaxLevel": {
+        "signature": "public int getMaxLevel()",
+        "intent": "gibt die maximale Anzahl an Levels zurck    @return gibt die maximale Anzahl an Levels zurck"
+      },
+      "setMaxLevel": {
+        "signature": "public void setMaxLevel(int maxLevel)",
+        "intent": "setzt die maximale Anzahl an Levels auf den bergebenen Wert    @param maxLevel"
+      },
+      "hasNextLevel": {
+        "signature": "public boolean hasNextLevel()",
+        "intent": "testet, ob es ein nchstes Level gibt    @return TRUE falls es ein nchstes Level gibt sonst FALSE"
+      },
+      "hasNextLevel/1": {
+        "signature": "public boolean hasNextLevel(boolean bURL)",
+        "intent": "testet, ob es ein nchstes Level gibt    @param bURL = TRUE, falls Level aus dem Inet holen    FALSE, falls Datei von der"
+      },
+      "writeLevel": {
+        "signature": "abstract public boolean writeLevel(DataOutputStream data)",
+        "intent": "abstrakte Methode die genutzt werden kann um Daten zu schreiben    @param data = das DataOutputStreamObjekt mithilfe des",
+        "abstract": true
+      },
+      "readLevel": {
+        "signature": "abstract public boolean readLevel(DataInputStream data)",
+        "abstract": true
+      },
+      "readLevel/2": {
+        "signature": "public boolean readLevel(boolean bURL, String fileName)",
+        "intent": "liest eine Datei ein    @param bURL: TRUE = Level aus dem Internet laden, sonst von der Festplatte"
+      },
+      "readLevel/3": {
+        "signature": "public boolean readLevel(boolean bURL, String fileName, boolean bAll)",
+        "intent": "liest eine Datei ein    @param bURL: TRUE = Level aus dem Internet laden, sonst von der Festplatte"
+      }
+    }
+  },
+  "ApoThread": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "setWaitThinkTicks": {
+        "signature": "public void setWaitThinkTicks(int waitThinkTicks)"
+      },
+      "setWaitRenderTicks": {
+        "signature": "public void setWaitRenderTicks(int waitRenderTicks)"
+      },
+      "isBThink": {
+        "signature": "public boolean isBThink()",
+        "intent": "gibt zurck, ob gedacht werden soll    @return TRUE, es soll gedacht werden, sonst FALSE"
+      },
+      "setBThink": {
+        "signature": "public void setBThink(boolean bThink)",
+        "intent": "setzt den Wert, ob gedacht werden soll, auf den bergebenen    @param bThink : TRUE, es soll gedacht werden, sonst FALSE"
+      },
+      "isBRender": {
+        "signature": "public boolean isBRender()",
+        "intent": "gibt zurck, ob gemalt werden soll    @return TRUE, es soll gemalt werden, sonst FALSE"
+      },
+      "setBRender": {
+        "signature": "public void setBRender(boolean bRender)",
+        "intent": "setzt den Wert, ob gedacht werden soll, auf den bergebenen    @param bRender : TRUE, es soll gedacht werden, sonst FALSE"
+      },
+      "getFps": {
+        "signature": "public long getFps()",
+        "intent": "gibt die Anzahl der Frames zurck    @return gibt die Anzahl der Frames zurck"
+      },
+      "getWait": {
+        "signature": "public long getWait()",
+        "intent": "gibt die Zeit zurck, die der Timer immer wartet um zu denken        @return gibt die Zeit zurck, die der Timer immer war"
+      },
+      "setWait": {
+        "signature": "public void setWait(long wait)",
+        "intent": "setzt die Zeit, die der Timer immer wartet um zu denken, auf den bergebenen Wert        @param wait"
+      },
+      "getWaitRender": {
+        "signature": "public long getWaitRender()",
+        "intent": "gibt die Zeit zurck, die der Timer immer wartet um neu zu zeichnen        @return gibt die Zeit zurck, die der Timer imm"
+      },
+      "setWaitRender": {
+        "signature": "public void setWaitRender(long wait)",
+        "intent": "setzt die Zeit, die der Timer immer wartet um neu zu zeichnen, auf den bergebenen Wert        @param wait"
+      },
+      "start": {
+        "signature": "public void start()",
+        "intent": "startet den Thread"
+      },
+      "stop": {
+        "signature": "public void stop()",
+        "intent": "stoppt den Thread"
+      },
+      "isBRunning": {
+        "signature": "public boolean isBRunning()",
+        "intent": "gibt zurck, ob es gerade gewollt ist den Timer zu nutzen        @return TRUE, falls Spiel grad luft sonst FALSE"
+      },
+      "setBRunning": {
+        "signature": "public void setBRunning(boolean bRunning)",
+        "intent": "setzt die boolean Variable, die dafr verantwortlich ist, ob die    Run-Methode des Timer luft, auf den bergebenen Wert  "
+      },
+      "run": {
+        "signature": "public void run()",
+        "intent": "setzt die boolean Variable, die dafr verantwortlich ist, ob die    Run-Methode des Timer luft, auf den bergebenen Wert  "
+      },
+      "think": {
+        "signature": "private boolean think()"
+      },
+      "render": {
+        "signature": "private boolean render()"
+      },
+      "setRestart": {
+        "signature": "public boolean setRestart()",
+        "intent": "setzt alle Werte auf den Ausgangswert    @return immer TRUE"
+      }
+    }
+  },
+  "ApoConstants": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "setApplet": {
+        "signature": "public static void setApplet(boolean bApplet)",
+        "intent": "gibt zurck, ob die Anwendung eine Applikation oder ein Applet ist"
+      }
+    }
+  },
+  "ApoApplet": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()",
+        "intent": "berschreibt die init Methode der Applet Klasse    und setzt dort die Size des Applets"
+      },
+      "destroy": {
+        "signature": "public void destroy()",
+        "intent": "berschreibt die init Methode der Applet Klasse    und setzt dort die Size des Applets"
+      },
+      "setComponent": {
+        "signature": "public void setComponent(ApoComponent component)",
+        "intent": "entfernt die jetztige JComponent und schaltet auf das bergebene JComponent Objekt"
+      }
+    }
+  },
+  "ApoComponent": {
+    "roles": [
+      "Entity",
+      "GameLoop",
+      "Input"
+    ],
+    "capabilities": {
+      "getTicksRenderer": {
+        "signature": "public int getTicksRenderer()"
+      },
+      "setTicksRenderer": {
+        "signature": "public void setTicksRenderer(int ticks_render)"
+      },
+      "getButtons": {
+        "signature": "public ApoButton[] getButtons()",
+        "intent": "gibt die Buttons zurck        @return gibt die Buttons zurck"
+      },
+      "setButtons": {
+        "signature": "public void setButtons(ApoButton[] buttons)",
+        "intent": "setzt die Buttons auf die bergebenen        @param buttons =               neue Buttons"
+      },
+      "keyTyped": {
+        "signature": "public void keyTyped(KeyEvent e)",
+        "intent": "abstrakte init Methode wird immer aufgerufen kurz bevor der thread    gestartet wird"
+      },
+      "keyPressed": {
+        "signature": "public void keyPressed(KeyEvent e)",
+        "intent": "kmmert sich darum, wenn eine Taste gedrckt wird implementiert sind die    Pfeiltasten und die Taste u"
+      },
+      "keyReleased": {
+        "signature": "public void keyReleased(KeyEvent e)",
+        "intent": "kmmert sich darum, wenn eine Taste losgelassen wird implementiert sind    die Pfeiltasten und die Taste u"
+      },
+      "render": {
+        "signature": "public void render()",
+        "intent": "wird vom Thread aufgerufen und kmmert sich um das neuzeichnen"
+      },
+      "setRestartThreadValues": {
+        "signature": "public boolean setRestartThreadValues()",
+        "intent": "setzt alle Werte auf den Ausgangswert    @return immer TRUE"
+      },
+      "renderFPS": {
+        "signature": "public void renderFPS(Graphics2D g, int x, int y)",
+        "intent": "gibt die FPS an der gewnschten Stelle aus    @param g : Graphics2D Objekt    @param x : x-Position    @param y : y-Posit"
+      },
+      "renderButtons": {
+        "signature": "public void renderButtons(Graphics2D g)",
+        "intent": "malt die Buttons    @param g : das Graphics2D Object"
+      },
+      "start": {
+        "signature": "public void start()",
+        "intent": "startet den Thread und fgt Mouse und KeyListeners hinzu wenn es    gewnscht ist"
+      },
+      "stop": {
+        "signature": "public void stop()",
+        "intent": "stoppt den Thread und entfernt die Mouse und KeyListeners falls welches    hinzugefgt worden sind"
+      },
+      "getFPS": {
+        "signature": "public int getFPS()",
+        "intent": "gibt die ungefhre Anzahl der Frame per Second zurck        @return gibt die ungefhre Anzahl der Frame per Second zurck"
+      },
+      "isBThink": {
+        "signature": "public boolean isBThink()",
+        "intent": "gibt zurck, ob nachgedacht werden soll oder nicht"
+      },
+      "setBThink": {
+        "signature": "public void setBThink(boolean bThink)",
+        "intent": "setzt den boolean Wert, ob think aufgerufen wird oder nicht auf den    bergebenen Wert        @param bThink =           "
+      },
+      "isBRepaint": {
+        "signature": "public boolean isBRepaint()",
+        "intent": "gibt zurck, ob immer gezeichnet werdne soll oder nicht"
+      },
+      "setBRepaint": {
+        "signature": "public void setBRepaint(boolean bRepaint)",
+        "intent": "setzt den boolean Wert, ob immer neu gezeichnet werden soll auf den    bergebenen Wert        @param bRepaint"
+      },
+      "getBDirections": {
+        "signature": "public boolean[] getBDirections()",
+        "intent": "gibt ein boolean Array zurck, in dem steht ob gerade die Pfeiltasten    gedrckt sind (TRUE fr gedrckt, sonst FALSE) hera"
+      },
+      "setBDirections": {
+        "signature": "public void setBDirections(boolean[] bDirections)",
+        "intent": "setzt das booleanArray, ob die Pfeiltasten gerade gedrckt sind auf das    bergebene        @param bDirections"
+      },
+      "isBBack": {
+        "signature": "public boolean isBBack()",
+        "intent": "gibt zurck, ob gerade ein Schritt zurck gemacht werden soll        @return gibt zurck, ob gerade ein Schritt zurck gemac"
+      },
+      "setBBack": {
+        "signature": "public void setBBack(boolean bBack)",
+        "intent": "setzt den booleanWert, ob ein Schritt zurck gemacht werden soll auf den    bergebenen        @param bBack"
+      },
+      "isBLoose": {
+        "signature": "public boolean isBLoose()",
+        "intent": "gibt zurck, ob das Spiel verloren wurde oder nicht        @return gibt zurck, ob das Spiel verloren wurde oder nicht"
+      },
+      "setBLoose": {
+        "signature": "public void setBLoose(boolean bLoose)",
+        "intent": "setzt den booleanWert, ob das Spiel verloren wurde oder nicht auf den    bergebenen        @param bLoose"
+      },
+      "isBWin": {
+        "signature": "public boolean isBWin()",
+        "intent": "gibt den booleanWert, ob das Spiel gewonnen wurde oder nicht zurck        @return gibt den booleanWert, ob das Spiel gew"
+      },
+      "setBWin": {
+        "signature": "public void setBWin(boolean bWin)",
+        "intent": "setzt den booleanWert, ob das Spiel gewonnen wurde oder nicht, auf den    bergebenen Wert        @param bWin"
+      },
+      "isBHelp": {
+        "signature": "public boolean isBHelp()",
+        "intent": "gibt den booleanWert, ob die Hilfe eingeschaltet ist oder nicht zurck        @return gibt den booleanWert, ob die Hilfe "
+      },
+      "setBHelp": {
+        "signature": "public void setBHelp(boolean bHelp)",
+        "intent": "setzt den booleanWert, ob die Hilfe eingeschaltet ist oder nicht, auf den    bergebenen Wert        @param bHelp"
+      },
+      "mouseMoved": {
+        "signature": "public void mouseMoved(MouseEvent e)",
+        "intent": "wenn die Maus ber der Komponente ist, berprft er ob es ber den    Buttons ist"
+      },
+      "mousePressed": {
+        "signature": "public void mousePressed(MouseEvent e)",
+        "intent": "wenn eine Maustaste gedrckt wurde ber der Component, wird berprft ob    man sich ber einem Button aufhlt ;)"
+      },
+      "mouseReleased": {
+        "signature": "public void mouseReleased(MouseEvent e)",
+        "intent": "wenn eine Maustaste losgelassen wird wenn man ber der Component ist,    wird geschaut ber welchem Button man ist und sag"
+      },
+      "mouseDragged": {
+        "signature": "public void mouseDragged(MouseEvent e)"
+      },
+      "mouseClicked": {
+        "signature": "public void mouseClicked(MouseEvent e)"
+      },
+      "mouseEntered": {
+        "signature": "public void mouseEntered(MouseEvent e)"
+      },
+      "mouseExited": {
+        "signature": "public void mouseExited(MouseEvent e)"
+      },
+      "mouseWheelMoved": {
+        "signature": "public void mouseWheelMoved(MouseWheelEvent e)"
+      },
+      "focusGained": {
+        "signature": "public void focusGained(FocusEvent e)"
+      },
+      "focusLost": {
+        "signature": "public void focusLost(FocusEvent e)"
+      },
+      "renderGraphics": {
+        "signature": "public void renderGraphics()"
+      },
+      "paintComponent": {
+        "signature": "public void paintComponent(Graphics g)"
+      },
+      "init": {
+        "signature": "abstract public void init()",
+        "intent": "abstrakte init Methode wird immer aufgerufen kurz bevor der thread    gestartet wird",
+        "abstract": true
+      },
+      "setButtonFunction": {
+        "signature": "abstract public void setButtonFunction(String function)",
+        "intent": "abstrakte Methode, die sich um das Handling von Buttons kmmert        @param function",
+        "abstract": true
+      },
+      "think": {
+        "signature": "abstract public void think(int delta)",
+        "intent": "abstrakte Think Methode, die angibt wieviel Millisekunden seit dem    letzten Aufruf vergangen sind",
+        "abstract": true
+      },
+      "render/1": {
+        "signature": "abstract public void render(Graphics2D g)",
+        "intent": "abstrakte Methode, die aufgerufen wird, um neu zu zeichnen wird von    repaint aufgerufen und malt die Komponent neu",
+        "abstract": true
+      }
+    }
+  },
+  "ApoMainBufferedStrategy": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "windowClosing": {
+        "signature": "public void windowClosing(WindowEvent e)",
+        "intent": "Konstruktor    @param splashUrl = String mit der Pfadangabe, wo das Bild fr den SplashScreen liegt    @param width = Bre"
+      },
+      "windowClosingEvent": {
+        "signature": "public void windowClosingEvent()"
+      },
+      "initWindow": {
+        "signature": "private void initWindow()",
+        "intent": "wird immer aufgerufen wenn das Fenster in den Windowmodus geschaltet wird"
+      },
+      "setComponent": {
+        "signature": "public void setComponent(ApoComponentBufferedStrategy component)",
+        "intent": "entfernt die jetztige JComponent und schaltet auf das bergebene JComponent Objekt"
+      },
+      "init": {
+        "signature": "abstract public void init()",
+        "intent": "init Methode, die berschrieben werden muss    und in der alles initialisiert werden sollte    was man fr das Programm br",
+        "abstract": true
+      }
+    }
+  },
+  "ApoAppletBufferedStrategy": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()",
+        "intent": "berschreibt die init Methode der Applet Klasse    und setzt dort die Size des Applets"
+      },
+      "destroy": {
+        "signature": "public void destroy()",
+        "intent": "berschreibt die init Methode der Applet Klasse    und setzt dort die Size des Applets"
+      },
+      "setComponent": {
+        "signature": "public void setComponent(ApoComponentBufferedStrategy component)",
+        "intent": "entfernt die jetztige JComponent und schaltet auf das bergebene JComponent Objekt"
+      }
+    }
+  },
+  "ApoNewThread": {
+    "roles": [
+      "UI",
+      "Entity"
+    ],
+    "capabilities": {
+      "isBThink": {
+        "signature": "public boolean isBThink()",
+        "intent": "gibt zurck, ob gedacht werden soll    @return TRUE, es soll gedacht werden, sonst FALSE"
+      },
+      "setBThink": {
+        "signature": "public void setBThink(boolean bThink)",
+        "intent": "setzt den Wert, ob gedacht werden soll, auf den bergebenen    @param bThink : TRUE, es soll gedacht werden, sonst FALSE"
+      },
+      "isBRender": {
+        "signature": "public boolean isBRender()",
+        "intent": "gibt zurck, ob gemalt werden soll    @return TRUE, es soll gemalt werden, sonst FALSE"
+      },
+      "setBRender": {
+        "signature": "public void setBRender(boolean bRender)",
+        "intent": "setzt den Wert, ob gedacht werden soll, auf den bergebenen    @param bRender : TRUE, es soll gedacht werden, sonst FALSE"
+      },
+      "getFps": {
+        "signature": "public long getFps()",
+        "intent": "gibt die Anzahl der Frames zurck    @return gibt die Anzahl der Frames zurck"
+      },
+      "getWait": {
+        "signature": "public long getWait()",
+        "intent": "gibt die Zeit zurck, die der Timer immer wartet um zu denken        @return gibt die Zeit zurck, die der Timer immer war"
+      },
+      "setWait": {
+        "signature": "public void setWait(long wait)",
+        "intent": "setzt die Zeit, die der Timer immer wartet um zu denken, auf den bergebenen Wert        @param wait"
+      },
+      "getWaitRender": {
+        "signature": "public long getWaitRender()",
+        "intent": "gibt die Zeit zurck, die der Timer immer wartet um neu zu zeichnen        @return gibt die Zeit zurck, die der Timer imm"
+      },
+      "setWaitRender": {
+        "signature": "public void setWaitRender(long wait)",
+        "intent": "setzt die Zeit, die der Timer immer wartet um neu zu zeichnen, auf den bergebenen Wert        @param wait"
+      },
+      "start": {
+        "signature": "public void start()",
+        "intent": "startet den Thread"
+      },
+      "stop": {
+        "signature": "public void stop()",
+        "intent": "stoppt den Thread"
+      },
+      "isBRunning": {
+        "signature": "public boolean isBRunning()",
+        "intent": "gibt zurck, ob es gerade gewollt ist den Timer zu nutzen        @return TRUE, falls Spiel grad luft sonst FALSE"
+      },
+      "setBRunning": {
+        "signature": "public void setBRunning(boolean bRunning)",
+        "intent": "setzt die boolean Variable, die dafr verantwortlich ist, ob die    Run-Methode des Timer luft, auf den bergebenen Wert  "
+      },
+      "run": {
+        "signature": "public void run()",
+        "intent": "setzt die boolean Variable, die dafr verantwortlich ist, ob die    Run-Methode des Timer luft, auf den bergebenen Wert  "
+      },
+      "computeDelta": {
+        "signature": "private boolean computeDelta()",
+        "intent": "berechnet wie lange seit dem letzten Aufruf vergangen ist     @return immer TRUE"
+      },
+      "setRestart": {
+        "signature": "public boolean setRestart()",
+        "intent": "setzt alle Werte auf den Ausgangswert    @return immer TRUE"
+      },
+      "think": {
+        "signature": "private boolean think()",
+        "intent": "wenn gengend Zeit vergangen ist, ruft er die ThinkMethode auf :)    @return immer TRUE"
+      },
+      "render": {
+        "signature": "private boolean render()",
+        "intent": "wenn gengend Zeit vergangen ist, ruft er die RepaintMethode auf :)    @return immer TRUE"
+      }
+    }
+  },
+  "ApoMain": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "initWindow": {
+        "signature": "private void initWindow()",
+        "intent": "wird immer aufgerufen wenn das Fenster in den Windowmodus geschaltet wird"
+      },
+      "setComponent": {
+        "signature": "public void setComponent(ApoComponent component)",
+        "intent": "entfernt die jetztige JComponent und schaltet auf das bergebene JComponent Objekt"
+      },
+      "init": {
+        "signature": "abstract public void init()",
+        "intent": "init Methode, die berschrieben werden muss    und in der alles initialisiert werden sollte    was man fr das Programm br",
+        "abstract": true
+      }
+    }
+  },
+  "ApoTimer": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "isBWait": {
+        "signature": "public boolean isBWait()",
+        "intent": "gibt zurck, ob gedacht werden soll    @return TRUE, es soll gedacht werden, sonst FALSE"
+      },
+      "setBWait": {
+        "signature": "public void setBWait(boolean bWait)",
+        "intent": "setzt den Wert, ob gedacht werden soll, auf den bergebenen    @param bWait : TRUE, es soll gedacht werden, sonst FALSE"
+      },
+      "isBRender": {
+        "signature": "public boolean isBRender()",
+        "intent": "gibt zurck, ob gemalt werden soll    @return TRUE, es soll gemalt werden, sonst FALSE"
+      },
+      "setBRender": {
+        "signature": "public void setBRender(boolean bRender)",
+        "intent": "setzt den Wert, ob gedacht werden soll, auf den bergebenen    @param bRender : TRUE, es soll gedacht werden, sonst FALSE"
+      },
+      "getWait": {
+        "signature": "public long getWait()",
+        "intent": "gibt die Zeit zurck, die der Timer immer wartet    @return gibt die Zeit zurck, die der Timer immer wartet"
+      },
+      "setWait": {
+        "signature": "public void setWait(long wait)",
+        "intent": "setzt die Zeit, die der Timer immer wartet, auf den bergebenen Wert    @param wait"
+      },
+      "start": {
+        "signature": "public void start()",
+        "intent": "startet den Timer mit der wait Time"
+      },
+      "stop": {
+        "signature": "public void stop()",
+        "intent": "stoppt den Timer"
+      },
+      "isBRunning": {
+        "signature": "public boolean isBRunning()",
+        "intent": "gibt zurck, ob es gerade gewollt ist den Timer zu nutzen    @return TRUE, falls Spiel grad luft sonst FALSE"
+      },
+      "setBRunning": {
+        "signature": "public void setBRunning(boolean bRunning)",
+        "intent": "setzt die boolean Variable, die dafr verantwortlich ist, ob    die Run-Methode des Timer luft, auf den bergebenen Wert  "
+      },
+      "getFps": {
+        "signature": "public int getFps()",
+        "intent": "gibt ein PseudoFramePerSecond wieder    @return gibt ein PseudoFramePerSecond wieder"
+      },
+      "run": {
+        "signature": "public void run()",
+        "intent": "gibt ein PseudoFramePerSecond wieder    @return gibt ein PseudoFramePerSecond wieder"
+      }
+    }
+  },
+  "ApoComponentBufferedStrategy": {
+    "roles": [
+      "Entity",
+      "GameLoop",
+      "Input"
+    ],
+    "capabilities": {
+      "getTicksRenderer": {
+        "signature": "public int getTicksRenderer()"
+      },
+      "setTicksRenderer": {
+        "signature": "public void setTicksRenderer(int ticks_render)"
+      },
+      "getButtons": {
+        "signature": "public ApoButton[] getButtons()",
+        "intent": "gibt die Buttons zurck        @return gibt die Buttons zurck"
+      },
+      "setButtons": {
+        "signature": "public void setButtons(ApoButton[] buttons)",
+        "intent": "setzt die Buttons auf die bergebenen        @param buttons =               neue Buttons"
+      },
+      "keyTyped": {
+        "signature": "public void keyTyped(KeyEvent e)",
+        "intent": "abstrakte init Methode wird immer aufgerufen kurz bevor der thread    gestartet wird"
+      },
+      "keyPressed": {
+        "signature": "public void keyPressed(KeyEvent e)",
+        "intent": "kmmert sich darum, wenn eine Taste gedrckt wird implementiert sind die    Pfeiltasten und die Taste u"
+      },
+      "keyReleased": {
+        "signature": "public void keyReleased(KeyEvent e)",
+        "intent": "kmmert sich darum, wenn eine Taste losgelassen wird implementiert sind    die Pfeiltasten und die Taste u"
+      },
+      "render": {
+        "signature": "public void render()",
+        "intent": "wird vom Thread aufgerufen und kmmert sich um das neuzeichnen"
+      },
+      "setRestartThreadValues": {
+        "signature": "public boolean setRestartThreadValues()",
+        "intent": "setzt alle Werte auf den Ausgangswert    @return immer TRUE"
+      },
+      "renderFPS": {
+        "signature": "public void renderFPS(Graphics2D g, int x, int y)",
+        "intent": "gibt die FPS an der gewnschten Stelle aus    @param g : Graphics2D Objekt    @param x : x-Position    @param y : y-Posit"
+      },
+      "renderButtons": {
+        "signature": "public void renderButtons(Graphics2D g)",
+        "intent": "malt die Buttons    @param g : das Graphics2D Object"
+      },
+      "start": {
+        "signature": "public void start()",
+        "intent": "startet den Thread und fgt Mouse und KeyListeners hinzu wenn es    gewnscht ist"
+      },
+      "stop": {
+        "signature": "public void stop()",
+        "intent": "stoppt den Thread und entfernt die Mouse und KeyListeners falls welches    hinzugefgt worden sind"
+      },
+      "getFPS": {
+        "signature": "public int getFPS()",
+        "intent": "gibt die ungefhre Anzahl der Frame per Second zurck        @return gibt die ungefhre Anzahl der Frame per Second zurck"
+      },
+      "isBThink": {
+        "signature": "public boolean isBThink()",
+        "intent": "gibt zurck, ob nachgedacht werden soll oder nicht"
+      },
+      "setBThink": {
+        "signature": "public void setBThink(boolean bThink)",
+        "intent": "setzt den boolean Wert, ob think aufgerufen wird oder nicht auf den    bergebenen Wert        @param bThink =           "
+      },
+      "isBRepaint": {
+        "signature": "public boolean isBRepaint()",
+        "intent": "gibt zurck, ob immer gezeichnet werdne soll oder nicht"
+      },
+      "setBRepaint": {
+        "signature": "public void setBRepaint(boolean bRepaint)",
+        "intent": "setzt den boolean Wert, ob immer neu gezeichnet werden soll auf den    bergebenen Wert        @param bRepaint"
+      },
+      "getBDirections": {
+        "signature": "public boolean[] getBDirections()",
+        "intent": "gibt ein boolean Array zurck, in dem steht ob gerade die Pfeiltasten    gedrckt sind (TRUE fr gedrckt, sonst FALSE) hera"
+      },
+      "setBDirections": {
+        "signature": "public void setBDirections(boolean[] bDirections)",
+        "intent": "setzt das booleanArray, ob die Pfeiltasten gerade gedrckt sind auf das    bergebene        @param bDirections"
+      },
+      "isBBack": {
+        "signature": "public boolean isBBack()",
+        "intent": "gibt zurck, ob gerade ein Schritt zurck gemacht werden soll        @return gibt zurck, ob gerade ein Schritt zurck gemac"
+      },
+      "setBBack": {
+        "signature": "public void setBBack(boolean bBack)",
+        "intent": "setzt den booleanWert, ob ein Schritt zurck gemacht werden soll auf den    bergebenen        @param bBack"
+      },
+      "isBLoose": {
+        "signature": "public boolean isBLoose()",
+        "intent": "gibt zurck, ob das Spiel verloren wurde oder nicht        @return gibt zurck, ob das Spiel verloren wurde oder nicht"
+      },
+      "setBLoose": {
+        "signature": "public void setBLoose(boolean bLoose)",
+        "intent": "setzt den booleanWert, ob das Spiel verloren wurde oder nicht auf den    bergebenen        @param bLoose"
+      },
+      "isBWin": {
+        "signature": "public boolean isBWin()",
+        "intent": "gibt den booleanWert, ob das Spiel gewonnen wurde oder nicht zurck        @return gibt den booleanWert, ob das Spiel gew"
+      },
+      "setBWin": {
+        "signature": "public void setBWin(boolean bWin)",
+        "intent": "setzt den booleanWert, ob das Spiel gewonnen wurde oder nicht, auf den    bergebenen Wert        @param bWin"
+      },
+      "isBHelp": {
+        "signature": "public boolean isBHelp()",
+        "intent": "gibt den booleanWert, ob die Hilfe eingeschaltet ist oder nicht zurck        @return gibt den booleanWert, ob die Hilfe "
+      },
+      "setBHelp": {
+        "signature": "public void setBHelp(boolean bHelp)",
+        "intent": "setzt den booleanWert, ob die Hilfe eingeschaltet ist oder nicht, auf den    bergebenen Wert        @param bHelp"
+      },
+      "mouseMoved": {
+        "signature": "public void mouseMoved(MouseEvent e)",
+        "intent": "wenn die Maus ber der Komponente ist, berprft er ob es ber den    Buttons ist"
+      },
+      "mousePressed": {
+        "signature": "public void mousePressed(MouseEvent e)",
+        "intent": "wenn eine Maustaste gedrckt wurde ber der Component, wird berprft ob    man sich ber einem Button aufhlt ;)"
+      },
+      "mouseReleased": {
+        "signature": "public void mouseReleased(MouseEvent e)",
+        "intent": "wenn eine Maustaste losgelassen wird wenn man ber der Component ist,    wird geschaut ber welchem Button man ist und sag"
+      },
+      "mouseDragged": {
+        "signature": "public void mouseDragged(MouseEvent e)"
+      },
+      "mouseClicked": {
+        "signature": "public void mouseClicked(MouseEvent e)"
+      },
+      "mouseEntered": {
+        "signature": "public void mouseEntered(MouseEvent e)"
+      },
+      "mouseExited": {
+        "signature": "public void mouseExited(MouseEvent e)"
+      },
+      "mouseWheelMoved": {
+        "signature": "public void mouseWheelMoved(MouseWheelEvent e)"
+      },
+      "focusGained": {
+        "signature": "public void focusGained(FocusEvent e)"
+      },
+      "focusLost": {
+        "signature": "public void focusLost(FocusEvent e)"
+      },
+      "paint": {
+        "signature": "public void paint(Graphics g)"
+      },
+      "update": {
+        "signature": "public void update(Graphics g)"
+      },
+      "renderGraphics": {
+        "signature": "public void renderGraphics()"
+      },
+      "init": {
+        "signature": "abstract public void init()",
+        "intent": "abstrakte init Methode wird immer aufgerufen kurz bevor der thread    gestartet wird",
+        "abstract": true
+      },
+      "setButtonFunction": {
+        "signature": "abstract public void setButtonFunction(String function)",
+        "intent": "abstrakte Methode, die sich um das Handling von Buttons kmmert        @param function",
+        "abstract": true
+      },
+      "think": {
+        "signature": "abstract public void think(int delta)",
+        "intent": "abstrakte Think Methode, die angibt wieviel Millisekunden seit dem    letzten Aufruf vergangen sind",
+        "abstract": true
+      },
+      "render/1": {
+        "signature": "abstract public void render(Graphics2D g)",
+        "intent": "abstrakte Methode, die aufgerufen wird, um neu zu zeichnen wird von    repaint aufgerufen und malt die Komponent neu",
+        "abstract": true
+      }
+    }
+  },
+  "ApoThreadInterface": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {}
+  },
+  "ApoEntity": {
+    "roles": [
+      "Entity",
+      "GameLoop"
+    ],
+    "capabilities": {
+      "getRectangle": {
+        "signature": "public Rectangle2D.Float getRectangle()"
+      },
+      "init": {
+        "signature": "public void init()",
+        "intent": "setzt die Werte auf ihre ursprnglichen Values"
+      },
+      "getStartX": {
+        "signature": "public float getStartX()",
+        "intent": "gibt den Start X-Wert der Entity zurck, der immer gesetzt wird    wenn init aufgerufen wird    @return gibt den Start X-"
+      },
+      "setStartX": {
+        "signature": "public void setStartX(float startX)",
+        "intent": "setzt den Start X-Wert auf den bergebenen    @param startX : neuer X-Startwert"
+      },
+      "getStartY": {
+        "signature": "public float getStartY()",
+        "intent": "gibt den Start Y-Wert der Entity zurck, der immer gesetzt wird    wenn init aufgerufen wird    @return gibt den Start Y-"
+      },
+      "setStartY": {
+        "signature": "public void setStartY(float startY)",
+        "intent": "setzt den Start Y-Wert auf den bergebenen    @param startX : neuer Y-Startwert"
+      },
+      "isBOpaque": {
+        "signature": "public boolean isBOpaque()",
+        "intent": "berprfung, ob Pixelgenau geprft werden soll    @return TRUE, pixelgenau, FALSE nicht"
+      },
+      "setBOpaque": {
+        "signature": "public void setBOpaque(boolean bOpaque)",
+        "intent": "setzt den boolean Wert, ob bei der berprfung von 2 Entitys durchsichtige Sachen betrachtet werden, auf true oder false  "
+      },
+      "isBVisible": {
+        "signature": "public boolean isBVisible()",
+        "intent": "gibt zurck, ob die Entity angezeigt werden soll oder nicht        @return gibt zurck, ob die Entity angezeigt werden sol"
+      },
+      "setBVisible": {
+        "signature": "public void setBVisible(boolean bVisible)",
+        "intent": "setzt die Sichtbarkeit der Entity auf den bergebenen Wert        @param bVisible"
+      },
+      "isBSelect": {
+        "signature": "public boolean isBSelect()",
+        "intent": "gibt an ob die Entity ausgewhlt wurde oder nicht        @return TRUE falls ausgewhlt sonst FALSE"
+      },
+      "setBSelect": {
+        "signature": "public void setBSelect(boolean bSelect)",
+        "intent": "setzt den boolean Wert ob ausgewhlt oder nicht auf den bergebenen        @param bSelect"
+      },
+      "isBClose": {
+        "signature": "public boolean isBClose()",
+        "intent": "gibt zurck, ob die JumpEntity fest ist oder vom Spieler gesetzt wurde        @return gibt zurck, ob die JumpEntity fest "
+      },
+      "setBClose": {
+        "signature": "public void setBClose(boolean bClose)",
+        "intent": "setzt die JumpEntity ob sie fest ist oder nicht auf den bergebenen Wert        @param close"
+      },
+      "isBUse": {
+        "signature": "public boolean isBUse()",
+        "intent": "gibt an, ob eine Entity schon benutzt wurde oder nicht        @return gibt an, ob eine Entity schon benutzt wurde oder n"
+      },
+      "setBUse": {
+        "signature": "public void setBUse(boolean bUse)",
+        "intent": "setzt den Wert fr die Entity, ob sie benutzt wurde oder nicht auf den    bergebenen Wert        @param use"
+      },
+      "getVecY": {
+        "signature": "public float getVecY()",
+        "intent": "gibt die Geschwindigkeit in y-Richtung zurck        @return gibt die Geschwindigkeit in y-Richtung zurck"
+      },
+      "setVecY": {
+        "signature": "public void setVecY(float vecY)",
+        "intent": "setzt die Geschwindkeit in y-Richtung zurck        @param vecX"
+      },
+      "getVecX": {
+        "signature": "public float getVecX()",
+        "intent": "gibt die Geschwindigkeit in x-Richtung zurck        @return gibt die Geschwindigkeit in x-Richtung zurck"
+      },
+      "setVecX": {
+        "signature": "public void setVecX(float vecX)",
+        "intent": "setzt die Geschwindkeit in x-Richtung zurck        @param vecX"
+      },
+      "getIBackground": {
+        "signature": "public BufferedImage getIBackground()",
+        "intent": "gibt das Bild zurck        @return Bild"
+      },
+      "setIBackground": {
+        "signature": "public void setIBackground(BufferedImage background)",
+        "intent": "setzt das Bild auf den bergebenen Wert        @param background"
+      },
+      "getWidth": {
+        "signature": "public float getWidth()",
+        "intent": "gibt die Weite des Objektes zurck        @return Weite des Objektes"
+      },
+      "setWidth": {
+        "signature": "public void setWidth(float width)",
+        "intent": "setzt die Weite des Objektes auf den bergebenen Wert        @param width"
+      },
+      "getHeight": {
+        "signature": "public float getHeight()",
+        "intent": "gibt die Hhe des Objektes zurck        @return Hhe des Objektes"
+      },
+      "setHeight": {
+        "signature": "public void setHeight(float height)",
+        "intent": "setzt die Hhe des Objektes auf den bergebenen Wert        @param height"
+      },
+      "zurck": {
+        "signature": "Wert des Objektes zurck(also den linken Rand des Bildes * * @return x-Wert des Objektes */ public float getX()",
+        "intent": "setzt die Hhe des Objektes auf den bergebenen Wert        @param height"
+      },
+      "getXMiddle": {
+        "signature": "public float getXMiddle()",
+        "intent": "gibt den mittigen x-Wert des Objektes (also die Kopfmitte sozusagen)        @return x-Wert des Objektes"
+      },
+      "setX": {
+        "signature": "public void setX(float x)",
+        "intent": "setzt den X-Wert auf den bergebenen Wert        @param x"
+      },
+      "getY": {
+        "signature": "public float getY()",
+        "intent": "gibt den y-Wert des Objektes zurck (also den hchsten Punkt am Kopf)        @return y-Wert des Objektes"
+      },
+      "setY": {
+        "signature": "public void setY(float y)",
+        "intent": "setzt den y-Wert des Objektes auf den bergebenen        @param y"
+      },
+      "intersects": {
+        "signature": "public boolean intersects(float x, float y)",
+        "intent": "berprft, ob die bergebenen Werte in der Entity liegen        @param x: x-Koordinate der Maus    @param y: y-Koordinate d"
+      },
+      "intersects/4": {
+        "signature": "public boolean intersects(float x, float y, float width, float height)",
+        "intent": "berprft, ob die bergebenen Werte (die ein Rechteck ergeben) die Entity    schneiden        @param x: X-Wert (links oben "
+      },
+      "intersects/1": {
+        "signature": "public boolean intersects(ApoEntity entity)",
+        "intent": "berprft, ob die bergebene Entity die Entity schneidet        @param entity : zu berprfende Entity    @return TRUE, falls"
+      },
+      "contains": {
+        "signature": "public boolean contains(float x, float y, float width, float height)"
+      },
+      "contains/1": {
+        "signature": "public boolean contains(ApoEntity entity)",
+        "intent": "berprft, ob die bergebene Entity komplett in der Entity liegen        @param entity:               zu berprfende Entity "
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "checkOpaqueColorCollisions": {
+        "signature": "public boolean checkOpaqueColorCollisions(ApoEntity entity)",
+        "intent": "berprft, wenn sich 2 Entity per Rechteck schneiden,    ob sie sich wirklich bildmig schneiden     @param entity = andere"
+      },
+      "getSubRec": {
+        "signature": "private Rectangle2D.Float getSubRec(Rectangle2D.Float source, Rectangle2D.Float part)"
+      },
+      "isOpaque": {
+        "signature": "private boolean isOpaque(int rgb)",
+        "intent": "berprft ob der bergebene rgb Wert durchsichtig ist oder nicht    @param rgb = zu berprfender RGB Wert    @return TRUE fa"
+      },
+      "think": {
+        "signature": "public void think(int delta)",
+        "intent": "Methode, die immer waehrend der update Methode aufgerufen wird        @param delta:               Zeit, die seit dem let"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int x, int y)",
+        "intent": "malt das Objekt    @param g"
+      },
+      "render/1": {
+        "signature": "public void render(Graphics g)",
+        "intent": "malt das Objekt    @param g = Graphics Objekt"
+      }
+    }
+  },
+  "ApoAnimation": {
+    "roles": [
+      "UI",
+      "Entity",
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "setIBackground": {
+        "signature": "public void setIBackground(BufferedImage iBackground)"
+      },
+      "makeImageArray": {
+        "signature": "private void makeImageArray()"
+      },
+      "getImages": {
+        "signature": "public BufferedImage[][] getImages()",
+        "intent": "Array mit den einzelnen Frames der Bilder    2-Dimensional weil es mehrere Animationen beinhalten knnte    @return 2-dim"
+      },
+      "getDirection": {
+        "signature": "public int getDirection()",
+        "intent": "gibt zurck, welches Tile angezeigt werden soll    @return gibt zurck, welches Tile angezeigt werden soll"
+      },
+      "setDirection": {
+        "signature": "public void setDirection(int direction)",
+        "intent": "setzt das Tile, dass angezeigt werden soll, auf den bergebenen Wert    @param direction = neues Tiles was angezeigt werd"
+      },
+      "getTiles": {
+        "signature": "public int getTiles()",
+        "intent": "gibt die Anzahl der Tiles zurck    @return gibt die Anzahl der Tiles zurck"
+      },
+      "setTiles": {
+        "signature": "public void setTiles(int tiles)",
+        "intent": "setzt die Anzahl der Tiles auf den bergebenen Wert    @param tiles"
+      },
+      "getFrame": {
+        "signature": "public int getFrame()",
+        "intent": "gibt zurck, in welches Frame gerade angezeigt wird    @return gibt zurck, in welches Frame gerade angezeigt wird"
+      },
+      "setFrame": {
+        "signature": "public void setFrame(int frame)",
+        "intent": "setzt das aktuelle Frame was gerade angezeigt werden soll    auf ein bergebenes    @param frame = neues Frame"
+      },
+      "getCurTime": {
+        "signature": "public long getCurTime()",
+        "intent": "gibt die aktuelle Zeit zurck, die vergangen ist    @return gibt die aktuelle Zeit zurck, die vergangen ist"
+      },
+      "setCurTime": {
+        "signature": "public void setCurTime(long curTime)",
+        "intent": "setzt die aktuelle Zeit auf den bergebenen Wert    @param curTime = neue aktuelle Zeit"
+      },
+      "getTime": {
+        "signature": "public long getTime()",
+        "intent": "gibt zurck, wieviel Zeit vergehen muss, damit ein neues Frame angezeigt wird    @return gibt zurck, wieviel Zeit vergehe"
+      },
+      "setTime": {
+        "signature": "public void setTime(long time)",
+        "intent": "setzt die Zeit bis ein neues Frame angezeigt wird auf den bergebenen Wert    @param time"
+      },
+      "isBLoop": {
+        "signature": "public boolean isBLoop()",
+        "intent": "gibt zurck, on die Animation wiederholt werden soll oder nicht    @return TRUE, Animation wird wiederholt, ansonsten FAL"
+      },
+      "setBLoop": {
+        "signature": "public void setBLoop(boolean bLoop)",
+        "intent": "setzt den Wert, ob die Animation wiederholt werden soll auf den bergebenen Wert    @param bLoop : TRUE, Animation wird w"
+      },
+      "isBAnimation": {
+        "signature": "public boolean isBAnimation()",
+        "intent": "gibt zurck, ob die Animation gerade abluft    @return TRUE, die Animation gerade abluft ab, ansonsten FALSE"
+      },
+      "setBAnimation": {
+        "signature": "public void setBAnimation(boolean bAnimation)",
+        "intent": "setzt die Variable, ob die Animation gerade abluft auf den bergebenen Wert    @param bAnimation : TRUE, die Animation so"
+      },
+      "think": {
+        "signature": "public void think(int time)",
+        "intent": "wird jeden Zyklus einmal aufgerufen,    und schaut, ob gengend Zeit vergangen ist,    um ein neues Frame anzuzeigen    @"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      },
+      "render/3": {
+        "signature": "public void render(Graphics2D g, int x, int y)"
+      }
+    }
+  },
+  "ApoButtonText": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "getColorPressed": {
+        "signature": "public Color getColorPressed()",
+        "intent": "gibt die derzeitige Farbe zurck, die der Text hat, wenn die Maus drber ist    @return gibt die derzeitige Farbe zurck, d"
+      },
+      "setColorPressed": {
+        "signature": "public void setColorPressed(Color colorPressed)",
+        "intent": "setzt die Farbe, die der Text hat, wenn die Maus drber ist, auf den bergebenen Wert    @param colorPressed: neue Farbe f"
+      },
+      "getColorReleased": {
+        "signature": "public Color getColorReleased()",
+        "intent": "gibt die derzeitige Farbe zurck, die der Text hat, wenn die Maus auf die Entity geklickt hat    @return gibt die derzeit"
+      },
+      "setColorReleased": {
+        "signature": "public void setColorReleased(Color colorReleased)",
+        "intent": "setzt die Farbe, die der Text hat, wenn die Maus auf die Entity geklickt hat, auf den bergebenen Wert    @param colorPre"
+      },
+      "setFontSize": {
+        "signature": "public void setFontSize(int size)",
+        "intent": "setzt die font Size auf den bergebenen Wert    @param size = Gre des Fonts"
+      },
+      "getValue": {
+        "signature": "public int getValue()",
+        "intent": "gibt eine Zahl zurck, die beim Erstellen des Objektes mit bergeben wurde oder auf -1    gesetzt wurde    @return gibt ei"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "malt den Button an die Stelle getX() + changeX und getY() + changeY hin    @param changeX: Verschiebung in x-Richtung   "
+      }
+    }
+  },
+  "ApoTextField": {
+    "roles": [
+      "Entity",
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getFont": {
+        "signature": "public Font getFont()"
+      },
+      "setFont": {
+        "signature": "public void setFont(Font font)"
+      },
+      "getMaxLength": {
+        "signature": "public int getMaxLength()"
+      },
+      "setMaxLength": {
+        "signature": "public void setMaxLength(int maxLength)"
+      },
+      "getCurString": {
+        "signature": "public String getCurString()"
+      },
+      "setCurString": {
+        "signature": "public void setCurString(String curString)"
+      },
+      "getPosition": {
+        "signature": "public int getPosition()"
+      },
+      "setPosition": {
+        "signature": "public void setPosition(int position)"
+      },
+      "deleteTextBackspace": {
+        "signature": "private void deleteTextBackspace()"
+      },
+      "deleteTextDelete": {
+        "signature": "private void deleteTextDelete()"
+      },
+      "addCharacter": {
+        "signature": "public void addCharacter(int button, char character)"
+      },
+      "showLine": {
+        "signature": "private void showLine()"
+      },
+      "think": {
+        "signature": "public void think(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoButton": {
+    "roles": [
+      "Entity",
+      "GameLoop"
+    ],
+    "capabilities": {
+      "isBWait": {
+        "signature": "public boolean isBWait()",
+        "intent": "gibt zurck, ob wenn eine Maustaste gehalten wird, auch alle paar Millisekunden    gecheckt werden soll, ob sich was vern"
+      },
+      "setBWait": {
+        "signature": "public void setBWait(boolean bWait)",
+        "intent": "setzt den boolean Wert ob wenn die Maustaste gehalten wird, alle paar Millisekunden    gecheckt werden soll, ob sich was"
+      },
+      "getWAIT_DELAY": {
+        "signature": "public int getWAIT_DELAY()",
+        "intent": "gibt die Wartezeit zwischen 2 Funktionsaufrufen, wenn die Maus    gedrckt gehalten wird, zurck    @return gibt die Warte"
+      },
+      "setWAIT_DELAY": {
+        "signature": "public void setWAIT_DELAY(int wait_delay)",
+        "intent": "setzt die Wartezeit zwischen 2 Funktionsaufrufen auf den    bergebenen Wert    @param wait_delay = neue Wartezeit in Mil"
+      },
+      "isBOver": {
+        "signature": "public boolean isBOver()",
+        "intent": "gibt zurck, ob die Maus ber dem Button ist oder nicht    @return TRUE, falls Maus drber, sonst FALSE"
+      },
+      "setBOver": {
+        "signature": "public void setBOver(boolean bOver)",
+        "intent": "setzt den boolean-Wert fr bOver auf den bergebenen Wert    @param bOver"
+      },
+      "isBPressed": {
+        "signature": "public boolean isBPressed()",
+        "intent": "gibt zurck, ob eine Maustaste ber dem Button gedrckt ist oder nicht    @return TRUE, falls Maustaste gedrckt, sonst FALS"
+      },
+      "setBPressed": {
+        "signature": "public void setBPressed(boolean bPressed)",
+        "intent": "setzt den boolean-Wert fr bPressed auf den bergebenen Wert     @param bPressed"
+      },
+      "getFunction": {
+        "signature": "public String getFunction()",
+        "intent": "gibt die Funktion des Buttons zurck    @return function"
+      },
+      "setFunction": {
+        "signature": "public void setFunction(String function)",
+        "intent": "sezt die Funktion des Buttons auf den bergebenen Wert    @param function"
+      },
+      "getMove": {
+        "signature": "public boolean getMove(int x, int y)",
+        "intent": "was passiert, wenn die Maus im Spielfeld bewegt wurde    @param x: x-Koordinate der Maus    @param y: y-Koordinate der M"
+      },
+      "getPressed": {
+        "signature": "public boolean getPressed(int x, int y)",
+        "intent": "was passiert, wenn eine Maustaste im Spielfeld gedrckt wurde wurde    @param x: x-Koordinate der Maus    @param y: y-Koo"
+      },
+      "getReleased": {
+        "signature": "public boolean getReleased(int x, int y)",
+        "intent": "was passiert, wenn eine Maustaste im Spielfeld losgelassen wurde    @param x: x-Koordinate der Maus    @param y: y-Koord"
+      },
+      "getWait": {
+        "signature": "public int getWait()"
+      },
+      "think": {
+        "signature": "public void think(int delay)",
+        "intent": "was passiert, wenn eine Maustaste gedrckt wurde und gehalten wird    @param delay"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "malt den Button an die Stelle getX() + changeX und getY() + changeY hin    @param changeX: Verschiebung in x-Richtung   "
+      }
+    }
+  },
+  "ApoDragObject": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getPressed": {
+        "signature": "public boolean getPressed(int x, int y)",
+        "intent": "was passiert, wenn eine Maustaste im Spielfeld gedrckt wurde    @param x: x-Koordinate der Maus    @param y: y-Koordinat"
+      },
+      "getReleased": {
+        "signature": "public boolean getReleased(int x, int y)",
+        "intent": "was passiert, wenn eine Maustaste im Spielfeld losgelassen wurde    @param x: x-Koordinate der Maus    @param y: y-Koord"
+      },
+      "getIn": {
+        "signature": "public boolean getIn(int x, int y)",
+        "intent": "berprft, ob die bergebenen Werte auf dem Button liegen    @param x: x-Koordinate der Maus    @param y: y-Koordinate der "
+      },
+      "setDragX": {
+        "signature": "public void setDragX(int x)",
+        "intent": "setzt die x Variable des Button auf den bergebenen Wert minus der Differenz von Start des Button und dem Punkt, auf welc"
+      },
+      "setDragY": {
+        "signature": "public void setDragY(int y)",
+        "intent": "setzt die y Variable des Button auf den bergebenen Wert minus der Differenz von Start des Button und dem Punkt, auf welc"
+      },
+      "getNewX": {
+        "signature": "public int getNewX(int x)",
+        "intent": "gibt die x Variable des Button vom bergebenen Wert minus der Differenz von Start des Button und dem Punkt, auf welchen g"
+      },
+      "getNewY": {
+        "signature": "public int getNewY(int y)",
+        "intent": "gibt die y Variable des Button vom bergebenen Wert minus der Differenz von Start des Button und dem Punkt, auf welchen g"
+      },
+      "getDiffX": {
+        "signature": "public int getDiffX()",
+        "intent": "gibt den derzeitigen DifferenzX-Wert zurck    @return gibt den derzeitigen DifferenzX-Wert zurck"
+      },
+      "getDiffY": {
+        "signature": "public int getDiffY()",
+        "intent": "gibt den derzeitigen DifferenzY-Wert zurck    @return gibt den derzeitigen DifferenzY-Wert zurck"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "malt das DragObject hin"
+      }
+    }
+  },
+  "ApoRawScale3x": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "different": {
+        "signature": "private boolean different(int a, int b)",
+        "intent": "Check if two pixels are different. Place holder for maybe some clever    code about tolerance checking    @param a : The"
+      },
+      "setDestPixel": {
+        "signature": "private void setDestPixel(int x, int y, int p)",
+        "intent": "Set a pixel in the destination image data    @param x : The x location of the pixel to set    @param y : The y location "
+      },
+      "getSourcePixel": {
+        "signature": "private int getSourcePixel(int x, int y)",
+        "intent": "Get a pixel from the source image. This handles bonds checks and resolves    to edge pixels    @param x : The x location"
+      },
+      "process": {
+        "signature": "private void process(int x, int y)",
+        "intent": "Process a specific pixel. This will generate 4 pixels in the destination    image based on the scale2x algorithm    @par"
+      },
+      "getScaledData": {
+        "signature": "public int[] getScaledData()",
+        "intent": "Get the scale image data. Note this is the method that does the work so    it might take some time to process.    @retur"
+      }
+    }
+  },
+  "ApoImage": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getPic": {
+        "signature": "public BufferedImage getPic(String pic, boolean bLoad)",
+        "intent": "ldt das Bild aus dem bergbenen String und wartet bis es fertig geladen ist    @param BildString = wo steckt das Bild    "
+      },
+      "getImage": {
+        "signature": "private BufferedImage getImage(String pic, boolean bLoad)",
+        "intent": "ldt das Bild aus einem bergebenen String    @param BildName = wo steckt das Bild    @param bLoad    @return das Bild"
+      }
+    }
+  },
+  "ApoImageScale": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getScale": {
+        "signature": "public int getScale()"
+      },
+      "setScale": {
+        "signature": "public void setScale(int scale)",
+        "intent": "setzt den Wert, wie das Bild skaliert werden soll auf den    bergebenen Wert    @param scale = neuer Skalwert"
+      },
+      "writeScaledImage": {
+        "signature": "public boolean writeScaledImage()",
+        "intent": "schreibt das vernderte Bild in den Ordner, wo das Anfangbild ist    @return true, falls alles geklappt hat sonst false"
+      },
+      "writeScaledImage/1": {
+        "signature": "public boolean writeScaledImage(String writeFile)",
+        "intent": "schreibt das vernderte Bild in den     @param writeFile    @return true, falls alles geklappt hat sonst false"
+      },
+      "writeScaledImage/2": {
+        "signature": "public boolean writeScaledImage(BufferedImage iOriginal, String writeFile)",
+        "intent": "scaliert ein OriginalBild und speichert es in den bergebenen Ordner    @param iOriginal    @param writeFile    @return t"
+      },
+      "getDoubleScaledImage": {
+        "signature": "public BufferedImage getDoubleScaledImage(BufferedImage srcImage)",
+        "intent": "Retrieve the scaled image. Note this is the method that actually does the    work so it may take some time to return    "
+      },
+      "getTrippleScaledImage": {
+        "signature": "public BufferedImage getTrippleScaledImage(BufferedImage srcImage)",
+        "intent": "Retrieve the scaled image. Note this is the method that actually does the    work so it may take some time to return    "
+      }
+    }
+  },
+  "ApoRawScale2x": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "different": {
+        "signature": "private boolean different(int a, int b)",
+        "intent": "Check if two pixels are different. Place holder for maybe some clever    code about tolerance checking        @param a ="
+      },
+      "setDestPixel": {
+        "signature": "private void setDestPixel(int x, int y, int p)",
+        "intent": "Set a pixel in the destination image data        @param x = The x location of the pixel to set    @param y = The y locat"
+      },
+      "getSourcePixel": {
+        "signature": "private int getSourcePixel(int x, int y)",
+        "intent": "Get a pixel from the source image. This handles bonds checks and resolves    to edge pixels        @param x = The x loca"
+      },
+      "process": {
+        "signature": "private void process(int x, int y)",
+        "intent": "Process a specific pixel. This will generate 4 pixels in the destination    image based on the scale2x algorithm        "
+      },
+      "getScaledData": {
+        "signature": "public int[] getScaledData()",
+        "intent": "Get the scale image data. Note this is the method that does the work so    it might take some time to process.        @r"
+      }
+    }
+  },
+  "ApoImageFromValue": {
+    "roles": [
+      "UI"
+    ],
+    "capabilities": {
+      "drawString": {
+        "signature": "public void drawString(Graphics2D g, String s, int x, int y, int width)",
+        "intent": "malt einen String zentriert an den bergebenen Wert    @param g : Das Graphics2DObjekt    @param s : der String    @param"
+      },
+      "getImageFromPath": {
+        "signature": "public BufferedImage getImageFromPath(String path, boolean bLoad)",
+        "intent": "liefert ein Bild von der Festplatte zurck    @param path = String mit der Pfadangabe    @param bLoad = true, fr laden au"
+      },
+      "getAndMakeIBackground": {
+        "signature": "public BufferedImage getAndMakeIBackground(int width, int height)",
+        "intent": "liefert ein Hintergrundbild mit der bergebenen Gre und der Farbe schwarz zurck    @param width = Weite des Bildes    @pa"
+      },
+      "getAndMakeIBackground/3": {
+        "signature": "public BufferedImage getAndMakeIBackground(int width, int height, Color c)",
+        "intent": "liefert ein Hintergrundbild mit der bergebenen Gre und der bergebenen Farbe zurck    @param width = Weite des Bildes    "
+      },
+      "getButtonImage": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, int round)"
+      },
+      "getButtonImage/6": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border)"
+      },
+      "getButtonImage/7": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border, int round)"
+      },
+      "getButtonImage/8": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border, Color over, Color pressed)"
+      },
+      "getButtonImageColor": {
+        "signature": "public BufferedImage getButtonImageColor(int width, int height, String text, Color background, Color font, Color border, Color over, Color pressed, Font writeFont, int round)"
+      },
+      "getButtonImage/10": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border, Color over, Color pressed, Font writeFont, int round)"
+      },
+      "getButtonWithImage": {
+        "signature": "public BufferedImage getButtonWithImage(int width, int height, BufferedImage iPic, Color background, Color border, Color mousePressed, Color mouseReleased)"
+      },
+      "getButtonImage/9": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border, Color over, Color pressed, Font writeFont)"
+      },
+      "getImageCopy": {
+        "signature": "public static BufferedImage getImageCopy(BufferedImage iImage)",
+        "intent": "kopiert ein Bild    @param iImage : das zu kopierende Image    @return das kopierte Bild"
+      }
+    }
+  },
+  "AudioPlayer": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "start": {
+        "signature": "public void start()"
+      },
+      "isBStop": {
+        "signature": "public boolean isBStop()"
+      },
+      "setBStop": {
+        "signature": "public void setBStop(boolean stop)"
+      },
+      "isBLoop": {
+        "signature": "public boolean isBLoop()"
+      },
+      "setBLoop": {
+        "signature": "public void setBLoop(boolean loop)"
+      },
+      "run": {
+        "signature": "public void run()"
+      }
+    }
+  },
+  "ApoMidiPlayer": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "getSequence": {
+        "signature": "public Sequence getSequence(InputStream is)",
+        "intent": "Loads a sequence from an input stream. Returns null if an error occurs."
+      },
+      "play": {
+        "signature": "public void play(Sequence sequence, boolean loop)",
+        "intent": "Plays a sequence, optionally looping. This method returns immediately.    The sequence is not played if it is invalid."
+      },
+      "stop": {
+        "signature": "public void stop()",
+        "intent": "Stops the sequencer and resets its position to 0."
+      },
+      "close": {
+        "signature": "public void close()",
+        "intent": "Closes the sequencer."
+      },
+      "getSequencer": {
+        "signature": "public Sequencer getSequencer()",
+        "intent": "Gets the sequencer."
+      },
+      "setPaused": {
+        "signature": "public void setPaused(boolean paused)",
+        "intent": "Sets the paused state. Music may not immediately pause."
+      },
+      "isPaused": {
+        "signature": "public boolean isPaused()",
+        "intent": "Returns the paused state."
+      },
+      "setVolume": {
+        "signature": "public void setVolume(int volume)",
+        "intent": "set Volume off the midi    Must be between 0 and 100    @param volume : between 0 and 100"
+      }
+    }
+  },
+  "ApoMidi": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "addSong": {
+        "signature": "public void addSong(String s)"
+      },
+      "startMusic": {
+        "signature": "public void startMusic(int song)"
+      },
+      "stopMusic": {
+        "signature": "public void stopMusic()"
+      },
+      "setVolume": {
+        "signature": "public void setVolume(int volume)"
+      }
+    }
+  },
+  "ApoSoundThread": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "start": {
+        "signature": "public synchronized void start()",
+        "intent": "Startet einen EThread."
+      },
+      "start/1": {
+        "signature": "public synchronized void start(boolean sw)",
+        "intent": "Startet einen EThread pausiert."
+      },
+      "run": {
+        "signature": "public void run()",
+        "intent": "Thread.run() musste ueberschrieben werden, damit EThread ein    Ende des Runnables mitbekommt."
+      },
+      "pause": {
+        "signature": "public synchronized void pause(boolean sw)",
+        "intent": "Pausiert einen EThread (sw = true) oder laesst ihn fortfahren (sw =    false).        @param sw"
+      },
+      "pause/0": {
+        "signature": "public synchronized void pause()",
+        "intent": "Schaltet den Pause-Modus des EThreads um."
+      },
+      "stop": {
+        "signature": "public synchronized void stop()",
+        "intent": "Stopt einen EThread. Die Verwendung des Methodennamens \"stop\" soll die    diesbezuegliche Verwirrung von \"java.lang.Thre"
+      },
+      "isRunning": {
+        "signature": "public boolean isRunning()",
+        "intent": "Gibt zurueck, ob der EThread gestartet wurde und immernoch laeuft. Auch    ein pausierter EThread liefet hier \"true\".   "
+      },
+      "isPaused": {
+        "signature": "public boolean isPaused()",
+        "intent": "Gibt zurueck ob ein EThread unterbrochen wurde. Das ist der Fall, wenn er    pausiert oder noch nicht gestartet wurde.  "
+      }
+    }
+  },
+  "ApoSounds": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "loadSound": {
+        "signature": "public void loadSound(String name, String path)"
+      },
+      "playSound": {
+        "signature": "public void playSound(String name)"
+      },
+      "playSound/2": {
+        "signature": "public void playSound(String name, boolean bLoop)"
+      }
+    }
+  },
+  "ApoSplashScreen": {
+    "roles": [
+      "UI"
+    ],
+    "capabilities": {
+      "blendOut": {
+        "signature": "public void blendOut()"
+      },
+      "actionPerformed": {
+        "signature": "public void actionPerformed(ActionEvent e)"
+      },
+      "drawImage": {
+        "signature": "private void drawImage(float alphaValue)",
+        "intent": "Draws Background, then draws image over it        @param alphaValue"
+      }
+    }
+  },
+  "ApoSplashPainter": {
+    "roles": [
+      "UI"
+    ],
+    "capabilities": {
+      "setImage": {
+        "signature": "public void setImage(Image image)"
+      },
+      "paintComponent": {
+        "signature": "public void paintComponent(Graphics g)"
+      }
+    }
+  },
+  "ApoHelp": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "rotateImage": {
+        "signature": "public static BufferedImage rotateImage(BufferedImage src, double degrees)",
+        "intent": "erste Methode um ein Bild zu drehen, bei Angabe des Winkels    funktioniert nur perfekt bei Bildern, deren Mae width = h"
+      },
+      "rotateImageMethodTwo": {
+        "signature": "public static BufferedImage rotateImageMethodTwo(BufferedImage inputImage, double degrees)",
+        "intent": "erste Methode um ein Bild zu drehen, bei Angabe des Winkels    funktioniert bei allen Bildern    @param inputImage = Bil"
+      },
+      "findTranslation": {
+        "signature": "private static AffineTransform findTranslation(AffineTransform at, BufferedImage bi, double degrees)",
+        "intent": "find proper translations to keep rotated image correctly displayed    @param at = AffineTransformObjekt    @param bi = B"
+      },
+      "round": {
+        "signature": "public static float round(float value, int adjust)",
+        "intent": "rundet einen bergebenen Wert auf die nachgefragte Stellen    @param value = Der zu rundende float Wert    @param adjust "
+      },
+      "getAngleBetween2Points": {
+        "signature": "public static double getAngleBetween2Points(Point a, Point b)",
+        "intent": "gibt den Winkel zwischen 2 Punkten zurck    @param a = Punkt A    @param b = Punkt B    @return Winkel zwischen den 2 Pu"
+      },
+      "getAngleBetween2Points/4": {
+        "signature": "public static double getAngleBetween2Points(float x1, float y1, float x2, float y2)",
+        "intent": "gibt den Winkel zwischen 2 Punkten zurck    @param a = Punkt A    @param b = Punkt B    @return Winkel zwischen den 2 Pu"
+      },
+      "getCircleCuts": {
+        "signature": "public static ArrayList<ApoFloatPoint> getCircleCuts(float x1, float y1, float radius1, float x2, float y2, float radius2)"
+      },
+      "getTimeToDraw": {
+        "signature": "public static String getTimeToDraw(int time)",
+        "intent": "gibt den String mit der Zeitangabe zurck    @return gibt den String mit der Zeitangabe zurck"
+      },
+      "getRandomValue": {
+        "signature": "public static int getRandomValue(int value, int plus)",
+        "intent": "gibt einen Zufallswert zurck    @return gibt einen Zufallswert zurck"
+      },
+      "getCopy": {
+        "signature": "public static int[][] getCopy(int[][] copyArray)",
+        "intent": "gibt ein kopiertes gleiches Feld zurck    @param copyArray : das zu kopierende Array    @return gibt ein kopiertes gleic"
+      },
+      "setClipboardContents": {
+        "signature": "public static void setClipboardContents(String string)",
+        "intent": "Place a String on the clipboard    @param string"
+      },
+      "getClipboardContents": {
+        "signature": "public static String getClipboardContents()",
+        "intent": "Get the String residing on the clipboard.        @return any text found on the Clipboard; if none found, return an empty"
+      },
+      "rectangleIntersects": {
+        "signature": "public static boolean rectangleIntersects(float rect1x, float rect1y, float rect1w, float rect1h, float rect2x, float rect2y, float rect2w, float rect2h)"
+      },
+      "rectangleContains": {
+        "signature": "public static boolean rectangleContains(float rect1x, float rect1y, float rect1w, float rect1h, float rect2x, float rect2y)"
+      },
+      "rectangleIntersects/3": {
+        "signature": "public static boolean rectangleIntersects(ApoEntity entity, float rect2x, float rect2y)"
+      },
+      "rectangleIntersects/5": {
+        "signature": "public static boolean rectangleIntersects(ApoEntity entity, float rect2x, float rect2y, float rect2w, float rect2h)"
+      },
+      "rectangleIntersects/2": {
+        "signature": "public static boolean rectangleIntersects(ApoEntity entity, ApoEntity secondEntity)"
+      }
+    }
+  },
+  "ApoFileFilter": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getLevelName": {
+        "signature": "public String getLevelName()",
+        "intent": "Klasse, um im OpenDialog nur bestimmte Dateien zu sehen und    nicht alle anderen Dateiformate    @author Dirk Aporius"
+      },
+      "getExtension": {
+        "signature": "public String getExtension(File file)"
+      },
+      "getDescription": {
+        "signature": "public String getDescription()",
+        "intent": "gibt zurck, welches Dateien angezeigt werden sollen        @return gibt zurck, welches Dateien angezeigt werden sollen"
+      },
+      "accept": {
+        "signature": "public boolean accept(File file)",
+        "intent": "akzeptiert nur die Dateien, die er annehmen soll, alle anderen nimmt er nicht an"
+      }
+    }
+  },
+  "ApoCopy": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "copyDirectory": {
+        "signature": "public void copyDirectory(String pSrcDirectory, String pCopyDirectory)",
+        "intent": "kopiert ein komplettes Verzeichnis (ohne Unterverzeichnisse)    in einen bergebenen Bereich    @param pSrcDirectory = St"
+      },
+      "copyFile": {
+        "signature": "public void copyFile(String pSrcFile, String pCopyFile)",
+        "intent": "kopiert eine Datei in ein anderes bergebenes Verzeichnis    @param pSrcFile = String mit Pfadangabe zur Datei, welche ko"
+      }
+    }
+  },
+  "ApoFileNameFilter": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "accept": {
+        "signature": "public boolean accept(File f, String s)"
+      },
+      "getExtension": {
+        "signature": "public String getExtension()"
+      },
+      "setExtension": {
+        "signature": "public void setExtension(String extension)"
+      }
+    }
+  },
+  "ApoInterface": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {}
+  },
+  "ApoFloatPoint": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getX": {
+        "signature": "public float getX()",
+        "intent": "gibt den X-Wert des Punktes zurck    @return gibt den X-Wert des Punktes zurck"
+      },
+      "setX": {
+        "signature": "public void setX(float x)",
+        "intent": "setzt den x-Wert des Punktes auf den bergebenen Wert    @param x = setzt den x-Wert des Punktes auf den bergebenen Wert"
+      },
+      "getY": {
+        "signature": "public float getY()",
+        "intent": "gibt den y-Wert des Punktes zurck    @return gibt den y-Wert des Punktes zurck"
+      },
+      "setY": {
+        "signature": "public void setY(float y)",
+        "intent": "setzt den y-Wert des Punktes auf den bergebenen Wert    @param y = setzt den y-Wert des Punktes auf den bergebenen Wert"
+      }
+    }
+  },
+  "ApoClassLoader": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getClassname": {
+        "signature": "public String getClassname()",
+        "intent": "gibt den Klassennamen zurck    @return gibt den Klassennamen zurck"
+      },
+      "setClassname": {
+        "signature": "public void setClassname(String classname)",
+        "intent": "setzt den Klassennamen auf den bergebenen Wert    @param classname"
+      },
+      "getPath": {
+        "signature": "public String getPath()",
+        "intent": "gibt den Pfad zur Klasse zurck"
+      },
+      "setPath": {
+        "signature": "public void setPath(String path)",
+        "intent": "setzt den Pfad, welcher zur Klasse fhrt, auf den    bergebenen Wert    @param path"
+      },
+      "getMyClass": {
+        "signature": "public Object getMyClass()",
+        "intent": "liefert ein Object der Klasse zurck, welches nur noch in die    entsprechende Klasse gecastet werden muss    @return lie"
+      }
+    }
+  },
+  "ApoMarioImageContainer": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public static void init(ApoMarioComponent component)"
+      },
+      "setTileSet": {
+        "signature": "public static void setTileSet(int tileSet)"
+      }
+    }
+  },
+  "ApoMarioClassLoader": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getAI": {
+        "signature": "public ApoMarioAI getAI()",
+        "intent": "gibt die zu ladene KI zurck    @return gibt die KI zurck"
+      },
+      "loadClass": {
+        "signature": "public Class loadClass(String name)"
+      },
+      "loadClassData": {
+        "signature": "private byte[] loadClassData(String filename)"
+      }
+    }
+  },
+  "ApoMarioImage": {
+    "roles": [
+      "UI"
+    ],
+    "capabilities": {
+      "getImage": {
+        "signature": "public BufferedImage getImage(String path, boolean bFile)",
+        "intent": "Methode um ein Bild aus der Jar oder vom FIlesystem zu laden    @param path : Pfad zum Bild    @param bFile : TRUE, Bild"
+      },
+      "getLogo": {
+        "signature": "public BufferedImage getLogo(BufferedImage iPlayer)",
+        "intent": "gibt das Logo fr das Spiel zurck    @param width : Breite des Logos    @param height : Hhe des Logos    @param iPlayer :"
+      },
+      "getImageMouseOver": {
+        "signature": "public BufferedImage getImageMouseOver(BufferedImage iOriginal)"
+      },
+      "getImageMouseOver/2": {
+        "signature": "public BufferedImage getImageMouseOver(BufferedImage iOriginal, int width)"
+      },
+      "getImageMouseOver/4": {
+        "signature": "public BufferedImage getImageMouseOver(BufferedImage iOriginal, int searchColor, Color drawColor, int w)"
+      },
+      "getBackgroundBack": {
+        "signature": "public BufferedImage getBackgroundBack(BufferedImage iTiles, int width, int height)",
+        "intent": "erstellt den blauen Hintergrund    @param iTiles : aus diesem Bild werden Teile genommen um das Bild zu rendern    @para"
+      },
+      "getBackgroundFront": {
+        "signature": "public BufferedImage getBackgroundFront(BufferedImage iTiles, int width, int height)",
+        "intent": "erstellt den grn, rosa vorderen Hintergrund    @param iTiles : aus diesem Bild werden Teile genommen um das Bild zu rend"
+      },
+      "drawBackground": {
+        "signature": "private void drawBackground(Graphics2D g, BufferedImage iTile, int startX, int startY, int height)",
+        "intent": "malt einen Hgel an die bestimmte Stelle im Graphicsobjekt    @param g : Das Grafiksobjekt    @param iTile : Bild aus dem"
+      },
+      "getButtonImage": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, int round)"
+      },
+      "getButtonImage/7": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, Color c, Color c2, Color c3, int round)"
+      },
+      "getButtonImage/8": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, Color c, Color c2, Color c3, Font font, int round)"
+      },
+      "getButtonImageColor": {
+        "signature": "public BufferedImage getButtonImageColor(int width, int height, String text, Color c, Color c2, Color c3, Font font, int round)"
+      },
+      "getButtonImage/10": {
+        "signature": "public BufferedImage getButtonImage(int width, int height, String text, Color c, Color c2, Color c3, Color mouseOver, Color mousePressed, Font font, int round)"
+      },
+      "getButtonWithImage": {
+        "signature": "public BufferedImage getButtonWithImage(int width, int height, BufferedImage iPic, String text, Color textColor, Color mousePressed, Color mouseReleased)"
+      },
+      "getButtonWithImage/8": {
+        "signature": "public BufferedImage getButtonWithImage(int width, int height, BufferedImage iPic, String text, Color textColor, Color mousePressed, Color mouseReleased, Font font)"
+      }
+    }
+  },
+  "ApoMarioApplet": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "stop": {
+        "signature": "public void stop()"
+      },
+      "destroy": {
+        "signature": "public void destroy()"
+      },
+      "init": {
+        "signature": "public void init()"
+      }
+    }
+  },
+  "ApoMarioComponent": {
+    "roles": [
+      "UI",
+      "Entity",
+      "GameLoop",
+      "Input"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getFileFilterEditor": {
+        "signature": "public ApoFileFilter getFileFilterEditor()"
+      },
+      "getFileChooser": {
+        "signature": "public JFileChooser getFileChooser()"
+      },
+      "getFileChooserReplay": {
+        "signature": "public JFileChooser getFileChooserReplay()"
+      },
+      "getFileChooserEditor": {
+        "signature": "public JFileChooser getFileChooserEditor()"
+      },
+      "getSpeed": {
+        "signature": "public int getSpeed()"
+      },
+      "addSpeed": {
+        "signature": "public void addSpeed(int plus)"
+      },
+      "getDebugFrame": {
+        "signature": "public ApoMarioDebugFrame getDebugFrame()"
+      },
+      "setDebugFrame": {
+        "signature": "protected void setDebugFrame(ApoMarioDebugFrame debugFrame)"
+      },
+      "isBPause": {
+        "signature": "public boolean isBPause()"
+      },
+      "setBPause": {
+        "signature": "public void setBPause(boolean bPause)"
+      },
+      "isBTwoPlayers": {
+        "signature": "public boolean isBTwoPlayers()"
+      },
+      "setBTwoPlayers": {
+        "signature": "public void setBTwoPlayers(boolean bTwoPlayers)"
+      },
+      "isBMiddle": {
+        "signature": "public boolean isBMiddle()"
+      },
+      "setBMiddle": {
+        "signature": "public void setBMiddle(boolean bMiddle)"
+      },
+      "getResizeImage": {
+        "signature": "public BufferedImage getResizeImage(BufferedImage orgImage)"
+      },
+      "getLevel": {
+        "signature": "public ApoMarioLevel getLevel()"
+      },
+      "setLevel": {
+        "signature": "public void setLevel(ApoMarioLevel level)"
+      },
+      "isBSound": {
+        "signature": "public boolean isBSound()"
+      },
+      "setBSound": {
+        "signature": "public void setBSound(boolean sound)"
+      },
+      "getSounds": {
+        "signature": "public ApoSounds getSounds()"
+      },
+      "playSound": {
+        "signature": "public void playSound(String song)"
+      },
+      "stopSound": {
+        "signature": "public void stopSound()"
+      },
+      "levelLoad": {
+        "signature": "public boolean levelLoad(String level)",
+        "intent": "ffnet einen fileChooser zum Laden eines Levels    @param level : Pfad zum Level der geladen werden soll    @return immer"
+      },
+      "levelSave": {
+        "signature": "public boolean levelSave()",
+        "intent": "ffnet einen fileChooser zum Speichern eines Levels    @return immer FALSE"
+      },
+      "keyReleased": {
+        "signature": "public synchronized void keyReleased(KeyEvent e)"
+      },
+      "keyPressed": {
+        "signature": "public synchronized void keyPressed(KeyEvent e)"
+      },
+      "getDown": {
+        "signature": "public boolean[] getDown()"
+      },
+      "getChangeX": {
+        "signature": "public float getChangeX()",
+        "intent": "gibt zurck um wieviel X-Werte sich das Spielfeld zur Darstellung verschoben wird    @return gibt zurck um wieviel X-Wert"
+      },
+      "setChangeX": {
+        "signature": "public void setChangeX(float changeX)",
+        "intent": "gibt zurck um wieviel X-Werte sich das Spielfeld zur Darstellung verschoben wird    @return gibt zurck um wieviel X-Wert"
+      },
+      "getChangeY": {
+        "signature": "public float getChangeY()",
+        "intent": "gibt zurck um wieviel Y-Werte sich das Spielfeld zur Darstellung verschoben wird    @return gibt zurck um wieviel Y-Wert"
+      },
+      "setChangeY": {
+        "signature": "public void setChangeY(float changeY)",
+        "intent": "gibt zurck um wieviel Y-Werte sich das Spielfeld zur Darstellung verschoben wird    @return gibt zurck um wieviel Y-Wert"
+      },
+      "getMouseX": {
+        "signature": "public int getMouseX()",
+        "intent": "gibt die X-Position der Maus zurck    @return gibt die X-Position der Maus zurck"
+      },
+      "getMouseY": {
+        "signature": "public int getMouseY()",
+        "intent": "gibt die Y-Position der Maus zurck    @return gibt die Y-Position der Maus zurck"
+      },
+      "getTime": {
+        "signature": "public int getTime()",
+        "intent": "gibt die Y-Position der Maus zurck    @return gibt die Y-Position der Maus zurck"
+      },
+      "setTime": {
+        "signature": "public void setTime(int time)",
+        "intent": "gibt die Y-Position der Maus zurck    @return gibt die Y-Position der Maus zurck"
+      },
+      "getReleasedKeys": {
+        "signature": "public ArrayList<Integer> getReleasedKeys()",
+        "intent": "gibt die Y-Position der Maus zurck    @return gibt die Y-Position der Maus zurck"
+      },
+      "getKeys": {
+        "signature": "public boolean[] getKeys()",
+        "intent": "gibt die Y-Position der Maus zurck    @return gibt die Y-Position der Maus zurck"
+      },
+      "setKeys": {
+        "signature": "public void setKeys(int key, boolean bKey)",
+        "intent": "gibt die Y-Position der Maus zurck    @return gibt die Y-Position der Maus zurck"
+      },
+      "clearKeys": {
+        "signature": "public void clearKeys()"
+      },
+      "getImages": {
+        "signature": "public ApoMarioImage getImages()",
+        "intent": "gibt das Images Objekt mitdem Bilder aus Werten erstellt werden knnen zurck    @return gibt das Images Objekt mitdem Bil"
+      },
+      "setImages": {
+        "signature": "public void setImages(ApoMarioImage images)",
+        "intent": "setzt das Images Objekt mitdem Bilder aus Werten erstellt werden knnen auf den bergebenen Werten    @param images : neue"
+      },
+      "setButtonFunction": {
+        "signature": "public void setButtonFunction(String function)",
+        "intent": "setzt das Images Objekt mitdem Bilder aus Werten erstellt werden knnen auf den bergebenen Werten    @param images : neue"
+      },
+      "think": {
+        "signature": "public synchronized void think(int delta)"
+      },
+      "mouseReleased": {
+        "signature": "public void mouseReleased(MouseEvent e)"
+      },
+      "mouseMoved": {
+        "signature": "public void mouseMoved(MouseEvent e)"
+      },
+      "mousePressed": {
+        "signature": "public void mousePressed(MouseEvent e)"
+      },
+      "mouseDragged": {
+        "signature": "public void mouseDragged(MouseEvent e)"
+      },
+      "saveLevel": {
+        "signature": "abstract public void saveLevel(String s)",
+        "abstract": true
+      },
+      "loadLevel": {
+        "signature": "abstract public void loadLevel(String s)",
+        "abstract": true
+      },
+      "mouseButtonReleased": {
+        "signature": "abstract public void mouseButtonReleased(int x, int y)",
+        "intent": "setzt das Images Objekt mitdem Bilder aus Werten erstellt werden knnen auf den bergebenen Werten    @param images : neue",
+        "abstract": true
+      },
+      "mouseButtonFunction": {
+        "signature": "abstract public void mouseButtonFunction(String function)",
+        "intent": "setzt das Images Objekt mitdem Bilder aus Werten erstellt werden knnen auf den bergebenen Werten    @param images : neue",
+        "abstract": true
+      },
+      "keyButtonReleased": {
+        "signature": "abstract public void keyButtonReleased(int button, char character)",
+        "abstract": true
+      },
+      "render": {
+        "signature": "abstract public void render(Graphics2D g)",
+        "intent": "abstrakte Methode, die aufgerufen wird, um neu zu zeichnen wird von    repaint aufgerufen und malt die Komponent neu",
+        "abstract": true
+      }
+    }
+  },
+  "ApoMarioMain": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()",
+        "intent": "Spielobjekt"
+      },
+      "windowClosingEvent": {
+        "signature": "public void windowClosingEvent()"
+      },
+      "main": {
+        "signature": "public static void main(String[] args)"
+      }
+    }
+  },
+  "ApoMarioConstants": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "saveProperties": {
+        "signature": "public static void saveProperties()"
+      },
+      "loadProperties": {
+        "signature": "public static void loadProperties()"
+      },
+      "setWaitTimeRender": {
+        "signature": "private static void setWaitTimeRender()"
+      },
+      "getStartX": {
+        "signature": "public static float getStartX(ApoMarioPlayer player)"
+      }
+    }
+  },
+  "ApoMarioSimulate": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "isBSimulate": {
+        "signature": "public boolean isBSimulate()",
+        "intent": "gibt die boolean Variable, ob die Simulation luft, zurck    @return TRUE, Simulation luft, sonst FALSE"
+      },
+      "setBSimulate": {
+        "signature": "public void setBSimulate(boolean bSimulate)",
+        "intent": "setzt die boolean Variable, ob die Simulation luft, auf den bergebenen Wert    @param bSimulate : TRUE, Simulation luft,"
+      },
+      "startSimulate": {
+        "signature": "public synchronized boolean startSimulate()",
+        "intent": "startet ein Spiel und lsst es bis zum Schluss durchlaufen    @return immer TRUE"
+      },
+      "startSimulate/1": {
+        "signature": "public synchronized boolean startSimulate(boolean bNewLevel)",
+        "intent": "startet ein Spiel und lsst es bis zum Schluss durchlaufen    @return immer TRUE"
+      },
+      "simulate": {
+        "signature": "private synchronized void simulate()",
+        "intent": "simuliert das eigentliche Spiel"
+      }
+    }
+  },
+  "ApoMarioAnalysis": {
+    "roles": [
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "makeBackground": {
+        "signature": "public void makeBackground()"
+      },
+      "makeBackgroundAnimation": {
+        "signature": "public void makeBackgroundAnimation()"
+      },
+      "makeRunner": {
+        "signature": "public void makeRunner()"
+      },
+      "makeSearch": {
+        "signature": "public void makeSearch()"
+      },
+      "keyButtonReleased": {
+        "signature": "public void keyButtonReleased(int button, char character)"
+      },
+      "mouseButtonFunction": {
+        "signature": "public void mouseButtonFunction(String function)"
+      },
+      "releasedEnter": {
+        "signature": "public void releasedEnter()"
+      },
+      "excecuteFunction": {
+        "signature": "public void excecuteFunction()"
+      },
+      "playNewLevel": {
+        "signature": "private void playNewLevel()"
+      },
+      "saveReplay": {
+        "signature": "private void saveReplay()"
+      },
+      "mouseButtonReleased": {
+        "signature": "public void mouseButtonReleased(int x, int y)"
+      },
+      "mouseDragged": {
+        "signature": "public boolean mouseDragged(int x, int y)"
+      },
+      "mouseMoved": {
+        "signature": "public boolean mouseMoved(int x, int y)"
+      },
+      "mousePressed": {
+        "signature": "public boolean mousePressed(int x, int y, boolean bRight)"
+      },
+      "think": {
+        "signature": "public void think(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      },
+      "isOnePlayer": {
+        "signature": "private boolean isOnePlayer()"
+      },
+      "getName": {
+        "signature": "private String getName(ApoMarioPlayer player)"
+      },
+      "renderPlayerStats": {
+        "signature": "private void renderPlayerStats(Graphics2D g, ApoMarioPlayer playerOne, ApoMarioPlayer playerTwo, String one, String two)"
+      },
+      "renderWinPlayer": {
+        "signature": "private void renderWinPlayer(Graphics2D g, ApoMarioPlayer player)"
+      }
+    }
+  },
+  "ApoMarioDestructableWall": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "setIWall": {
+        "signature": "public void setIWall(BufferedImage wall)"
+      },
+      "getParticle": {
+        "signature": "public ArrayList<ApoEntity> getParticle()"
+      },
+      "isBWall": {
+        "signature": "public boolean isBWall()"
+      },
+      "makeParticle": {
+        "signature": "private void makeParticle()"
+      },
+      "getIWall": {
+        "signature": "public BufferedImage getIWall()"
+      },
+      "damageWall": {
+        "signature": "public void damageWall(ApoMarioLevel level, int player)"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert den Spieler, falls er sichtbar ist hin"
+      }
+    }
+  },
+  "ApoMarioParticle": {
+    "roles": [
+      "GameLoop"
+    ],
+    "capabilities": {
+      "think": {
+        "signature": "public void think(int delta)"
+      },
+      "coinCheck": {
+        "signature": "public void coinCheck(ApoMarioLevel level, int x, int y)"
+      },
+      "xCheckChange": {
+        "signature": "public void xCheckChange(ApoMarioLevel level, int x, int y)"
+      },
+      "yCheckUp": {
+        "signature": "public void yCheckUp(ApoMarioLevel level, int x, int y)"
+      },
+      "yDownCheck": {
+        "signature": "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioCoinParticle": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert den Spieler, falls er sichtbar ist hin"
+      }
+    }
+  },
+  "ApoMarioFlower": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getTimeToShow": {
+        "signature": "public int getTimeToShow()"
+      },
+      "getStartTime": {
+        "signature": "public int getStartTime()"
+      },
+      "setTimeToShow": {
+        "signature": "public void setTimeToShow(int timeToShow)"
+      },
+      "setStartTime": {
+        "signature": "public void setStartTime(int startTime)"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "getMyChangeY": {
+        "signature": "public float getMyChangeY()"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioEntity": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "getId": {
+        "signature": "public int getId()",
+        "intent": "gibt die eindeutige ID der Entity zurck    @return gibt die eindeutige ID der Entity zurck"
+      },
+      "getDirection": {
+        "signature": "public int getDirection()",
+        "intent": "gibt die Blickrichtung der Entity zurck    @return gibt die Blickrichtung der Entity zurck"
+      },
+      "changeDirection": {
+        "signature": "public void changeDirection()",
+        "intent": "wechselt die Blickrichtung der Entity von links auf rechts oder umgekehrt"
+      },
+      "setDirection": {
+        "signature": "public void setDirection(int direction)",
+        "intent": "setzt die Blickrichtung    @param direction"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      },
+      "getLevel": {
+        "signature": "public ApoMarioLevel getLevel()",
+        "intent": "gibt das Objekt des Levels zurck    @return gibt das Objekt des Levels zurck"
+      },
+      "setLevel": {
+        "signature": "public void setLevel(ApoMarioLevel level)",
+        "intent": "gibt das Objekt des Levels zurck    @return gibt das Objekt des Levels zurck"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)",
+        "intent": "veranlasst den Spieler zum Nachdenken   Animieren"
+      },
+      "yDownCheckEntity": {
+        "signature": "public boolean yDownCheckEntity(ApoMarioLevel level, int x, int y, int delta)",
+        "intent": "abstrakte Methode, die von jeder Entity aufgerufen wird, wenn sie auf den Boden kommt"
+      },
+      "nextYCheck": {
+        "signature": "public void nextYCheck(int delta, ApoMarioLevel level, int player)",
+        "intent": "testet die Entity, ob sie im nchsten Schritt Bodenkontakt hat    @param delta : Zeit die vergangen ist, seit dem letzten"
+      },
+      "thinkCollision": {
+        "signature": "public void thinkCollision(int delta, ApoMarioLevel level)",
+        "intent": "Methode zur berprfung, ob sich eine Entity mit dem Level den Wnden schneidet kollidiert    Dabei wird das Rechteck der E"
+      },
+      "xChange": {
+        "signature": "private void xChange(ApoMarioLevel level, int x, int y, Rectangle2D.Float rec, int difX)"
+      },
+      "makeParticles": {
+        "signature": "protected void makeParticles(float entityX, float entityY, float width, float height)"
+      },
+      "getMinMax": {
+        "signature": "public Point getMinMax(ApoMarioLevel level, int add)"
+      },
+      "isPlayerNear": {
+        "signature": "protected boolean isPlayerNear(ApoMarioLevel level)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert die Entity, falls er sichtbar ist hin"
+      },
+      "getCurFrameImage": {
+        "signature": "public BufferedImage getCurFrameImage()"
+      },
+      "renderImage": {
+        "signature": "public void renderImage(Graphics2D g, int changeX, int changeY)"
+      },
+      "yDownCheck": {
+        "signature": "abstract public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)",
+        "intent": "abstrakte Methode, die von jeder Entity aufgerufen wird, wenn sie auf den Boden kommt",
+        "abstract": true
+      },
+      "coinCheck": {
+        "signature": "abstract public void coinCheck(ApoMarioLevel level, int x, int y)",
+        "intent": "abstrakte Methode, die aufgerufen wird, wenn eine Entity mit einer Coin kollidiert    @param level : das Levelobjekt    ",
+        "abstract": true
+      },
+      "yCheckUp": {
+        "signature": "abstract public void yCheckUp(ApoMarioLevel level, int x, int y)",
+        "intent": "abstrakte Methode, die aufgerufen wird, wenn eine Entity mit einer Wand oben kollidert (zum Beispiel beim Springen)    @",
+        "abstract": true
+      },
+      "xCheckChange": {
+        "signature": "abstract public void xCheckChange(ApoMarioLevel level, int x, int y)",
+        "intent": "abstrakte Methode, die aufgerufen wird, wenn eine Entity mit einer Wand links oder rechts kollidert (zum Beispiel beim L",
+        "abstract": true
+      }
+    }
+  },
+  "ApoMarioShell": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "getPlayer": {
+        "signature": "public int getPlayer()"
+      },
+      "setPlayer": {
+        "signature": "public void setPlayer(int player)"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      },
+      "thinkJump": {
+        "signature": "public void thinkJump(int delta, ApoMarioLevel level)"
+      },
+      "damageCheck": {
+        "signature": "private void damageCheck(ApoMarioLevel level)"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "intersectsWithEnemy": {
+        "signature": "private boolean intersectsWithEnemy(ApoMarioEnemy enemy, ApoMarioLevel level, int player)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioCoin": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getCurY": {
+        "signature": "public float getCurY()"
+      },
+      "setCurY": {
+        "signature": "public void setCurY(float curY)"
+      },
+      "setBVisible": {
+        "signature": "public void setBVisible(boolean bVisible)"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert den Spieler, falls er sichtbar ist hin"
+      },
+      "coinCheck": {
+        "signature": "public void coinCheck(ApoMarioLevel level, int x, int y)"
+      },
+      "xCheckChange": {
+        "signature": "public void xCheckChange(ApoMarioLevel level, int x, int y)"
+      },
+      "yCheckUp": {
+        "signature": "public void yCheckUp(ApoMarioLevel level, int x, int y)"
+      },
+      "yDownCheck": {
+        "signature": "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)"
+      }
+    }
+  },
+  "ApoMarioGoodieMushroom": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "catchMe": {
+        "signature": "public void catchMe(ApoMarioPlayer player)"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioEnd": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "coinCheck": {
+        "signature": "public void coinCheck(ApoMarioLevel level, int x, int y)"
+      },
+      "xCheckChange": {
+        "signature": "public void xCheckChange(ApoMarioLevel level, int x, int y)"
+      },
+      "yCheckUp": {
+        "signature": "public void yCheckUp(ApoMarioLevel level, int x, int y)"
+      },
+      "yDownCheck": {
+        "signature": "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioFireball": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      },
+      "setVecX": {
+        "signature": "public void setVecX(float vecX)"
+      },
+      "think": {
+        "signature": "public synchronized void think(int delta, ApoMarioLevel level)"
+      },
+      "checkWall": {
+        "signature": "private boolean checkWall(ApoMarioLevel level)"
+      },
+      "intersectsWithEnemy": {
+        "signature": "private boolean intersectsWithEnemy(ApoMarioEnemy enemy, ApoMarioLevel level, int player)"
+      },
+      "nextYCheck": {
+        "signature": "public void nextYCheck(int delta, ApoMarioLevel level, int player)"
+      },
+      "downCheck": {
+        "signature": "public void downCheck()"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioQuestionmark": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "damageWall": {
+        "signature": "public void damageWall(ApoMarioLevel level, int player)"
+      },
+      "isBWall": {
+        "signature": "public boolean isBWall()"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert den Spieler, falls er sichtbar ist hin"
+      }
+    }
+  },
+  "ApoMarioCannon": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getMyHeight": {
+        "signature": "public int getMyHeight()"
+      },
+      "getShootTime": {
+        "signature": "public int getShootTime()"
+      },
+      "getStartTime": {
+        "signature": "public int getStartTime()"
+      },
+      "setShootTime": {
+        "signature": "public void setShootTime(int shootTime)"
+      },
+      "setStartTime": {
+        "signature": "public void setStartTime(int startTime)"
+      },
+      "getCannons": {
+        "signature": "public ArrayList<ApoMarioCannonCannon> getCannons()"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "thinkCanon": {
+        "signature": "public void thinkCanon(int delta, ApoMarioLevel level)"
+      },
+      "makeCannon": {
+        "signature": "private void makeCannon(ApoMarioLevel level)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioPlayer": {
+    "roles": [
+      "UI",
+      "Entity"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getTeamName": {
+        "signature": "public String getTeamName()"
+      },
+      "getAuthor": {
+        "signature": "public String getAuthor()"
+      },
+      "setTeamName": {
+        "signature": "public void setTeamName(String teamName)"
+      },
+      "setAuthor": {
+        "signature": "public void setAuthor(String author)"
+      },
+      "addMessage": {
+        "signature": "public void addMessage(String message)"
+      },
+      "addDrawElement": {
+        "signature": "public void addDrawElement(ApoMarioPlayerDraw drawElement)"
+      },
+      "isBDie": {
+        "signature": "public boolean isBDie()",
+        "intent": "gibt zurck, ob der Spieler gerade stirbt oder nicht =)    @return"
+      },
+      "getChangeY": {
+        "signature": "public float getChangeY()",
+        "intent": "gibt zurck, ob der Spieler gerade stirbt oder nicht =)    @return"
+      },
+      "getCoins": {
+        "signature": "public int getCoins()",
+        "intent": "gibt die Anzahl der Mnzen zurck, die der Spieler gesammelt hat    @return gibt die Anzahl der Mnzen zurck, die der Spiel"
+      },
+      "setCoins": {
+        "signature": "public void setCoins(int coins)",
+        "intent": "gibt die Anzahl der Mnzen zurck, die der Spieler gesammelt hat    @return gibt die Anzahl der Mnzen zurck, die der Spiel"
+      },
+      "getPoints": {
+        "signature": "public int getPoints()",
+        "intent": "gibt die Punkte des Spielers zurck    @return gibt die Punkte des Spielers zurck"
+      },
+      "setPoints": {
+        "signature": "public void setPoints(int points)",
+        "intent": "gibt die Punkte des Spielers zurck    @return gibt die Punkte des Spielers zurck"
+      },
+      "getAi": {
+        "signature": "public ApoMarioAI getAi()",
+        "intent": "gibt die Punkte des Spielers zurck    @return gibt die Punkte des Spielers zurck"
+      },
+      "setAi": {
+        "signature": "public void setAi(final ApoMarioAI ai)",
+        "intent": "gibt die Punkte des Spielers zurck    @return gibt die Punkte des Spielers zurck"
+      },
+      "setAi/2": {
+        "signature": "public void setAi(final ApoMarioAI ai, final String path)",
+        "intent": "gibt die Punkte des Spielers zurck    @return gibt die Punkte des Spielers zurck"
+      },
+      "saveAI": {
+        "signature": "public void saveAI()"
+      },
+      "getDamageTime": {
+        "signature": "public int getDamageTime()"
+      },
+      "setDamageTime": {
+        "signature": "public void setDamageTime(int damageTime)"
+      },
+      "damagePlayer": {
+        "signature": "public void damagePlayer()",
+        "intent": "wird aufgerufen wenn der Spieler einen Schaden erhlt (z.B. gegen Gegner laufen)"
+      },
+      "catchMushroom": {
+        "signature": "public void catchMushroom()",
+        "intent": "wird aufgerufen wenn ein Pilz gefangen wurde"
+      },
+      "catchFireflower": {
+        "signature": "public void catchFireflower()",
+        "intent": "wird aufgerufen wenn eine Feuerpflanze aufgerufen wird"
+      },
+      "getType": {
+        "signature": "public int getType()",
+        "intent": "wird aufgerufen wenn eine Feuerpflanze aufgerufen wird"
+      },
+      "setType": {
+        "signature": "public void setType(int type)",
+        "intent": "Verndert den Typen des Spielers von Klein zu Gro zu Feuer bzw andersrum    @param type"
+      },
+      "playerDie": {
+        "signature": "public void playerDie()",
+        "intent": "wird aufgerufen wenn der Spieler stirbt"
+      },
+      "getGoalVecX": {
+        "signature": "public float getGoalVecX()",
+        "intent": "wird aufgerufen wenn der Spieler stirbt"
+      },
+      "setGoalVecX": {
+        "signature": "public void setGoalVecX(float goalVecX)",
+        "intent": "wird aufgerufen wenn der Spieler stirbt"
+      },
+      "setGoalVecX/2": {
+        "signature": "private void setGoalVecX(float goalVecX, boolean bParticle)",
+        "intent": "wird aufgerufen wenn der Spieler stirbt"
+      },
+      "getLevelX": {
+        "signature": "public int getLevelX()"
+      },
+      "getLevelY": {
+        "signature": "public int getLevelY()"
+      },
+      "isBSpeed": {
+        "signature": "public boolean isBSpeed()"
+      },
+      "getPlayer": {
+        "signature": "public int getPlayer()"
+      },
+      "setBSpeed": {
+        "signature": "public void setBSpeed(boolean bSpeed)"
+      },
+      "isBDown": {
+        "signature": "public boolean isBDown()"
+      },
+      "setBDown": {
+        "signature": "public void setBDown(boolean bDown)"
+      },
+      "isBJump": {
+        "signature": "public boolean isBJump()"
+      },
+      "canJump": {
+        "signature": "public boolean canJump()",
+        "intent": "gibt zurck, ob ein Spieler springen kann    @return"
+      },
+      "setBNextJump": {
+        "signature": "public void setBNextJump(boolean bJump)",
+        "intent": "gibt zurck, ob ein Spieler springen kann    @return"
+      },
+      "setBJump": {
+        "signature": "public void setBJump(boolean bJump)",
+        "intent": "gibt zurck, ob ein Spieler springen kann    @return"
+      },
+      "isBEnemyJump": {
+        "signature": "public boolean isBEnemyJump()"
+      },
+      "setEnemyJump": {
+        "signature": "public void setEnemyJump()",
+        "intent": "Methode die aufgerufen wird, wenn der Spieler auf einen Gegner springt"
+      },
+      "getFireballs": {
+        "signature": "public ArrayList<ApoMarioFireball> getFireballs()",
+        "intent": "Methode die aufgerufen wird, wenn der Spieler auf einen Gegner springt"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      },
+      "thinkAI": {
+        "signature": "public synchronized void thinkAI(int delta, ApoMarioLevel level)"
+      },
+      "think": {
+        "signature": "public synchronized void think(int delta, ApoMarioLevel level)"
+      },
+      "thinkSpeedAndMovePlayer": {
+        "signature": "private void thinkSpeedAndMovePlayer(int delta, ApoMarioLevel level)",
+        "intent": "bewegt den Spieler    @param delta : Zeit seit dem letzten Aufruf"
+      },
+      "yDownCheckEntity": {
+        "signature": "public boolean yDownCheckEntity(ApoMarioLevel level, int x, int y, int delta)"
+      },
+      "test": {
+        "signature": "private boolean test(ApoMarioLevel level, int x, int y)"
+      },
+      "testNewY": {
+        "signature": "private boolean testNewY(ApoMarioLevel level)"
+      },
+      "yDownCheck": {
+        "signature": "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)"
+      },
+      "coinCheck": {
+        "signature": "public void coinCheck(ApoMarioLevel level, int x, int y)"
+      },
+      "yCheckUp": {
+        "signature": "public void yCheckUp(ApoMarioLevel level, int x, int y)"
+      },
+      "xCheckChange": {
+        "signature": "public void xCheckChange(ApoMarioLevel level, int x, int y)"
+      },
+      "render": {
+        "signature": "public synchronized void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert den Spieler, falls er sichtbar ist hin"
+      },
+      "drawStringAbove": {
+        "signature": "public void drawStringAbove(final Graphics2D g, String name, int changeX, int changeY, boolean bBackground)"
+      },
+      "drawImage": {
+        "signature": "public void drawImage(final Graphics2D g, final ApoAnimation animation, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioEnemy": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "setBLeft": {
+        "signature": "public void setBLeft(boolean bLeft)"
+      },
+      "getChangeY": {
+        "signature": "public float getChangeY()"
+      },
+      "setChangeY": {
+        "signature": "public void setChangeY(float changeY)"
+      },
+      "isBImmortal": {
+        "signature": "public boolean isBImmortal()"
+      },
+      "setBImmortal": {
+        "signature": "public void setBImmortal(boolean bImmortal)"
+      },
+      "isBDie": {
+        "signature": "public boolean isBDie()"
+      },
+      "setBDie": {
+        "signature": "public void setBDie(boolean bDie)"
+      },
+      "isBFall": {
+        "signature": "public boolean isBFall()"
+      },
+      "setBFall": {
+        "signature": "public void setBFall(boolean bFall)"
+      },
+      "isBFlyOriginal": {
+        "signature": "public boolean isBFlyOriginal()"
+      },
+      "setBFlyOriginal": {
+        "signature": "public void setBFlyOriginal(boolean bFlyOriginal)"
+      },
+      "getPoints": {
+        "signature": "public int getPoints()"
+      },
+      "setPoints": {
+        "signature": "public void setPoints(int points)"
+      },
+      "isBFly": {
+        "signature": "public boolean isBFly()"
+      },
+      "setBFly": {
+        "signature": "public void setBFly(boolean bFly)"
+      },
+      "setBFly/2": {
+        "signature": "public void setBFly(boolean bFly, int player)"
+      },
+      "getMirrorImage": {
+        "signature": "protected BufferedImage getMirrorImage(BufferedImage iOriginal)"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)",
+        "intent": "die Nachdenkmethode der Gegner    @param delta : Zeitdifferenz seit dem letzten Aufruf    @param level : das Level-Objek"
+      },
+      "die": {
+        "signature": "public void die(ApoMarioLevel level, int player)",
+        "intent": "Methode zum Tten der Entity    @param level : das Level-Objekt"
+      },
+      "thinkJump": {
+        "signature": "public void thinkJump(int delta, ApoMarioLevel level)",
+        "intent": "wird aufgerufen um zu berprfen, ob der Gegner mit dem Spieler kollidiert    dabei wird unterschieden wo der Spieler ist "
+      },
+      "thinkSpeedAndMoveEnemy": {
+        "signature": "public void thinkSpeedAndMoveEnemy(int delta, ApoMarioLevel level)",
+        "intent": "bewegt den Gegner    @param delta : Zeit seit dem letzten Aufruf"
+      },
+      "yDownCheck": {
+        "signature": "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)"
+      },
+      "nextYCheck": {
+        "signature": "public void nextYCheck(int delta, ApoMarioLevel level, int player)"
+      },
+      "downCheck": {
+        "signature": "public void downCheck()"
+      },
+      "coinCheck": {
+        "signature": "public void coinCheck(ApoMarioLevel level, int x, int y)"
+      },
+      "xCheckChange": {
+        "signature": "public void xCheckChange(ApoMarioLevel level, int x, int y)"
+      },
+      "yCheckUp": {
+        "signature": "public void yCheckUp(ApoMarioLevel level, int x, int y)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert die Entity, falls er sichtbar ist hin"
+      }
+    }
+  },
+  "ApoMarioWall": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getTubePoint": {
+        "signature": "public Point getTubePoint()"
+      },
+      "setTubePoint": {
+        "signature": "public void setTubePoint(Point tubePoint)"
+      },
+      "isBTube": {
+        "signature": "public boolean isBTube()"
+      },
+      "setBTube": {
+        "signature": "public void setBTube(boolean tube)"
+      },
+      "isBCanon": {
+        "signature": "public boolean isBCanon()"
+      },
+      "setBCanon": {
+        "signature": "public void setBCanon(boolean canon)"
+      },
+      "isBGround": {
+        "signature": "public boolean isBGround()"
+      },
+      "addGoodie": {
+        "signature": "public void addGoodie(ApoMarioLevel level, int player)"
+      },
+      "isBCanBeUp": {
+        "signature": "public boolean isBCanBeUp()"
+      },
+      "setBCanBeUp": {
+        "signature": "public void setBCanBeUp(boolean canBeUp)"
+      },
+      "getCurChangeY": {
+        "signature": "public float getCurChangeY()"
+      },
+      "setCurChangeY": {
+        "signature": "public void setCurChangeY(float curChangeY)"
+      },
+      "getChangeY": {
+        "signature": "public float getChangeY()"
+      },
+      "setChangeY": {
+        "signature": "public void setChangeY(float changeY)"
+      },
+      "isBUp": {
+        "signature": "public boolean isBUp()"
+      },
+      "setBUp": {
+        "signature": "public void setBUp(boolean up)"
+      },
+      "isBNoCollision": {
+        "signature": "public boolean isBNoCollision()",
+        "intent": "gibt zurck, ob mit dieser Wand eine Kollision mglich ist    @return TRUE, keine Kollision, sonst FALSE"
+      },
+      "setBNoCollision": {
+        "signature": "public void setBNoCollision(boolean bNoCollision)",
+        "intent": "gibt zurck, ob mit dieser Wand eine Kollision mglich ist    @return TRUE, keine Kollision, sonst FALSE"
+      },
+      "isBOnlyAboveWall": {
+        "signature": "public boolean isBOnlyAboveWall()",
+        "intent": "gibt zurck, ob die Wand nur oben kollidiert werden kann    @return TRUE, Kollision nur oben, sonst FALSE"
+      },
+      "setBOnlyAboveWall": {
+        "signature": "public void setBOnlyAboveWall(boolean bOnlyAboveWall)",
+        "intent": "gibt zurck, ob die Wand nur oben kollidiert werden kann    @return TRUE, Kollision nur oben, sonst FALSE"
+      },
+      "enemyCheck": {
+        "signature": "protected void enemyCheck(ApoMarioLevel level, int player)",
+        "intent": "gibt zurck, ob die Wand nur oben kollidiert werden kann    @return TRUE, Kollision nur oben, sonst FALSE"
+      },
+      "getGoodie": {
+        "signature": "public int getGoodie()",
+        "intent": "gibt zurck, welches Goodie es enthlt    @return -1 falls kein Goodie, ansonsten Zahl >= 0"
+      },
+      "setGoodie": {
+        "signature": "public void setGoodie(int goodie)",
+        "intent": "setzt den Wert, welches Goodie es enthlt, auf den bergebenen    @param goodie : neues Goodie ansonsten -1"
+      },
+      "isBDestructable": {
+        "signature": "public boolean isBDestructable()",
+        "intent": "gibt zurck, ob eine Wand zerstrbar ist    @return TRUE, Wand zerstrbar, FALSE Wand unzerstrbar"
+      },
+      "setBDestructable": {
+        "signature": "public void setBDestructable(boolean bDestructable)",
+        "intent": "setzt die Variable, ob die Wand zerstrt werden kann auf den bergebenen Wert    @param bDestructable : TRUE, Wand zerstrb"
+      },
+      "getTimeToRepeat": {
+        "signature": "public int getTimeToRepeat()",
+        "intent": "gibt zurck, wie lange immer zwischen der ANimation gewartet werden soll    @return gibt zurck, wie lange immer zwischen "
+      },
+      "setTimeToRepeat": {
+        "signature": "public void setTimeToRepeat(int timeToRepeat)",
+        "intent": "setzt die Variable, wie lange immer zwischen den Animationen gewartet werden soll auf den bergebenen Wert    @param time"
+      },
+      "damageWall": {
+        "signature": "public void damageWall(ApoMarioLevel level, int player)",
+        "intent": "wird aufgerufen, wenn eine Wand getroffen wird"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)",
+        "intent": "wird aufgerufen, wenn eine Wand getroffen wird"
+      },
+      "thinkBeUp": {
+        "signature": "public void thinkBeUp(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      },
+      "coinCheck": {
+        "signature": "public void coinCheck(ApoMarioLevel level, int x, int y)"
+      },
+      "xCheckChange": {
+        "signature": "public void xCheckChange(ApoMarioLevel level, int x, int y)"
+      },
+      "yCheckUp": {
+        "signature": "public void yCheckUp(ApoMarioLevel level, int x, int y)"
+      },
+      "yDownCheck": {
+        "signature": "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)"
+      }
+    }
+  },
+  "ApoMarioGoodieFireflower": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "catchMe": {
+        "signature": "public void catchMe(ApoMarioPlayer player)"
+      }
+    }
+  },
+  "ApoMarioGumba": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "isBLeft": {
+        "signature": "public boolean isBLeft()"
+      },
+      "setBFlyOriginal": {
+        "signature": "public void setBFlyOriginal(boolean bFly)"
+      },
+      "setBLeft": {
+        "signature": "public void setBLeft(boolean bLeft)"
+      },
+      "setIOriginal": {
+        "signature": "public void setIOriginal(BufferedImage original)"
+      },
+      "setVecX": {
+        "signature": "public void setVecX(float vecX)"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioKoopa": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "setBLeft": {
+        "signature": "public void setBLeft(boolean bLeft)"
+      },
+      "setBFlyOriginal": {
+        "signature": "public void setBFlyOriginal(boolean bFly)"
+      },
+      "isBGreen": {
+        "signature": "public boolean isBGreen()"
+      },
+      "die": {
+        "signature": "public void die(ApoMarioLevel level, int player)"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      }
+    }
+  },
+  "ApoMarioCannonCannon": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getRec": {
+        "signature": "public Rectangle2D.Float getRec()",
+        "intent": "gibt das aktuelle Rechteck der Entity zurck    @return gibt das aktuelle Rechteck der Entity zurck"
+      },
+      "getNextRec": {
+        "signature": "public Rectangle2D.Float getNextRec(int delta)",
+        "intent": "gibt das Rechteck fr den nchsten Schritt der Entity zurck    @return gibt das Rechteck fr den nchsten Schritt der Entity"
+      },
+      "think": {
+        "signature": "public void think(int delta, ApoMarioLevel level)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioSearchNode": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getX": {
+        "signature": "public int getX()"
+      },
+      "getY": {
+        "signature": "public int getY()"
+      },
+      "getNode": {
+        "signature": "public int getNode()"
+      },
+      "getConntectedNodes": {
+        "signature": "public final ArrayList<Integer> getConntectedNodes()"
+      },
+      "addConnectedNode": {
+        "signature": "public void addConnectedNode(int node)"
+      },
+      "addConnectedNodes": {
+        "signature": "public void addConnectedNodes(ArrayList<Integer> nodes)"
+      }
+    }
+  },
+  "ApoMarioSearchRunner": {
+    "roles": [
+      "GameLoop"
+    ],
+    "capabilities": {
+      "setEnd": {
+        "signature": "public void setEnd(int x, int y)"
+      },
+      "hasReachedEnd": {
+        "signature": "public boolean hasReachedEnd()"
+      },
+      "think": {
+        "signature": "public void think(int delta)"
+      }
+    }
+  },
+  "ApoMarioSearch": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getNodes": {
+        "signature": "public final ArrayList<ApoMarioSearchNode> getNodes()",
+        "intent": "kleine Hilfsklasse, um einen Weg zum Ziel zu bekommen (nicht ZWANGSLUFIG den Besten ... eher selten ... dafr t < 20 Minu"
+      },
+      "addNode": {
+        "signature": "public void addNode(ApoMarioSearchNode node)"
+      },
+      "searchWay": {
+        "signature": "public ArrayList<ApoMarioSearchNode> searchWay(int startNode, int endNode)"
+      },
+      "getWay": {
+        "signature": "private ArrayList<ApoMarioSearchNode> getWay(int startNode, int endNode, ArrayList<ApoMarioSearchNode> way)"
+      },
+      "getCost": {
+        "signature": "private int getCost(int x, int y, int endX, int endY)"
+      },
+      "main": {
+        "signature": "public static void main(String[] args)"
+      }
+    }
+  },
+  "ApoMarioDebugFrame": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "refresh": {
+        "signature": "public void refresh()"
+      },
+      "addString": {
+        "signature": "public void addString(String addString)"
+      },
+      "clear": {
+        "signature": "public void clear()"
+      }
+    }
+  },
+  "ApoMarioMiniMap": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "makeMiniMap": {
+        "signature": "public void makeMiniMap()",
+        "intent": "Minimapklasse, die im Spiel am unteren Bildschirmrand sichtbar ist    @author Dirk Aporius"
+      },
+      "getMiniImage": {
+        "signature": "private BufferedImage getMiniImage()"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      }
+    }
+  },
+  "ApoMarioReplay": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getClone": {
+        "signature": "public synchronized ApoMarioReplay getClone()"
+      },
+      "setPlayerOne": {
+        "signature": "public void setPlayerOne(ApoMarioReplayHelp playerOne)"
+      },
+      "setPlayerTwo": {
+        "signature": "public void setPlayerTwo(ApoMarioReplayHelp playerTwo)"
+      },
+      "getWidth": {
+        "signature": "public int getWidth()"
+      },
+      "getDifficulty": {
+        "signature": "public int getDifficulty()"
+      },
+      "getRandom": {
+        "signature": "public long getRandom()"
+      },
+      "getLevelString": {
+        "signature": "public String getLevelString()"
+      },
+      "setLevel": {
+        "signature": "public void setLevel(int width, int difficulty, long random, String levelString)"
+      },
+      "getPlayerOne": {
+        "signature": "public ApoMarioReplayHelp getPlayerOne()"
+      },
+      "getPlayerTwo": {
+        "signature": "public ApoMarioReplayHelp getPlayerTwo()"
+      },
+      "setPlayerStep": {
+        "signature": "public synchronized void setPlayerStep(ApoMarioPlayer player)"
+      },
+      "setStep": {
+        "signature": "public synchronized int setStep(ApoMarioPlayer playerOne, ApoMarioPlayer playerTwo, int step)"
+      },
+      "setPlayerStep/2": {
+        "signature": "private synchronized void setPlayerStep(ApoMarioPlayer player, int step)"
+      },
+      "load": {
+        "signature": "public void load(String fileName)"
+      },
+      "loadLevel": {
+        "signature": "private void loadLevel(BufferedReader reader)"
+      },
+      "save": {
+        "signature": "public void save(String fileName)"
+      },
+      "saveLevel": {
+        "signature": "private void saveLevel(BufferedWriter writer)"
+      }
+    }
+  },
+  "ApoMarioReplayHelp": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "getClone": {
+        "signature": "public synchronized ApoMarioReplayHelp getClone()"
+      },
+      "getName": {
+        "signature": "public String getName()"
+      },
+      "setName": {
+        "signature": "public void setName(String name)"
+      },
+      "getAuthor": {
+        "signature": "public String getAuthor()"
+      },
+      "setAuthor": {
+        "signature": "public void setAuthor(String author)"
+      },
+      "getReplay": {
+        "signature": "public String getReplay()"
+      },
+      "setReplay": {
+        "signature": "public void setReplay(String replay)"
+      },
+      "makeReplaySteps": {
+        "signature": "private synchronized void makeReplaySteps()"
+      },
+      "getMaxSteps": {
+        "signature": "public int getMaxSteps()"
+      },
+      "getReplayStep": {
+        "signature": "public ArrayList<Integer> getReplayStep()"
+      },
+      "getReplayStep/1": {
+        "signature": "public int getReplayStep(int step)"
+      },
+      "addNextStep": {
+        "signature": "public void addNextStep(int step)"
+      }
+    }
+  },
+  "ApoMarioButtons": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "makeButtons": {
+        "signature": "public void makeButtons()",
+        "intent": "Hilfsklasse, um die ganzen Buttons (fr alle Panels) zu erstellen    @author Dirk Aporius"
+      }
+    }
+  },
+  "ApoMarioReplayPlay": {
+    "roles": [
+      "GameLoop"
+    ],
+    "capabilities": {
+      "initReplay": {
+        "signature": "public void initReplay()"
+      },
+      "onlyOnePlayer": {
+        "signature": "public boolean onlyOnePlayer()"
+      },
+      "nextStep": {
+        "signature": "public int nextStep()"
+      },
+      "think": {
+        "signature": "public void think(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      }
+    }
+  },
+  "ApoMarioPanel": {
+    "roles": [
+      "UI",
+      "Entity",
+      "GameLoop",
+      "Input"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "isBMiddleWall": {
+        "signature": "public boolean isBMiddleWall()"
+      },
+      "setBMiddleWall": {
+        "signature": "public void setBMiddleWall(boolean middleWall)"
+      },
+      "loadProperties": {
+        "signature": "private void loadProperties()"
+      },
+      "loadPropertiesPlayer": {
+        "signature": "private void loadPropertiesPlayer(int player, String playerPath)"
+      },
+      "setDebugMode": {
+        "signature": "public void setDebugMode(boolean bDebug)"
+      },
+      "getSpeedCounter": {
+        "signature": "public int getSpeedCounter()"
+      },
+      "setSpeedCounter": {
+        "signature": "public void setSpeedCounter(int speedCounter)"
+      },
+      "isBJump": {
+        "signature": "public boolean isBJump()"
+      },
+      "setBJump": {
+        "signature": "public void setBJump(boolean bJump)"
+      },
+      "setMenu": {
+        "signature": "public void setMenu()"
+      },
+      "setCredits": {
+        "signature": "public void setCredits()"
+      },
+      "setSimulation": {
+        "signature": "public void setSimulation()"
+      },
+      "getMiniMap": {
+        "signature": "public ApoMarioMiniMap getMiniMap()"
+      },
+      "loadEditorLevel": {
+        "signature": "public boolean loadEditorLevel()"
+      },
+      "saveEditorLevel": {
+        "signature": "public void saveEditorLevel()"
+      },
+      "loadReplay": {
+        "signature": "public void loadReplay()"
+      },
+      "setReplay": {
+        "signature": "public void setReplay(ApoMarioReplay replay)"
+      },
+      "playReplay": {
+        "signature": "public void playReplay(boolean bReplay)"
+      },
+      "getPlayerSelectCamera": {
+        "signature": "public int getPlayerSelectCamera()"
+      },
+      "getBackgroundImage": {
+        "signature": "public BufferedImage getBackgroundImage()"
+      },
+      "isBEditor": {
+        "signature": "public boolean isBEditor()"
+      },
+      "setBEditor": {
+        "signature": "public void setBEditor(boolean editor)"
+      },
+      "setGame": {
+        "signature": "public void setGame(boolean bReplay)"
+      },
+      "setGame/2": {
+        "signature": "public void setGame(boolean bReplay, boolean bEditor)"
+      },
+      "setEditor": {
+        "signature": "public void setEditor()"
+      },
+      "setOptions": {
+        "signature": "public void setOptions()"
+      },
+      "setAnalysis": {
+        "signature": "public void setAnalysis()"
+      },
+      "getBackgroundImageWithRect": {
+        "signature": "private BufferedImage getBackgroundImageWithRect(boolean bDown)"
+      },
+      "setButtons": {
+        "signature": "private void setButtons(boolean[] visible)"
+      },
+      "isBSimulate": {
+        "signature": "public boolean isBSimulate()"
+      },
+      "setBSimulate": {
+        "signature": "public void setBSimulate(boolean bSimulate)"
+      },
+      "saveLevel": {
+        "signature": "public void saveLevel(String s)"
+      },
+      "loadLevel": {
+        "signature": "public void loadLevel(String s)"
+      },
+      "mouseButtonFunction": {
+        "signature": "public void mouseButtonFunction(String function)"
+      },
+      "keyButtonReleased": {
+        "signature": "public void keyButtonReleased(int button, char character)"
+      },
+      "restartLevel": {
+        "signature": "public void restartLevel()"
+      },
+      "restartLevel/1": {
+        "signature": "public void restartLevel(boolean bReplay)"
+      },
+      "newLevel": {
+        "signature": "public void newLevel()"
+      },
+      "newLevel/2": {
+        "signature": "public void newLevel(int width, int difficulty)"
+      },
+      "mouseButtonReleased": {
+        "signature": "public void mouseButtonReleased(int x, int y)"
+      },
+      "mouseReleased": {
+        "signature": "public void mouseReleased(MouseEvent e)"
+      },
+      "mousePressed": {
+        "signature": "public void mousePressed(MouseEvent e)"
+      },
+      "mouseMoved": {
+        "signature": "public void mouseMoved(MouseEvent e)"
+      },
+      "mouseDragged": {
+        "signature": "public void mouseDragged(MouseEvent e)"
+      },
+      "keyReleased": {
+        "signature": "public void keyReleased(KeyEvent e)"
+      },
+      "getOptions": {
+        "signature": "public ApoMarioOptions getOptions()"
+      },
+      "getIMenuBackground": {
+        "signature": "public BufferedImage getIMenuBackground()"
+      },
+      "think": {
+        "signature": "public synchronized void think(int delta)"
+      },
+      "thinkLevelGame": {
+        "signature": "public synchronized void thinkLevelGame(int delta)"
+      },
+      "render": {
+        "signature": "public synchronized void render(Graphics2D g)"
+      },
+      "renderSimulate": {
+        "signature": "private void renderSimulate(Graphics2D g)"
+      },
+      "renderLevelWidthStatistics": {
+        "signature": "private void renderLevelWidthStatistics(Graphics2D g)"
+      },
+      "renderFPS": {
+        "signature": "private void renderFPS(Graphics2D g)",
+        "intent": "rendert die Anzeige fr die FPS und die Thinkzeit    @param g : das Graphicsobjekt"
+      },
+      "renderPause": {
+        "signature": "private void renderPause(Graphics2D g)"
+      }
+    }
+  },
+  "ApoMarioDebugPanel": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "setLevel": {
+        "signature": "protected void setLevel(ApoMarioAIPlayer player, ApoMarioAILevel level)",
+        "intent": "Panel, dass das Spiel abstrakt darstellt (mit Rechtecken, Kreisen usw)    @author Dirk Aporius"
+      },
+      "paintComponent": {
+        "signature": "public void paintComponent(Graphics g)"
+      }
+    }
+  },
+  "ApoMarioSimulationTab": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "isChoosen": {
+        "signature": "public boolean isChoosen()",
+        "intent": "SimulationTab<br  >    Klasse, die fr die Tabs oben bei der Simulation gedacht ist<br  >    @author Dirk Aporius"
+      },
+      "setChoosen": {
+        "signature": "public void setChoosen(boolean bChoose)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioSimulation": {
+    "roles": [
+      "Entity",
+      "GameLoop",
+      "Input"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "setSimulateTab": {
+        "signature": "private void setSimulateTab()"
+      },
+      "setAnalysisTab": {
+        "signature": "private void setAnalysisTab()"
+      },
+      "setDragObjects": {
+        "signature": "private void setDragObjects()"
+      },
+      "makeBackground": {
+        "signature": "public void makeBackground()"
+      },
+      "makeBackgroundAnimation": {
+        "signature": "public void makeBackgroundAnimation()"
+      },
+      "makeRunner": {
+        "signature": "public void makeRunner()"
+      },
+      "makeSearch": {
+        "signature": "public void makeSearch()"
+      },
+      "keyButtonReleased": {
+        "signature": "public void keyButtonReleased(int button, char character)"
+      },
+      "mouseButtonFunction": {
+        "signature": "public void mouseButtonFunction(String function)"
+      },
+      "checkFunction": {
+        "signature": "private void checkFunction(String function)"
+      },
+      "releasedEnter": {
+        "signature": "public void releasedEnter()"
+      },
+      "excecuteFunction": {
+        "signature": "public void excecuteFunction()"
+      },
+      "getCount": {
+        "signature": "public int getCount()"
+      },
+      "getCurRound": {
+        "signature": "public int getCurRound()"
+      },
+      "startSimulation": {
+        "signature": "private void startSimulation()"
+      },
+      "run": {
+        "signature": "public void run()"
+      },
+      "mouseButtonReleased": {
+        "signature": "public void mouseButtonReleased(int x, int y)"
+      },
+      "mouseDragged": {
+        "signature": "public boolean mouseDragged(int x, int y)"
+      },
+      "mouseMoved": {
+        "signature": "public boolean mouseMoved(int x, int y)"
+      },
+      "mousePressed": {
+        "signature": "public boolean mousePressed(int x, int y, boolean bRight)"
+      },
+      "think": {
+        "signature": "public void think(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      },
+      "renderSimulation": {
+        "signature": "private void renderSimulation(Graphics2D g)"
+      }
+    }
+  },
+  "ApoMarioMenu": {
+    "roles": [
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "makeBackground": {
+        "signature": "public void makeBackground()"
+      },
+      "makeBackgroundAnimation": {
+        "signature": "public void makeBackgroundAnimation()"
+      },
+      "makeRunner": {
+        "signature": "public void makeRunner()"
+      },
+      "makeSearch": {
+        "signature": "public void makeSearch()"
+      },
+      "keyButtonReleased": {
+        "signature": "public void keyButtonReleased(int button, char character)"
+      },
+      "exit": {
+        "signature": "private void exit()"
+      },
+      "mouseButtonFunction": {
+        "signature": "public void mouseButtonFunction(String function)"
+      },
+      "releasedEnter": {
+        "signature": "public void releasedEnter()"
+      },
+      "excecuteFunction": {
+        "signature": "public void excecuteFunction()"
+      },
+      "mouseButtonReleased": {
+        "signature": "public void mouseButtonReleased(int x, int y)"
+      },
+      "mouseDragged": {
+        "signature": "public boolean mouseDragged(int x, int y)"
+      },
+      "mouseMoved": {
+        "signature": "public boolean mouseMoved(int x, int y)"
+      },
+      "mousePressed": {
+        "signature": "public boolean mousePressed(int x, int y, boolean bRight)"
+      },
+      "think": {
+        "signature": "public void think(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      },
+      "renderPlayerStats": {
+        "signature": "private void renderPlayerStats(Graphics2D g, int x, int y, ApoMarioPlayer player)"
+      },
+      "drawString": {
+        "signature": "private void drawString(Graphics2D g, String s, int x, int y, Color behind, Color color)"
+      }
+    }
+  },
+  "ApoMarioOptionsTextfield": {
+    "roles": [
+      "Entity",
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getMaxLength": {
+        "signature": "public int getMaxLength()"
+      },
+      "setMaxLength": {
+        "signature": "public void setMaxLength(int maxLength)"
+      },
+      "isBEnabled": {
+        "signature": "public boolean isBEnabled()"
+      },
+      "setBEnabled": {
+        "signature": "public void setBEnabled(boolean bEnabled)"
+      },
+      "getFont": {
+        "signature": "public Font getFont()"
+      },
+      "setFont": {
+        "signature": "public void setFont(Font myFont)"
+      },
+      "mouseDragged": {
+        "signature": "public boolean mouseDragged(int x, int y)"
+      },
+      "mousePressed": {
+        "signature": "public boolean mousePressed(int x, int y)"
+      },
+      "mouseReleased": {
+        "signature": "public boolean mouseReleased(int x, int y)"
+      },
+      "nextSelectedPosition": {
+        "signature": "public void nextSelectedPosition(int position)"
+      },
+      "setSelectedPosition": {
+        "signature": "private void setSelectedPosition(int position)"
+      },
+      "getThisPosition": {
+        "signature": "private int getThisPosition(int x, int y)"
+      },
+      "getCurString": {
+        "signature": "public String getCurString()"
+      },
+      "getSelectedString": {
+        "signature": "public String getSelectedString()"
+      },
+      "deleteSelectedString": {
+        "signature": "public void deleteSelectedString()"
+      },
+      "removeCurStringAndSetCurString": {
+        "signature": "public void removeCurStringAndSetCurString(String curString)"
+      },
+      "setCurString": {
+        "signature": "public void setCurString(String curString)"
+      },
+      "getPosition": {
+        "signature": "public int getPosition()"
+      },
+      "setPosition": {
+        "signature": "public void setPosition(int position)"
+      },
+      "deleteTextBackspace": {
+        "signature": "private void deleteTextBackspace()"
+      },
+      "deleteTextDelete": {
+        "signature": "private void deleteTextDelete()"
+      },
+      "addCharacter": {
+        "signature": "public void addCharacter(int button, char character)"
+      },
+      "showLine": {
+        "signature": "private void showLine()"
+      },
+      "think": {
+        "signature": "public void think(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioModelMenu": {
+    "roles": [
+      "UI",
+      "Entity",
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getIBackground": {
+        "signature": "public BufferedImage getIBackground()"
+      },
+      "setIBackground": {
+        "signature": "public void setIBackground(BufferedImage background)"
+      },
+      "getSearch": {
+        "signature": "public ApoMarioSearch getSearch()"
+      },
+      "setSearch": {
+        "signature": "public void setSearch(ApoMarioSearch search)"
+      },
+      "getExcecuteFunction": {
+        "signature": "public String getExcecuteFunction()"
+      },
+      "setExcecuteFunction": {
+        "signature": "public void setExcecuteFunction(String excecuteFunction)"
+      },
+      "getEndNode": {
+        "signature": "public int getEndNode()"
+      },
+      "setEndNode": {
+        "signature": "public void setEndNode(int endNode)"
+      },
+      "getRunner": {
+        "signature": "public ApoMarioSearchRunner getRunner()"
+      },
+      "setRunner": {
+        "signature": "public void setRunner(ApoMarioSearchRunner runner)"
+      },
+      "getWay": {
+        "signature": "public ArrayList<ApoMarioSearchNode> getWay()"
+      },
+      "setWay": {
+        "signature": "public void setWay(ArrayList<ApoMarioSearchNode> way)"
+      },
+      "getCurNode": {
+        "signature": "public int getCurNode()"
+      },
+      "setCurNode": {
+        "signature": "public void setCurNode(int curNode)"
+      },
+      "getBackgroundAnimation": {
+        "signature": "public ArrayList<ApoAnimation> getBackgroundAnimation()"
+      },
+      "setBackgroundAnimation": {
+        "signature": "public void setBackgroundAnimation(ArrayList<ApoAnimation> backgroundAnimation)"
+      },
+      "searchWay": {
+        "signature": "public void searchWay()"
+      },
+      "keyButtonReleasedArrowAndEnter": {
+        "signature": "public void keyButtonReleasedArrowAndEnter(int button, char character)"
+      },
+      "releasedEnter": {
+        "signature": "public void releasedEnter()"
+      },
+      "thinkRunnerAndAnimation": {
+        "signature": "public void thinkRunnerAndAnimation(int delta)"
+      },
+      "renderBackgroundAndAnimation": {
+        "signature": "public void renderBackgroundAndAnimation(Graphics2D g)"
+      },
+      "renderButtonsAndRunner": {
+        "signature": "public void renderButtonsAndRunner(Graphics2D g)"
+      },
+      "makeBackground": {
+        "signature": "abstract public void makeBackground()",
+        "abstract": true
+      },
+      "makeRunner": {
+        "signature": "abstract public void makeRunner()",
+        "abstract": true
+      },
+      "makeBackgroundAnimation": {
+        "signature": "abstract public void makeBackgroundAnimation()",
+        "abstract": true
+      },
+      "makeSearch": {
+        "signature": "abstract public void makeSearch()",
+        "abstract": true
+      },
+      "excecuteFunction": {
+        "signature": "abstract public void excecuteFunction()",
+        "abstract": true
+      },
+      "keyButtonReleased": {
+        "signature": "abstract public void keyButtonReleased(int button, char character)",
+        "abstract": true
+      },
+      "mouseButtonFunction": {
+        "signature": "abstract public void mouseButtonFunction(String function)",
+        "abstract": true
+      },
+      "mouseButtonReleased": {
+        "signature": "abstract public void mouseButtonReleased(int x, int y)",
+        "abstract": true
+      },
+      "mouseMoved": {
+        "signature": "abstract public boolean mouseMoved(int x, int y)",
+        "abstract": true
+      },
+      "mouseDragged": {
+        "signature": "abstract public boolean mouseDragged(int x, int y)",
+        "abstract": true
+      },
+      "mousePressed": {
+        "signature": "abstract public boolean mousePressed(int x, int y, boolean bRight)",
+        "abstract": true
+      },
+      "think": {
+        "signature": "abstract public void think(int delta)",
+        "abstract": true
+      },
+      "render": {
+        "signature": "abstract public void render(Graphics2D g)",
+        "abstract": true
+      }
+    }
+  },
+  "ApoMarioSimulationHelp": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "setPlayerTwo": {
+        "signature": "public void setPlayerTwo(String nameTwo, int pointsTwo)"
+      },
+      "getReplay": {
+        "signature": "public ApoMarioReplay getReplay()"
+      },
+      "isInFinish": {
+        "signature": "public boolean isInFinish()"
+      },
+      "setInFinish": {
+        "signature": "public void setInFinish(boolean bFinish)"
+      },
+      "getWidth": {
+        "signature": "public int getWidth()"
+      },
+      "setWidth": {
+        "signature": "public void setWidth(int width)"
+      },
+      "getDifficulty": {
+        "signature": "public int getDifficulty()"
+      },
+      "setDifficulty": {
+        "signature": "public void setDifficulty(int difficulty)"
+      },
+      "getRandom": {
+        "signature": "public long getRandom()"
+      },
+      "setRandom": {
+        "signature": "public void setRandom(long random)"
+      },
+      "getNameOne": {
+        "signature": "public String getNameOne()"
+      },
+      "setNameOne": {
+        "signature": "public void setNameOne(String nameOne)"
+      },
+      "getPointsOne": {
+        "signature": "public int getPointsOne()"
+      },
+      "setPointsOne": {
+        "signature": "public void setPointsOne(int pointsOne)"
+      },
+      "getNameTwo": {
+        "signature": "public String getNameTwo()"
+      },
+      "setNameTwo": {
+        "signature": "public void setNameTwo(String nameTwo)"
+      },
+      "getPointsTwo": {
+        "signature": "public int getPointsTwo()"
+      },
+      "setPointsTwo": {
+        "signature": "public void setPointsTwo(int pointsTwo)"
+      }
+    }
+  },
+  "ApoMarioGame": {
+    "roles": [
+      "Entity",
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getIStats": {
+        "signature": "private BufferedImage getIStats()"
+      },
+      "getPlayerSelectCamera": {
+        "signature": "public int getPlayerSelectCamera()"
+      },
+      "setPlayerSelectCamera": {
+        "signature": "public void setPlayerSelectCamera(int player)"
+      },
+      "keyButtonReleased": {
+        "signature": "public void keyButtonReleased(int button, char character)"
+      },
+      "mouseButtonFunction": {
+        "signature": "public void mouseButtonFunction(String function)"
+      },
+      "mouseButtonReleased": {
+        "signature": "public void mouseButtonReleased(int x, int y)"
+      },
+      "mouseDragged": {
+        "signature": "public boolean mouseDragged(int x, int y)"
+      },
+      "mouseMoved": {
+        "signature": "public boolean mouseMoved(int x, int y)"
+      },
+      "mousePressed": {
+        "signature": "public boolean mousePressed(int x, int y, boolean bRight)"
+      },
+      "think": {
+        "signature": "public synchronized void think(int delta)"
+      },
+      "changeCamera": {
+        "signature": "public void changeCamera()"
+      },
+      "thinkLevel": {
+        "signature": "protected synchronized void thinkLevel(int delta)"
+      },
+      "playerHumanControl": {
+        "signature": "private synchronized void playerHumanControl()"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      },
+      "renderStatistics": {
+        "signature": "private void renderStatistics(Graphics2D g)"
+      },
+      "isOnePlayer": {
+        "signature": "private boolean isOnePlayer()"
+      },
+      "renderStatisticsPlayer": {
+        "signature": "private void renderStatisticsPlayer(Graphics2D g, int x, ApoMarioPlayer player, boolean bLeft)"
+      },
+      "renderPlayerBar": {
+        "signature": "private void renderPlayerBar(Graphics2D g)"
+      }
+    }
+  },
+  "ApoMarioCredits": {
+    "roles": [
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()",
+        "intent": "Creditspanelklasse<br  >    Klasse, die die Credits des Spiels anzeigt<br  >    @author Dirk Aporius"
+      },
+      "makeBackground": {
+        "signature": "public void makeBackground()"
+      },
+      "makeBackgroundAnimation": {
+        "signature": "public void makeBackgroundAnimation()"
+      },
+      "makeRunner": {
+        "signature": "public void makeRunner()"
+      },
+      "makeSearch": {
+        "signature": "public void makeSearch()"
+      },
+      "keyButtonReleased": {
+        "signature": "public void keyButtonReleased(int button, char character)"
+      },
+      "mouseButtonFunction": {
+        "signature": "public void mouseButtonFunction(String function)"
+      },
+      "releasedEnter": {
+        "signature": "public void releasedEnter()"
+      },
+      "excecuteFunction": {
+        "signature": "public void excecuteFunction()"
+      },
+      "mouseButtonReleased": {
+        "signature": "public void mouseButtonReleased(int x, int y)"
+      },
+      "mouseDragged": {
+        "signature": "public boolean mouseDragged(int x, int y)"
+      },
+      "mouseMoved": {
+        "signature": "public boolean mouseMoved(int x, int y)"
+      },
+      "mousePressed": {
+        "signature": "public boolean mousePressed(int x, int y, boolean bRight)"
+      },
+      "think": {
+        "signature": "public void think(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      },
+      "renderCredits": {
+        "signature": "private void renderCredits(Graphics2D g)"
+      }
+    }
+  },
+  "ApoMarioOptions": {
+    "roles": [
+      "Entity",
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "makeBackground": {
+        "signature": "public void makeBackground()"
+      },
+      "makeBackgroundAnimation": {
+        "signature": "public void makeBackgroundAnimation()"
+      },
+      "makeRunner": {
+        "signature": "public void makeRunner()"
+      },
+      "makeSearch": {
+        "signature": "public void makeSearch()"
+      },
+      "isFreezeLevelInt": {
+        "signature": "public boolean isFreezeLevelInt()"
+      },
+      "stopOptions": {
+        "signature": "public void stopOptions()"
+      },
+      "setOptionsDrag": {
+        "signature": "public void setOptionsDrag()"
+      },
+      "mouseButtonFunction": {
+        "signature": "public void mouseButtonFunction(String function)"
+      },
+      "releasedEnter": {
+        "signature": "public void releasedEnter()"
+      },
+      "excecuteFunction": {
+        "signature": "public void excecuteFunction()"
+      },
+      "difOrWidth": {
+        "signature": "private void difOrWidth(String function)"
+      },
+      "makeNewLevel": {
+        "signature": "public void makeNewLevel(long random)"
+      },
+      "think": {
+        "signature": "public void think(int delta, String function)"
+      },
+      "mouseButtonReleased": {
+        "signature": "public void mouseButtonReleased(int x, int y)"
+      },
+      "changeDebug": {
+        "signature": "private void changeDebug()"
+      },
+      "setDebugChange": {
+        "signature": "public void setDebugChange(boolean bChange)"
+      },
+      "newLevel": {
+        "signature": "public void newLevel(long random)"
+      },
+      "mouseMoved": {
+        "signature": "public boolean mouseMoved(int x, int y)"
+      },
+      "mousePressed": {
+        "signature": "public boolean mousePressed(int x, int y, boolean bRight)"
+      },
+      "mouseDragged": {
+        "signature": "public boolean mouseDragged(int x, int y)"
+      },
+      "keyButtonReleased": {
+        "signature": "public void keyButtonReleased(int button, char character)"
+      },
+      "think/1": {
+        "signature": "public void think(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      }
+    }
+  },
+  "ApoMarioEditor": {
+    "roles": [
+      "Entity",
+      "GameLoop",
+      "Input"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "keyButtonReleased": {
+        "signature": "public void keyButtonReleased(int button, char character)"
+      },
+      "mouseButtonFunction": {
+        "signature": "public void mouseButtonFunction(String function)"
+      },
+      "mouseButtonReleased": {
+        "signature": "public void mouseButtonReleased(int x, int y)"
+      },
+      "setCurChooseEntity": {
+        "signature": "public void setCurChooseEntity(ApoMarioEntity curChooseEntity)"
+      },
+      "isThereAnEnemy": {
+        "signature": "private ApoMarioEntity isThereAnEnemy(int x, int y, boolean bRealEnemies)"
+      },
+      "deleteEnemy": {
+        "signature": "private boolean deleteEnemy(int x, int y)"
+      },
+      "addEnemy": {
+        "signature": "private boolean addEnemy(int x, int y, int enemy)"
+      },
+      "checkFunction": {
+        "signature": "private void checkFunction(String function, int choose)"
+      },
+      "setStartTime": {
+        "signature": "private void setStartTime(int plus)"
+      },
+      "setShootTime": {
+        "signature": "private void setShootTime(int plus)"
+      },
+      "getCurChooseImage": {
+        "signature": "private BufferedImage getCurChooseImage(String function, boolean bAlpha)"
+      },
+      "setCurChoose": {
+        "signature": "private void setCurChoose(int curChoose, String function)"
+      },
+      "mouseDragged": {
+        "signature": "public boolean mouseDragged(int x, int y)"
+      },
+      "mouseMoved": {
+        "signature": "public boolean mouseMoved(int x, int y)"
+      },
+      "mousePressed": {
+        "signature": "public boolean mousePressed(int x, int y, boolean bRight)"
+      },
+      "changeCamera": {
+        "signature": "public void changeCamera(float myChangeX)"
+      },
+      "getMouseXInLevel": {
+        "signature": "protected int getMouseXInLevel()"
+      },
+      "getMouseXInLevel/1": {
+        "signature": "private int getMouseXInLevel(int x)"
+      },
+      "getChangeX": {
+        "signature": "private float getChangeX()"
+      },
+      "getMouseYInLevel": {
+        "signature": "private int getMouseYInLevel()"
+      },
+      "getMouseYInLevel/1": {
+        "signature": "private int getMouseYInLevel(int y)"
+      },
+      "think": {
+        "signature": "public void think(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g)"
+      },
+      "renderGrid": {
+        "signature": "private void renderGrid(Graphics2D g)"
+      }
+    }
+  },
+  "ApoMarioModel": {
+    "roles": [
+      "GameLoop"
+    ],
+    "capabilities": {
+      "getGame": {
+        "signature": "public ApoMarioPanel getGame()",
+        "intent": "abstrakte Panelklasse<br  >    abstrakte Klasse, die das Grundgerst fr alle Panels im Spiel bildet und die bentigten Met"
+      },
+      "init": {
+        "signature": "abstract public void init()",
+        "intent": "abstrakte Panelklasse<br  >    abstrakte Klasse, die das Grundgerst fr alle Panels im Spiel bildet und die bentigten Met",
+        "abstract": true
+      },
+      "keyButtonReleased": {
+        "signature": "abstract public void keyButtonReleased(int button, char character)",
+        "abstract": true
+      },
+      "mouseButtonFunction": {
+        "signature": "abstract public void mouseButtonFunction(String function)",
+        "abstract": true
+      },
+      "mouseButtonReleased": {
+        "signature": "abstract public void mouseButtonReleased(int x, int y)",
+        "abstract": true
+      },
+      "mouseMoved": {
+        "signature": "abstract public boolean mouseMoved(int x, int y)",
+        "abstract": true
+      },
+      "mouseDragged": {
+        "signature": "abstract public boolean mouseDragged(int x, int y)",
+        "abstract": true
+      },
+      "mousePressed": {
+        "signature": "abstract public boolean mousePressed(int x, int y, boolean bRight)",
+        "abstract": true
+      },
+      "think": {
+        "signature": "abstract public void think(int delta)",
+        "abstract": true
+      },
+      "render": {
+        "signature": "abstract public void render(Graphics2D g)",
+        "abstract": true
+      }
+    }
+  },
+  "ApoMarioOptionsButton": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "isBActive": {
+        "signature": "public boolean isBActive()"
+      },
+      "setBActive": {
+        "signature": "public void setBActive(boolean bActive)"
+      },
+      "mouseReleased": {
+        "signature": "public boolean mouseReleased(int x, int y)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioSimulationButton": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getHelp": {
+        "signature": "public ApoMarioSimulationHelp getHelp()",
+        "intent": "SimulationButton<br  >    Klasse, die fr die Replays nach einer Simulation bestimmt sind<br  >    @author Dirk Aporius"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioEditorIO": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "readLevel": {
+        "signature": "public boolean readLevel(DataInputStream data)"
+      },
+      "writeLevel": {
+        "signature": "public boolean writeLevel(DataOutputStream data)"
+      },
+      "isThereAnEnemy": {
+        "signature": "private ApoMarioEntity isThereAnEnemy(int x, int y)"
+      }
+    }
+  },
+  "ApoMarioOptionsDrag": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "mouseReleased": {
+        "signature": "public boolean mouseReleased(int x, int y)"
+      },
+      "mouseMoved": {
+        "signature": "public boolean mouseMoved(int x, int y)"
+      },
+      "getPercent": {
+        "signature": "public int getPercent()"
+      },
+      "setToPercent": {
+        "signature": "public void setToPercent(int percent)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int x, int y)"
+      }
+    }
+  },
+  "ApoMarioAIEnemy": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "isFlyingEnemy": {
+        "signature": "public boolean isFlyingEnemy()",
+        "intent": "gibt zurck, ob der Gegner fliegt    @return TRUE, Gegner fliegt, else FALSE"
+      },
+      "isImmortalEnemy": {
+        "signature": "public boolean isImmortalEnemy()",
+        "intent": "gibt zurck, ob der Gegner unverwundbar ist    @return TRUE Gegner unverwunderbar, else FALSE"
+      },
+      "getPoints": {
+        "signature": "public int getPoints()",
+        "intent": "gibt die Anzahl der Punkte zurck, die es gibt, wenn man den Gegner erledigt    @return gibt die Anzahl der Punkte zurck,"
+      },
+      "isGumbaType": {
+        "signature": "public boolean isGumbaType()",
+        "intent": "falls es ein Gumba ist TRUE, ansonsten FALSE    @return falls es eine Gumba ist TRUE, ansonsten FALSE"
+      },
+      "isKoopaType": {
+        "signature": "public boolean isKoopaType()",
+        "intent": "falls es ein Koopa ist also eine Schildkrte TRUE, ansonsten FALSE    @return falls es eine Koopa ist also eine Schildkrt"
+      },
+      "isFlowerType": {
+        "signature": "public boolean isFlowerType()",
+        "intent": "falls es eine Pflanze aus der Rhre ist TRUE, ansonsten FALSE    @return falls es eine Pflanze aus der Rhre ist TRUE, ans"
+      },
+      "isCannonType": {
+        "signature": "public boolean isCannonType()",
+        "intent": "falls es eine Kannone ist TRUE, ansonsten FALSE    @return falls es eine Kannone ist TRUE, ansonsten FALSE"
+      },
+      "isFireballType": {
+        "signature": "public boolean isFireballType()",
+        "intent": "falls es ein vom Spieler abgeschossener Fireball ist wird TRUE zurckgegeben, ansonsten FALSE    @return falls es ein ein"
+      },
+      "isShellType": {
+        "signature": "public boolean isShellType()",
+        "intent": "falls es eine Bananenschale Brustpanzer ist dann TRUE, ansonsten FALSE    @return falls es eine Bananenschale ist dann T"
+      }
+    }
+  },
+  "ApoMarioAIEntity": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "setStartX": {
+        "signature": "protected void setStartX(float startX)"
+      },
+      "isVisible": {
+        "signature": "public boolean isVisible()",
+        "intent": "gibt zurck, ob die Entity sichtbar ist    @return TRUE Entity sichtbar, sonst FALSE"
+      },
+      "getID": {
+        "signature": "public int getID()",
+        "intent": "gibt eine eindeutige ID fr diese Entity zurck    @return gibt eine eindeutige ID fr diese Entity zurck"
+      },
+      "getX": {
+        "signature": "public float getX()",
+        "intent": "gibt die genaue x-Position der Entity zurck    @return gibt die genaue x-Position der Entity zurck"
+      },
+      "getY": {
+        "signature": "public float getY()",
+        "intent": "gibt die genaue y-Position der Entity zurck    @return gibt die genaue y-Position der Entity zurck"
+      },
+      "getWidth": {
+        "signature": "public float getWidth()",
+        "intent": "gibt die Breite der Entity zurck    @return gibt die Breite der Entity zurck"
+      },
+      "getHeight": {
+        "signature": "public float getHeight()",
+        "intent": "gibt die Hoehe der Entity zurck    @return gibt die Hoehe der Entity zurck"
+      },
+      "getVecX": {
+        "signature": "public float getVecX()",
+        "intent": "gibt die Geschwindigkeit in x-Richtung zurck pro Millisekunde.<br  >    @return gibt die Geschwindigkeit in x-Richtung z"
+      },
+      "getVecY": {
+        "signature": "public float getVecY()",
+        "intent": "gibt die Geschwindigkeit in y-Richtung zurck pro Millisekunde.<br  >    @return gibt die Geschwindigkeit in y-Richtung z"
+      }
+    }
+  },
+  "ApoMarioAIGoodie": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "isCoin": {
+        "signature": "public boolean isCoin()",
+        "intent": "gibt zurck, ob es ein Coin ist    @return TRUE, es ist ein Coin, else FALSE"
+      },
+      "isMushroom": {
+        "signature": "public boolean isMushroom()",
+        "intent": "gibt zurck, ob es ein Pilz ist    @return TRUE, es ist ein Pilz, else FALSE"
+      },
+      "isFireflower": {
+        "signature": "public boolean isFireflower()",
+        "intent": "gibt zurck, ob es eine Feuerpflanze ist    @return TRUE, es ist eine Feuerpflanze, else FALSE"
+      },
+      "getPoints": {
+        "signature": "public int getPoints()",
+        "intent": "gibt die Anzahl der Punkte zurck, die es gibt, wenn dieses Goodie eingesammelt wird    @return gibt die Anzahl der Punkt"
+      }
+    }
+  },
+  "ApoMarioAIPlayer": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "getType": {
+        "signature": "public int getType()",
+        "intent": "gibt den derzeitigen MarioTyp zurck    entweder ApoMarioConstants.PLAYER_TYPE_LITTLE, ApoMarioConstants.PLAYER_TYPE_BIG "
+      },
+      "runFast": {
+        "signature": "public void runFast()",
+        "intent": "veranlasst den Spieler schnell zu rennen"
+      },
+      "runNormal": {
+        "signature": "public void runNormal()",
+        "intent": "veranlasst den Spieler normal zu laufen"
+      },
+      "runLeft": {
+        "signature": "public void runLeft()",
+        "intent": "veranlasst den Spieler nach links zu laufen"
+      },
+      "runRight": {
+        "signature": "public void runRight()",
+        "intent": "veranlasst den Spieler nach rechts zu laufen"
+      },
+      "runStand": {
+        "signature": "public void runStand()",
+        "intent": "veranlasst den Spieler stehen zu bleiben"
+      },
+      "duck": {
+        "signature": "public void duck()",
+        "intent": "veranlasst den Spieler stehen zu bleiben"
+      },
+      "canJump": {
+        "signature": "public boolean canJump()",
+        "intent": "gibt zurck, ob ein Spieler springen kann    @return"
+      },
+      "jump": {
+        "signature": "public void jump()",
+        "intent": "veranlasst den Spieler hoch zu springen"
+      },
+      "isImmortal": {
+        "signature": "public boolean isImmortal()",
+        "intent": "gibt zurck, ob der Spieler gerade unverwundbar ist<br  >    z.B. wenn er einen Schaden abbekommen hat,<br  >    ist er f"
+      },
+      "stopGame": {
+        "signature": "public void stopGame()",
+        "intent": "stoppt das ganze Spiel (mit der 'p' Taste kann es fortgesetzt werden)<br  >    funktioniert nur im Debugmodus<br  >"
+      },
+      "drawLine": {
+        "signature": "public void drawLine(float x1, float y1, float x2, float y2, int time)",
+        "intent": "malt eine rote Linie an die bergebene Stelle fr die bergebene Zeit in ms    @param x1 : erster x-Wert    @param y1 : ers"
+      },
+      "drawLine/6": {
+        "signature": "public void drawLine(float x1, float y1, float x2, float y2, int time, Color color)",
+        "intent": "malt eine Linie an die bergebene Stelle fr die bergebene Zeit in ms    @param x1 : erster x-Wert    @param y1 : erster y"
+      },
+      "drawCircle": {
+        "signature": "public void drawCircle(float x, float y, float radius, boolean bFill, int time)",
+        "intent": "malt einen roten Kreis an die bergebene Stelle fr die bergebene Zeit in ms    @param x : x-Wert des Mittelpunktes    @pa"
+      },
+      "drawCircle/6": {
+        "signature": "public void drawCircle(float x, float y, float radius, boolean bFill, int time, Color color)",
+        "intent": "malt einen Kreis an die bergebene Stelle fr die bergebene Zeit in ms    @param x : x-Wert des Mittelpunktes    @param y "
+      },
+      "drawRect": {
+        "signature": "public void drawRect(float x, float y, float width, float height, boolean bFill, int time)"
+      },
+      "drawRect/7": {
+        "signature": "public void drawRect(float x, float y, float width, float height, boolean bFill, int time, Color color)"
+      },
+      "addMessage": {
+        "signature": "public void addMessage(String message)",
+        "intent": "fgt eine Nachricht im Debugfenster hinzu    @param message : neue Nachricht"
+      }
+    }
+  },
+  "ApoMarioAI": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "load": {
+        "signature": "public void load(String path)",
+        "intent": "gibt den Namen des Autors zurck< br>    return the name of the author< br>    @return gibt den Namen des Autos zurck, re"
+      },
+      "save": {
+        "signature": "public void save(String path)",
+        "intent": "gibt den Namen des Autors zurck< br>    return the name of the author< br>    @return gibt den Namen des Autos zurck, re"
+      },
+      "getTeamName": {
+        "signature": "abstract public String getTeamName()",
+        "intent": "gibt den Namen des Teams zurck< br>    return the teamname< br>    @return gibt den Namen des Teams zurck, return the te",
+        "abstract": true
+      },
+      "getAuthor": {
+        "signature": "abstract public String getAuthor()",
+        "intent": "gibt den Namen des Autors zurck< br>    return the name of the author< br>    @return gibt den Namen des Autos zurck, re",
+        "abstract": true
+      },
+      "think": {
+        "signature": "abstract public void think(final ApoMarioAIPlayer player, final ApoMarioAILevel level)",
+        "intent": "wichtigste Methode: wird bei jedem Schritt einmal aufgerufen< br>    in dieser Methode werden alle wichtigen Objekte fr ",
+        "abstract": true
+      }
+    }
+  },
+  "ApoMarioAIConstants": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {}
+  },
+  "ApoMarioAILevel": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "private void init()",
+        "intent": "wird beim Initialisieren aufgerufen und erstellt die Arrays fr die Gegner, Goodie und auch das Level selber"
+      },
+      "getChangeX": {
+        "signature": "public float getChangeX()",
+        "intent": "gibt die Vernderung der Anzahl von Tiles in x-Richtung wieder<br  >    Dass heit wenn es den Wert 6 wiedergibt, dann ist"
+      },
+      "getStartTime": {
+        "signature": "public int getStartTime()",
+        "intent": "gibt die Zeit, die am Anfang des Levels zur Verfgung stand, zurck in ms<br  >    @return gibt die Zeit, die am Anfang de"
+      },
+      "getTimeLeft": {
+        "signature": "public int getTimeLeft()",
+        "intent": "gibt die Zeit zurck, die der Spieler noch zur Verfgung hat ins Ziel zu kommen in ms<br  >    Das bedeutet, wenn man 1000"
+      },
+      "getDifficulty": {
+        "signature": "public int getDifficulty()",
+        "intent": "gibt den Schwierigkeitsgrad des Levels zurck    @return gibt den Schwierigkeitsgrad des Levels zurck"
+      },
+      "getLevelWidth": {
+        "signature": "public int getLevelWidth()",
+        "intent": "gibt die Breite des Levels zurck    @return gibt die Breite des Levels zurck"
+      },
+      "getLevelRandom": {
+        "signature": "public long getLevelRandom()",
+        "intent": "gibt die Zufalls zurck, auf deren Basis das Level gebaut wurde    @return gibt die Zufalls zurck, auf deren Basis das Le"
+      },
+      "getEnemies": {
+        "signature": "public ArrayList<ApoMarioAIEnemy> getEnemies()",
+        "intent": "gibt eine ArrayList mit den Objekten der Gegner zurck<br  >    @return gibt eine ArrayList mit den Objekten der Gegner z"
+      },
+      "getGoodies": {
+        "signature": "public ArrayList<ApoMarioAIGoodie> getGoodies()",
+        "intent": "gibt eine ArrayList mit den Objekten der Goodies zurck<br  >    @return gibt eine ArrayList mit den Objekten der Goodies"
+      },
+      "getLevelArray": {
+        "signature": "public byte[][] getLevelArray()"
+      },
+      "getEnemyPlayer": {
+        "signature": "public ApoMarioAIEntity getEnemyPlayer()",
+        "intent": "gibt den Gegnerspieler zurck<br  >    @return NULL kein Gegner, else das Gegnerobjekt<br  >"
+      }
+    }
+  },
+  "ApoMarioLevelIO": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "readLevel": {
+        "signature": "public boolean readLevel(DataInputStream data)"
+      },
+      "writeLevel": {
+        "signature": "public boolean writeLevel(DataOutputStream data)"
+      }
+    }
+  },
+  "ApoMarioRandomLevel": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "getLastRandom": {
+        "signature": "public long getLastRandom()"
+      },
+      "setLastRandom": {
+        "signature": "public void setLastRandom(long lastRandom)"
+      },
+      "getWidth": {
+        "signature": "public int getWidth()"
+      },
+      "setWidth": {
+        "signature": "public void setWidth(int width)"
+      },
+      "getDifficulty": {
+        "signature": "public int getDifficulty()"
+      },
+      "setDifficulty": {
+        "signature": "public void setDifficulty(int difficulty)"
+      },
+      "getTime": {
+        "signature": "public int getTime()"
+      },
+      "setTime": {
+        "signature": "public void setTime(int time)"
+      },
+      "makeRandomLevel": {
+        "signature": "public void makeRandomLevel(long lastRandom)"
+      },
+      "makeBFull": {
+        "signature": "private void makeBFull()"
+      },
+      "makeGround": {
+        "signature": "private void makeGround(int startX)"
+      },
+      "makeIncreaseWall": {
+        "signature": "private void makeIncreaseWall(int startX, int width)"
+      },
+      "isEmpty": {
+        "signature": "private boolean isEmpty(int x, int width)"
+      },
+      "makeHole": {
+        "signature": "private void makeHole(int startX, int width)"
+      },
+      "makeHoleOnly": {
+        "signature": "private void makeHoleOnly(int x, int width)"
+      },
+      "isFull": {
+        "signature": "private boolean isFull(int x, int width)"
+      },
+      "makeCannon": {
+        "signature": "private void makeCannon(int startX, int width)"
+      },
+      "makeFlower": {
+        "signature": "private void makeFlower(int startX, int width)"
+      },
+      "isReserved": {
+        "signature": "private boolean isReserved(int x, int width)"
+      },
+      "canJump": {
+        "signature": "private boolean canJump(int x, int heightDifference)"
+      },
+      "getHeight": {
+        "signature": "private int getHeight(int x)"
+      },
+      "isOneHeight": {
+        "signature": "private int isOneHeight(int x, int width)"
+      },
+      "makeWalls": {
+        "signature": "private void makeWalls(int startX, int startWidth)"
+      },
+      "canMakeWalls": {
+        "signature": "private int canMakeWalls(int x, int width)"
+      },
+      "makeDestructableWall": {
+        "signature": "private void makeDestructableWall(int x, int y)"
+      },
+      "makeQuestionmark": {
+        "signature": "private void makeQuestionmark(int x, int y)"
+      },
+      "makeCoin": {
+        "signature": "private void makeCoin(int startX, int startWidth)"
+      },
+      "makeEnemy": {
+        "signature": "private void makeEnemy(int startX, int startWidth)"
+      }
+    }
+  },
+  "ApoMarioLevel": {
+    "roles": [
+      "Entity",
+      "GameLoop"
+    ],
+    "capabilities": {
+      "init": {
+        "signature": "public void init()"
+      },
+      "getReplayPlay": {
+        "signature": "public ApoMarioReplayPlay getReplayPlay()"
+      },
+      "isBReplay": {
+        "signature": "public boolean isBReplay()"
+      },
+      "setBReplay": {
+        "signature": "public void setBReplay(boolean bReplay)"
+      },
+      "getReplay": {
+        "signature": "public ApoMarioReplay getReplay()"
+      },
+      "setReplay": {
+        "signature": "public void setReplay(ApoMarioReplay replay)"
+      },
+      "getWidth": {
+        "signature": "public int getWidth()",
+        "intent": "gibt die Breite des Levels zurck    @return die Breite des Levels"
+      },
+      "getHeight": {
+        "signature": "public int getHeight()",
+        "intent": "gibt die Hhe des Levels zurck    @return"
+      },
+      "isBStop": {
+        "signature": "public boolean isBStop()",
+        "intent": "gibt die Hhe des Levels zurck    @return"
+      },
+      "setBStop": {
+        "signature": "public void setBStop(boolean bStop)",
+        "intent": "gibt die Hhe des Levels zurck    @return"
+      },
+      "getLevelInt": {
+        "signature": "public long getLevelInt()",
+        "intent": "gibt die Hhe des Levels zurck    @return"
+      },
+      "getComponent": {
+        "signature": "public ApoMarioComponent getComponent()",
+        "intent": "gibt die Hhe des Levels zurck    @return"
+      },
+      "getGoodies": {
+        "signature": "public ArrayList<ApoMarioEnemy> getGoodies()",
+        "intent": "gibt eine ArrayList mit den Goodies zurck    @return gibt eine ArrayList mit den Goodies zurck"
+      },
+      "getEnemies": {
+        "signature": "public ArrayList<ApoMarioEnemy> getEnemies()",
+        "intent": "gibt eine Arraylist mit den Gegnern zurck    @return gibt eine Arraylist mit den Gegnern zurck"
+      },
+      "makeEmptyLevel": {
+        "signature": "public void makeEmptyLevel()",
+        "intent": "gibt eine Arraylist mit den Gegnern zurck    @return gibt eine Arraylist mit den Gegnern zurck"
+      },
+      "makeEmptyLevel/3": {
+        "signature": "public void makeEmptyLevel(int width, int height, int difficulty)",
+        "intent": "gibt eine Arraylist mit den Gegnern zurck    @return gibt eine Arraylist mit den Gegnern zurck"
+      },
+      "setLevelEntities": {
+        "signature": "public void setLevelEntities(ApoMarioEntity[][] levelEntities)"
+      },
+      "setPlayerAndFinish": {
+        "signature": "public void setPlayerAndFinish()"
+      },
+      "makeLevel": {
+        "signature": "public void makeLevel(long levelInt, boolean bNew, boolean bRealNew, int width, int difficulty)",
+        "intent": "erstellt ein zuflliges Level    @param levelInt : Zufallszahl nach dem sich der Levelaufbau richtet"
+      },
+      "setLevelInt": {
+        "signature": "public void setLevelInt(long levelInt)"
+      },
+      "setTime": {
+        "signature": "protected void setTime(int time)"
+      },
+      "makeMyBackground": {
+        "signature": "private void makeMyBackground()"
+      },
+      "getDifficulty": {
+        "signature": "public int getDifficulty()"
+      },
+      "setWidth": {
+        "signature": "public void setWidth(int width)"
+      },
+      "setDifficulty": {
+        "signature": "public void setDifficulty(int difficulty)"
+      },
+      "getStartTime": {
+        "signature": "public int getStartTime()"
+      },
+      "getTime": {
+        "signature": "public int getTime()"
+      },
+      "makeFinish": {
+        "signature": "protected void makeFinish(int x, int y)"
+      },
+      "makeBoxQuestionMark": {
+        "signature": "public void makeBoxQuestionMark(int x, int y, int goodie)"
+      },
+      "makeBoxCoin": {
+        "signature": "public void makeBoxCoin(int x, int y)"
+      },
+      "makePlayer": {
+        "signature": "protected void makePlayer(float x, float y)"
+      },
+      "makeGroundWall": {
+        "signature": "public void makeGroundWall(int x, int y)"
+      },
+      "makeGroundCorrect": {
+        "signature": "public void makeGroundCorrect()"
+      },
+      "setNames": {
+        "signature": "public void setNames()"
+      },
+      "makeGroundCorrect/4": {
+        "signature": "public void makeGroundCorrect(int startX, int endX, int startY, int endY)"
+      },
+      "makeGroundCorrectNoCollision": {
+        "signature": "public void makeGroundCorrectNoCollision()"
+      },
+      "makeGroundCorrectNoCollision/4": {
+        "signature": "public void makeGroundCorrectNoCollision(int startX, int endX, int startY, int endY)"
+      },
+      "isGroundWall": {
+        "signature": "private boolean isGroundWall(int x, int y)"
+      },
+      "isGroundWallNoCollision": {
+        "signature": "private boolean isGroundWallNoCollision(int x, int y)"
+      },
+      "makeWall": {
+        "signature": "public void makeWall(BufferedImage iWall, boolean bOnlyAbove, boolean bNoCollision, boolean bDestructable, boolean bNull, int goodie, int x, int y)"
+      },
+      "makeWall/5": {
+        "signature": "public void makeWall(boolean bDestructable, boolean bNull, int goodie, int x, int y)"
+      },
+      "makeKoopa": {
+        "signature": "public void makeKoopa(boolean bRed, int x, int y, boolean bFall, boolean bFly, boolean bLeft)"
+      },
+      "makeGumba": {
+        "signature": "public void makeGumba(int x, int y, boolean bFall, boolean bFly, boolean bLeft)"
+      },
+      "makeImmortal": {
+        "signature": "public void makeImmortal(int x, int y, boolean bFall, boolean bFly, boolean bLeft)"
+      },
+      "makeCanon": {
+        "signature": "public void makeCanon(int x, int y, int height, int shootTime, int startTime)"
+      },
+      "makeFlower": {
+        "signature": "public void makeFlower(int x, int y, int height, int timeToShow, boolean bWithFlower, int startTime)"
+      },
+      "unloadPlayer": {
+        "signature": "public void unloadPlayer(int player)"
+      },
+      "changePlayerOneAI": {
+        "signature": "public void changePlayerOneAI(int plus)"
+      },
+      "setPlayerOneAI": {
+        "signature": "public void setPlayerOneAI(int ai)"
+      },
+      "setPlayerTwoAI": {
+        "signature": "public void setPlayerTwoAI(int ai)"
+      },
+      "changePlayerTwoAI": {
+        "signature": "public void changePlayerTwoAI(int plus)"
+      },
+      "loadPlayer": {
+        "signature": "public void loadPlayer(int player, String s)",
+        "intent": "laedt eine PlayerAI    @param player = f\u00fcr welchen Spieler    @param s = falls != NULL dann lade den \u00fcbergeben String   "
+      },
+      "loadPlayer/3": {
+        "signature": "public boolean loadPlayer(int player, String path, String classname)",
+        "intent": "laed einen Spieler, wobei \u00fcbergeben wird welches Team es ist, wie der Pfad lautet und wie die KI lautet    @param bHome "
+      },
+      "loadPlayer/4": {
+        "signature": "public boolean loadPlayer(int player, String path, String classname, String classN)",
+        "intent": "laed einen Spieler, wobei \u00fcbergeben wird welches Team es ist, wie der Pfad lautet und wie die KI lautet    @param bHome "
+      },
+      "addParticle": {
+        "signature": "public void addParticle(ApoMarioParticle particle)"
+      },
+      "levelRestart": {
+        "signature": "private void levelRestart(boolean bReplay)"
+      },
+      "restart": {
+        "signature": "public void restart(boolean bReplay)"
+      },
+      "newLevel": {
+        "signature": "public void newLevel()"
+      },
+      "newSameLevel": {
+        "signature": "public void newSameLevel()"
+      },
+      "setLevelString": {
+        "signature": "public void setLevelString(int width, String levelString)"
+      },
+      "getCannons": {
+        "signature": "public ArrayList<Point> getCannons()"
+      },
+      "getFinish": {
+        "signature": "public ApoMarioEnd getFinish()"
+      },
+      "getLevelEntities": {
+        "signature": "public ApoMarioEntity[][] getLevelEntities()"
+      },
+      "getPlayers": {
+        "signature": "public ArrayList<ApoMarioPlayer> getPlayers()"
+      },
+      "getPassedTime": {
+        "signature": "public int getPassedTime()"
+      },
+      "setAnalysis": {
+        "signature": "public void setAnalysis(boolean bWin)"
+      },
+      "isOnePlayer": {
+        "signature": "private boolean isOnePlayer()"
+      },
+      "isBAnalysis": {
+        "signature": "public boolean isBAnalysis()"
+      },
+      "think": {
+        "signature": "public synchronized void think(int delta)",
+        "intent": "die eigentliche Levellogik    @param delta : Zeit seit dem letzten Aufruf"
+      },
+      "thinkTime": {
+        "signature": "private void thinkTime(int delta)",
+        "intent": "die eigentliche Levellogik    @param delta : Zeit seit dem letzten Aufruf"
+      },
+      "thinkPlayer": {
+        "signature": "private synchronized void thinkPlayer(int delta)"
+      },
+      "dieIcarus": {
+        "signature": "private void dieIcarus(ApoMarioPlayer player, int delta)"
+      },
+      "thinkFinish": {
+        "signature": "private void thinkFinish(int delta)"
+      },
+      "thinkParticle": {
+        "signature": "private void thinkParticle(int delta)"
+      },
+      "thinkEnemies": {
+        "signature": "private void thinkEnemies(int delta)"
+      },
+      "thinkGoodies": {
+        "signature": "private void thinkGoodies(int delta)"
+      },
+      "thinkLevelEntities": {
+        "signature": "private void thinkLevelEntities(int delta)"
+      },
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert das Level    @param g : das Grafikobjekt    @param changeX : Verschiebung der X-Achse    @param changeY : Versch"
+      },
+      "renderBackgroundImage": {
+        "signature": "private void renderBackgroundImage(Graphics2D g, BufferedImage iBackground, float delta, int changeX)",
+        "intent": "malt ein Bild in den Hintergrund    @param g : Das Grafikobjekt    @param iBackground : Das Bild was gemalt werden sll  "
+      },
+      "renderParticle": {
+        "signature": "private void renderParticle(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert die Partikel    @param g : das Grafikobjekt    @param changeX : Verschiebung auf der X-Achse    @param changeY :"
+      },
+      "renderFinish": {
+        "signature": "private void renderFinish(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert das Ziel    @param g : das Grafikobjekt    @param changeX : Verschiebung auf der X-Achse    @param changeY : Ver"
+      },
+      "renderPlayer": {
+        "signature": "private void renderPlayer(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert den Spieler    @param g : das Grafikobjekt    @param changeX : Verschiebung auf der X-Achse    @param changeY : "
+      },
+      "renderEnemies": {
+        "signature": "public void renderEnemies(Graphics2D g, int changeX, int changeY, boolean bFlower)",
+        "intent": "rendert die Gegner    @param g : das Grafikobjekt    @param changeX : Verschiebung auf der X-Achse    @param changeY : V"
+      },
+      "renderGoodies": {
+        "signature": "private void renderGoodies(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert die Goodies    @param g : das Grafikobjekt    @param changeX : Verschiebung auf der X-Achse    @param changeY : "
+      },
+      "renderTiles": {
+        "signature": "private void renderTiles(Graphics2D g, int changeX, int changeY)",
+        "intent": "rendert das eigentliche Level mit seinen Tiles    @param g : das Grafikobjekt    @param changeX : Verschiebung auf der X"
+      },
+      "renderIcarus": {
+        "signature": "private void renderIcarus(final Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioPlayerDrawRect": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioPlayerDraw": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "getTime": {
+        "signature": "public int getTime()",
+        "intent": "abstrakte Klasse, um etwas zu zeichnen<br  >    @author Dirk Aporius"
+      },
+      "setTime": {
+        "signature": "public void setTime(int time)",
+        "intent": "abstrakte Klasse, um etwas zu zeichnen<br  >    @author Dirk Aporius"
+      },
+      "getColor": {
+        "signature": "public Color getColor()",
+        "intent": "abstrakte Klasse, um etwas zu zeichnen<br  >    @author Dirk Aporius"
+      },
+      "setColor": {
+        "signature": "public void setColor(Color color)"
+      },
+      "render": {
+        "signature": "abstract public void render(Graphics2D g, int changeX, int changeY)",
+        "abstract": true
+      }
+    }
+  },
+  "ApoMarioPlayerDrawLine": {
+    "roles": [
+      "Entity"
+    ],
+    "capabilities": {
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  },
+  "ApoMarioPlayerDrawCircle": {
+    "roles": [
+      "Utility"
+    ],
+    "capabilities": {
+      "render": {
+        "signature": "public void render(Graphics2D g, int changeX, int changeY)"
+      }
+    }
+  }
+}

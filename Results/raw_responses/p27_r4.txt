@@ -1,0 +1,290 @@
+To integrate the Achievements feature into ApoMario, we will create the `ApoMarioStateAchievements` class to manage the state and persistence of achievements, and the `ApoMarioAchievementsPanel` class to display them in the game menu. We will then wire this into the existing game flow by modifying `ApoMarioLevel`, `ApoMarioEnemy`, `ApoMarioMenu`, and `ApoMarioPanel`.
+
+### 1. New Classes
+
+```java filename=apoMario/game/panels/ApoMarioStateAchievements.java
+package apoMario.game.panels;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import apoMario.level.ApoMarioLevel;
+
+public class ApoMarioStateAchievements {
+    private static final String POINTS_GOAL = "POINTS_GOAL";
+    private static final String ENEMIES_GOAL = "ENEMIES_GOAL";
+    private static final String TIME_GOAL = "TIME_GOAL";
+    private static final int POINTS_THRESHOLD = 20000;
+    private static final int ENEMIES_THRESHOLD = 3;
+    private static final long TIME_THRESHOLD = 60000;
+
+    private final Path store;
+    private final Properties props = new Properties();
+    
+    private int runPoints = 0;
+    private int runEnemies = 0;
+    private long runTime = 0;
+
+    public ApoMarioStateAchievements(java.nio.file.Path store) {
+        this.store = store;
+        load();
+    }
+
+    private void load() {
+        try (FileInputStream in = new FileInputStream(store.toFile())) {
+            props.load(in);
+        } catch (IOException e) {
+            // File might not exist
+        }
+    }
+
+    public void beginRun() {
+        runPoints = 0;
+        runEnemies = 0;
+        runTime = 0;
+    }
+
+    public void addPoints(int points) {
+        runPoints += points;
+        if (runPoints >= POINTS_THRESHOLD) {
+            props.setProperty(POINTS_GOAL, "true");
+        }
+    }
+
+    public void addEnemyKilled() {
+        runEnemies++;
+        if (runEnemies >= ENEMIES_THRESHOLD) {
+            props.setProperty(ENEMIES_GOAL, "true");
+        }
+    }
+
+    public void addTimeSurvived(long ms) {
+        runTime = ms;
+        if (runTime >= TIME_THRESHOLD) {
+            props.setProperty(TIME_GOAL, "true");
+        }
+    }
+
+    public void recordRunEnd(ApoMarioLevel level) {
+        // Final evaluation check
+        if (runPoints >= POINTS_THRESHOLD) props.setProperty(POINTS_GOAL, "true");
+        if (runEnemies >= ENEMIES_THRESHOLD) props.setProperty(ENEMIES_GOAL, "true");
+        if (runTime >= TIME_THRESHOLD) props.setProperty(TIME_GOAL, "true");
+        saveAcrossSessions();
+    }
+
+    public List<String> getUnlockedAchievements() {
+        List<String> unlocked = new ArrayList<>();
+        if ("true".equals(props.getProperty(POINTS_GOAL))) unlocked.add(POINTS_GOAL);
+        if ("true".equals(props.getProperty(ENEMIES_GOAL))) unlocked.add(ENEMIES_GOAL);
+        if ("true".equals(props.getProperty(TIME_GOAL))) unlocked.add(TIME_GOAL);
+        return unlocked;
+    }
+
+    public void saveAcrossSessions() {
+        try (FileOutputStream out = new FileOutputStream(store.toFile())) {
+            props.store(out, "ApoMario Achievements");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+```java filename=apoMario/game/panels/ApoMarioAchievementsPanel.java
+package apoMario.game.panels;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.util.List;
+
+import apoMario.game.ApoMarioPanel;
+
+public class ApoMarioAchievementsPanel extends ApoMarioModelMenu {
+
+    public ApoMarioAchievementsPanel(ApoMarioPanel game) {
+        super(game);
+    }
+
+    @Override
+    public void render(Graphics2D g) {
+        super.renderBackgroundAndAnimation(g);
+        
+        g.setColor(Color.BLACK);
+        g.drawString("Achievements", 100, 100);
+        
+        List<String> unlocked = getGame().getAchievements().getUnlockedAchievements();
+        int y = 150;
+        
+        String[] goals = {"POINTS_GOAL", "ENEMIES_GOAL", "TIME_GOAL"};
+        for (String goal : goals) {
+            boolean isUnlocked = unlocked.contains(goal);
+            g.drawString(goal + ": " + (isUnlocked ? "UNLOCKED" : "LOCKED"), 100, y);
+            y += 30;
+        }
+    }
+
+    @Override
+    public void keyButtonReleased(int button, char character) {
+        if (button == java.awt.event.KeyEvent.VK_ESCAPE) {
+            getGame().setMenu();
+        }
+    }
+    
+    // Stub implementations for required interface/base class methods
+    @Override public void mouseButtonFunction(String function) {}
+    @Override public void mouseButtonReleased(int x, int y) {}
+    @Override public boolean mouseDragged(int x, int y) { return false; }
+    @Override public boolean mouseMoved(int x, int y) { return false; }
+    @Override public boolean mousePressed(int x, int y, boolean bRight) { return false; }
+    @Override public void think(int delta) {}
+}
+```
+
+### 2. Modified Existing Classes
+
+```java filename=apoMario/level/ApoMarioLevel.java
+// ... (Preserve original imports and class structure)
+// Add import:
+import apoMario.game.panels.ApoMarioStateAchievements;
+import java.io.File;
+
+public class ApoMarioLevel {
+    // ... (Existing members)
+    private ApoMarioStateAchievements achievements;
+    
+    public ApoMarioLevel(ApoMarioComponent component) {
+        this.component = component;
+        this.fireAnimation = new ApoAnimation(this.component.getImages().getImage("images/fire.png", false), 0, 0, 3, 100);
+        this.init();
+        this.playerOneAI = this.HUMAN_NO_PLAYER;
+        this.playerTwoAI = this.HUMAN_NO_PLAYER;
+    }
+    
+    public void init() {
+        this.achievements = new ApoMarioStateAchievements(new File("achievements.properties").toPath());
+        this.achievements.beginRun();
+        this.thinkPlayerOne = new ArrayList<Long>();
+        this.thinkPlayerTwo = new ArrayList<Long>();
+        this.makeLevel((int)System.nanoTime(), true, true, 100, 0);
+        this.replay = new ApoMarioReplay();
+        this.replay.setLevel(this.getWidth(), this.getDifficulty(), this.randomLevel.getLastRandom(), null);
+        this.bAnalysis = false;
+        this.bReplay = false;
+        this.bIcarus = false;
+        if (this.replayPlay == null) {
+            this.replayPlay = new ApoMarioReplayPlay(this);
+        }
+        this.steps = 0;
+    }
+    
+    public ApoMarioStateAchievements getAchievements() {
+        return this.achievements;
+    }
+    
+    // ... (Keep existing methods, add tracking calls)
+    private void thinkTime(int delta) {
+        this.time -= delta;
+        this.achievements.addTimeSurvived(this.levelStartTime - this.time);
+        if (this.time <= 0) {
+            this.setAnalysis(false);
+        }
+        this.replayPlay.think(delta);
+    }
+    
+    public void setAnalysis(boolean bWin) {
+        if (!this.bAnalysis) {
+            return;
+        }
+        this.achievements.recordRunEnd(this);
+        // ... (Existing logic)
+    }
+    // ... (Rest of existing methods)
+}
+```
+
+```java filename=apoMario/game/ApoMarioPanel.java
+// ... (Preserve original imports and class structure)
+import apoMario.game.panels.ApoMarioStateAchievements;
+import apoMario.game.panels.ApoMarioAchievementsPanel;
+import java.io.File;
+
+public class ApoMarioPanel extends ApoMarioComponent {
+    // ... (Existing members)
+    private ApoMarioStateAchievements achievements;
+    private ApoMarioAchievementsPanel achievementsPanel;
+
+    public void init() {
+        this.bInit = true;
+        super.init();
+        this.achievements = new ApoMarioStateAchievements(new File("achievements.properties").toPath());
+        // ... (Existing init logic)
+    }
+    
+    public ApoMarioStateAchievements getAchievements() {
+        return this.achievements;
+    }
+    
+    public void setAchievements() {
+        this.setBPause(false);
+        if (this.achievementsPanel == null) {
+            this.achievementsPanel = new ApoMarioAchievementsPanel(this);
+        }
+        this.model = this.achievementsPanel;
+    }
+    
+    // ... (Rest of existing methods)
+}
+```
+
+```java filename=apoMario/game/panels/ApoMarioMenu.java
+// ... (Preserve original imports and class structure)
+import java.awt.event.KeyEvent;
+
+public class ApoMarioMenu extends ApoMarioModelMenu {
+    // ... (Existing members)
+
+    @Override
+    public void keyButtonReleased(int button, char character) {
+        if (button == KeyEvent.VK_A) {
+            this.getGame().setAchievements();
+        }
+        // ... (Existing logic)
+        this.keyButtonReleasedArrowAndEnter(button, character);
+    }
+    
+    @Override
+    public void render(Graphics2D g) {
+        super.renderBackgroundAndAnimation(g);
+        // ... (Existing rendering logic)
+        g.drawString("Press 'A' for Achievements", 10, 20);
+        // ... (Existing rendering logic)
+    }
+    // ... (Rest of existing methods)
+}
+```
+
+```java filename=apoMario/entity/ApoMarioEnemy.java
+// ... (Preserve original imports and class structure)
+
+public class ApoMarioEnemy extends ApoMarioEntity {
+    // ... (Existing members)
+
+    public void die(ApoMarioLevel level, int player) {
+        if (player >= 0) {
+            level.getPlayers().get(player).setPoints(level.getPlayers().get(player).getPoints() + this.points);
+        }
+        level.getAchievements().addEnemyKilled();
+        this.setBDie(true);
+        this.setVecY(-ApoMarioConstants.ENEMY_VEC_Y_DIE);
+    }
+    // ... (Rest of existing methods)
+}
+```
+
+*(Note: `ApoMarioPlayer.java` is unmodified and should be preserved as in the attachments. I have omitted the full code block for brevity, but it is implied to be included in the final delivery.)*

@@ -1,0 +1,4590 @@
+{
+  "Test2": {
+    "module": "Test2",
+    "package": "test",
+    "type": "class",
+    "parent": "ApoMarioAI",
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public String getAuthor()",
+      "public String getTeamName()",
+      "public void think(ApoMarioAIPlayer player, ApoMarioAILevel level)"
+    ]
+  },
+  "TestIf": {
+    "module": "TestIf",
+    "package": "test",
+    "type": "class",
+    "parent": "ApoMarioAI",
+    "implements": [],
+    "fields": {
+      "JUMP_VALUE": "double"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public String getAuthor()",
+      "public String getTeamName()",
+      "public void think(ApoMarioAIPlayer player, ApoMarioAILevel level)",
+      "private void playerRunFastAndJump(ApoMarioAIPlayer player)"
+    ]
+  },
+  "Test": {
+    "module": "Test",
+    "package": "test",
+    "type": "class",
+    "parent": "ApoMarioAI",
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public String getAuthor()",
+      "public String getTeamName()",
+      "public void think(ApoMarioAIPlayer player, ApoMarioAILevel level)"
+    ]
+  },
+  "ApoIO": {
+    "module": "ApoIO",
+    "package": "org.apogames",
+    "type": "abstract class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "maxLevel": "int",
+      "currentLevel": "int",
+      "levelName": "String",
+      "fileEnding": "String"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public String getLevelName()",
+      "public void setLevelName(String levelName)",
+      "public String getFileEnding()",
+      "public void setFileEnding(String fileEnding)",
+      "public int getCurrentLevel()",
+      "public void setCurrentLevel(int currentLevel)",
+      "public int getMaxLevel()",
+      "public void setMaxLevel(int maxLevel)",
+      "public boolean hasNextLevel()",
+      "public boolean hasNextLevel(boolean bURL)",
+      "abstract public boolean writeLevel(DataOutputStream data)",
+      "abstract public boolean readLevel(DataInputStream data)",
+      "public boolean readLevel(boolean bURL, String fileName)",
+      "public boolean readLevel(boolean bURL, String fileName, boolean bAll)"
+    ]
+  },
+  "ApoThread": {
+    "module": "ApoThread",
+    "package": "org.apogames",
+    "type": "class",
+    "parent": null,
+    "implements": [
+      "Runnable"
+    ],
+    "fields": {
+      "game": "volatile ApoThreadInterface",
+      "bRunning": "volatile boolean",
+      "bThink": "volatile boolean",
+      "bRender": "volatile boolean",
+      "waitThinkTicks": "int",
+      "waitRenderTicks": "int",
+      "waitThink": "long",
+      "waitRender": "long",
+      "last": "long",
+      "fps": "volatile long"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void setWaitThinkTicks(int waitThinkTicks)",
+      "public void setWaitRenderTicks(int waitRenderTicks)",
+      "public boolean isBThink()",
+      "public void setBThink(boolean bThink)",
+      "public boolean isBRender()",
+      "public void setBRender(boolean bRender)",
+      "public long getFps()",
+      "public long getWait()",
+      "public void setWait(long wait)",
+      "public long getWaitRender()",
+      "public void setWaitRender(long wait)",
+      "public void start()",
+      "public void stop()",
+      "public boolean isBRunning()",
+      "public void setBRunning(boolean bRunning)",
+      "public void run()",
+      "private boolean think()",
+      "private boolean render()",
+      "public boolean setRestart()"
+    ]
+  },
+  "ApoConstants": {
+    "module": "ApoConstants",
+    "package": "org.apogames",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "B_APPLET": "boolean",
+      "B_FPS": "boolean",
+      "DOWN": "int",
+      "LEFT": "int",
+      "RIGHT": "int",
+      "UP": "int",
+      "STAND": "int",
+      "NO_THREAD": "int",
+      "ONE_THREADS": "int",
+      "TWO_THREADS": "int"
+    },
+    "constants": {
+      "DOWN": {
+        "type": "int",
+        "value": "0"
+      },
+      "LEFT": {
+        "type": "int",
+        "value": "1"
+      },
+      "RIGHT": {
+        "type": "int",
+        "value": "2"
+      },
+      "UP": {
+        "type": "int",
+        "value": "3"
+      },
+      "STAND": {
+        "type": "int",
+        "value": "4"
+      },
+      "NO_THREAD": {
+        "type": "int",
+        "value": "0"
+      },
+      "ONE_THREADS": {
+        "type": "int",
+        "value": "1"
+      },
+      "TWO_THREADS": {
+        "type": "int",
+        "value": "2"
+      }
+    },
+    "method_signatures": [
+      "public static void setApplet(boolean bApplet)"
+    ]
+  },
+  "ApoApplet": {
+    "module": "ApoApplet",
+    "package": "org.apogames",
+    "type": "abstract class",
+    "parent": "JApplet",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "currentComponent": "JComponent",
+      "component": "ApoComponent",
+      "main": "ApoApplet",
+      "width": "int",
+      "height": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void destroy()",
+      "public void setComponent(ApoComponent component)"
+    ]
+  },
+  "ApoComponent": {
+    "module": "ApoComponent",
+    "package": "org.apogames",
+    "type": "abstract class",
+    "parent": "JComponent",
+    "implements": [
+      "ApoThreadInterface",
+      "KeyListener",
+      "MouseListener",
+      "MouseMotionListener",
+      "MouseWheelListener",
+      "FocusListener"
+    ],
+    "fields": {
+      "serialVersionUID": "long",
+      "bDirections": "boolean[]",
+      "bThink": "boolean",
+      "bRepaint": "boolean",
+      "bBack": "boolean",
+      "bWin": "boolean",
+      "bHelp": "boolean",
+      "bLoose": "boolean",
+      "thread": "ApoThread",
+      "bMouse": "boolean",
+      "bKey": "boolean",
+      "bTimer": "boolean",
+      "TICKS_THINK": "int",
+      "TICKS_RENDER": "int",
+      "buttons": "ApoButton[]",
+      "GAME_WIDTH": "int",
+      "GAME_HEIGHT": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public int getTicksRenderer()",
+      "public void setTicksRenderer(int ticks_render)",
+      "public ApoButton[] getButtons()",
+      "public void setButtons(ApoButton[] buttons)",
+      "public void keyTyped(KeyEvent e)",
+      "public void keyPressed(KeyEvent e)",
+      "public void keyReleased(KeyEvent e)",
+      "public void render()",
+      "public boolean setRestartThreadValues()",
+      "public void renderFPS(Graphics2D g, int x, int y)",
+      "public void renderButtons(Graphics2D g)",
+      "public void start()",
+      "public void stop()",
+      "public int getFPS()",
+      "public boolean isBThink()",
+      "public void setBThink(boolean bThink)",
+      "public boolean isBRepaint()",
+      "public void setBRepaint(boolean bRepaint)",
+      "public boolean[] getBDirections()",
+      "public void setBDirections(boolean[] bDirections)",
+      "public boolean isBBack()",
+      "public void setBBack(boolean bBack)",
+      "public boolean isBLoose()",
+      "public void setBLoose(boolean bLoose)",
+      "public boolean isBWin()",
+      "public void setBWin(boolean bWin)",
+      "public boolean isBHelp()",
+      "public void setBHelp(boolean bHelp)",
+      "public void mouseMoved(MouseEvent e)",
+      "public void mousePressed(MouseEvent e)",
+      "public void mouseReleased(MouseEvent e)",
+      "public void mouseDragged(MouseEvent e)",
+      "public void mouseClicked(MouseEvent e)",
+      "public void mouseEntered(MouseEvent e)",
+      "public void mouseExited(MouseEvent e)",
+      "public void mouseWheelMoved(MouseWheelEvent e)",
+      "public void focusGained(FocusEvent e)",
+      "public void focusLost(FocusEvent e)",
+      "public void renderGraphics()",
+      "public void paintComponent(Graphics g)",
+      "abstract public void init()",
+      "abstract public void setButtonFunction(String function)",
+      "abstract public void think(int delta)",
+      "abstract public void render(Graphics2D g)"
+    ]
+  },
+  "ApoMainBufferedStrategy": {
+    "module": "ApoMainBufferedStrategy",
+    "package": "org.apogames",
+    "type": "abstract class",
+    "parent": "JFrame",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "main": "ApoMainBufferedStrategy",
+      "component": "ApoComponentBufferedStrategy"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void windowClosing(WindowEvent e)",
+      "public void windowClosingEvent()",
+      "private void initWindow()",
+      "public void setComponent(ApoComponentBufferedStrategy component)",
+      "abstract public void init()"
+    ]
+  },
+  "ApoAppletBufferedStrategy": {
+    "module": "ApoAppletBufferedStrategy",
+    "package": "org.apogames",
+    "type": "class",
+    "parent": "JApplet",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "currentComponent": "JComponent",
+      "component": "ApoComponentBufferedStrategy",
+      "main": "ApoAppletBufferedStrategy",
+      "width": "int",
+      "height": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void destroy()",
+      "public void setComponent(ApoComponentBufferedStrategy component)"
+    ]
+  },
+  "ApoNewThread": {
+    "module": "ApoNewThread",
+    "package": "org.apogames",
+    "type": "class",
+    "parent": null,
+    "implements": [
+      "Runnable"
+    ],
+    "fields": {
+      "game": "ApoThreadInterface",
+      "bRunning": "boolean",
+      "bThink": "boolean",
+      "bRender": "boolean",
+      "waitThink": "long",
+      "waitRender": "long",
+      "frameAverage": "float",
+      "lastFrame": "long",
+      "yield": "float",
+      "damping": "float",
+      "lastSecond": "long",
+      "fps": "int",
+      "draws": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean isBThink()",
+      "public void setBThink(boolean bThink)",
+      "public boolean isBRender()",
+      "public void setBRender(boolean bRender)",
+      "public long getFps()",
+      "public long getWait()",
+      "public void setWait(long wait)",
+      "public long getWaitRender()",
+      "public void setWaitRender(long wait)",
+      "public void start()",
+      "public void stop()",
+      "public boolean isBRunning()",
+      "public void setBRunning(boolean bRunning)",
+      "public void run()",
+      "private boolean computeDelta()",
+      "public boolean setRestart()",
+      "private boolean think()",
+      "private boolean render()"
+    ]
+  },
+  "ApoMain": {
+    "module": "ApoMain",
+    "package": "org.apogames",
+    "type": "abstract class",
+    "parent": "JFrame",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "main": "ApoMain",
+      "currentComponent": "JComponent",
+      "component": "ApoComponent"
+    },
+    "constants": {},
+    "method_signatures": [
+      "private void initWindow()",
+      "public void setComponent(ApoComponent component)",
+      "abstract public void init()"
+    ]
+  },
+  "ApoTimer": {
+    "module": "ApoTimer",
+    "package": "org.apogames",
+    "type": "class",
+    "parent": "TimerTask",
+    "implements": [],
+    "fields": {
+      "game": "ApoThreadInterface",
+      "bRunning": "boolean",
+      "bWait": "boolean",
+      "bRender": "boolean",
+      "wait": "long",
+      "delta": "long",
+      "timer": "Timer"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean isBWait()",
+      "public void setBWait(boolean bWait)",
+      "public boolean isBRender()",
+      "public void setBRender(boolean bRender)",
+      "public long getWait()",
+      "public void setWait(long wait)",
+      "public void start()",
+      "public void stop()",
+      "public boolean isBRunning()",
+      "public void setBRunning(boolean bRunning)",
+      "public int getFps()",
+      "public void run()"
+    ]
+  },
+  "ApoComponentBufferedStrategy": {
+    "module": "ApoComponentBufferedStrategy",
+    "package": "org.apogames",
+    "type": "abstract class",
+    "parent": "Canvas",
+    "implements": [
+      "ApoThreadInterface",
+      "KeyListener",
+      "MouseListener",
+      "MouseMotionListener",
+      "MouseWheelListener",
+      "FocusListener"
+    ],
+    "fields": {
+      "serialVersionUID": "long",
+      "bStrategy": "boolean",
+      "bDirections": "boolean[]",
+      "bThink": "boolean",
+      "bRepaint": "boolean",
+      "bBack": "boolean",
+      "bWin": "boolean",
+      "bHelp": "boolean",
+      "bLoose": "boolean",
+      "thread": "ApoThread",
+      "bMouse": "boolean",
+      "bKey": "boolean",
+      "bTimer": "boolean",
+      "TICKS_THINK": "int",
+      "TICKS_RENDER": "int",
+      "buttons": "ApoButton[]",
+      "GAME_WIDTH": "int",
+      "GAME_HEIGHT": "int",
+      "offscreenImage": "BufferedImage",
+      "offscreenGraphics": "Graphics",
+      "strategy": "BufferStrategy"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public int getTicksRenderer()",
+      "public void setTicksRenderer(int ticks_render)",
+      "public ApoButton[] getButtons()",
+      "public void setButtons(ApoButton[] buttons)",
+      "public void keyTyped(KeyEvent e)",
+      "public void keyPressed(KeyEvent e)",
+      "public void keyReleased(KeyEvent e)",
+      "public void render()",
+      "public boolean setRestartThreadValues()",
+      "public void renderFPS(Graphics2D g, int x, int y)",
+      "public void renderButtons(Graphics2D g)",
+      "public void start()",
+      "public void stop()",
+      "public int getFPS()",
+      "public boolean isBThink()",
+      "public void setBThink(boolean bThink)",
+      "public boolean isBRepaint()",
+      "public void setBRepaint(boolean bRepaint)",
+      "public boolean[] getBDirections()",
+      "public void setBDirections(boolean[] bDirections)",
+      "public boolean isBBack()",
+      "public void setBBack(boolean bBack)",
+      "public boolean isBLoose()",
+      "public void setBLoose(boolean bLoose)",
+      "public boolean isBWin()",
+      "public void setBWin(boolean bWin)",
+      "public boolean isBHelp()",
+      "public void setBHelp(boolean bHelp)",
+      "public void mouseMoved(MouseEvent e)",
+      "public void mousePressed(MouseEvent e)",
+      "public void mouseReleased(MouseEvent e)",
+      "public void mouseDragged(MouseEvent e)",
+      "public void mouseClicked(MouseEvent e)",
+      "public void mouseEntered(MouseEvent e)",
+      "public void mouseExited(MouseEvent e)",
+      "public void mouseWheelMoved(MouseWheelEvent e)",
+      "public void focusGained(FocusEvent e)",
+      "public void focusLost(FocusEvent e)",
+      "public void paint(Graphics g)",
+      "public void update(Graphics g)",
+      "public void renderGraphics()",
+      "abstract public void init()",
+      "abstract public void setButtonFunction(String function)",
+      "abstract public void think(int delta)",
+      "abstract public void render(Graphics2D g)"
+    ]
+  },
+  "ApoThreadInterface": {
+    "module": "ApoThreadInterface",
+    "package": "org.apogames",
+    "type": "abstract interface",
+    "parent": null,
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": []
+  },
+  "ApoEntity": {
+    "module": "ApoEntity",
+    "package": "org.apogames.entity",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "startX": "float",
+      "startY": "float",
+      "vecX": "float",
+      "vecY": "float",
+      "width": "float",
+      "height": "float",
+      "iBackground": "BufferedImage",
+      "bSelect": "boolean",
+      "bVisible": "boolean",
+      "bClose": "boolean",
+      "bUse": "boolean",
+      "bOpaque": "boolean",
+      "rec": "Rectangle2D.Float"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public Rectangle2D.Float getRectangle()",
+      "public void init()",
+      "public float getStartX()",
+      "public void setStartX(float startX)",
+      "public float getStartY()",
+      "public void setStartY(float startY)",
+      "public boolean isBOpaque()",
+      "public void setBOpaque(boolean bOpaque)",
+      "public boolean isBVisible()",
+      "public void setBVisible(boolean bVisible)",
+      "public boolean isBSelect()",
+      "public void setBSelect(boolean bSelect)",
+      "public boolean isBClose()",
+      "public void setBClose(boolean bClose)",
+      "public boolean isBUse()",
+      "public void setBUse(boolean bUse)",
+      "public float getVecY()",
+      "public void setVecY(float vecY)",
+      "public float getVecX()",
+      "public void setVecX(float vecX)",
+      "public BufferedImage getIBackground()",
+      "public void setIBackground(BufferedImage background)",
+      "public float getWidth()",
+      "public void setWidth(float width)",
+      "public float getHeight()",
+      "public void setHeight(float height)",
+      "Wert des Objektes zurck(also den linken Rand des Bildes * * @return x-Wert des Objektes */ public float getX()",
+      "public float getXMiddle()",
+      "public void setX(float x)",
+      "public float getY()",
+      "public void setY(float y)",
+      "public boolean intersects(float x, float y)",
+      "public boolean intersects(float x, float y, float width, float height)",
+      "public boolean intersects(ApoEntity entity)",
+      "public boolean contains(float x, float y, float width, float height)",
+      "public boolean contains(ApoEntity entity)",
+      "public Rectangle2D.Float getRec()",
+      "public boolean checkOpaqueColorCollisions(ApoEntity entity)",
+      "private Rectangle2D.Float getSubRec(Rectangle2D.Float source, Rectangle2D.Float part)",
+      "private boolean isOpaque(int rgb)",
+      "public void think(int delta)",
+      "public void render(Graphics2D g, int x, int y)",
+      "public void render(Graphics g)"
+    ]
+  },
+  "ApoAnimation": {
+    "module": "ApoAnimation",
+    "package": "org.apogames.entity",
+    "type": "class",
+    "parent": "ApoEntity",
+    "implements": [],
+    "fields": {
+      "frame": "int",
+      "tiles": "int",
+      "direction": "int",
+      "maxDirection": "int",
+      "time": "long",
+      "curTime": "long",
+      "bLoop": "boolean",
+      "bAnimation": "boolean",
+      "bRGB": "boolean",
+      "images": "BufferedImage[][]"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void setIBackground(BufferedImage iBackground)",
+      "private void makeImageArray()",
+      "public BufferedImage[][] getImages()",
+      "public int getDirection()",
+      "public void setDirection(int direction)",
+      "public int getTiles()",
+      "public void setTiles(int tiles)",
+      "public int getFrame()",
+      "public void setFrame(int frame)",
+      "public long getCurTime()",
+      "public void setCurTime(long curTime)",
+      "public long getTime()",
+      "public void setTime(long time)",
+      "public boolean isBLoop()",
+      "public void setBLoop(boolean bLoop)",
+      "public boolean isBAnimation()",
+      "public void setBAnimation(boolean bAnimation)",
+      "public void think(int time)",
+      "public void render(Graphics2D g)",
+      "public void render(Graphics2D g, int x, int y)"
+    ]
+  },
+  "ApoButtonText": {
+    "module": "ApoButtonText",
+    "package": "org.apogames.entity",
+    "type": "class",
+    "parent": "ApoButton",
+    "implements": [],
+    "fields": {
+      "text": "String",
+      "font": "Font",
+      "colorPressed": "Color",
+      "colorReleased": "Color",
+      "value": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public Color getColorPressed()",
+      "public void setColorPressed(Color colorPressed)",
+      "public Color getColorReleased()",
+      "public void setColorReleased(Color colorReleased)",
+      "public void setFontSize(int size)",
+      "public int getValue()",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoTextField": {
+    "module": "ApoTextField",
+    "package": "org.apogames.entity",
+    "type": "class",
+    "parent": "ApoEntity",
+    "implements": [],
+    "fields": {
+      "TIME_LINE": "int",
+      "curString": "String",
+      "position": "int",
+      "time": "int",
+      "bLineOn": "boolean",
+      "maxLength": "int",
+      "font": "Font"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public Font getFont()",
+      "public void setFont(Font font)",
+      "public int getMaxLength()",
+      "public void setMaxLength(int maxLength)",
+      "public String getCurString()",
+      "public void setCurString(String curString)",
+      "public int getPosition()",
+      "public void setPosition(int position)",
+      "private void deleteTextBackspace()",
+      "private void deleteTextDelete()",
+      "public void addCharacter(int button, char character)",
+      "private void showLine()",
+      "public void think(int delta)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoButton": {
+    "module": "ApoButton",
+    "package": "org.apogames.entity",
+    "type": "class",
+    "parent": "ApoEntity",
+    "implements": [],
+    "fields": {
+      "WAIT_DELAY": "int",
+      "wait": "int",
+      "maxWait": "int",
+      "bWait": "boolean",
+      "bFirstWait": "boolean",
+      "function": "String",
+      "bOver": "boolean",
+      "bPressed": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean isBWait()",
+      "public void setBWait(boolean bWait)",
+      "public int getWAIT_DELAY()",
+      "public void setWAIT_DELAY(int wait_delay)",
+      "public boolean isBOver()",
+      "public void setBOver(boolean bOver)",
+      "public boolean isBPressed()",
+      "public void setBPressed(boolean bPressed)",
+      "public String getFunction()",
+      "public void setFunction(String function)",
+      "public boolean getMove(int x, int y)",
+      "public boolean getPressed(int x, int y)",
+      "public boolean getReleased(int x, int y)",
+      "public int getWait()",
+      "public void think(int delay)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoDragObject": {
+    "module": "ApoDragObject",
+    "package": "org.apogames.entity",
+    "type": "class",
+    "parent": "ApoButton",
+    "implements": [],
+    "fields": {
+      "diffX": "int",
+      "diffY": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean getPressed(int x, int y)",
+      "public boolean getReleased(int x, int y)",
+      "public boolean getIn(int x, int y)",
+      "public void setDragX(int x)",
+      "public void setDragY(int y)",
+      "public int getNewX(int x)",
+      "public int getNewY(int y)",
+      "public int getDiffX()",
+      "public int getDiffY()",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoRawScale3x": {
+    "module": "ApoRawScale3x",
+    "package": "org.apogames.image",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "srcImage": "int[]",
+      "dstImage": "int[]",
+      "width": "int",
+      "height": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "private boolean different(int a, int b)",
+      "private void setDestPixel(int x, int y, int p)",
+      "private int getSourcePixel(int x, int y)",
+      "private void process(int x, int y)",
+      "public int[] getScaledData()"
+    ]
+  },
+  "ApoImage": {
+    "module": "ApoImage",
+    "package": "org.apogames.image",
+    "type": "class",
+    "parent": "Component",
+    "implements": [
+      "ImageObserver"
+    ],
+    "fields": {
+      "serialVersionUID": "long",
+      "component": "Component"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public BufferedImage getPic(String pic, boolean bLoad)",
+      "private BufferedImage getImage(String pic, boolean bLoad)"
+    ]
+  },
+  "ApoImageScale": {
+    "module": "ApoImageScale",
+    "package": "org.apogames.image",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "ORIGINAL_SCALE": "int",
+      "DOUBLE_SCALE": "int",
+      "TRIPPLE_SCALE": "int",
+      "srcFile": "String",
+      "scale": "int"
+    },
+    "constants": {
+      "ORIGINAL_SCALE": {
+        "type": "int",
+        "value": "1"
+      },
+      "DOUBLE_SCALE": {
+        "type": "int",
+        "value": "2"
+      },
+      "TRIPPLE_SCALE": {
+        "type": "int",
+        "value": "3"
+      }
+    },
+    "method_signatures": [
+      "public int getScale()",
+      "public void setScale(int scale)",
+      "public boolean writeScaledImage()",
+      "public boolean writeScaledImage(String writeFile)",
+      "public boolean writeScaledImage(BufferedImage iOriginal, String writeFile)",
+      "public BufferedImage getDoubleScaledImage(BufferedImage srcImage)",
+      "public BufferedImage getTrippleScaledImage(BufferedImage srcImage)"
+    ]
+  },
+  "ApoRawScale2x": {
+    "module": "ApoRawScale2x",
+    "package": "org.apogames.image",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "srcImage": "int[]",
+      "dstImage": "int[]",
+      "width": "int",
+      "height": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "private boolean different(int a, int b)",
+      "private void setDestPixel(int x, int y, int p)",
+      "private int getSourcePixel(int x, int y)",
+      "private void process(int x, int y)",
+      "public int[] getScaledData()"
+    ]
+  },
+  "ApoImageFromValue": {
+    "module": "ApoImageFromValue",
+    "package": "org.apogames.image",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "image": "ApoImage"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void drawString(Graphics2D g, String s, int x, int y, int width)",
+      "public BufferedImage getImageFromPath(String path, boolean bLoad)",
+      "public BufferedImage getAndMakeIBackground(int width, int height)",
+      "public BufferedImage getAndMakeIBackground(int width, int height, Color c)",
+      "public BufferedImage getButtonImage(int width, int height, String text, int round)",
+      "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border)",
+      "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border, int round)",
+      "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border, Color over, Color pressed)",
+      "public BufferedImage getButtonImageColor(int width, int height, String text, Color background, Color font, Color border, Color over, Color pressed, Font writeFont, int round)",
+      "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border, Color over, Color pressed, Font writeFont, int round)",
+      "public BufferedImage getButtonWithImage(int width, int height, BufferedImage iPic, Color background, Color border, Color mousePressed, Color mouseReleased)",
+      "public BufferedImage getButtonImage(int width, int height, String text, Color background, Color font, Color border, Color over, Color pressed, Font writeFont)",
+      "public static BufferedImage getImageCopy(BufferedImage iImage)"
+    ]
+  },
+  "AudioPlayer": {
+    "module": "AudioPlayer",
+    "package": "org.apogames.sound",
+    "type": "class",
+    "parent": null,
+    "implements": [
+      "Runnable"
+    ],
+    "fields": {
+      "EXTERNAL_BUFFER_SIZE": "int",
+      "path": "String",
+      "bStop": "boolean",
+      "bLoop": "boolean",
+      "soundThread": "ApoSoundThread"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void start()",
+      "public boolean isBStop()",
+      "public void setBStop(boolean stop)",
+      "public boolean isBLoop()",
+      "public void setBLoop(boolean loop)",
+      "public void run()"
+    ]
+  },
+  "ApoMidiPlayer": {
+    "module": "ApoMidiPlayer",
+    "package": "org.apogames.sound",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "END_OF_TRACK_MESSAGE": "int",
+      "sequencer": "Sequencer",
+      "synthesizer": "Synthesizer",
+      "paused": "boolean"
+    },
+    "constants": {
+      "END_OF_TRACK_MESSAGE": {
+        "type": "int",
+        "value": "47"
+      }
+    },
+    "method_signatures": [
+      "public Sequence getSequence(InputStream is)",
+      "public void play(Sequence sequence, boolean loop)",
+      "public void stop()",
+      "public void close()",
+      "public Sequencer getSequencer()",
+      "public void setPaused(boolean paused)",
+      "public boolean isPaused()",
+      "public void setVolume(int volume)"
+    ]
+  },
+  "ApoMidi": {
+    "module": "ApoMidi",
+    "package": "org.apogames.sound",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "songs": "ArrayList<Sequence>",
+      "sequencer": "Sequencer"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void addSong(String s)",
+      "public void startMusic(int song)",
+      "public void stopMusic()",
+      "public void setVolume(int volume)"
+    ]
+  },
+  "ApoSoundThread": {
+    "module": "ApoSoundThread",
+    "package": "org.apogames.sound",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "worker": "Thread",
+      "runner": "Runnable",
+      "running": "boolean",
+      "paused": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public synchronized void start()",
+      "public synchronized void start(boolean sw)",
+      "public void run()",
+      "public synchronized void pause(boolean sw)",
+      "public synchronized void pause()",
+      "public synchronized void stop()",
+      "public boolean isRunning()",
+      "public boolean isPaused()"
+    ]
+  },
+  "ApoSounds": {
+    "module": "ApoSounds",
+    "package": "org.apogames.sound",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "sounds": "Hashtable<String, String>"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void loadSound(String name, String path)",
+      "public void playSound(String name)",
+      "public void playSound(String name, boolean bLoop)"
+    ]
+  },
+  "ApoSplashScreen": {
+    "module": "ApoSplashScreen",
+    "package": "org.apogames.help",
+    "type": "class",
+    "parent": null,
+    "implements": [
+      "ActionListener"
+    ],
+    "fields": {
+      "background": "BufferedImage",
+      "image": "BufferedImage",
+      "currentImage": "BufferedImage",
+      "label": "ApoSplashPainter",
+      "speed": "int",
+      "duration": "float",
+      "startTime": "long",
+      "isBlendIn": "boolean",
+      "timer": "Timer"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void blendOut()",
+      "public void actionPerformed(ActionEvent e)",
+      "private void drawImage(float alphaValue)"
+    ]
+  },
+  "ApoSplashPainter": {
+    "module": "ApoSplashPainter",
+    "package": "org.apogames.help",
+    "type": "class",
+    "parent": "JLabel",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "image": "Image"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void setImage(Image image)",
+      "public void paintComponent(Graphics g)"
+    ]
+  },
+  "ApoHelp": {
+    "module": "ApoHelp",
+    "package": "org.apogames.help",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public static BufferedImage rotateImage(BufferedImage src, double degrees)",
+      "public static BufferedImage rotateImageMethodTwo(BufferedImage inputImage, double degrees)",
+      "private static AffineTransform findTranslation(AffineTransform at, BufferedImage bi, double degrees)",
+      "public static float round(float value, int adjust)",
+      "public static double getAngleBetween2Points(Point a, Point b)",
+      "public static double getAngleBetween2Points(float x1, float y1, float x2, float y2)",
+      "public static ArrayList<ApoFloatPoint> getCircleCuts(float x1, float y1, float radius1, float x2, float y2, float radius2)",
+      "public static String getTimeToDraw(int time)",
+      "public static int getRandomValue(int value, int plus)",
+      "public static int[][] getCopy(int[][] copyArray)",
+      "public static void setClipboardContents(String string)",
+      "public static String getClipboardContents()",
+      "public static boolean rectangleIntersects(float rect1x, float rect1y, float rect1w, float rect1h, float rect2x, float rect2y, float rect2w, float rect2h)",
+      "public static boolean rectangleContains(float rect1x, float rect1y, float rect1w, float rect1h, float rect2x, float rect2y)",
+      "public static boolean rectangleIntersects(ApoEntity entity, float rect2x, float rect2y)",
+      "public static boolean rectangleIntersects(ApoEntity entity, float rect2x, float rect2y, float rect2w, float rect2h)",
+      "public static boolean rectangleIntersects(ApoEntity entity, ApoEntity secondEntity)"
+    ]
+  },
+  "ApoFileFilter": {
+    "module": "ApoFileFilter",
+    "package": "org.apogames.help",
+    "type": "class",
+    "parent": "javax.swing.filechooser.FileFilter",
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public String getLevelName()",
+      "public String getExtension(File file)",
+      "public String getDescription()",
+      "public boolean accept(File file)"
+    ]
+  },
+  "ApoCopy": {
+    "module": "ApoCopy",
+    "package": "org.apogames.help",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public void copyDirectory(String pSrcDirectory, String pCopyDirectory)",
+      "public void copyFile(String pSrcFile, String pCopyFile)"
+    ]
+  },
+  "ApoFileNameFilter": {
+    "module": "ApoFileNameFilter",
+    "package": "org.apogames.help",
+    "type": "class",
+    "parent": null,
+    "implements": [
+      "FilenameFilter"
+    ],
+    "fields": {
+      "extension": "String"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean accept(File f, String s)",
+      "public String getExtension()",
+      "public void setExtension(String extension)"
+    ]
+  },
+  "ApoInterface": {
+    "module": "ApoInterface",
+    "package": "org.apogames.help",
+    "type": "abstract interface",
+    "parent": null,
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": []
+  },
+  "ApoFloatPoint": {
+    "module": "ApoFloatPoint",
+    "package": "org.apogames.help",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public float getX()",
+      "public void setX(float x)",
+      "public float getY()",
+      "public void setY(float y)"
+    ]
+  },
+  "ApoClassLoader": {
+    "module": "ApoClassLoader",
+    "package": "org.apogames.help",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "path": "String",
+      "classname": "String"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public String getClassname()",
+      "public void setClassname(String classname)",
+      "public String getPath()",
+      "public void setPath(String path)",
+      "public Object getMyClass()"
+    ]
+  },
+  "ApoMarioImageContainer": {
+    "module": "ApoMarioImageContainer",
+    "package": "apoMario",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "PLAYER_MARIO": "BufferedImage[]",
+      "PARTICLE_MARIO": "BufferedImage",
+      "TILES_BACKGROUND_MARIO": "BufferedImage",
+      "TILES_LEVEL_MARIO": "BufferedImage",
+      "ITEMS_MARIO": "BufferedImage",
+      "ENEMIES_MARIO": "BufferedImage",
+      "MENU_MARIO": "BufferedImage",
+      "PLAYER_EAT": "BufferedImage[]",
+      "PARTICLE_EAT": "BufferedImage",
+      "TILES_BACKGROUND_EAT": "BufferedImage",
+      "TILES_LEVEL_EAT": "BufferedImage",
+      "ITEMS_EAT": "BufferedImage",
+      "ENEMIES_EAT": "BufferedImage",
+      "MENU_EAT": "BufferedImage",
+      "PLAYER": "BufferedImage[]",
+      "PARTICLE": "BufferedImage",
+      "TILES_BACKGROUND": "BufferedImage",
+      "TILES_LEVEL": "BufferedImage",
+      "ITEMS": "BufferedImage",
+      "ENEMIES": "BufferedImage",
+      "MENU": "BufferedImage",
+      "CAMERA": "BufferedImage",
+      "B_EXTERN": "boolean",
+      "TILE_SET": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public static void init(ApoMarioComponent component)",
+      "public static void setTileSet(int tileSet)"
+    ]
+  },
+  "ApoMarioClassLoader": {
+    "module": "ApoMarioClassLoader",
+    "package": "apoMario",
+    "type": "class",
+    "parent": "ClassLoader",
+    "implements": [],
+    "fields": {
+      "root": "String",
+      "name": "String"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public ApoMarioAI getAI()",
+      "public Class loadClass(String name)",
+      "private byte[] loadClassData(String filename)"
+    ]
+  },
+  "ApoMarioImage": {
+    "module": "ApoMarioImage",
+    "package": "apoMario",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "image": "ApoImageFromValue"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public BufferedImage getImage(String path, boolean bFile)",
+      "public BufferedImage getLogo(BufferedImage iPlayer)",
+      "public BufferedImage getImageMouseOver(BufferedImage iOriginal)",
+      "public BufferedImage getImageMouseOver(BufferedImage iOriginal, int width)",
+      "public BufferedImage getImageMouseOver(BufferedImage iOriginal, int searchColor, Color drawColor, int w)",
+      "public BufferedImage getBackgroundBack(BufferedImage iTiles, int width, int height)",
+      "public BufferedImage getBackgroundFront(BufferedImage iTiles, int width, int height)",
+      "private void drawBackground(Graphics2D g, BufferedImage iTile, int startX, int startY, int height)",
+      "public BufferedImage getButtonImage(int width, int height, String text, int round)",
+      "public BufferedImage getButtonImage(int width, int height, String text, Color c, Color c2, Color c3, int round)",
+      "public BufferedImage getButtonImage(int width, int height, String text, Color c, Color c2, Color c3, Font font, int round)",
+      "public BufferedImage getButtonImageColor(int width, int height, String text, Color c, Color c2, Color c3, Font font, int round)",
+      "public BufferedImage getButtonImage(int width, int height, String text, Color c, Color c2, Color c3, Color mouseOver, Color mousePressed, Font font, int round)",
+      "public BufferedImage getButtonWithImage(int width, int height, BufferedImage iPic, String text, Color textColor, Color mousePressed, Color mouseReleased)",
+      "public BufferedImage getButtonWithImage(int width, int height, BufferedImage iPic, String text, Color textColor, Color mousePressed, Color mouseReleased, Font font)"
+    ]
+  },
+  "ApoMarioApplet": {
+    "module": "ApoMarioApplet",
+    "package": "apoMario",
+    "type": "class",
+    "parent": "ApoAppletBufferedStrategy",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "component": "ApoMarioComponent"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void stop()",
+      "public void destroy()",
+      "public void init()"
+    ]
+  },
+  "ApoMarioComponent": {
+    "module": "ApoMarioComponent",
+    "package": "apoMario",
+    "type": "abstract class",
+    "parent": "ApoComponentBufferedStrategy",
+    "implements": [],
+    "fields": {
+      "SHIFT_DOWN": "int",
+      "CTRL_DOWN": "int",
+      "ALT_DOWN": "int",
+      "ALT_GR_DOWN": "int",
+      "MAX_DOWN": "int",
+      "serialVersionUID": "long",
+      "APPLET_LEVEL": "String",
+      "fileChooser": "JFileChooser",
+      "fileFilter": "ApoFileFilter",
+      "fileChooserReplay": "JFileChooser",
+      "fileFilterReplay": "ApoFileFilter",
+      "fileChooserEditor": "JFileChooser",
+      "fileFilterEditor": "ApoFileFilter",
+      "curMouseFunction": "String",
+      "bRightMouse": "boolean",
+      "releasedKeys": "ArrayList<Integer>",
+      "charKeys": "ArrayList<Character>",
+      "bReleasedMouse": "boolean",
+      "bPause": "boolean",
+      "keys": "boolean[]",
+      "curX": "int",
+      "curY": "int",
+      "curWidth": "int",
+      "curHeight": "int",
+      "changeX": "float",
+      "changeY": "float",
+      "levelWidth": "int",
+      "levelHeight": "int",
+      "oldMouseX": "int",
+      "mouseX": "int",
+      "oldMouseY": "int",
+      "mouseY": "int",
+      "images": "ApoMarioImage",
+      "bTwoPlayers": "boolean",
+      "time": "int",
+      "sounds": "ApoSounds",
+      "bSound": "boolean",
+      "level": "ApoMarioLevel",
+      "scale": "ApoImageScale",
+      "bMiddle": "boolean",
+      "debugFrame": "ApoMarioDebugFrame",
+      "speed": "int",
+      "down": "boolean[]"
+    },
+    "constants": {
+      "SHIFT_DOWN": {
+        "type": "int",
+        "value": "0"
+      },
+      "CTRL_DOWN": {
+        "type": "int",
+        "value": "1"
+      },
+      "ALT_DOWN": {
+        "type": "int",
+        "value": "2"
+      },
+      "ALT_GR_DOWN": {
+        "type": "int",
+        "value": "3"
+      },
+      "APPLET_LEVEL": {
+        "type": "String",
+        "value": "\"http://apo-games.de/apoMario/\""
+      }
+    },
+    "method_signatures": [
+      "public void init()",
+      "public ApoFileFilter getFileFilterEditor()",
+      "public JFileChooser getFileChooser()",
+      "public JFileChooser getFileChooserReplay()",
+      "public JFileChooser getFileChooserEditor()",
+      "public int getSpeed()",
+      "public void addSpeed(int plus)",
+      "public ApoMarioDebugFrame getDebugFrame()",
+      "protected void setDebugFrame(ApoMarioDebugFrame debugFrame)",
+      "public boolean isBPause()",
+      "public void setBPause(boolean bPause)",
+      "public boolean isBTwoPlayers()",
+      "public void setBTwoPlayers(boolean bTwoPlayers)",
+      "public boolean isBMiddle()",
+      "public void setBMiddle(boolean bMiddle)",
+      "public BufferedImage getResizeImage(BufferedImage orgImage)",
+      "public ApoMarioLevel getLevel()",
+      "public void setLevel(ApoMarioLevel level)",
+      "public boolean isBSound()",
+      "public void setBSound(boolean sound)",
+      "public ApoSounds getSounds()",
+      "public void playSound(String song)",
+      "public void stopSound()",
+      "public boolean levelLoad(String level)",
+      "public boolean levelSave()",
+      "public synchronized void keyReleased(KeyEvent e)",
+      "public synchronized void keyPressed(KeyEvent e)",
+      "public boolean[] getDown()",
+      "public float getChangeX()",
+      "public void setChangeX(float changeX)",
+      "public float getChangeY()",
+      "public void setChangeY(float changeY)",
+      "public int getMouseX()",
+      "public int getMouseY()",
+      "public int getTime()",
+      "public void setTime(int time)",
+      "public ArrayList<Integer> getReleasedKeys()",
+      "public boolean[] getKeys()",
+      "public void setKeys(int key, boolean bKey)",
+      "public void clearKeys()",
+      "public ApoMarioImage getImages()",
+      "public void setImages(ApoMarioImage images)",
+      "public void setButtonFunction(String function)",
+      "public synchronized void think(int delta)",
+      "public void mouseReleased(MouseEvent e)",
+      "public void mouseMoved(MouseEvent e)",
+      "public void mousePressed(MouseEvent e)",
+      "public void mouseDragged(MouseEvent e)",
+      "abstract public void saveLevel(String s)",
+      "abstract public void loadLevel(String s)",
+      "abstract public void mouseButtonReleased(int x, int y)",
+      "abstract public void mouseButtonFunction(String function)",
+      "abstract public void keyButtonReleased(int button, char character)",
+      "abstract public void render(Graphics2D g)"
+    ]
+  },
+  "ApoMarioMain": {
+    "module": "ApoMarioMain",
+    "package": "apoMario",
+    "type": "class",
+    "parent": "ApoMainBufferedStrategy",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "component": "ApoMarioComponent"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void windowClosingEvent()",
+      "public static void main(String[] args)"
+    ]
+  },
+  "ApoMarioConstants": {
+    "module": "ApoMarioConstants",
+    "package": "apoMario",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "VERSION": "double",
+      "FPS_RENDER": "int",
+      "PROP_SIZE": "String",
+      "PROP_DEBUG": "String",
+      "PROP_FPS": "String",
+      "PROP_LOAD_EXTERN_IMAGE": "String",
+      "PROP_AI_LEFT": "String",
+      "PROP_AI_RIGHT": "String",
+      "PROP_WIDTH": "String",
+      "PROP_DIFFICULTY": "String",
+      "PROP_MAX_ROUNDS": "String",
+      "PROP_FPS_COUNT": "String",
+      "PROP_BURN": "String",
+      "BUFFER_STRATEGY": "boolean",
+      "props": "Object",
+      "MARIO_PROPERTIES": "String",
+      "APPLICATION_SIZE": "int",
+      "DEBUG": "boolean",
+      "FPS": "boolean",
+      "LOAD_EXTERN": "boolean",
+      "AI_LEFT": "String",
+      "AI_RIGHT": "String",
+      "SIM_WIDTH": "int",
+      "SIM_DIFFICULTY": "int",
+      "SIM_MAX_ROUNDS": "int",
+      "FPS_COUNT": "int",
+      "ICARUS_BURN": "boolean",
+      "TILE_SET_EAT": "int",
+      "TILE_SET_MARIO": "int",
+      "PLAYER_ONE": "int",
+      "PLAYER_TWO": "int",
+      "TILE_SET": "int",
+      "APP_SIZE": "int",
+      "SIZE": "int",
+      "FPS_THINK": "int",
+      "WAIT_TIME_RENDER": "int",
+      "WAIT_TIME_THINK": "int",
+      "GAME_WIDTH": "int",
+      "GAME_HEIGHT": "int",
+      "TILE_SIZE": "int",
+      "FONT_FPS": "Font",
+      "FONT_STATISTICS": "Font",
+      "FONT_MENU": "Font",
+      "FONT_CREDITS": "Font",
+      "MENU_PLAYER_VEC": "float",
+      "MENU_PLAYER_ANIMATION_TIME": "int",
+      "MENU_PLAYER_TILES": "int",
+      "VECY_PLAYER": "int",
+      "VECY_ENEMY": "int",
+      "VECY_FIREBALL": "int",
+      "COIN_ANIMATION_FRAMES": "int",
+      "COIN_ANIMATION_TIME": "int",
+      "PARTICLE_ANIMATION_FRAMES": "int",
+      "PARTICLE_ANIMATION_TIME": "int",
+      "WALL_DESTRUCABLE_ANIMATION_FRAMES": "int",
+      "WALL_DESTRUCABLE_ANIMATION_TIME": "int",
+      "WALL_DESTRUCABLE_REPEATTIME": "int",
+      "WALL_PARTICLE_VEC_X": "float",
+      "WALL_PARTICLE_VEC_Y": "float",
+      "WALL_PARTICLE_ADD_VEC_Y": "float",
+      "QUESTIONMARK_ANIMATION_FRAMES": "int",
+      "QUESTIONMARK_ANIMATION_TIME": "int",
+      "PLAYER_ANIMATION_FRAMES": "int",
+      "PLAYER_ANIMATION_TIME": "int",
+      "PLAYER_INCREASE_VEC_X": "float",
+      "PLAYER_DECREASE_VEC_X": "float",
+      "PLAYER_MAX_VEC_X_NORMAL": "float",
+      "PLAYER_MAX_VEC_X_FAST": "float",
+      "PLAYER_VEC_Y": "float",
+      "PLAYER_VEC_Y_ENEMY": "float",
+      "PLAYER_VEC_DECREASE_Y": "float",
+      "PLAYER_VEC_DECREASE_FALL_Y": "float",
+      "PLAYER_VEC_FALL_Y_ICARUS": "float",
+      "PLAYER_TYPE_LITTLE": "int",
+      "PLAYER_TYPE_BIG": "int",
+      "PLAYER_TYPE_FIRE": "int",
+      "PLAYER_DAMAGE_TIME": "int",
+      "PLAYER_FIREBALL_TIME": "int",
+      "PLAYER_FIREBALL_VEC_X": "float",
+      "PLAYER_FIREBALL_VEC_Y": "float",
+      "PLAYER_FIREBALL_VEC_DECREASE_Y": "float",
+      "ENEMY_ANIMATION_FRAMES": "int",
+      "ENEMY_ANIMATION_TIME": "int",
+      "ENEMY_VEC_X": "float",
+      "ENEMY_VEC_Y": "float",
+      "ENEMY_VEC_DECREASE_Y": "float",
+      "ENEMY_VEC_DECREASE_Y_FLY": "float",
+      "ENEMY_VEC_DECREASE_Y_DIE": "float",
+      "ENEMY_VEC_Y_DIE": "float",
+      "CANNON_VEC_X": "float",
+      "FLOWER_VEC_Y": "float",
+      "FLOWER_ANIMATION_TIME": "int",
+      "GUMBA_VEC_X": "float",
+      "GUMBA_ANIMATION_FRAMES": "int",
+      "GUMBA_ANIMATION_TIME": "int",
+      "KOOPA_VEC_X": "float",
+      "KOOPA_ANIMATION_FRAMES": "int",
+      "KOOPA_ANIMATION_TIME": "int",
+      "SHELL_VEC_X": "float",
+      "MUSHROOM_VEC_X": "float",
+      "GOODIE_VEC_Y": "float",
+      "END_VEC_Y": "float",
+      "GOODIE_COIN": "int",
+      "GOODIE_GOODIE": "int",
+      "FLOWER_SPAWNTIME": "int",
+      "CANNON_SPAWNTIME": "int",
+      "POINTS_COIN": "int",
+      "POINTS_GOODIE": "int",
+      "POINTS_GOODIE_MUSHROOM": "int",
+      "POINTS_GOODIE_FLOWER": "int",
+      "POINTS_DESTRUCTABLE_WALL": "int",
+      "POINTS_ENEMY_GUMBA": "int",
+      "POINTS_ENEMY_CANNON": "int",
+      "POINTS_ENEMY_FLOWER": "int",
+      "POINTS_ENEMY_KOOPA": "int",
+      "POINTS_ENEMY_UNDESTRUCABLE": "int",
+      "POINTS_END": "int",
+      "POINTS_WIN_AGAINST_ANOTHER": "int",
+      "POINTS_EXCEPTION": "int",
+      "EMPTY": "int",
+      "WALL": "int",
+      "QUESTIONMARKBOX": "int",
+      "DESTRUCTIBLEBOX": "int",
+      "CANNON": "int",
+      "COIN": "int",
+      "ONLY_ABOVE_WALL": "int",
+      "NO_COLLISION_WALL": "int",
+      "FINISH": "int",
+      "NO_GROUND_WALL": "int",
+      "FONT_BUTTON": "Font",
+      "FONT_BUTTON_START": "Font",
+      "FONT_ARROW": "Font",
+      "BUTTON_EDITOR": "boolean[]",
+      "BUTTON_GAME": "boolean[]",
+      "BUTTON_MENU": "boolean[]",
+      "BUTTON_OPTIONS": "boolean[]",
+      "BUTTON_ANALYSIS": "boolean[]",
+      "BUTTON_CREDITS": "boolean[]",
+      "BUTTON_SIMULATION": "boolean[]",
+      "DRAG_WIDTH": "int",
+      "DRAG_HEIGHT": "int",
+      "MIN_GAMES": "int",
+      "MAX_GAMES": "int",
+      "MIN_DIFFICULTY": "int",
+      "MAX_DIFFICULTY": "int",
+      "MIN_WIDTH": "int",
+      "MAX_WIDTH": "int",
+      "TIMES_SLOWER_50": "int",
+      "TIMES_SLOWER_5": "int",
+      "TIMES_NORMAL": "int",
+      "TIMES_FASTER_3": "int",
+      "TIMES_FASTER_10": "int",
+      "POINT_TIME_MULTIPLICATOR": "float",
+      "POINT_DIFFICULTY_MULTIPLICATOR": "float",
+      "POINT_WIDTH_MULTIPLICATOR": "float",
+      "TIMES_SPEED": "String[]"
+    },
+    "constants": {
+      "VERSION": {
+        "type": "double",
+        "value": "1.13"
+      },
+      "BUFFER_STRATEGY": {
+        "type": "boolean",
+        "value": "false"
+      },
+      "TILE_SET_EAT": {
+        "type": "int",
+        "value": "0"
+      },
+      "TILE_SET_MARIO": {
+        "type": "int",
+        "value": "1"
+      },
+      "PLAYER_ONE": {
+        "type": "int",
+        "value": "0"
+      },
+      "PLAYER_TWO": {
+        "type": "int",
+        "value": "1"
+      },
+      "APP_SIZE": {
+        "type": "int",
+        "value": "APPLICATION_SIZE"
+      },
+      "SIZE": {
+        "type": "int",
+        "value": "1"
+      },
+      "FPS_THINK": {
+        "type": "int",
+        "value": "100"
+      },
+      "WAIT_TIME_THINK": {
+        "type": "int",
+        "value": "(int)(1000.0 / (double)FPS_THINK)"
+      },
+      "GAME_WIDTH": {
+        "type": "int",
+        "value": "320 * APP_SIZE"
+      },
+      "GAME_HEIGHT": {
+        "type": "int",
+        "value": "240 * APP_SIZE"
+      },
+      "TILE_SIZE": {
+        "type": "int",
+        "value": "16 * SIZE"
+      },
+      "FONT_FPS": {
+        "type": "Font",
+        "value": "new Font(\"Dialog\", Font.PLAIN, 9 + 1 * APP_SIZE)"
+      },
+      "FONT_STATISTICS": {
+        "type": "Font",
+        "value": "new Font(\"Dialog\", Font.BOLD, 10 + 4 * APP_SIZE)"
+      },
+      "FONT_MENU": {
+        "type": "Font",
+        "value": "new Font(\"Dialog\", Font.BOLD, 10 + 6 * APP_SIZE)"
+      },
+      "FONT_CREDITS": {
+        "type": "Font",
+        "value": "new Font(\"Dialog\", Font.BOLD, 15 + 6 * APP_SIZE)"
+      },
+      "MENU_PLAYER_VEC": {
+        "type": "float",
+        "value": "70f * ApoMarioConstants.SIZE/1000f"
+      },
+      "MENU_PLAYER_ANIMATION_TIME": {
+        "type": "int",
+        "value": "120"
+      },
+      "MENU_PLAYER_TILES": {
+        "type": "int",
+        "value": "2"
+      },
+      "VECY_PLAYER": {
+        "type": "int",
+        "value": "0"
+      },
+      "VECY_ENEMY": {
+        "type": "int",
+        "value": "1"
+      },
+      "VECY_FIREBALL": {
+        "type": "int",
+        "value": "2"
+      },
+      "COIN_ANIMATION_FRAMES": {
+        "type": "int",
+        "value": "4"
+      },
+      "COIN_ANIMATION_TIME": {
+        "type": "int",
+        "value": "150"
+      },
+      "PARTICLE_ANIMATION_FRAMES": {
+        "type": "int",
+        "value": "3"
+      },
+      "PARTICLE_ANIMATION_TIME": {
+        "type": "int",
+        "value": "180"
+      },
+      "WALL_DESTRUCABLE_ANIMATION_FRAMES": {
+        "type": "int",
+        "value": "4"
+      },
+      "WALL_DESTRUCABLE_ANIMATION_TIME": {
+        "type": "int",
+        "value": "170"
+      },
+      "WALL_DESTRUCABLE_REPEATTIME": {
+        "type": "int",
+        "value": "2000"
+      },
+      "WALL_PARTICLE_VEC_X": {
+        "type": "float",
+        "value": "0.1f * ApoMarioConstants.SIZE"
+      },
+      "WALL_PARTICLE_VEC_Y": {
+        "type": "float",
+        "value": "0.3f * ApoMarioConstants.SIZE"
+      },
+      "WALL_PARTICLE_ADD_VEC_Y": {
+        "type": "float",
+        "value": "0.0035f * ApoMarioConstants.SIZE"
+      },
+      "QUESTIONMARK_ANIMATION_FRAMES": {
+        "type": "int",
+        "value": "4"
+      },
+      "QUESTIONMARK_ANIMATION_TIME": {
+        "type": "int",
+        "value": "170"
+      },
+      "PLAYER_ANIMATION_FRAMES": {
+        "type": "int",
+        "value": "4"
+      },
+      "PLAYER_ANIMATION_TIME": {
+        "type": "int",
+        "value": "170"
+      },
+      "PLAYER_INCREASE_VEC_X": {
+        "type": "float",
+        "value": "1.4f * ApoMarioConstants.SIZE/10000f"
+      },
+      "PLAYER_DECREASE_VEC_X": {
+        "type": "float",
+        "value": "4.0f * ApoMarioConstants.SIZE/10000f"
+      },
+      "PLAYER_MAX_VEC_X_NORMAL": {
+        "type": "float",
+        "value": "90f * ApoMarioConstants.SIZE/1000f"
+      },
+      "PLAYER_MAX_VEC_X_FAST": {
+        "type": "float",
+        "value": "150f * ApoMarioConstants.SIZE/1000f"
+      },
+      "PLAYER_VEC_Y": {
+        "type": "float",
+        "value": "380f * ApoMarioConstants.SIZE/1000f"
+      },
+      "PLAYER_VEC_Y_ENEMY": {
+        "type": "float",
+        "value": "ApoMarioConstants.PLAYER_VEC_Y*5f/6f"
+      },
+      "PLAYER_VEC_DECREASE_Y": {
+        "type": "float",
+        "value": "0.001f * ApoMarioConstants.SIZE"
+      },
+      "PLAYER_VEC_DECREASE_FALL_Y": {
+        "type": "float",
+        "value": "0.0007f * ApoMarioConstants.SIZE"
+      },
+      "PLAYER_VEC_FALL_Y_ICARUS": {
+        "type": "float",
+        "value": "0.00004f * ApoMarioConstants.SIZE"
+      },
+      "PLAYER_TYPE_LITTLE": {
+        "type": "int",
+        "value": "0"
+      },
+      "PLAYER_TYPE_BIG": {
+        "type": "int",
+        "value": "1"
+      },
+      "PLAYER_TYPE_FIRE": {
+        "type": "int",
+        "value": "2"
+      },
+      "PLAYER_DAMAGE_TIME": {
+        "type": "int",
+        "value": "2100"
+      },
+      "PLAYER_FIREBALL_TIME": {
+        "type": "int",
+        "value": "350"
+      },
+      "PLAYER_FIREBALL_VEC_X": {
+        "type": "float",
+        "value": "151f * ApoMarioConstants.SIZE/1000f"
+      },
+      "PLAYER_FIREBALL_VEC_Y": {
+        "type": "float",
+        "value": "120f * ApoMarioConstants.SIZE/1000f"
+      },
+      "PLAYER_FIREBALL_VEC_DECREASE_Y": {
+        "type": "float",
+        "value": "0.001f * ApoMarioConstants.SIZE"
+      },
+      "ENEMY_ANIMATION_FRAMES": {
+        "type": "int",
+        "value": "4"
+      },
+      "ENEMY_ANIMATION_TIME": {
+        "type": "int",
+        "value": "150"
+      },
+      "ENEMY_VEC_X": {
+        "type": "float",
+        "value": "80f * ApoMarioConstants.SIZE/1000f"
+      },
+      "ENEMY_VEC_Y": {
+        "type": "float",
+        "value": "100f * ApoMarioConstants.SIZE/1000f"
+      },
+      "ENEMY_VEC_DECREASE_Y": {
+        "type": "float",
+        "value": "0.0005f * ApoMarioConstants.SIZE"
+      },
+      "ENEMY_VEC_DECREASE_Y_FLY": {
+        "type": "float",
+        "value": "0.00018f * ApoMarioConstants.SIZE"
+      },
+      "ENEMY_VEC_DECREASE_Y_DIE": {
+        "type": "float",
+        "value": "0.00042f * ApoMarioConstants.SIZE"
+      },
+      "ENEMY_VEC_Y_DIE": {
+        "type": "float",
+        "value": "80f * ApoMarioConstants.SIZE/1000f"
+      },
+      "CANNON_VEC_X": {
+        "type": "float",
+        "value": "105f * ApoMarioConstants.SIZE/1000f"
+      },
+      "FLOWER_VEC_Y": {
+        "type": "float",
+        "value": "35f * ApoMarioConstants.SIZE/1000f"
+      },
+      "FLOWER_ANIMATION_TIME": {
+        "type": "int",
+        "value": "180"
+      },
+      "GUMBA_VEC_X": {
+        "type": "float",
+        "value": "25f * ApoMarioConstants.SIZE/1000f"
+      },
+      "GUMBA_ANIMATION_FRAMES": {
+        "type": "int",
+        "value": "2"
+      },
+      "GUMBA_ANIMATION_TIME": {
+        "type": "int",
+        "value": "200"
+      },
+      "KOOPA_VEC_X": {
+        "type": "float",
+        "value": "28f * ApoMarioConstants.SIZE/1000f"
+      },
+      "KOOPA_ANIMATION_FRAMES": {
+        "type": "int",
+        "value": "2"
+      },
+      "KOOPA_ANIMATION_TIME": {
+        "type": "int",
+        "value": "200"
+      },
+      "SHELL_VEC_X": {
+        "type": "float",
+        "value": "155f * ApoMarioConstants.SIZE/1000f"
+      },
+      "MUSHROOM_VEC_X": {
+        "type": "float",
+        "value": "70f * ApoMarioConstants.SIZE/1000f"
+      },
+      "GOODIE_VEC_Y": {
+        "type": "float",
+        "value": "45f * ApoMarioConstants.SIZE/1000f"
+      },
+      "END_VEC_Y": {
+        "type": "float",
+        "value": "50f * ApoMarioConstants.SIZE/1000f"
+      },
+      "GOODIE_COIN": {
+        "type": "int",
+        "value": "0"
+      },
+      "GOODIE_GOODIE": {
+        "type": "int",
+        "value": "1"
+      },
+      "FLOWER_SPAWNTIME": {
+        "type": "int",
+        "value": "1000"
+      },
+      "CANNON_SPAWNTIME": {
+        "type": "int",
+        "value": "4500"
+      },
+      "POINTS_COIN": {
+        "type": "int",
+        "value": "80"
+      },
+      "POINTS_GOODIE": {
+        "type": "int",
+        "value": "100"
+      },
+      "POINTS_GOODIE_MUSHROOM": {
+        "type": "int",
+        "value": "500"
+      },
+      "POINTS_GOODIE_FLOWER": {
+        "type": "int",
+        "value": "700"
+      },
+      "POINTS_DESTRUCTABLE_WALL": {
+        "type": "int",
+        "value": "35"
+      },
+      "POINTS_ENEMY_GUMBA": {
+        "type": "int",
+        "value": "150"
+      },
+      "POINTS_ENEMY_CANNON": {
+        "type": "int",
+        "value": "200"
+      },
+      "POINTS_ENEMY_FLOWER": {
+        "type": "int",
+        "value": "500"
+      },
+      "POINTS_ENEMY_KOOPA": {
+        "type": "int",
+        "value": "450"
+      },
+      "POINTS_ENEMY_UNDESTRUCABLE": {
+        "type": "int",
+        "value": "1000"
+      },
+      "POINTS_END": {
+        "type": "int",
+        "value": "10000"
+      },
+      "POINTS_WIN_AGAINST_ANOTHER": {
+        "type": "int",
+        "value": "20000"
+      },
+      "POINTS_EXCEPTION": {
+        "type": "int",
+        "value": "-100000"
+      },
+      "EMPTY": {
+        "type": "int",
+        "value": "0"
+      },
+      "WALL": {
+        "type": "int",
+        "value": "1"
+      },
+      "QUESTIONMARKBOX": {
+        "type": "int",
+        "value": "2"
+      },
+      "DESTRUCTIBLEBOX": {
+        "type": "int",
+        "value": "3"
+      },
+      "CANNON": {
+        "type": "int",
+        "value": "4"
+      },
+      "COIN": {
+        "type": "int",
+        "value": "5"
+      },
+      "ONLY_ABOVE_WALL": {
+        "type": "int",
+        "value": "6"
+      },
+      "NO_COLLISION_WALL": {
+        "type": "int",
+        "value": "7"
+      },
+      "FINISH": {
+        "type": "int",
+        "value": "8"
+      },
+      "NO_GROUND_WALL": {
+        "type": "int",
+        "value": "9"
+      },
+      "FONT_BUTTON": {
+        "type": "Font",
+        "value": "new Font(Font.SANS_SERIF, Font.BOLD, 10 * ApoMarioConstants."
+      },
+      "FONT_BUTTON_START": {
+        "type": "Font",
+        "value": "new Font(Font.SANS_SERIF, Font.BOLD, 15 * ApoMarioConstants."
+      },
+      "FONT_ARROW": {
+        "type": "Font",
+        "value": "new Font(Font.SANS_SERIF, Font.BOLD, 12 * ApoMarioConstants."
+      },
+      "BUTTON_EDITOR": {
+        "type": "boolean[]",
+        "value": "new boolean[] {false, false, false, false, false, false, fal"
+      },
+      "BUTTON_GAME": {
+        "type": "boolean[]",
+        "value": "new boolean[] {false, false, false, false, false, false, fal"
+      },
+      "BUTTON_MENU": {
+        "type": "boolean[]",
+        "value": "new boolean[] {true, true, true, true, true, false, false, f"
+      },
+      "BUTTON_OPTIONS": {
+        "type": "boolean[]",
+        "value": "new boolean[] {false, false, false, false, false, true, true"
+      },
+      "BUTTON_ANALYSIS": {
+        "type": "boolean[]",
+        "value": "new boolean[] {false, false, false, false, false, false, fal"
+      },
+      "BUTTON_CREDITS": {
+        "type": "boolean[]",
+        "value": "new boolean[] {false, false, false, false, false, false, fal"
+      },
+      "BUTTON_SIMULATION": {
+        "type": "boolean[]",
+        "value": "new boolean[] {false, false, false, false, false, false, fal"
+      },
+      "DRAG_WIDTH": {
+        "type": "int",
+        "value": "10 * ApoMarioConstants.APP_SIZE"
+      },
+      "DRAG_HEIGHT": {
+        "type": "int",
+        "value": "10 * ApoMarioConstants.APP_SIZE"
+      },
+      "MIN_GAMES": {
+        "type": "int",
+        "value": "1"
+      },
+      "MAX_GAMES": {
+        "type": "int",
+        "value": "10000"
+      },
+      "MIN_DIFFICULTY": {
+        "type": "int",
+        "value": "0"
+      },
+      "MAX_DIFFICULTY": {
+        "type": "int",
+        "value": "1000"
+      },
+      "MIN_WIDTH": {
+        "type": "int",
+        "value": "100"
+      },
+      "MAX_WIDTH": {
+        "type": "int",
+        "value": "1500"
+      },
+      "TIMES_SLOWER_50": {
+        "type": "int",
+        "value": "0"
+      },
+      "TIMES_SLOWER_5": {
+        "type": "int",
+        "value": "1"
+      },
+      "TIMES_NORMAL": {
+        "type": "int",
+        "value": "2"
+      },
+      "TIMES_FASTER_3": {
+        "type": "int",
+        "value": "3"
+      },
+      "TIMES_FASTER_10": {
+        "type": "int",
+        "value": "4"
+      },
+      "POINT_TIME_MULTIPLICATOR": {
+        "type": "float",
+        "value": "0.2f"
+      },
+      "POINT_DIFFICULTY_MULTIPLICATOR": {
+        "type": "float",
+        "value": "15"
+      },
+      "POINT_WIDTH_MULTIPLICATOR": {
+        "type": "float",
+        "value": "100"
+      },
+      "TIMES_SPEED": {
+        "type": "String[]",
+        "value": "new String[] {\n\t\t\"50 times slower\",\n\t\t\"5 times slower\",\n\t\t\"n"
+      }
+    },
+    "method_signatures": [
+      "public static void saveProperties()",
+      "public static void loadProperties()",
+      "private static void setWaitTimeRender()",
+      "public static float getStartX(ApoMarioPlayer player)"
+    ]
+  },
+  "ApoMarioSimulate": {
+    "module": "ApoMarioSimulate",
+    "package": "apoMario.analysis",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "B_SIMULATE": "boolean",
+      "game": "ApoMarioPanel",
+      "bSimulate": "boolean",
+      "width": "int",
+      "difficulty": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean isBSimulate()",
+      "public void setBSimulate(boolean bSimulate)",
+      "public synchronized boolean startSimulate()",
+      "public synchronized boolean startSimulate(boolean bNewLevel)",
+      "private synchronized void simulate()"
+    ]
+  },
+  "ApoMarioAnalysis": {
+    "module": "ApoMarioAnalysis",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoMarioModelMenu",
+    "implements": [],
+    "fields": {
+      "FUNCTION_ANALYSIS_BACK": "String",
+      "FUNCTION_ANALYSIS_RESTART": "String",
+      "FUNCTION_ANALYSIS_NEWLEVEL": "String",
+      "FUNCTION_ANALYSIS_REPLAYSAVE": "String",
+      "FUNCTION_ANALYSIS_REPLAYLOAD": "String",
+      "FUNCTION_ANALYSIS_REPLAYPLAY": "String",
+      "FADE_TIME": "int",
+      "bFade": "boolean",
+      "iLevel": "BufferedImage",
+      "fadeTime": "int"
+    },
+    "constants": {
+      "FUNCTION_ANALYSIS_BACK": {
+        "type": "String",
+        "value": "\"backAnalysis\""
+      },
+      "FUNCTION_ANALYSIS_RESTART": {
+        "type": "String",
+        "value": "\"restartAnalysis\""
+      },
+      "FUNCTION_ANALYSIS_NEWLEVEL": {
+        "type": "String",
+        "value": "\"newLevelAnalysis\""
+      },
+      "FUNCTION_ANALYSIS_REPLAYSAVE": {
+        "type": "String",
+        "value": "\"saveReplay\""
+      },
+      "FUNCTION_ANALYSIS_REPLAYLOAD": {
+        "type": "String",
+        "value": "\"loadReplay\""
+      },
+      "FUNCTION_ANALYSIS_REPLAYPLAY": {
+        "type": "String",
+        "value": "\"playReplay\""
+      }
+    },
+    "method_signatures": [
+      "public void init()",
+      "public void makeBackground()",
+      "public void makeBackgroundAnimation()",
+      "public void makeRunner()",
+      "public void makeSearch()",
+      "public void keyButtonReleased(int button, char character)",
+      "public void mouseButtonFunction(String function)",
+      "public void releasedEnter()",
+      "public void excecuteFunction()",
+      "private void playNewLevel()",
+      "private void saveReplay()",
+      "public void mouseButtonReleased(int x, int y)",
+      "public boolean mouseDragged(int x, int y)",
+      "public boolean mouseMoved(int x, int y)",
+      "public boolean mousePressed(int x, int y, boolean bRight)",
+      "public void think(int delta)",
+      "public void render(Graphics2D g)",
+      "private boolean isOnePlayer()",
+      "private String getName(ApoMarioPlayer player)",
+      "private void renderPlayerStats(Graphics2D g, ApoMarioPlayer playerOne, ApoMarioPlayer playerTwo, String one, String two)",
+      "private void renderWinPlayer(Graphics2D g, ApoMarioPlayer player)"
+    ]
+  },
+  "ApoMarioDestructableWall": {
+    "module": "ApoMarioDestructableWall",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioWall",
+    "implements": [],
+    "fields": {
+      "particle": "ArrayList<ApoEntity>",
+      "iParticle": "BufferedImage",
+      "iAnimation": "BufferedImage",
+      "iWall": "BufferedImage",
+      "bWall": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void setIWall(BufferedImage wall)",
+      "public ArrayList<ApoEntity> getParticle()",
+      "public boolean isBWall()",
+      "private void makeParticle()",
+      "public BufferedImage getIWall()",
+      "public void damageWall(ApoMarioLevel level, int player)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioParticle": {
+    "module": "ApoMarioParticle",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEntity",
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public void think(int delta)",
+      "public void coinCheck(ApoMarioLevel level, int x, int y)",
+      "public void xCheckChange(ApoMarioLevel level, int x, int y)",
+      "public void yCheckUp(ApoMarioLevel level, int x, int y)",
+      "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioCoinParticle": {
+    "module": "ApoMarioCoinParticle",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioCoin",
+    "implements": [],
+    "fields": {
+      "MAX_Y": "float"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void think(int delta, ApoMarioLevel level)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioFlower": {
+    "module": "ApoMarioFlower",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEnemy",
+    "implements": [],
+    "fields": {
+      "MAX_CHANGE_Y": "float",
+      "UP_TIME_STAND": "float",
+      "timeToShow": "int",
+      "startTime": "int",
+      "curTimeToShow": "int",
+      "curUpStandTime": "int",
+      "bUp": "boolean",
+      "changeY": "float"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public int getTimeToShow()",
+      "public int getStartTime()",
+      "public void setTimeToShow(int timeToShow)",
+      "public void setStartTime(int startTime)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public float getMyChangeY()",
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioEntity": {
+    "module": "ApoMarioEntity",
+    "package": "apoMario.entity",
+    "type": "abstract class",
+    "parent": "ApoAnimation",
+    "implements": [],
+    "fields": {
+      "RIGHT": "int",
+      "LEFT": "int",
+      "level": "ApoMarioLevel",
+      "nextRec": "Rectangle2D.Float",
+      "id": "int",
+      "direction": "int"
+    },
+    "constants": {
+      "RIGHT": {
+        "type": "int",
+        "value": "0"
+      },
+      "LEFT": {
+        "type": "int",
+        "value": "1"
+      }
+    },
+    "method_signatures": [
+      "public int getId()",
+      "public int getDirection()",
+      "public void changeDirection()",
+      "public void setDirection(int direction)",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public ApoMarioLevel getLevel()",
+      "public void setLevel(ApoMarioLevel level)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public boolean yDownCheckEntity(ApoMarioLevel level, int x, int y, int delta)",
+      "public void nextYCheck(int delta, ApoMarioLevel level, int player)",
+      "public void thinkCollision(int delta, ApoMarioLevel level)",
+      "private void xChange(ApoMarioLevel level, int x, int y, Rectangle2D.Float rec, int difX)",
+      "protected void makeParticles(float entityX, float entityY, float width, float height)",
+      "public Point getMinMax(ApoMarioLevel level, int add)",
+      "protected boolean isPlayerNear(ApoMarioLevel level)",
+      "public void render(Graphics2D g, int changeX, int changeY)",
+      "public BufferedImage getCurFrameImage()",
+      "public void renderImage(Graphics2D g, int changeX, int changeY)",
+      "abstract public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)",
+      "abstract public void coinCheck(ApoMarioLevel level, int x, int y)",
+      "abstract public void yCheckUp(ApoMarioLevel level, int x, int y)",
+      "abstract public void xCheckChange(ApoMarioLevel level, int x, int y)"
+    ]
+  },
+  "ApoMarioShell": {
+    "module": "ApoMarioShell",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEnemy",
+    "implements": [],
+    "fields": {
+      "player": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public int getPlayer()",
+      "public void setPlayer(int player)",
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public void thinkJump(int delta, ApoMarioLevel level)",
+      "private void damageCheck(ApoMarioLevel level)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "private boolean intersectsWithEnemy(ApoMarioEnemy enemy, ApoMarioLevel level, int player)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioCoin": {
+    "module": "ApoMarioCoin",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEnemy",
+    "implements": [],
+    "fields": {
+      "curY": "float"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public float getCurY()",
+      "public void setCurY(float curY)",
+      "public void setBVisible(boolean bVisible)",
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public void render(Graphics2D g, int changeX, int changeY)",
+      "public void coinCheck(ApoMarioLevel level, int x, int y)",
+      "public void xCheckChange(ApoMarioLevel level, int x, int y)",
+      "public void yCheckUp(ApoMarioLevel level, int x, int y)",
+      "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)"
+    ]
+  },
+  "ApoMarioGoodieMushroom": {
+    "module": "ApoMarioGoodieMushroom",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEnemy",
+    "implements": [],
+    "fields": {
+      "MAX_Y": "long",
+      "bStart": "boolean",
+      "curChangeY": "float"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void catchMe(ApoMarioPlayer player)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioEnd": {
+    "module": "ApoMarioEnd",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEnemy",
+    "implements": [],
+    "fields": {
+      "bUp": "boolean",
+      "curY": "float"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public Rectangle2D.Float getRec()",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public void coinCheck(ApoMarioLevel level, int x, int y)",
+      "public void xCheckChange(ApoMarioLevel level, int x, int y)",
+      "public void yCheckUp(ApoMarioLevel level, int x, int y)",
+      "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioFireball": {
+    "module": "ApoMarioFireball",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEnemy",
+    "implements": [],
+    "fields": {
+      "player": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public void setVecX(float vecX)",
+      "public synchronized void think(int delta, ApoMarioLevel level)",
+      "private boolean checkWall(ApoMarioLevel level)",
+      "private boolean intersectsWithEnemy(ApoMarioEnemy enemy, ApoMarioLevel level, int player)",
+      "public void nextYCheck(int delta, ApoMarioLevel level, int player)",
+      "public void downCheck()",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioQuestionmark": {
+    "module": "ApoMarioQuestionmark",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioWall",
+    "implements": [],
+    "fields": {
+      "iAnimation": "BufferedImage",
+      "iWall": "BufferedImage",
+      "bWall": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void damageWall(ApoMarioLevel level, int player)",
+      "public boolean isBWall()",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioCannon": {
+    "module": "ApoMarioCannon",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioWall",
+    "implements": [],
+    "fields": {
+      "iCanon": "BufferedImage",
+      "shootTime": "int",
+      "startTime": "int",
+      "curShootTime": "int",
+      "cannons": "ArrayList<ApoMarioCannonCannon>",
+      "myHeight": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public int getMyHeight()",
+      "public int getShootTime()",
+      "public int getStartTime()",
+      "public void setShootTime(int shootTime)",
+      "public void setStartTime(int startTime)",
+      "public ArrayList<ApoMarioCannonCannon> getCannons()",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public void thinkCanon(int delta, ApoMarioLevel level)",
+      "private void makeCannon(ApoMarioLevel level)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioPlayer": {
+    "module": "ApoMarioPlayer",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEntity",
+    "implements": [],
+    "fields": {
+      "MAX_CHANGE_TYPE": "int",
+      "MAX_DRAWELEMENTS": "int",
+      "bLastTypeDamage": "boolean",
+      "bDown": "boolean",
+      "bJump": "boolean",
+      "bEnemyJump": "boolean",
+      "bSpeed": "boolean",
+      "lastType": "int",
+      "type": "int",
+      "goalVecX": "float",
+      "damageTime": "int",
+      "coins": "int",
+      "points": "int",
+      "ai": "ApoMarioAI",
+      "changeType": "int",
+      "curFireTime": "int",
+      "fireballs": "ArrayList<ApoMarioFireball>",
+      "bDie": "boolean",
+      "changeY": "float",
+      "player": "int",
+      "drawElements": "ArrayList<ApoMarioPlayerDraw>",
+      "messages": "ArrayList<String>",
+      "bNextJump": "boolean",
+      "teamName": "String",
+      "author": "String",
+      "count": "int",
+      "bDuckOld": "boolean",
+      "pathAI": "String",
+      "lastGoalVecX": "float"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public String getTeamName()",
+      "public String getAuthor()",
+      "public void setTeamName(String teamName)",
+      "public void setAuthor(String author)",
+      "public void addMessage(String message)",
+      "public void addDrawElement(ApoMarioPlayerDraw drawElement)",
+      "public boolean isBDie()",
+      "public float getChangeY()",
+      "public int getCoins()",
+      "public void setCoins(int coins)",
+      "public int getPoints()",
+      "public void setPoints(int points)",
+      "public ApoMarioAI getAi()",
+      "public void setAi(final ApoMarioAI ai)",
+      "public void setAi(final ApoMarioAI ai, final String path)",
+      "public void saveAI()",
+      "public int getDamageTime()",
+      "public void setDamageTime(int damageTime)",
+      "public void damagePlayer()",
+      "public void catchMushroom()",
+      "public void catchFireflower()",
+      "public int getType()",
+      "public void setType(int type)",
+      "public void playerDie()",
+      "public float getGoalVecX()",
+      "public void setGoalVecX(float goalVecX)",
+      "private void setGoalVecX(float goalVecX, boolean bParticle)",
+      "public int getLevelX()",
+      "public int getLevelY()",
+      "public boolean isBSpeed()",
+      "public int getPlayer()",
+      "public void setBSpeed(boolean bSpeed)",
+      "public boolean isBDown()",
+      "public void setBDown(boolean bDown)",
+      "public boolean isBJump()",
+      "public boolean canJump()",
+      "public void setBNextJump(boolean bJump)",
+      "public void setBJump(boolean bJump)",
+      "public boolean isBEnemyJump()",
+      "public void setEnemyJump()",
+      "public ArrayList<ApoMarioFireball> getFireballs()",
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public synchronized void thinkAI(int delta, ApoMarioLevel level)",
+      "public synchronized void think(int delta, ApoMarioLevel level)",
+      "private void thinkSpeedAndMovePlayer(int delta, ApoMarioLevel level)",
+      "public boolean yDownCheckEntity(ApoMarioLevel level, int x, int y, int delta)",
+      "private boolean test(ApoMarioLevel level, int x, int y)",
+      "private boolean testNewY(ApoMarioLevel level)",
+      "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)",
+      "public void coinCheck(ApoMarioLevel level, int x, int y)",
+      "public void yCheckUp(ApoMarioLevel level, int x, int y)",
+      "public void xCheckChange(ApoMarioLevel level, int x, int y)",
+      "public synchronized void render(Graphics2D g, int changeX, int changeY)",
+      "public void drawStringAbove(final Graphics2D g, String name, int changeX, int changeY, boolean bBackground)",
+      "public void drawImage(final Graphics2D g, final ApoAnimation animation, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioEnemy": {
+    "module": "ApoMarioEnemy",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEntity",
+    "implements": [],
+    "fields": {
+      "bFall": "boolean",
+      "bFly": "boolean",
+      "bDie": "boolean",
+      "changeY": "float",
+      "bImmortal": "boolean",
+      "bFlyOriginal": "boolean",
+      "points": "int",
+      "orgPoints": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void setBLeft(boolean bLeft)",
+      "public float getChangeY()",
+      "public void setChangeY(float changeY)",
+      "public boolean isBImmortal()",
+      "public void setBImmortal(boolean bImmortal)",
+      "public boolean isBDie()",
+      "public void setBDie(boolean bDie)",
+      "public boolean isBFall()",
+      "public void setBFall(boolean bFall)",
+      "public boolean isBFlyOriginal()",
+      "public void setBFlyOriginal(boolean bFlyOriginal)",
+      "public int getPoints()",
+      "public void setPoints(int points)",
+      "public boolean isBFly()",
+      "public void setBFly(boolean bFly)",
+      "public void setBFly(boolean bFly, int player)",
+      "protected BufferedImage getMirrorImage(BufferedImage iOriginal)",
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public void die(ApoMarioLevel level, int player)",
+      "public void thinkJump(int delta, ApoMarioLevel level)",
+      "public void thinkSpeedAndMoveEnemy(int delta, ApoMarioLevel level)",
+      "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)",
+      "public void nextYCheck(int delta, ApoMarioLevel level, int player)",
+      "public void downCheck()",
+      "public void coinCheck(ApoMarioLevel level, int x, int y)",
+      "public void xCheckChange(ApoMarioLevel level, int x, int y)",
+      "public void yCheckUp(ApoMarioLevel level, int x, int y)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioWall": {
+    "module": "ApoMarioWall",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEntity",
+    "implements": [],
+    "fields": {
+      "MAX_CHANGE_Y": "float",
+      "VEC_CHANGE_Y": "float",
+      "bNoCollision": "boolean",
+      "bOnlyAboveWall": "boolean",
+      "bCanBeUp": "boolean",
+      "bDestructable": "boolean",
+      "timeToRepeat": "int",
+      "curTimeToRepeat": "int",
+      "goodie": "int",
+      "curChangeY": "float",
+      "changeY": "float",
+      "bUp": "boolean",
+      "bGround": "boolean",
+      "bCanon": "boolean",
+      "bTube": "boolean",
+      "tubePoint": "Point"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public Point getTubePoint()",
+      "public void setTubePoint(Point tubePoint)",
+      "public boolean isBTube()",
+      "public void setBTube(boolean tube)",
+      "public boolean isBCanon()",
+      "public void setBCanon(boolean canon)",
+      "public boolean isBGround()",
+      "public void addGoodie(ApoMarioLevel level, int player)",
+      "public boolean isBCanBeUp()",
+      "public void setBCanBeUp(boolean canBeUp)",
+      "public float getCurChangeY()",
+      "public void setCurChangeY(float curChangeY)",
+      "public float getChangeY()",
+      "public void setChangeY(float changeY)",
+      "public boolean isBUp()",
+      "public void setBUp(boolean up)",
+      "public boolean isBNoCollision()",
+      "public void setBNoCollision(boolean bNoCollision)",
+      "public boolean isBOnlyAboveWall()",
+      "public void setBOnlyAboveWall(boolean bOnlyAboveWall)",
+      "protected void enemyCheck(ApoMarioLevel level, int player)",
+      "public int getGoodie()",
+      "public void setGoodie(int goodie)",
+      "public boolean isBDestructable()",
+      "public void setBDestructable(boolean bDestructable)",
+      "public int getTimeToRepeat()",
+      "public void setTimeToRepeat(int timeToRepeat)",
+      "public void damageWall(ApoMarioLevel level, int player)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public void thinkBeUp(int delta)",
+      "public void render(Graphics2D g, int changeX, int changeY)",
+      "public void coinCheck(ApoMarioLevel level, int x, int y)",
+      "public void xCheckChange(ApoMarioLevel level, int x, int y)",
+      "public void yCheckUp(ApoMarioLevel level, int x, int y)",
+      "public void yDownCheck(ApoMarioLevel level, int x, int y, int delta)"
+    ]
+  },
+  "ApoMarioGoodieFireflower": {
+    "module": "ApoMarioGoodieFireflower",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioGoodieMushroom",
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public void catchMe(ApoMarioPlayer player)"
+    ]
+  },
+  "ApoMarioGumba": {
+    "module": "ApoMarioGumba",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEnemy",
+    "implements": [],
+    "fields": {
+      "iOriginal": "BufferedImage",
+      "bLeft": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public boolean isBLeft()",
+      "public void setBFlyOriginal(boolean bFly)",
+      "public void setBLeft(boolean bLeft)",
+      "public void setIOriginal(BufferedImage original)",
+      "public void setVecX(float vecX)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioKoopa": {
+    "module": "ApoMarioKoopa",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioGumba",
+    "implements": [],
+    "fields": {
+      "bGreen": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void setBLeft(boolean bLeft)",
+      "public void setBFlyOriginal(boolean bFly)",
+      "public boolean isBGreen()",
+      "public void die(ApoMarioLevel level, int player)",
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)"
+    ]
+  },
+  "ApoMarioCannonCannon": {
+    "module": "ApoMarioCannonCannon",
+    "package": "apoMario.entity",
+    "type": "class",
+    "parent": "ApoMarioEnemy",
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public Rectangle2D.Float getRec()",
+      "public Rectangle2D.Float getNextRec(int delta)",
+      "public void think(int delta, ApoMarioLevel level)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioSearchNode": {
+    "module": "ApoMarioSearchNode",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "node": "int",
+      "conntectedNodes": "ArrayList<Integer>"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public int getX()",
+      "public int getY()",
+      "public int getNode()",
+      "public final ArrayList<Integer> getConntectedNodes()",
+      "public void addConnectedNode(int node)",
+      "public void addConnectedNodes(ArrayList<Integer> nodes)"
+    ]
+  },
+  "ApoMarioSearchRunner": {
+    "module": "ApoMarioSearchRunner",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": "ApoAnimation",
+    "implements": [],
+    "fields": {
+      "endX": "int",
+      "endY": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void setEnd(int x, int y)",
+      "public boolean hasReachedEnd()",
+      "public void think(int delta)"
+    ]
+  },
+  "ApoMarioSearch": {
+    "module": "ApoMarioSearch",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "nodes": "ArrayList<ApoMarioSearchNode>"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public final ArrayList<ApoMarioSearchNode> getNodes()",
+      "public void addNode(ApoMarioSearchNode node)",
+      "public ArrayList<ApoMarioSearchNode> searchWay(int startNode, int endNode)",
+      "private ArrayList<ApoMarioSearchNode> getWay(int startNode, int endNode, ArrayList<ApoMarioSearchNode> way)",
+      "private int getCost(int x, int y, int endX, int endY)",
+      "public static void main(String[] args)"
+    ]
+  },
+  "ApoMarioDebugFrame": {
+    "module": "ApoMarioDebugFrame",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": "JFrame",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "game": "ApoMarioPanel",
+      "playerOneName": "JLabel",
+      "playerOnePoints": "JLabel",
+      "playerOneCoins": "JLabel",
+      "playerOneX": "JLabel",
+      "playerOneY": "JLabel",
+      "playerOneWidth": "JLabel",
+      "playerOneHeight": "JLabel",
+      "playerOneDirection": "JLabel",
+      "playerOneSprint": "JLabel",
+      "playerOneJump": "JLabel",
+      "playerOneVecX": "JLabel",
+      "playerOneVecY": "JLabel",
+      "playerOneType": "JLabel",
+      "playerTwoName": "JLabel",
+      "playerTwoPoints": "JLabel",
+      "playerTwoCoins": "JLabel",
+      "playerTwoX": "JLabel",
+      "playerTwoY": "JLabel",
+      "playerTwoWidth": "JLabel",
+      "playerTwoHeight": "JLabel",
+      "playerTwoDirection": "JLabel",
+      "playerTwoSprint": "JLabel",
+      "playerTwoJump": "JLabel",
+      "playerTwoVecX": "JLabel",
+      "playerTwoVecY": "JLabel",
+      "playerTwoType": "JLabel",
+      "area": "JTextArea",
+      "scrollPane": "JScrollPane",
+      "debugPanel": "ApoMarioDebugPanel"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public void refresh()",
+      "public void addString(String addString)",
+      "public void clear()"
+    ]
+  },
+  "ApoMarioMiniMap": {
+    "module": "ApoMarioMiniMap",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "level": "ApoMarioLevel",
+      "MAX_HEIGHT": "int",
+      "iMiniMap": "BufferedImage"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void makeMiniMap()",
+      "private BufferedImage getMiniImage()",
+      "public void render(Graphics2D g)"
+    ]
+  },
+  "ApoMarioReplay": {
+    "module": "ApoMarioReplay",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "RIGHT_STAND_JUMP_NORMAL": "int",
+      "RIGHT_STAND_JUMP_FAST": "int",
+      "RIGHT_STAND_NOJUMP_NORMAL": "int",
+      "RIGHT_STAND_NOJUMP_FAST": "int",
+      "RIGHT_STAND_DUCK_NORMAL": "int",
+      "RIGHT_STAND_DUCK_FAST": "int",
+      "RIGHT_NORMAL_JUMP": "int",
+      "RIGHT_NORMAL_NOJUMP": "int",
+      "RIGHT_FAST_JUMP": "int",
+      "RIGHT_FAST_NOJUMP": "int",
+      "LEFT_STAND_JUMP_NORMAL": "int",
+      "LEFT_STAND_JUMP_FAST": "int",
+      "LEFT_STAND_NOJUMP_NORMAL": "int",
+      "LEFT_STAND_NOJUMP_FAST": "int",
+      "LEFT_STAND_DUCK_NORMAL": "int",
+      "LEFT_STAND_DUCK_FAST": "int",
+      "LEFT_NORMAL_JUMP": "int",
+      "LEFT_NORMAL_NOJUMP": "int",
+      "LEFT_FAST_JUMP": "int",
+      "LEFT_FAST_NOJUMP": "int",
+      "width": "int",
+      "difficulty": "int",
+      "random": "long",
+      "levelString": "String",
+      "playerOne": "ApoMarioReplayHelp",
+      "playerTwo": "ApoMarioReplayHelp"
+    },
+    "constants": {
+      "RIGHT_STAND_JUMP_NORMAL": {
+        "type": "int",
+        "value": "0"
+      },
+      "RIGHT_STAND_JUMP_FAST": {
+        "type": "int",
+        "value": "1"
+      },
+      "RIGHT_STAND_NOJUMP_NORMAL": {
+        "type": "int",
+        "value": "2"
+      },
+      "RIGHT_STAND_NOJUMP_FAST": {
+        "type": "int",
+        "value": "3"
+      },
+      "RIGHT_STAND_DUCK_NORMAL": {
+        "type": "int",
+        "value": "4"
+      },
+      "RIGHT_STAND_DUCK_FAST": {
+        "type": "int",
+        "value": "5"
+      },
+      "RIGHT_NORMAL_JUMP": {
+        "type": "int",
+        "value": "6"
+      },
+      "RIGHT_NORMAL_NOJUMP": {
+        "type": "int",
+        "value": "7"
+      },
+      "RIGHT_FAST_JUMP": {
+        "type": "int",
+        "value": "8"
+      },
+      "RIGHT_FAST_NOJUMP": {
+        "type": "int",
+        "value": "9"
+      },
+      "LEFT_STAND_JUMP_NORMAL": {
+        "type": "int",
+        "value": "10"
+      },
+      "LEFT_STAND_JUMP_FAST": {
+        "type": "int",
+        "value": "11"
+      },
+      "LEFT_STAND_NOJUMP_NORMAL": {
+        "type": "int",
+        "value": "12"
+      },
+      "LEFT_STAND_NOJUMP_FAST": {
+        "type": "int",
+        "value": "13"
+      },
+      "LEFT_STAND_DUCK_NORMAL": {
+        "type": "int",
+        "value": "14"
+      },
+      "LEFT_STAND_DUCK_FAST": {
+        "type": "int",
+        "value": "15"
+      },
+      "LEFT_NORMAL_JUMP": {
+        "type": "int",
+        "value": "16"
+      },
+      "LEFT_NORMAL_NOJUMP": {
+        "type": "int",
+        "value": "17"
+      },
+      "LEFT_FAST_JUMP": {
+        "type": "int",
+        "value": "18"
+      },
+      "LEFT_FAST_NOJUMP": {
+        "type": "int",
+        "value": "19"
+      }
+    },
+    "method_signatures": [
+      "public void init()",
+      "public synchronized ApoMarioReplay getClone()",
+      "public void setPlayerOne(ApoMarioReplayHelp playerOne)",
+      "public void setPlayerTwo(ApoMarioReplayHelp playerTwo)",
+      "public int getWidth()",
+      "public int getDifficulty()",
+      "public long getRandom()",
+      "public String getLevelString()",
+      "public void setLevel(int width, int difficulty, long random, String levelString)",
+      "public ApoMarioReplayHelp getPlayerOne()",
+      "public ApoMarioReplayHelp getPlayerTwo()",
+      "public synchronized void setPlayerStep(ApoMarioPlayer player)",
+      "public synchronized int setStep(ApoMarioPlayer playerOne, ApoMarioPlayer playerTwo, int step)",
+      "private synchronized void setPlayerStep(ApoMarioPlayer player, int step)",
+      "public void load(String fileName)",
+      "private void loadLevel(BufferedReader reader)",
+      "public void save(String fileName)",
+      "private void saveLevel(BufferedWriter writer)"
+    ]
+  },
+  "ApoMarioReplayHelp": {
+    "module": "ApoMarioReplayHelp",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "name": "String",
+      "author": "String",
+      "replay": "String",
+      "replayStep": "ArrayList<Integer>"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public synchronized ApoMarioReplayHelp getClone()",
+      "public String getName()",
+      "public void setName(String name)",
+      "public String getAuthor()",
+      "public void setAuthor(String author)",
+      "public String getReplay()",
+      "public void setReplay(String replay)",
+      "private synchronized void makeReplaySteps()",
+      "public int getMaxSteps()",
+      "public ArrayList<Integer> getReplayStep()",
+      "public int getReplayStep(int step)",
+      "public void addNextStep(int step)"
+    ]
+  },
+  "ApoMarioButtons": {
+    "module": "ApoMarioButtons",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "game": "ApoMarioPanel"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void makeButtons()"
+    ]
+  },
+  "ApoMarioReplayPlay": {
+    "module": "ApoMarioReplayPlay",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "CHANGE_TIME": "int",
+      "FONT_REPLAY": "Font",
+      "level": "ApoMarioLevel",
+      "step": "int",
+      "bShow": "boolean",
+      "curTime": "int"
+    },
+    "constants": {
+      "CHANGE_TIME": {
+        "type": "int",
+        "value": "500"
+      },
+      "FONT_REPLAY": {
+        "type": "Font",
+        "value": "new Font(Font.SANS_SERIF, Font.BOLD, 10 + 10 * ApoMarioConst"
+      }
+    },
+    "method_signatures": [
+      "public void initReplay()",
+      "public boolean onlyOnePlayer()",
+      "public int nextStep()",
+      "public void think(int delta)",
+      "public void render(Graphics2D g)"
+    ]
+  },
+  "ApoMarioPanel": {
+    "module": "ApoMarioPanel",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": "ApoMarioComponent",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "bMiniMap": "boolean",
+      "bShow": "boolean",
+      "curTime": "int",
+      "thinkTime": "long",
+      "renderTime": "long",
+      "bJump": "boolean",
+      "bInit": "boolean",
+      "middleCount": "ArrayList<Long>",
+      "menu": "ApoMarioMenu",
+      "options": "ApoMarioOptions",
+      "analysis": "ApoMarioAnalysis",
+      "game": "ApoMarioGame",
+      "editor": "ApoMarioEditor",
+      "credits": "ApoMarioCredits",
+      "simulation": "ApoMarioSimulation",
+      "model": "ApoMarioModel",
+      "buttons": "ApoMarioButtons",
+      "iMenuBackground": "BufferedImage",
+      "miniMap": "ApoMarioMiniMap",
+      "speedCounter": "int",
+      "bSimulate": "boolean",
+      "bEditor": "boolean",
+      "editorIO": "ApoMarioEditorIO",
+      "bMiddleWall": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public boolean isBMiddleWall()",
+      "public void setBMiddleWall(boolean middleWall)",
+      "private void loadProperties()",
+      "private void loadPropertiesPlayer(int player, String playerPath)",
+      "public void setDebugMode(boolean bDebug)",
+      "public int getSpeedCounter()",
+      "public void setSpeedCounter(int speedCounter)",
+      "public boolean isBJump()",
+      "public void setBJump(boolean bJump)",
+      "public void setMenu()",
+      "public void setCredits()",
+      "public void setSimulation()",
+      "public ApoMarioMiniMap getMiniMap()",
+      "public boolean loadEditorLevel()",
+      "public void saveEditorLevel()",
+      "public void loadReplay()",
+      "public void setReplay(ApoMarioReplay replay)",
+      "public void playReplay(boolean bReplay)",
+      "public int getPlayerSelectCamera()",
+      "public BufferedImage getBackgroundImage()",
+      "public boolean isBEditor()",
+      "public void setBEditor(boolean editor)",
+      "public void setGame(boolean bReplay)",
+      "public void setGame(boolean bReplay, boolean bEditor)",
+      "public void setEditor()",
+      "public void setOptions()",
+      "public void setAnalysis()",
+      "private BufferedImage getBackgroundImageWithRect(boolean bDown)",
+      "private void setButtons(boolean[] visible)",
+      "public boolean isBSimulate()",
+      "public void setBSimulate(boolean bSimulate)",
+      "public void saveLevel(String s)",
+      "public void loadLevel(String s)",
+      "public void mouseButtonFunction(String function)",
+      "public void keyButtonReleased(int button, char character)",
+      "public void restartLevel()",
+      "public void restartLevel(boolean bReplay)",
+      "public void newLevel()",
+      "public void newLevel(int width, int difficulty)",
+      "public void mouseButtonReleased(int x, int y)",
+      "public void mouseReleased(MouseEvent e)",
+      "public void mousePressed(MouseEvent e)",
+      "public void mouseMoved(MouseEvent e)",
+      "public void mouseDragged(MouseEvent e)",
+      "public void keyReleased(KeyEvent e)",
+      "public ApoMarioOptions getOptions()",
+      "public BufferedImage getIMenuBackground()",
+      "public synchronized void think(int delta)",
+      "public synchronized void thinkLevelGame(int delta)",
+      "public synchronized void render(Graphics2D g)",
+      "private void renderSimulate(Graphics2D g)",
+      "private void renderLevelWidthStatistics(Graphics2D g)",
+      "private void renderFPS(Graphics2D g)",
+      "private void renderPause(Graphics2D g)"
+    ]
+  },
+  "ApoMarioDebugPanel": {
+    "module": "ApoMarioDebugPanel",
+    "package": "apoMario.game",
+    "type": "class",
+    "parent": "JPanel",
+    "implements": [],
+    "fields": {
+      "serialVersionUID": "long",
+      "level": "ApoMarioAILevel",
+      "player": "ApoMarioAIPlayer"
+    },
+    "constants": {},
+    "method_signatures": [
+      "protected void setLevel(ApoMarioAIPlayer player, ApoMarioAILevel level)",
+      "public void paintComponent(Graphics g)"
+    ]
+  },
+  "ApoMarioSimulationTab": {
+    "module": "ApoMarioSimulationTab",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoButton",
+    "implements": [],
+    "fields": {
+      "bChoose": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean isChoosen()",
+      "public void setChoosen(boolean bChoose)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioSimulation": {
+    "module": "ApoMarioSimulation",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoMarioModelMenu",
+    "implements": [],
+    "fields": {
+      "SIZE": "int",
+      "FUNCTION_SIMULATION_BACK": "String",
+      "FUNCTION_SIMULATION_SIMULATE": "String",
+      "FUNCTION_SIMULATION_LEFTGAME": "String",
+      "FUNCTION_SIMULATION_RIGHTGAME": "String",
+      "FUNCTION_SIMULATION_LEFTWIDTH": "String",
+      "FUNCTION_SIMULATION_RIGHTWIDTH": "String",
+      "FUNCTION_SIMULATION_LEFTDIF": "String",
+      "FUNCTION_SIMULATION_RIGHTDIF": "String",
+      "FUNCTION_SIMULATION_LEFTREPLAY": "String",
+      "FUNCTION_SIMULATION_RIGHTREPLAY": "String",
+      "dragDifficulty": "ApoMarioOptionsDrag",
+      "dragWidth": "ApoMarioOptionsDrag",
+      "dragCount": "ApoMarioOptionsDrag",
+      "count": "int",
+      "curRound": "int",
+      "difficulty": "int",
+      "width": "int",
+      "finish": "int",
+      "tabSimulate": "ApoMarioSimulationTab",
+      "tabAnalysis": "ApoMarioSimulationTab",
+      "buttons": "ArrayList<ApoMarioSimulationButton>",
+      "changeX": "int",
+      "changeXAfter": "int",
+      "bBreak": "boolean"
+    },
+    "constants": {
+      "FUNCTION_SIMULATION_BACK": {
+        "type": "String",
+        "value": "\"backSimulation\""
+      },
+      "FUNCTION_SIMULATION_SIMULATE": {
+        "type": "String",
+        "value": "\"simulateSimulation\""
+      },
+      "FUNCTION_SIMULATION_LEFTGAME": {
+        "type": "String",
+        "value": "\"leftgameSimulation\""
+      },
+      "FUNCTION_SIMULATION_RIGHTGAME": {
+        "type": "String",
+        "value": "\"rightgameSimulation\""
+      },
+      "FUNCTION_SIMULATION_LEFTWIDTH": {
+        "type": "String",
+        "value": "\"leftwidthSimulation\""
+      },
+      "FUNCTION_SIMULATION_RIGHTWIDTH": {
+        "type": "String",
+        "value": "\"rightwidthSimulation\""
+      },
+      "FUNCTION_SIMULATION_LEFTDIF": {
+        "type": "String",
+        "value": "\"leftdifficultySimulation\""
+      },
+      "FUNCTION_SIMULATION_RIGHTDIF": {
+        "type": "String",
+        "value": "\"rightdifficultySimulation\""
+      },
+      "FUNCTION_SIMULATION_LEFTREPLAY": {
+        "type": "String",
+        "value": "\"leftreplaySimulation\""
+      },
+      "FUNCTION_SIMULATION_RIGHTREPLAY": {
+        "type": "String",
+        "value": "\"rightreplaySimulation\""
+      }
+    },
+    "method_signatures": [
+      "public void init()",
+      "private void setSimulateTab()",
+      "private void setAnalysisTab()",
+      "private void setDragObjects()",
+      "public void makeBackground()",
+      "public void makeBackgroundAnimation()",
+      "public void makeRunner()",
+      "public void makeSearch()",
+      "public void keyButtonReleased(int button, char character)",
+      "public void mouseButtonFunction(String function)",
+      "private void checkFunction(String function)",
+      "public void releasedEnter()",
+      "public void excecuteFunction()",
+      "public int getCount()",
+      "public int getCurRound()",
+      "private void startSimulation()",
+      "public void run()",
+      "public void mouseButtonReleased(int x, int y)",
+      "public boolean mouseDragged(int x, int y)",
+      "public boolean mouseMoved(int x, int y)",
+      "public boolean mousePressed(int x, int y, boolean bRight)",
+      "public void think(int delta)",
+      "public void render(Graphics2D g)",
+      "private void renderSimulation(Graphics2D g)"
+    ]
+  },
+  "ApoMarioMenu": {
+    "module": "ApoMarioMenu",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoMarioModelMenu",
+    "implements": [],
+    "fields": {
+      "FUNCTION_QUIT": "String",
+      "FUNCTION_START": "String",
+      "FUNCTION_CREDITS": "String",
+      "FUNCTION_LOAD_PLAYER_ONE": "String",
+      "FUNCTION_LOAD_PLAYER_TWO": "String",
+      "FUNCTION_OPTIONS": "String",
+      "FUNCTION_PLAYER_ONE_LEFT": "String",
+      "FUNCTION_PLAYER_ONE_RIGHT": "String",
+      "FUNCTION_PLAYER_TWO_LEFT": "String",
+      "FUNCTION_PLAYER_TWO_RIGHT": "String",
+      "FUNCTION_SIMULATE": "String",
+      "FUNCTION_REPLAYLOAD": "String",
+      "fUNCTION_EDITOR": "String",
+      "FUNCTION_EDITORLOAD": "String"
+    },
+    "constants": {
+      "FUNCTION_QUIT": {
+        "type": "String",
+        "value": "\"quit\""
+      },
+      "FUNCTION_START": {
+        "type": "String",
+        "value": "\"start\""
+      },
+      "FUNCTION_CREDITS": {
+        "type": "String",
+        "value": "\"credits\""
+      },
+      "FUNCTION_LOAD_PLAYER_ONE": {
+        "type": "String",
+        "value": "\"loadPlayerOne\""
+      },
+      "FUNCTION_LOAD_PLAYER_TWO": {
+        "type": "String",
+        "value": "\"loadPlayerTwo\""
+      },
+      "FUNCTION_OPTIONS": {
+        "type": "String",
+        "value": "\"options\""
+      },
+      "FUNCTION_PLAYER_ONE_LEFT": {
+        "type": "String",
+        "value": "\"playerOneLeft\""
+      },
+      "FUNCTION_PLAYER_ONE_RIGHT": {
+        "type": "String",
+        "value": "\"playerOneRight\""
+      },
+      "FUNCTION_PLAYER_TWO_LEFT": {
+        "type": "String",
+        "value": "\"playerTwoLeft\""
+      },
+      "FUNCTION_PLAYER_TWO_RIGHT": {
+        "type": "String",
+        "value": "\"playerTwoRight\""
+      },
+      "FUNCTION_SIMULATE": {
+        "type": "String",
+        "value": "\"simulate\""
+      },
+      "FUNCTION_REPLAYLOAD": {
+        "type": "String",
+        "value": "\"loadReplay\""
+      },
+      "fUNCTION_EDITOR": {
+        "type": "String",
+        "value": "\"editor\""
+      },
+      "FUNCTION_EDITORLOAD": {
+        "type": "String",
+        "value": "\"editorLoad\""
+      }
+    },
+    "method_signatures": [
+      "public void init()",
+      "public void makeBackground()",
+      "public void makeBackgroundAnimation()",
+      "public void makeRunner()",
+      "public void makeSearch()",
+      "public void keyButtonReleased(int button, char character)",
+      "private void exit()",
+      "public void mouseButtonFunction(String function)",
+      "public void releasedEnter()",
+      "public void excecuteFunction()",
+      "public void mouseButtonReleased(int x, int y)",
+      "public boolean mouseDragged(int x, int y)",
+      "public boolean mouseMoved(int x, int y)",
+      "public boolean mousePressed(int x, int y, boolean bRight)",
+      "public void think(int delta)",
+      "public void render(Graphics2D g)",
+      "private void renderPlayerStats(Graphics2D g, int x, int y, ApoMarioPlayer player)",
+      "private void drawString(Graphics2D g, String s, int x, int y, Color behind, Color color)"
+    ]
+  },
+  "ApoMarioOptionsTextfield": {
+    "module": "ApoMarioOptionsTextfield",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoButton",
+    "implements": [],
+    "fields": {
+      "FONT": "Font",
+      "MAX_LENGTH": "int",
+      "TIME_LINE": "int",
+      "curString": "String",
+      "position": "int",
+      "time": "int",
+      "bLineOn": "boolean",
+      "myFont": "Font",
+      "bEnabled": "boolean",
+      "maxLength": "int",
+      "myGraphics": "Graphics2D",
+      "selectedPosition": "Point"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public int getMaxLength()",
+      "public void setMaxLength(int maxLength)",
+      "public boolean isBEnabled()",
+      "public void setBEnabled(boolean bEnabled)",
+      "public Font getFont()",
+      "public void setFont(Font myFont)",
+      "public boolean mouseDragged(int x, int y)",
+      "public boolean mousePressed(int x, int y)",
+      "public boolean mouseReleased(int x, int y)",
+      "public void nextSelectedPosition(int position)",
+      "private void setSelectedPosition(int position)",
+      "private int getThisPosition(int x, int y)",
+      "public String getCurString()",
+      "public String getSelectedString()",
+      "public void deleteSelectedString()",
+      "public void removeCurStringAndSetCurString(String curString)",
+      "public void setCurString(String curString)",
+      "public int getPosition()",
+      "public void setPosition(int position)",
+      "private void deleteTextBackspace()",
+      "private void deleteTextDelete()",
+      "public void addCharacter(int button, char character)",
+      "private void showLine()",
+      "public void think(int delta)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioModelMenu": {
+    "module": "ApoMarioModelMenu",
+    "package": "apoMario.game.panels",
+    "type": "abstract class",
+    "parent": "ApoMarioModel",
+    "implements": [],
+    "fields": {
+      "iBackground": "BufferedImage",
+      "search": "ApoMarioSearch",
+      "excecuteFunction": "String",
+      "endNode": "int",
+      "runner": "ApoMarioSearchRunner",
+      "way": "ArrayList<ApoMarioSearchNode>",
+      "curNode": "int",
+      "backgroundAnimation": "ArrayList<ApoAnimation>"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public BufferedImage getIBackground()",
+      "public void setIBackground(BufferedImage background)",
+      "public ApoMarioSearch getSearch()",
+      "public void setSearch(ApoMarioSearch search)",
+      "public String getExcecuteFunction()",
+      "public void setExcecuteFunction(String excecuteFunction)",
+      "public int getEndNode()",
+      "public void setEndNode(int endNode)",
+      "public ApoMarioSearchRunner getRunner()",
+      "public void setRunner(ApoMarioSearchRunner runner)",
+      "public ArrayList<ApoMarioSearchNode> getWay()",
+      "public void setWay(ArrayList<ApoMarioSearchNode> way)",
+      "public int getCurNode()",
+      "public void setCurNode(int curNode)",
+      "public ArrayList<ApoAnimation> getBackgroundAnimation()",
+      "public void setBackgroundAnimation(ArrayList<ApoAnimation> backgroundAnimation)",
+      "public void searchWay()",
+      "public void keyButtonReleasedArrowAndEnter(int button, char character)",
+      "public void releasedEnter()",
+      "public void thinkRunnerAndAnimation(int delta)",
+      "public void renderBackgroundAndAnimation(Graphics2D g)",
+      "public void renderButtonsAndRunner(Graphics2D g)",
+      "abstract public void makeBackground()",
+      "abstract public void makeRunner()",
+      "abstract public void makeBackgroundAnimation()",
+      "abstract public void makeSearch()",
+      "abstract public void excecuteFunction()",
+      "abstract public void keyButtonReleased(int button, char character)",
+      "abstract public void mouseButtonFunction(String function)",
+      "abstract public void mouseButtonReleased(int x, int y)",
+      "abstract public boolean mouseMoved(int x, int y)",
+      "abstract public boolean mouseDragged(int x, int y)",
+      "abstract public boolean mousePressed(int x, int y, boolean bRight)",
+      "abstract public void think(int delta)",
+      "abstract public void render(Graphics2D g)"
+    ]
+  },
+  "ApoMarioSimulationHelp": {
+    "module": "ApoMarioSimulationHelp",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "width": "int",
+      "difficulty": "int",
+      "random": "long",
+      "nameOne": "String",
+      "pointsOne": "int",
+      "nameTwo": "String",
+      "pointsTwo": "int",
+      "bFinish": "boolean",
+      "replay": "ApoMarioReplay"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void setPlayerTwo(String nameTwo, int pointsTwo)",
+      "public ApoMarioReplay getReplay()",
+      "public boolean isInFinish()",
+      "public void setInFinish(boolean bFinish)",
+      "public int getWidth()",
+      "public void setWidth(int width)",
+      "public int getDifficulty()",
+      "public void setDifficulty(int difficulty)",
+      "public long getRandom()",
+      "public void setRandom(long random)",
+      "public String getNameOne()",
+      "public void setNameOne(String nameOne)",
+      "public int getPointsOne()",
+      "public void setPointsOne(int pointsOne)",
+      "public String getNameTwo()",
+      "public void setNameTwo(String nameTwo)",
+      "public int getPointsTwo()",
+      "public void setPointsTwo(int pointsTwo)"
+    ]
+  },
+  "ApoMarioGame": {
+    "module": "ApoMarioGame",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoMarioModel",
+    "implements": [],
+    "fields": {
+      "FUNCTION_SPEED_LEFT": "String",
+      "FUNCTION_SPEED_RIGHT": "String",
+      "PLAYER_ONE": "int",
+      "PLAYER_TWO": "int",
+      "playerSelectCamera": "int",
+      "playerCamerEntity": "ApoEntity",
+      "iStats": "BufferedImage"
+    },
+    "constants": {
+      "FUNCTION_SPEED_LEFT": {
+        "type": "String",
+        "value": "\"speedLeft\""
+      },
+      "FUNCTION_SPEED_RIGHT": {
+        "type": "String",
+        "value": "\"speedRight\""
+      },
+      "PLAYER_ONE": {
+        "type": "int",
+        "value": "0"
+      },
+      "PLAYER_TWO": {
+        "type": "int",
+        "value": "1"
+      }
+    },
+    "method_signatures": [
+      "public void init()",
+      "private BufferedImage getIStats()",
+      "public int getPlayerSelectCamera()",
+      "public void setPlayerSelectCamera(int player)",
+      "public void keyButtonReleased(int button, char character)",
+      "public void mouseButtonFunction(String function)",
+      "public void mouseButtonReleased(int x, int y)",
+      "public boolean mouseDragged(int x, int y)",
+      "public boolean mouseMoved(int x, int y)",
+      "public boolean mousePressed(int x, int y, boolean bRight)",
+      "public synchronized void think(int delta)",
+      "public void changeCamera()",
+      "protected synchronized void thinkLevel(int delta)",
+      "private synchronized void playerHumanControl()",
+      "public void render(Graphics2D g)",
+      "private void renderStatistics(Graphics2D g)",
+      "private boolean isOnePlayer()",
+      "private void renderStatisticsPlayer(Graphics2D g, int x, ApoMarioPlayer player, boolean bLeft)",
+      "private void renderPlayerBar(Graphics2D g)"
+    ]
+  },
+  "ApoMarioCredits": {
+    "module": "ApoMarioCredits",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoMarioModelMenu",
+    "implements": [],
+    "fields": {
+      "FUNCTION_CREDITS_BACK": "String"
+    },
+    "constants": {
+      "FUNCTION_CREDITS_BACK": {
+        "type": "String",
+        "value": "\"backCredits\""
+      }
+    },
+    "method_signatures": [
+      "public void init()",
+      "public void makeBackground()",
+      "public void makeBackgroundAnimation()",
+      "public void makeRunner()",
+      "public void makeSearch()",
+      "public void keyButtonReleased(int button, char character)",
+      "public void mouseButtonFunction(String function)",
+      "public void releasedEnter()",
+      "public void excecuteFunction()",
+      "public void mouseButtonReleased(int x, int y)",
+      "public boolean mouseDragged(int x, int y)",
+      "public boolean mouseMoved(int x, int y)",
+      "public boolean mousePressed(int x, int y, boolean bRight)",
+      "public void think(int delta)",
+      "public void render(Graphics2D g)",
+      "private void renderCredits(Graphics2D g)"
+    ]
+  },
+  "ApoMarioOptions": {
+    "module": "ApoMarioOptions",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoMarioModelMenu",
+    "implements": [],
+    "fields": {
+      "FUNCTION_OPTIONS_BACK": "String",
+      "FUNCTION_OPTIONS_LEFT_DIFFICULTY": "String",
+      "FUNCTION_OPTIONS_RIGHT_DIFFICULTY": "String",
+      "FUNCTION_OPTIONS_LEFT_LEVELWIDTH": "String",
+      "FUNCTION_OPTIONS_RIGHT_LEVELWIDTH": "String",
+      "Y_DIFFICULTY": "int",
+      "Y_WIDTH": "int",
+      "dragDifficulty": "ApoMarioOptionsDrag",
+      "dragWidth": "ApoMarioOptionsDrag",
+      "myButton": "ApoMarioOptionsButton",
+      "myButtonDebug": "ApoMarioOptionsButton",
+      "myTextfield": "ApoMarioOptionsTextfield"
+    },
+    "constants": {
+      "FUNCTION_OPTIONS_BACK": {
+        "type": "String",
+        "value": "\"backOptions\""
+      },
+      "FUNCTION_OPTIONS_LEFT_DIFFICULTY": {
+        "type": "String",
+        "value": "\"prevDifficulty\""
+      },
+      "FUNCTION_OPTIONS_RIGHT_DIFFICULTY": {
+        "type": "String",
+        "value": "\"nextDifficulty\""
+      },
+      "FUNCTION_OPTIONS_LEFT_LEVELWIDTH": {
+        "type": "String",
+        "value": "\"prevLevelwidth\""
+      },
+      "FUNCTION_OPTIONS_RIGHT_LEVELWIDTH": {
+        "type": "String",
+        "value": "\"nextLevelwidth\""
+      },
+      "Y_DIFFICULTY": {
+        "type": "int",
+        "value": "ApoMarioConstants.GAME_HEIGHT*1/4 + 15 * ApoMarioConstants.A"
+      },
+      "Y_WIDTH": {
+        "type": "int",
+        "value": "ApoMarioConstants.GAME_HEIGHT*1/2 + 10 * ApoMarioConstants.A"
+      }
+    },
+    "method_signatures": [
+      "public void init()",
+      "public void makeBackground()",
+      "public void makeBackgroundAnimation()",
+      "public void makeRunner()",
+      "public void makeSearch()",
+      "public boolean isFreezeLevelInt()",
+      "public void stopOptions()",
+      "public void setOptionsDrag()",
+      "public void mouseButtonFunction(String function)",
+      "public void releasedEnter()",
+      "public void excecuteFunction()",
+      "private void difOrWidth(String function)",
+      "public void makeNewLevel(long random)",
+      "public void think(int delta, String function)",
+      "public void mouseButtonReleased(int x, int y)",
+      "private void changeDebug()",
+      "public void setDebugChange(boolean bChange)",
+      "public void newLevel(long random)",
+      "public boolean mouseMoved(int x, int y)",
+      "public boolean mousePressed(int x, int y, boolean bRight)",
+      "public boolean mouseDragged(int x, int y)",
+      "public void keyButtonReleased(int button, char character)",
+      "public void think(int delta)",
+      "public void render(Graphics2D g)"
+    ]
+  },
+  "ApoMarioEditor": {
+    "module": "ApoMarioEditor",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoMarioModel",
+    "implements": [],
+    "fields": {
+      "FUNCTION_SET": "String",
+      "FUNCTION_RANDOM": "String",
+      "FUNCTION_TEST": "String",
+      "FUNCTION_LOAD": "String",
+      "FUNCTION_SAVE": "String",
+      "FUNCTION_MENU": "String",
+      "FUNCTION_WALL": "String",
+      "FUNCTION_WALL_NO_COLLISION": "String",
+      "FUNCTION_WALL_BREAKABLE": "String",
+      "FUNCTION_WALL_COLLISION": "String",
+      "FUNCTION_WALL_QUESTION": "String",
+      "FUNCTION_WALL_COIN": "String",
+      "FUNCTION_ENEMY_FLOWER": "String",
+      "FUNCTION_ENEMY_CANON": "String",
+      "FUNCTION_ENEMY_GUMBA": "String",
+      "FUNCTION_ENEMY_KOOPA": "String",
+      "FUNCTION_DETAIL_LEFT": "String",
+      "FUNCTION_DETAIL_FALL": "String",
+      "FUNCTION_DETAIL_FLY": "String",
+      "FUNCTION_DETAIL_IMMORTAL": "String",
+      "FUNCTION_DETAIL_LEFTTIMESHOW": "String",
+      "FUNCTION_DETAIL_RIGHTTIMESHOW": "String",
+      "FUNCTION_DETAIL_LEFTSTART": "String",
+      "FUNCTION_DETAIL_RIGHTSTART": "String",
+      "FUNCTION_DETAIL_ENEMYFLOWER": "String",
+      "FUNCTION_DETAIL_QUESTION_GOODIE": "String",
+      "FUNCTION_DETAIL_BREAKABLE_COIN": "String",
+      "FUNCTION_DETAIL_BREAKABLE_GOODIE": "String",
+      "FUNCTION_DETAIL_BREAKABLE": "String",
+      "WIDTH": "int",
+      "dragWidth": "ApoMarioOptionsDrag",
+      "dragDifficulty": "ApoMarioOptionsDrag",
+      "editorButtons": "ApoButton[]",
+      "curChoose": "int",
+      "curFunction": "String",
+      "iCurChoose": "BufferedImage",
+      "mouseX": "int",
+      "mouseY": "int",
+      "bRight": "boolean",
+      "curChooseEntity": "ApoMarioEntity"
+    },
+    "constants": {
+      "FUNCTION_SET": {
+        "type": "String",
+        "value": "\"empty\""
+      },
+      "FUNCTION_RANDOM": {
+        "type": "String",
+        "value": "\"random\""
+      },
+      "FUNCTION_TEST": {
+        "type": "String",
+        "value": "\"test\""
+      },
+      "FUNCTION_LOAD": {
+        "type": "String",
+        "value": "\"load\""
+      },
+      "FUNCTION_SAVE": {
+        "type": "String",
+        "value": "\"save\""
+      },
+      "FUNCTION_MENU": {
+        "type": "String",
+        "value": "\"menu\""
+      },
+      "FUNCTION_WALL": {
+        "type": "String",
+        "value": "\"wall\""
+      },
+      "FUNCTION_WALL_NO_COLLISION": {
+        "type": "String",
+        "value": "\"no_collision\""
+      },
+      "FUNCTION_WALL_BREAKABLE": {
+        "type": "String",
+        "value": "\"breakable\""
+      },
+      "FUNCTION_WALL_COLLISION": {
+        "type": "String",
+        "value": "\"collision\""
+      },
+      "FUNCTION_WALL_QUESTION": {
+        "type": "String",
+        "value": "\"question\""
+      },
+      "FUNCTION_WALL_COIN": {
+        "type": "String",
+        "value": "\"coin\""
+      },
+      "FUNCTION_ENEMY_FLOWER": {
+        "type": "String",
+        "value": "\"flower\""
+      },
+      "FUNCTION_ENEMY_CANON": {
+        "type": "String",
+        "value": "\"canon\""
+      },
+      "FUNCTION_ENEMY_GUMBA": {
+        "type": "String",
+        "value": "\"gumba\""
+      },
+      "FUNCTION_ENEMY_KOOPA": {
+        "type": "String",
+        "value": "\"koopa\""
+      },
+      "FUNCTION_DETAIL_LEFT": {
+        "type": "String",
+        "value": "\"look left:\""
+      },
+      "FUNCTION_DETAIL_FALL": {
+        "type": "String",
+        "value": "\"can fall:\""
+      },
+      "FUNCTION_DETAIL_FLY": {
+        "type": "String",
+        "value": "\"can fly:\""
+      },
+      "FUNCTION_DETAIL_IMMORTAL": {
+        "type": "String",
+        "value": "\"is immortal:\""
+      },
+      "FUNCTION_DETAIL_LEFTTIMESHOW": {
+        "type": "String",
+        "value": "\"left_timeshow\""
+      },
+      "FUNCTION_DETAIL_RIGHTTIMESHOW": {
+        "type": "String",
+        "value": "\"right_timeshow\""
+      },
+      "FUNCTION_DETAIL_LEFTSTART": {
+        "type": "String",
+        "value": "\"left_start\""
+      },
+      "FUNCTION_DETAIL_RIGHTSTART": {
+        "type": "String",
+        "value": "\"right_start\""
+      },
+      "FUNCTION_DETAIL_ENEMYFLOWER": {
+        "type": "String",
+        "value": "\"with enemy:\""
+      },
+      "FUNCTION_DETAIL_QUESTION_GOODIE": {
+        "type": "String",
+        "value": "\"with goodie\""
+      },
+      "FUNCTION_DETAIL_BREAKABLE_COIN": {
+        "type": "String",
+        "value": "\"with coin:\""
+      },
+      "FUNCTION_DETAIL_BREAKABLE_GOODIE": {
+        "type": "String",
+        "value": "\"with goodie:\""
+      },
+      "FUNCTION_DETAIL_BREAKABLE": {
+        "type": "String",
+        "value": "\"breakable:\""
+      }
+    },
+    "method_signatures": [
+      "public void init()",
+      "public void keyButtonReleased(int button, char character)",
+      "public void mouseButtonFunction(String function)",
+      "public void mouseButtonReleased(int x, int y)",
+      "public void setCurChooseEntity(ApoMarioEntity curChooseEntity)",
+      "private ApoMarioEntity isThereAnEnemy(int x, int y, boolean bRealEnemies)",
+      "private boolean deleteEnemy(int x, int y)",
+      "private boolean addEnemy(int x, int y, int enemy)",
+      "private void checkFunction(String function, int choose)",
+      "private void setStartTime(int plus)",
+      "private void setShootTime(int plus)",
+      "private BufferedImage getCurChooseImage(String function, boolean bAlpha)",
+      "private void setCurChoose(int curChoose, String function)",
+      "public boolean mouseDragged(int x, int y)",
+      "public boolean mouseMoved(int x, int y)",
+      "public boolean mousePressed(int x, int y, boolean bRight)",
+      "public void changeCamera(float myChangeX)",
+      "protected int getMouseXInLevel()",
+      "private int getMouseXInLevel(int x)",
+      "private float getChangeX()",
+      "private int getMouseYInLevel()",
+      "private int getMouseYInLevel(int y)",
+      "public void think(int delta)",
+      "public void render(Graphics2D g)",
+      "private void renderGrid(Graphics2D g)"
+    ]
+  },
+  "ApoMarioModel": {
+    "module": "ApoMarioModel",
+    "package": "apoMario.game.panels",
+    "type": "abstract class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "game": "ApoMarioPanel"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public ApoMarioPanel getGame()",
+      "abstract public void init()",
+      "abstract public void keyButtonReleased(int button, char character)",
+      "abstract public void mouseButtonFunction(String function)",
+      "abstract public void mouseButtonReleased(int x, int y)",
+      "abstract public boolean mouseMoved(int x, int y)",
+      "abstract public boolean mouseDragged(int x, int y)",
+      "abstract public boolean mousePressed(int x, int y, boolean bRight)",
+      "abstract public void think(int delta)",
+      "abstract public void render(Graphics2D g)"
+    ]
+  },
+  "ApoMarioOptionsButton": {
+    "module": "ApoMarioOptionsButton",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoButton",
+    "implements": [],
+    "fields": {
+      "bActive": "boolean",
+      "description": "String"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public boolean isBActive()",
+      "public void setBActive(boolean bActive)",
+      "public boolean mouseReleased(int x, int y)",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioSimulationButton": {
+    "module": "ApoMarioSimulationButton",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoButton",
+    "implements": [],
+    "fields": {
+      "help": "ApoMarioSimulationHelp"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public ApoMarioSimulationHelp getHelp()",
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioEditorIO": {
+    "module": "ApoMarioEditorIO",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoIO",
+    "implements": [],
+    "fields": {
+      "ENEMY_GUMBA": "int",
+      "ENEMY_KOOPA": "int",
+      "ENEMY_FLOWER": "int",
+      "level": "ApoMarioLevel",
+      "levelString": "String"
+    },
+    "constants": {
+      "ENEMY_GUMBA": {
+        "type": "int",
+        "value": "1"
+      },
+      "ENEMY_KOOPA": {
+        "type": "int",
+        "value": "2"
+      },
+      "ENEMY_FLOWER": {
+        "type": "int",
+        "value": "3"
+      }
+    },
+    "method_signatures": [
+      "public boolean readLevel(DataInputStream data)",
+      "public boolean writeLevel(DataOutputStream data)",
+      "private ApoMarioEntity isThereAnEnemy(int x, int y)"
+    ]
+  },
+  "ApoMarioOptionsDrag": {
+    "module": "ApoMarioOptionsDrag",
+    "package": "apoMario.game.panels",
+    "type": "class",
+    "parent": "ApoEntity",
+    "implements": [],
+    "fields": {
+      "COLOR_BACKGROUND": "Color",
+      "maxWidth": "float",
+      "width": "float",
+      "myRealRec": "Rectangle2D.Float"
+    },
+    "constants": {
+      "COLOR_BACKGROUND": {
+        "type": "Color",
+        "value": "new Color(254, 254, 254, 240)"
+      }
+    },
+    "method_signatures": [
+      "public boolean mouseReleased(int x, int y)",
+      "public boolean mouseMoved(int x, int y)",
+      "public int getPercent()",
+      "public void setToPercent(int percent)",
+      "public void render(Graphics2D g, int x, int y)"
+    ]
+  },
+  "ApoMarioAIEnemy": {
+    "module": "ApoMarioAIEnemy",
+    "package": "apoMario.ai",
+    "type": "class",
+    "parent": "ApoMarioAIEntity",
+    "implements": [],
+    "fields": {
+      "enemy": "ApoMarioEnemy"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean isFlyingEnemy()",
+      "public boolean isImmortalEnemy()",
+      "public int getPoints()",
+      "public boolean isGumbaType()",
+      "public boolean isKoopaType()",
+      "public boolean isFlowerType()",
+      "public boolean isCannonType()",
+      "public boolean isFireballType()",
+      "public boolean isShellType()"
+    ]
+  },
+  "ApoMarioAIEntity": {
+    "module": "ApoMarioAIEntity",
+    "package": "apoMario.ai",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "entity": "ApoMarioEntity",
+      "rec": "Rectangle2D.Float",
+      "level": "ApoMarioLevel",
+      "startX": "float"
+    },
+    "constants": {},
+    "method_signatures": [
+      "protected void setStartX(float startX)",
+      "public boolean isVisible()",
+      "public int getID()",
+      "public float getX()",
+      "public float getY()",
+      "public float getWidth()",
+      "public float getHeight()",
+      "public float getVecX()",
+      "public float getVecY()"
+    ]
+  },
+  "ApoMarioAIGoodie": {
+    "module": "ApoMarioAIGoodie",
+    "package": "apoMario.ai",
+    "type": "class",
+    "parent": "ApoMarioAIEntity",
+    "implements": [],
+    "fields": {
+      "goodie": "ApoMarioEnemy"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean isCoin()",
+      "public boolean isMushroom()",
+      "public boolean isFireflower()",
+      "public int getPoints()"
+    ]
+  },
+  "ApoMarioAIPlayer": {
+    "module": "ApoMarioAIPlayer",
+    "package": "apoMario.ai",
+    "type": "class",
+    "parent": "ApoMarioAIEntity",
+    "implements": [],
+    "fields": {
+      "player": "ApoMarioPlayer",
+      "level": "ApoMarioLevel"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public int getType()",
+      "public void runFast()",
+      "public void runNormal()",
+      "public void runLeft()",
+      "public void runRight()",
+      "public void runStand()",
+      "public void duck()",
+      "public boolean canJump()",
+      "public void jump()",
+      "public boolean isImmortal()",
+      "public void stopGame()",
+      "public void drawLine(float x1, float y1, float x2, float y2, int time)",
+      "public void drawLine(float x1, float y1, float x2, float y2, int time, Color color)",
+      "public void drawCircle(float x, float y, float radius, boolean bFill, int time)",
+      "public void drawCircle(float x, float y, float radius, boolean bFill, int time, Color color)",
+      "public void drawRect(float x, float y, float width, float height, boolean bFill, int time)",
+      "public void drawRect(float x, float y, float width, float height, boolean bFill, int time, Color color)",
+      "public void addMessage(String message)"
+    ]
+  },
+  "ApoMarioAI": {
+    "module": "ApoMarioAI",
+    "package": "apoMario.ai",
+    "type": "abstract class",
+    "parent": null,
+    "implements": [],
+    "fields": {},
+    "constants": {},
+    "method_signatures": [
+      "public void load(String path)",
+      "public void save(String path)",
+      "abstract public String getTeamName()",
+      "abstract public String getAuthor()",
+      "abstract public void think(final ApoMarioAIPlayer player, final ApoMarioAILevel level)"
+    ]
+  },
+  "ApoMarioAIConstants": {
+    "module": "ApoMarioAIConstants",
+    "package": "apoMario.ai",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "LEVEL_EMPTY": "int",
+      "LEVEL_WALL": "int",
+      "LEVEL_QUESTIONMARKBOX": "int",
+      "LEVEL_DESTRUCTIBLEBOX": "int",
+      "LEVEL_CANNON": "int",
+      "LEVEL_ONLY_ABOVE_WALL": "int",
+      "LEVEL_FINISH": "int",
+      "PLAYER_INCREASE_VEC_X": "float",
+      "PLAYER_DECREASE_VEC_X": "float",
+      "PLAYER_MAX_VEC_X_NORMAL": "float",
+      "PLAYER_MAX_VEC_X_FAST": "float",
+      "PLAYER_VEC_Y": "float",
+      "PLAYER_VEC_Y_ENEMY": "float",
+      "PLAYER_VEC_DECREASE_Y": "float",
+      "PLAYER_VEC_DECREASE_FALL_Y": "float",
+      "WAIT_TIME_THINK": "int",
+      "POINTS_COIN": "int",
+      "POINTS_GOODIE": "int",
+      "POINTS_GOODIE_MUSHROOM": "int",
+      "POINTS_GOODIE_FLOWER": "int",
+      "POINTS_DESTRUCTABLE_WALL": "int",
+      "POINTS_ENEMY_GUMBA": "int",
+      "POINTS_ENEMY_CANNON": "int",
+      "POINTS_ENEMY_FLOWER": "int",
+      "POINTS_ENEMY_KOOPA": "int",
+      "POINTS_ENEMY_UNDESTRUCABLE": "int",
+      "POINTS_END": "int",
+      "POINTS_WIN_AGAINST_ANOTHER": "int",
+      "POINTS_EXCEPTION": "int"
+    },
+    "constants": {
+      "LEVEL_EMPTY": {
+        "type": "int",
+        "value": "ApoMarioConstants.EMPTY"
+      },
+      "LEVEL_WALL": {
+        "type": "int",
+        "value": "ApoMarioConstants.WALL"
+      },
+      "LEVEL_QUESTIONMARKBOX": {
+        "type": "int",
+        "value": "ApoMarioConstants.QUESTIONMARKBOX"
+      },
+      "LEVEL_DESTRUCTIBLEBOX": {
+        "type": "int",
+        "value": "ApoMarioConstants.DESTRUCTIBLEBOX"
+      },
+      "LEVEL_CANNON": {
+        "type": "int",
+        "value": "ApoMarioConstants.CANNON"
+      },
+      "LEVEL_ONLY_ABOVE_WALL": {
+        "type": "int",
+        "value": "ApoMarioConstants.ONLY_ABOVE_WALL"
+      },
+      "LEVEL_FINISH": {
+        "type": "int",
+        "value": "ApoMarioConstants.FINISH"
+      },
+      "PLAYER_INCREASE_VEC_X": {
+        "type": "float",
+        "value": "ApoMarioConstants.PLAYER_INCREASE_VEC_X/ApoMarioConstants.TI"
+      },
+      "PLAYER_DECREASE_VEC_X": {
+        "type": "float",
+        "value": "ApoMarioConstants.PLAYER_DECREASE_VEC_X/ApoMarioConstants.TI"
+      },
+      "PLAYER_MAX_VEC_X_NORMAL": {
+        "type": "float",
+        "value": "ApoMarioConstants.PLAYER_MAX_VEC_X_NORMAL/ApoMarioConstants."
+      },
+      "PLAYER_MAX_VEC_X_FAST": {
+        "type": "float",
+        "value": "ApoMarioConstants.PLAYER_MAX_VEC_X_FAST/ApoMarioConstants.TI"
+      },
+      "PLAYER_VEC_Y": {
+        "type": "float",
+        "value": "ApoMarioConstants.PLAYER_VEC_Y/ApoMarioConstants.TILE_SIZE"
+      },
+      "PLAYER_VEC_Y_ENEMY": {
+        "type": "float",
+        "value": "ApoMarioConstants.PLAYER_VEC_Y_ENEMY/ApoMarioConstants.TILE_"
+      },
+      "PLAYER_VEC_DECREASE_Y": {
+        "type": "float",
+        "value": "ApoMarioConstants.PLAYER_VEC_DECREASE_Y/ApoMarioConstants.TI"
+      },
+      "PLAYER_VEC_DECREASE_FALL_Y": {
+        "type": "float",
+        "value": "ApoMarioConstants.PLAYER_VEC_DECREASE_FALL_Y/ApoMarioConstan"
+      },
+      "WAIT_TIME_THINK": {
+        "type": "int",
+        "value": "ApoMarioConstants.WAIT_TIME_THINK"
+      },
+      "POINTS_COIN": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_COIN"
+      },
+      "POINTS_GOODIE": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_GOODIE"
+      },
+      "POINTS_GOODIE_MUSHROOM": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_GOODIE_MUSHROOM"
+      },
+      "POINTS_GOODIE_FLOWER": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_GOODIE_FLOWER"
+      },
+      "POINTS_DESTRUCTABLE_WALL": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_DESTRUCTABLE_WALL"
+      },
+      "POINTS_ENEMY_GUMBA": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_ENEMY_GUMBA"
+      },
+      "POINTS_ENEMY_CANNON": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_ENEMY_CANNON"
+      },
+      "POINTS_ENEMY_FLOWER": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_ENEMY_FLOWER"
+      },
+      "POINTS_ENEMY_KOOPA": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_ENEMY_KOOPA"
+      },
+      "POINTS_ENEMY_UNDESTRUCABLE": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_ENEMY_UNDESTRUCABLE"
+      },
+      "POINTS_END": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_END"
+      },
+      "POINTS_WIN_AGAINST_ANOTHER": {
+        "type": "int",
+        "value": "ApoMarioConstants.POINTS_WIN_AGAINST_ANOTHER"
+      },
+      "POINTS_EXCEPTION": {
+        "type": "int",
+        "value": "-100000"
+      }
+    },
+    "method_signatures": []
+  },
+  "ApoMarioAILevel": {
+    "module": "ApoMarioAILevel",
+    "package": "apoMario.ai",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "level": "ApoMarioLevel",
+      "enemies": "ArrayList<ApoMarioAIEnemy>",
+      "goodies": "ArrayList<ApoMarioAIGoodie>",
+      "enemyPlayer": "ApoMarioAIEntity",
+      "levelArray": "byte[][]",
+      "player": "int"
+    },
+    "constants": {},
+    "method_signatures": [
+      "private void init()",
+      "public float getChangeX()",
+      "public int getStartTime()",
+      "public int getTimeLeft()",
+      "public int getDifficulty()",
+      "public int getLevelWidth()",
+      "public long getLevelRandom()",
+      "public ArrayList<ApoMarioAIEnemy> getEnemies()",
+      "public ArrayList<ApoMarioAIGoodie> getGoodies()",
+      "public byte[][] getLevelArray()",
+      "public ApoMarioAIEntity getEnemyPlayer()"
+    ]
+  },
+  "ApoMarioLevelIO": {
+    "module": "ApoMarioLevelIO",
+    "package": "apoMario.level",
+    "type": "class",
+    "parent": "ApoIO",
+    "implements": [],
+    "fields": {
+      "level": "ApoMarioLevel"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public boolean readLevel(DataInputStream data)",
+      "public boolean writeLevel(DataOutputStream data)"
+    ]
+  },
+  "ApoMarioRandomLevel": {
+    "module": "ApoMarioRandomLevel",
+    "package": "apoMario.level",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "level": "ApoMarioLevel",
+      "lastRandom": "long",
+      "random": "Random",
+      "difficulty": "int",
+      "time": "int",
+      "width": "int",
+      "bFull": "boolean[]"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public long getLastRandom()",
+      "public void setLastRandom(long lastRandom)",
+      "public int getWidth()",
+      "public void setWidth(int width)",
+      "public int getDifficulty()",
+      "public void setDifficulty(int difficulty)",
+      "public int getTime()",
+      "public void setTime(int time)",
+      "public void makeRandomLevel(long lastRandom)",
+      "private void makeBFull()",
+      "private void makeGround(int startX)",
+      "private void makeIncreaseWall(int startX, int width)",
+      "private boolean isEmpty(int x, int width)",
+      "private void makeHole(int startX, int width)",
+      "private void makeHoleOnly(int x, int width)",
+      "private boolean isFull(int x, int width)",
+      "private void makeCannon(int startX, int width)",
+      "private void makeFlower(int startX, int width)",
+      "private boolean isReserved(int x, int width)",
+      "private boolean canJump(int x, int heightDifference)",
+      "private int getHeight(int x)",
+      "private int isOneHeight(int x, int width)",
+      "private void makeWalls(int startX, int startWidth)",
+      "private int canMakeWalls(int x, int width)",
+      "private void makeDestructableWall(int x, int y)",
+      "private void makeQuestionmark(int x, int y)",
+      "private void makeCoin(int startX, int startWidth)",
+      "private void makeEnemy(int startX, int startWidth)"
+    ]
+  },
+  "ApoMarioLevel": {
+    "module": "ApoMarioLevel",
+    "package": "apoMario.level",
+    "type": "class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "HUMAN_NO_PLAYER": "int",
+      "TEST_IF_PLAYER": "int",
+      "TEST_SLOW_PLAYER": "int",
+      "TEST_FAST_PLAYER": "int",
+      "TEST_SHORTI": "int",
+      "TEST_CHEATER": "int",
+      "ID": "int",
+      "playerOneAI": "int",
+      "playerTwoAI": "int",
+      "width": "int",
+      "height": "int",
+      "levelInt": "long",
+      "iBackground": "BufferedImage",
+      "iBackgroundFront": "BufferedImage",
+      "iBoth": "BufferedImage",
+      "difficulty": "int",
+      "time": "int",
+      "bAnalysis": "boolean",
+      "particle": "ArrayList<ApoMarioParticle>",
+      "enemies": "ArrayList<ApoMarioEnemy>",
+      "goodies": "ArrayList<ApoMarioEnemy>",
+      "component": "ApoMarioComponent",
+      "levelEntities": "ApoMarioEntity[][]",
+      "finish": "ApoMarioEnd",
+      "cannons": "ArrayList<Point>",
+      "players": "ArrayList<ApoMarioPlayer>",
+      "bStop": "boolean",
+      "randomLevel": "ApoMarioRandomLevel",
+      "replay": "ApoMarioReplay",
+      "AIOne": "ApoMarioAI",
+      "AITwo": "ApoMarioAI",
+      "bReplay": "boolean",
+      "replayPlay": "ApoMarioReplayPlay",
+      "steps": "int",
+      "thinkPlayerOne": "ArrayList<Long>",
+      "thinkPlayerTwo": "ArrayList<Long>",
+      "levelString": "String",
+      "levelStartTime": "int",
+      "bIcarus": "boolean",
+      "icarus": "ApoMarioPlayer",
+      "icarusLastY": "float",
+      "icarusLastVecY": "float",
+      "fireAnimation": "ApoAnimation"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void init()",
+      "public ApoMarioReplayPlay getReplayPlay()",
+      "public boolean isBReplay()",
+      "public void setBReplay(boolean bReplay)",
+      "public ApoMarioReplay getReplay()",
+      "public void setReplay(ApoMarioReplay replay)",
+      "public int getWidth()",
+      "public int getHeight()",
+      "public boolean isBStop()",
+      "public void setBStop(boolean bStop)",
+      "public long getLevelInt()",
+      "public ApoMarioComponent getComponent()",
+      "public ArrayList<ApoMarioEnemy> getGoodies()",
+      "public ArrayList<ApoMarioEnemy> getEnemies()",
+      "public void makeEmptyLevel()",
+      "public void makeEmptyLevel(int width, int height, int difficulty)",
+      "public void setLevelEntities(ApoMarioEntity[][] levelEntities)",
+      "public void setPlayerAndFinish()",
+      "public void makeLevel(long levelInt, boolean bNew, boolean bRealNew, int width, int difficulty)",
+      "public void setLevelInt(long levelInt)",
+      "protected void setTime(int time)",
+      "private void makeMyBackground()",
+      "public int getDifficulty()",
+      "public void setWidth(int width)",
+      "public void setDifficulty(int difficulty)",
+      "public int getStartTime()",
+      "public int getTime()",
+      "protected void makeFinish(int x, int y)",
+      "public void makeBoxQuestionMark(int x, int y, int goodie)",
+      "public void makeBoxCoin(int x, int y)",
+      "protected void makePlayer(float x, float y)",
+      "public void makeGroundWall(int x, int y)",
+      "public void makeGroundCorrect()",
+      "public void setNames()",
+      "public void makeGroundCorrect(int startX, int endX, int startY, int endY)",
+      "public void makeGroundCorrectNoCollision()",
+      "public void makeGroundCorrectNoCollision(int startX, int endX, int startY, int endY)",
+      "private boolean isGroundWall(int x, int y)",
+      "private boolean isGroundWallNoCollision(int x, int y)",
+      "public void makeWall(BufferedImage iWall, boolean bOnlyAbove, boolean bNoCollision, boolean bDestructable, boolean bNull, int goodie, int x, int y)",
+      "public void makeWall(boolean bDestructable, boolean bNull, int goodie, int x, int y)",
+      "public void makeKoopa(boolean bRed, int x, int y, boolean bFall, boolean bFly, boolean bLeft)",
+      "public void makeGumba(int x, int y, boolean bFall, boolean bFly, boolean bLeft)",
+      "public void makeImmortal(int x, int y, boolean bFall, boolean bFly, boolean bLeft)",
+      "public void makeCanon(int x, int y, int height, int shootTime, int startTime)",
+      "public void makeFlower(int x, int y, int height, int timeToShow, boolean bWithFlower, int startTime)",
+      "public void unloadPlayer(int player)",
+      "public void changePlayerOneAI(int plus)",
+      "public void setPlayerOneAI(int ai)",
+      "public void setPlayerTwoAI(int ai)",
+      "public void changePlayerTwoAI(int plus)",
+      "public void loadPlayer(int player, String s)",
+      "public boolean loadPlayer(int player, String path, String classname)",
+      "public boolean loadPlayer(int player, String path, String classname, String classN)",
+      "public void addParticle(ApoMarioParticle particle)",
+      "private void levelRestart(boolean bReplay)",
+      "public void restart(boolean bReplay)",
+      "public void newLevel()",
+      "public void newSameLevel()",
+      "public void setLevelString(int width, String levelString)",
+      "public ArrayList<Point> getCannons()",
+      "public ApoMarioEnd getFinish()",
+      "public ApoMarioEntity[][] getLevelEntities()",
+      "public ArrayList<ApoMarioPlayer> getPlayers()",
+      "public int getPassedTime()",
+      "public void setAnalysis(boolean bWin)",
+      "private boolean isOnePlayer()",
+      "public boolean isBAnalysis()",
+      "public synchronized void think(int delta)",
+      "private void thinkTime(int delta)",
+      "private synchronized void thinkPlayer(int delta)",
+      "private void dieIcarus(ApoMarioPlayer player, int delta)",
+      "private void thinkFinish(int delta)",
+      "private void thinkParticle(int delta)",
+      "private void thinkEnemies(int delta)",
+      "private void thinkGoodies(int delta)",
+      "private void thinkLevelEntities(int delta)",
+      "public void render(Graphics2D g, int changeX, int changeY)",
+      "private void renderBackgroundImage(Graphics2D g, BufferedImage iBackground, float delta, int changeX)",
+      "private void renderParticle(Graphics2D g, int changeX, int changeY)",
+      "private void renderFinish(Graphics2D g, int changeX, int changeY)",
+      "private void renderPlayer(Graphics2D g, int changeX, int changeY)",
+      "public void renderEnemies(Graphics2D g, int changeX, int changeY, boolean bFlower)",
+      "private void renderGoodies(Graphics2D g, int changeX, int changeY)",
+      "private void renderTiles(Graphics2D g, int changeX, int changeY)",
+      "private void renderIcarus(final Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioPlayerDrawRect": {
+    "module": "ApoMarioPlayerDrawRect",
+    "package": "apoMario.help",
+    "type": "class",
+    "parent": "ApoMarioPlayerDraw",
+    "implements": [],
+    "fields": {
+      "width": "float",
+      "height": "float",
+      "bFill": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioPlayerDraw": {
+    "module": "ApoMarioPlayerDraw",
+    "package": "apoMario.help",
+    "type": "abstract class",
+    "parent": null,
+    "implements": [],
+    "fields": {
+      "time": "int",
+      "color": "Color"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public int getTime()",
+      "public void setTime(int time)",
+      "public Color getColor()",
+      "public void setColor(Color color)",
+      "abstract public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioPlayerDrawLine": {
+    "module": "ApoMarioPlayerDrawLine",
+    "package": "apoMario.help",
+    "type": "class",
+    "parent": "ApoMarioPlayerDraw",
+    "implements": [],
+    "fields": {
+      "x1": "float",
+      "y1": "float",
+      "x2": "float",
+      "y2": "float"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  },
+  "ApoMarioPlayerDrawCircle": {
+    "module": "ApoMarioPlayerDrawCircle",
+    "package": "apoMario.help",
+    "type": "class",
+    "parent": "ApoMarioPlayerDraw",
+    "implements": [],
+    "fields": {
+      "radius": "float",
+      "bFill": "boolean"
+    },
+    "constants": {},
+    "method_signatures": [
+      "public void render(Graphics2D g, int changeX, int changeY)"
+    ]
+  }
+}

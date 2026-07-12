@@ -1,0 +1,41 @@
+{
+  "Options": {
+    "target_game":       "ApoBot",
+    "generated_package": "apoBot.game",
+    "generated_dir":     "apoBot/game",
+    "test_class":        "ApoBotOptionsTest",
+    "broken_import_patterns": [],
+    "ignored_source_files": ["Test.java", "Test2.java"],
+    "context_descriptions": {
+      "S": "This JSON describes the class hierarchy, fields, and assets of the target game (ApoBot):",
+      "F": "This JSON describes each class's roles and method capabilities in the target game (ApoBot):",
+      "B": "This JSON describes method call graphs, logic hints, and execution flow in the target game (ApoBot):"
+    }
+  },
+  "Highscore": {
+    "target_game":       "ApoMario",
+    "generated_package": "apoMario.game.panels",
+    "generated_dir":     "apoMario/game/panels",
+    "test_class":        "ApoMarioHighscoreTest",
+    "broken_import_patterns": ["import test.Test;", "import test.", "new Test()", "new Test2()", "new TestIf()"],
+    "ignored_source_files": ["Test.java", "Test2.java"],
+    "context_descriptions": {
+      "S": "This JSON describes the class hierarchy, fields, and assets of the target game (ApoMario):",
+      "F": "This JSON describes each class's roles and method capabilities in the target game (ApoMario):",
+      "B": "This JSON describes method call graphs, logic hints, and execution flow in the target game (ApoMario):"
+    }
+  },
+  "Achievements": {
+    "target_game":       "ApoMario",
+    "generated_package": "apoMario.game.panels",
+    "generated_dir":     "apoMario/game/panels",
+    "test_class":        "ApoMarioAchievementsTest",
+    "broken_import_patterns": ["import test.Test;", "import test.", "new Test()", "new Test2()",  "new TestIf()"],
+    "ignored_source_files": ["Test.java", "Test2.java"],
+    "context_descriptions": {
+      "S": "This JSON describes the class hierarchy, fields, and assets of the target game (ApoMario):",
+      "F": "This JSON describes each class's roles and method capabilities in the target game (ApoMario):",
+      "B": "This JSON describes method call graphs, logic hints, and execution flow in the target game (ApoMario):"
+    }
+  }
+}

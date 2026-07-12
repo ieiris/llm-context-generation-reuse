@@ -1,0 +1,4142 @@
+{
+  "ApoIO": {
+    "methods_execution": {
+      "setLevelName": {
+        "calls": [],
+        "logic_hints": [
+          "levelName = levelName"
+        ],
+        "values_hint": []
+      },
+      "setFileEnding": {
+        "calls": [],
+        "logic_hints": [
+          "fileEnding = fileEnding"
+        ],
+        "values_hint": []
+      },
+      "setCurrentLevel": {
+        "calls": [],
+        "logic_hints": [
+          "currentLevel = currentLevel"
+        ],
+        "values_hint": []
+      },
+      "setMaxLevel": {
+        "calls": [],
+        "logic_hints": [
+          "maxLevel = maxLevel"
+        ],
+        "values_hint": []
+      },
+      "hasNextLevel": {
+        "calls": [
+          "connection.openStream",
+          "data.close"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoThread": {
+    "methods_execution": {
+      "ApoThread_constructor_5": {
+        "calls": [],
+        "logic_hints": [
+          "game = game",
+          "waitThink = waitThink * 1000000",
+          "waitRender = waitRender * 1000000",
+          "bRunning = false"
+        ],
+        "values_hint": []
+      },
+      "setBThink": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRender": {
+        "calls": [],
+        "logic_hints": [
+          "bRender = bRender"
+        ],
+        "values_hint": []
+      },
+      "setWait": {
+        "calls": [],
+        "logic_hints": [
+          "waitThink = wait"
+        ],
+        "values_hint": []
+      },
+      "setWaitRender": {
+        "calls": [],
+        "logic_hints": [
+          "waitRender = wait",
+          "deltaRender = 0"
+        ],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "t.start"
+        ],
+        "logic_hints": [
+          "last = System.nanoTime()",
+          "deltaThink = 0",
+          "deltaRender = 0",
+          "deltaSecond = 0"
+        ],
+        "values_hint": []
+      },
+      "setBRunning": {
+        "calls": [],
+        "logic_hints": [
+          "bRunning = bRunning"
+        ],
+        "values_hint": []
+      },
+      "run": {
+        "calls": [
+          "Thread.sleep"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "computeDelta": {
+        "calls": [],
+        "logic_hints": [
+          "delta = now - this.last",
+          "last = now",
+          "fps = this.fpsCounter",
+          "fpsCounter = 0"
+        ],
+        "values_hint": []
+      },
+      "setRestart": {
+        "calls": [],
+        "logic_hints": [
+          "last = System.nanoTime()",
+          "deltaThink = 0",
+          "deltaRender = 0",
+          "deltaSecond = 0"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "game.isBThink",
+          "game.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "game.isBRepaint",
+          "game.render"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoConstants": {
+    "methods_execution": {}
+  },
+  "ApoStart": {
+    "methods_execution": {}
+  },
+  "ApoApplet": {
+    "methods_execution": {
+      "ApoApplet_constructor_2": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "destroy": {
+        "calls": [
+          "component.stop"
+        ],
+        "logic_hints": [
+          "component = null",
+          "currentComponent = null"
+        ],
+        "values_hint": []
+      },
+      "setComponent": {
+        "calls": [
+          "component.init",
+          "component.start",
+          "component.stop",
+          "currentComponent.add",
+          "currentComponent.remove",
+          "currentComponent.repaint"
+        ],
+        "logic_hints": [
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component",
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoComponent": {
+    "methods_execution": {
+      "ApoComponent_constructor_4": {
+        "calls": [],
+        "logic_hints": [
+          "bMouse = bMouse",
+          "bKey = bKey",
+          "timerThread = timerThread",
+          "WAIT_TIME = wait_time"
+        ],
+        "values_hint": []
+      },
+      "setButtons": {
+        "calls": [],
+        "logic_hints": [
+          "buttons = buttons"
+        ],
+        "values_hint": []
+      },
+      "keyPressed": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "keyReleased": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "threadRender.setBThink",
+          "threadRender.start",
+          "threadThink.setBRender",
+          "threadThink.start",
+          "threadThinkAndRender.start"
+        ],
+        "logic_hints": [
+          "threadThinkAndRender = = null) && (this.timerThread == ApoConstants.ONE_THREADS)) {",
+          "threadThinkAndRender = new ApoThread(this, WAIT_TIME)",
+          "threadThink = = null) && (this.threadRender == null) && (this.timerThread",
+          "threadThink = new ApoThread(this, WAIT_TIME)"
+        ],
+        "values_hint": []
+      },
+      "stop": {
+        "calls": [
+          "threadRender.stop",
+          "threadThink.stop",
+          "threadThinkAndRender.stop"
+        ],
+        "logic_hints": [
+          "timerThread = = ApoConstants.ONE_THREADS)) {",
+          "threadThinkAndRender = null",
+          "timerThread = = ApoConstants.TWO_THREADS)) {",
+          "threadThink = null"
+        ],
+        "values_hint": []
+      },
+      "setRestartThreadValues": {
+        "calls": [
+          "threadRender.setRestart",
+          "threadThink.setRestart",
+          "threadThinkAndRender.setRestart"
+        ],
+        "logic_hints": [
+          "timerThread = = ApoConstants.ONE_THREADS) {",
+          "timerThread = = ApoConstants.TWO_THREADS) {"
+        ],
+        "values_hint": []
+      },
+      "getFPS": {
+        "calls": [
+          "threadRender.getFps",
+          "threadThinkAndRender.getFps"
+        ],
+        "logic_hints": [
+          "timerThread = = ApoConstants.ONE_THREADS) {",
+          "timerThread = = ApoConstants.TWO_THREADS) {"
+        ],
+        "values_hint": []
+      },
+      "renderFPS": {
+        "calls": [
+          "g.drawString"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setBThink": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRepaint": {
+        "calls": [],
+        "logic_hints": [
+          "bRepaint = bRepaint"
+        ],
+        "values_hint": []
+      },
+      "setBDirections": {
+        "calls": [],
+        "logic_hints": [
+          "bDirections = bDirections"
+        ],
+        "values_hint": []
+      },
+      "setBBack": {
+        "calls": [],
+        "logic_hints": [
+          "bBack = bBack"
+        ],
+        "values_hint": []
+      },
+      "setBLoose": {
+        "calls": [],
+        "logic_hints": [
+          "bLoose = bLoose"
+        ],
+        "values_hint": []
+      },
+      "setBWin": {
+        "calls": [],
+        "logic_hints": [
+          "bWin = bWin"
+        ],
+        "values_hint": []
+      },
+      "setBHelp": {
+        "calls": [],
+        "logic_hints": [
+          "bHelp = bHelp"
+        ],
+        "values_hint": []
+      },
+      "mouseMoved": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "timerThread = = ApoConstants.NO_THREAD) || (!this.bRepaint) )"
+        ],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "timerThread = = ApoConstants.NO_THREAD) || (!this.bRepaint)) {"
+        ],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "timerThread = = ApoConstants.NO_THREAD) || (!this.bRepaint)) {"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMainBufferedStrategy": {
+    "methods_execution": {
+      "ApoMainBufferedStrategy_constructor_3": {
+        "calls": [
+          "component.start",
+          "e.printStackTrace",
+          "splash.blendOut"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setComponent": {
+        "calls": [
+          "component.getPreferredSize",
+          "component.init",
+          "component.start",
+          "component.stop"
+        ],
+        "logic_hints": [
+          "component = component",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoTimerInterface": {
+    "methods_execution": {}
+  },
+  "ApoAppletBufferedStrategy": {
+    "methods_execution": {
+      "ApoAppletBufferedStrategy_constructor_2": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "destroy": {
+        "calls": [
+          "component.stop"
+        ],
+        "logic_hints": [
+          "component = null",
+          "currentComponent = null"
+        ],
+        "values_hint": []
+      },
+      "setComponent": {
+        "calls": [
+          "component.init",
+          "component.start",
+          "component.stop",
+          "currentComponent.add",
+          "currentComponent.remove",
+          "currentComponent.repaint"
+        ],
+        "logic_hints": [
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component",
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoNewThread": {
+    "methods_execution": {
+      "ApoNewThread_constructor_5": {
+        "calls": [],
+        "logic_hints": [
+          "game = game",
+          "waitThink = waitThink * 1000000",
+          "waitRender = waitRender * 1000000",
+          "bRunning = false"
+        ],
+        "values_hint": []
+      },
+      "setBThink": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRender": {
+        "calls": [],
+        "logic_hints": [
+          "bRender = bRender"
+        ],
+        "values_hint": []
+      },
+      "setWait": {
+        "calls": [],
+        "logic_hints": [
+          "waitThink = wait"
+        ],
+        "values_hint": []
+      },
+      "setWaitRender": {
+        "calls": [],
+        "logic_hints": [
+          "waitRender = wait"
+        ],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "t.start"
+        ],
+        "logic_hints": [
+          "frameAverage = this.waitRender",
+          "lastFrame = System.currentTimeMillis()",
+          "yield = 10000f",
+          "damping = 0.1f"
+        ],
+        "values_hint": []
+      },
+      "setBRunning": {
+        "calls": [],
+        "logic_hints": [
+          "bRunning = bRunning"
+        ],
+        "values_hint": []
+      },
+      "run": {
+        "calls": [
+          "Thread.sleep"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "computeDelta": {
+        "calls": [
+          "Thread.yield",
+          "out.println"
+        ],
+        "logic_hints": [
+          "frameAverage = (this.frameAverage * 10 + (timeNow - this.lastFrame)) / 11",
+          "lastFrame = timeNow",
+          "fps = this.draws",
+          "draws = 0"
+        ],
+        "values_hint": [
+          "10",
+          "1000",
+          "11"
+        ]
+      },
+      "setRestart": {
+        "calls": [],
+        "logic_hints": [
+          "frameAverage = this.waitRender",
+          "lastFrame = System.currentTimeMillis()",
+          "yield = 10000f",
+          "damping = 0.1f"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "game.isBThink",
+          "game.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "game.isBRepaint",
+          "game.render"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMain": {
+    "methods_execution": {
+      "ApoMain_constructor_3": {
+        "calls": [
+          "currentComponent.setLayout",
+          "currentComponent.setPreferredSize",
+          "e.printStackTrace",
+          "splash.blendOut"
+        ],
+        "logic_hints": [
+          "currentComponent = (JComponent)this.getContentPane()"
+        ],
+        "values_hint": []
+      },
+      "setComponent": {
+        "calls": [
+          "component.getHeight",
+          "component.getWidth",
+          "component.init",
+          "component.start",
+          "component.stop",
+          "currentComponent.add",
+          "currentComponent.remove",
+          "currentComponent.repaint",
+          "currentComponent.setPreferredSize"
+        ],
+        "logic_hints": [
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component",
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoTimer": {
+    "methods_execution": {
+      "ApoTimer_constructor_2": {
+        "calls": [],
+        "logic_hints": [
+          "game = game",
+          "wait = wait",
+          "bRunning = true"
+        ],
+        "values_hint": []
+      },
+      "setBWait": {
+        "calls": [],
+        "logic_hints": [
+          "bWait = bWait"
+        ],
+        "values_hint": []
+      },
+      "setBRender": {
+        "calls": [],
+        "logic_hints": [
+          "bRender = bRender"
+        ],
+        "values_hint": []
+      },
+      "setWait": {
+        "calls": [],
+        "logic_hints": [
+          "wait = wait"
+        ],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "timer.scheduleAtFixedRate"
+        ],
+        "logic_hints": [
+          "timer = = null )",
+          "timer = new Timer()",
+          "delta = System.nanoTime()"
+        ],
+        "values_hint": []
+      },
+      "stop": {
+        "calls": [
+          "timer.cancel"
+        ],
+        "logic_hints": [
+          "timer = null"
+        ],
+        "values_hint": []
+      },
+      "setBRunning": {
+        "calls": [],
+        "logic_hints": [
+          "bRunning = bRunning"
+        ],
+        "values_hint": []
+      },
+      "run": {
+        "calls": [
+          "game.isBRepaint",
+          "game.isBThink",
+          "game.render",
+          "game.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoComponentBufferedStrategy": {
+    "methods_execution": {
+      "ApoComponentBufferedStrategy_constructor_5": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "ge.getDefaultScreenDevice"
+        ],
+        "logic_hints": [
+          "ge = GraphicsEnvironment.getLocalGraphicsEnvironment()",
+          "gc = this.ge.getDefaultScreenDevice().getDefaultConfiguration()",
+          "bMouse = bMouse",
+          "bKey = bKey"
+        ],
+        "values_hint": []
+      },
+      "setWAIT_TIME_RENDER": {
+        "calls": [
+          "thread.setWaitRender"
+        ],
+        "logic_hints": [
+          "WAIT_TIME_RENDER = wait_time_render"
+        ],
+        "values_hint": []
+      },
+      "setButtons": {
+        "calls": [],
+        "logic_hints": [
+          "buttons = buttons"
+        ],
+        "values_hint": []
+      },
+      "keyPressed": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "keyReleased": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "createBackbuffer": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "backbuffer.flush",
+          "gc.createCompatibleVolatileImage",
+          "ge.getDefaultScreenDevice"
+        ],
+        "logic_hints": [
+          "backbuffer = null",
+          "ge = GraphicsEnvironment.getLocalGraphicsEnvironment()",
+          "gc = this.ge.getDefaultScreenDevice().getDefaultConfiguration()",
+          "backbuffer = this.gc.createCompatibleVolatileImage(getWidth(),\tgetHeight("
+        ],
+        "values_hint": []
+      },
+      "checkBackbuffer": {
+        "calls": [
+          "backbuffer.validate"
+        ],
+        "logic_hints": [
+          "backbuffer = = null) {"
+        ],
+        "values_hint": []
+      },
+      "setRestartThreadValues": {
+        "calls": [
+          "thread.setRestart"
+        ],
+        "logic_hints": [
+          "thread = = null) {"
+        ],
+        "values_hint": []
+      },
+      "renderFPS": {
+        "calls": [
+          "g.drawString"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "thread.start"
+        ],
+        "logic_hints": [
+          "thread = = null) && (this.bTimer)) {",
+          "strategy = getBufferStrategy()",
+          "thread = new ApoThread(this, this.WAIT_TIME_THINK, this.WAIT_TIME_REN"
+        ],
+        "values_hint": []
+      },
+      "stop": {
+        "calls": [
+          "thread.stop"
+        ],
+        "logic_hints": [
+          "thread = null"
+        ],
+        "values_hint": []
+      },
+      "getFPS": {
+        "calls": [
+          "thread.getFps"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setBThink": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRepaint": {
+        "calls": [],
+        "logic_hints": [
+          "bRepaint = bRepaint"
+        ],
+        "values_hint": []
+      },
+      "setBDirections": {
+        "calls": [],
+        "logic_hints": [
+          "bDirections = bDirections"
+        ],
+        "values_hint": []
+      },
+      "setBBack": {
+        "calls": [],
+        "logic_hints": [
+          "bBack = bBack"
+        ],
+        "values_hint": []
+      },
+      "setBLoose": {
+        "calls": [],
+        "logic_hints": [
+          "bLoose = bLoose"
+        ],
+        "values_hint": []
+      },
+      "setBWin": {
+        "calls": [],
+        "logic_hints": [
+          "bWin = bWin"
+        ],
+        "values_hint": []
+      },
+      "setBHelp": {
+        "calls": [],
+        "logic_hints": [
+          "bHelp = bHelp"
+        ],
+        "values_hint": []
+      },
+      "mouseMoved": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoEntity": {
+    "methods_execution": {
+      "ApoEntity_constructor_5": {
+        "calls": [],
+        "logic_hints": [
+          "iBackground = iBackground",
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = 0.0F"
+        ],
+        "values_hint": []
+      },
+      "setBUse": {
+        "calls": [],
+        "logic_hints": [
+          "bUse = bUse"
+        ],
+        "values_hint": []
+      },
+      "setVecY": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = vecY"
+        ],
+        "values_hint": []
+      },
+      "setHeight": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "intersects": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "contains": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getRec": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkOpaqueColorCollisions": {
+        "calls": [
+          "entity.getIBackground",
+          "entity.getRec",
+          "img_him.getHeight",
+          "img_him.getRGB",
+          "img_me.getRGB",
+          "img_me.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getSubRec": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isOpaque": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "16",
+          "24"
+        ]
+      }
+    }
+  },
+  "ApoAnimation": {
+    "methods_execution": {
+      "ApoAnimation_constructor_5": {
+        "calls": [
+          "iAnimation.getHeight",
+          "iAnimation.getWidth"
+        ],
+        "logic_hints": [
+          "tiles = tiles",
+          "time = time"
+        ],
+        "values_hint": []
+      },
+      "ApoAnimation_constructor_7": {
+        "calls": [],
+        "logic_hints": [
+          "tiles = tiles",
+          "time = time"
+        ],
+        "values_hint": []
+      },
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "frame = 0",
+          "curTime = 0"
+        ],
+        "values_hint": []
+      },
+      "setTiles": {
+        "calls": [],
+        "logic_hints": [
+          "tiles = tiles"
+        ],
+        "values_hint": []
+      },
+      "setFrame": {
+        "calls": [],
+        "logic_hints": [
+          "frame = frame"
+        ],
+        "values_hint": []
+      },
+      "setCurTime": {
+        "calls": [],
+        "logic_hints": [
+          "curTime = curTime"
+        ],
+        "values_hint": []
+      },
+      "setTime": {
+        "calls": [],
+        "logic_hints": [
+          "time = time"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "frame = 0"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawImage",
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setBUse (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "bUse = bUse"
+        ],
+        "values_hint": []
+      },
+      "setVecY (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = vecY"
+        ],
+        "values_hint": []
+      },
+      "setHeight (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "intersects (inherited from ApoEntity)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "contains (inherited from ApoEntity)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getRec (inherited from ApoEntity)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkOpaqueColorCollisions (inherited from ApoEntity)": {
+        "calls": [
+          "entity.getIBackground",
+          "entity.getRec",
+          "img_him.getHeight",
+          "img_him.getRGB",
+          "img_me.getRGB",
+          "img_me.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getSubRec (inherited from ApoEntity)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isOpaque (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "16",
+          "24"
+        ]
+      }
+    }
+  },
+  "ApoButtonText": {
+    "methods_execution": {
+      "ApoButtonText_constructor_7": {
+        "calls": [],
+        "logic_hints": [
+          "value = value",
+          "text = \"\"",
+          "font = new Font( \"Dialog\", Font.BOLD, 14 )",
+          "colorReleased = Color.RED"
+        ],
+        "values_hint": [
+          "14",
+          "80"
+        ]
+      },
+      "setColorReleased": {
+        "calls": [],
+        "logic_hints": [
+          "colorReleased = colorReleased"
+        ],
+        "values_hint": []
+      },
+      "setFontSize": {
+        "calls": [],
+        "logic_hints": [
+          "font = new Font( \"Dialog\", Font.BOLD, size )"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawImage",
+          "g.drawRect",
+          "g.drawString",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "text.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setWAIT_DELAY (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "WAIT_DELAY = wait_delay"
+        ],
+        "values_hint": []
+      },
+      "setBPressed (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "bPressed = bPressed"
+        ],
+        "values_hint": []
+      },
+      "setFunction (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "function = function"
+        ],
+        "values_hint": []
+      },
+      "getMove (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "bPressed = false",
+          "wait = 0",
+          "bFirstWait = true"
+        ],
+        "values_hint": []
+      },
+      "getReleased (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "wait = 0",
+          "bFirstWait = true"
+        ],
+        "values_hint": []
+      },
+      "think (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "bFirstWait = false"
+        ],
+        "values_hint": []
+      },
+      "init (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = 0.0F"
+        ],
+        "values_hint": []
+      },
+      "setBUse (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "bUse = bUse"
+        ],
+        "values_hint": []
+      },
+      "setVecY (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = vecY"
+        ],
+        "values_hint": []
+      },
+      "setHeight (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "intersects (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "contains (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getRec (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkOpaqueColorCollisions (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "entity.getIBackground",
+          "entity.getRec",
+          "img_him.getHeight",
+          "img_him.getRGB",
+          "img_me.getRGB",
+          "img_me.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getSubRec (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isOpaque (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "16",
+          "24"
+        ]
+      }
+    }
+  },
+  "ApoButton": {
+    "methods_execution": {
+      "ApoButton_constructor_6": {
+        "calls": [],
+        "logic_hints": [
+          "function = function",
+          "bPressed = false",
+          "wait = 0",
+          "bFirstWait = true"
+        ],
+        "values_hint": []
+      },
+      "setWAIT_DELAY": {
+        "calls": [],
+        "logic_hints": [
+          "WAIT_DELAY = wait_delay"
+        ],
+        "values_hint": []
+      },
+      "setBPressed": {
+        "calls": [],
+        "logic_hints": [
+          "bPressed = bPressed"
+        ],
+        "values_hint": []
+      },
+      "setFunction": {
+        "calls": [],
+        "logic_hints": [
+          "function = function"
+        ],
+        "values_hint": []
+      },
+      "getMove": {
+        "calls": [],
+        "logic_hints": [
+          "bPressed = false",
+          "wait = 0",
+          "bFirstWait = true"
+        ],
+        "values_hint": []
+      },
+      "getReleased": {
+        "calls": [],
+        "logic_hints": [
+          "wait = 0",
+          "bFirstWait = true"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "bFirstWait = false"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "init (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = 0.0F"
+        ],
+        "values_hint": []
+      },
+      "setBUse (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "bUse = bUse"
+        ],
+        "values_hint": []
+      },
+      "setVecY (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = vecY"
+        ],
+        "values_hint": []
+      },
+      "setHeight (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "intersects (inherited from ApoEntity)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "contains (inherited from ApoEntity)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getRec (inherited from ApoEntity)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkOpaqueColorCollisions (inherited from ApoEntity)": {
+        "calls": [
+          "entity.getIBackground",
+          "entity.getRec",
+          "img_him.getHeight",
+          "img_him.getRGB",
+          "img_me.getRGB",
+          "img_me.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getSubRec (inherited from ApoEntity)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isOpaque (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "16",
+          "24"
+        ]
+      }
+    }
+  },
+  "ApoDragObject": {
+    "methods_execution": {
+      "ApoDragObject_constructor_4": {
+        "calls": [],
+        "logic_hints": [
+          "diffY = 0"
+        ],
+        "values_hint": []
+      },
+      "getPressed": {
+        "calls": [],
+        "logic_hints": [
+          "diffY = (int)( y - this.getY() )"
+        ],
+        "values_hint": []
+      },
+      "getReleased": {
+        "calls": [],
+        "logic_hints": [
+          "diffY = 0"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.fillRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setWAIT_DELAY (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "WAIT_DELAY = wait_delay"
+        ],
+        "values_hint": []
+      },
+      "setBPressed (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "bPressed = bPressed"
+        ],
+        "values_hint": []
+      },
+      "setFunction (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "function = function"
+        ],
+        "values_hint": []
+      },
+      "getMove (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "bPressed = false",
+          "wait = 0",
+          "bFirstWait = true"
+        ],
+        "values_hint": []
+      },
+      "think (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "bFirstWait = false"
+        ],
+        "values_hint": []
+      },
+      "init (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = 0.0F"
+        ],
+        "values_hint": []
+      },
+      "setBUse (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "bUse = bUse"
+        ],
+        "values_hint": []
+      },
+      "setVecY (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = vecY"
+        ],
+        "values_hint": []
+      },
+      "setHeight (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "intersects (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "contains (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getRec (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkOpaqueColorCollisions (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "entity.getIBackground",
+          "entity.getRec",
+          "img_him.getHeight",
+          "img_him.getRGB",
+          "img_me.getRGB",
+          "img_me.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getSubRec (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isOpaque (inherited from ApoEntity) (inherited from ApoButton)": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "16",
+          "24"
+        ]
+      }
+    }
+  },
+  "ApoRawScale3x": {
+    "methods_execution": {
+      "ApoRawScale3x_constructor_3": {
+        "calls": [],
+        "logic_hints": [
+          "width = dataWidth",
+          "height = dataHeight",
+          "srcImage = imageData",
+          "dstImage = new int[imageData.length * 9]"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoImage": {
+    "methods_execution": {
+      "ApoImage_constructor_0": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment"
+        ],
+        "logic_hints": [
+          "component = this",
+          "graphicsConfiguration = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefault"
+        ],
+        "values_hint": []
+      },
+      "getPic": {
+        "calls": [
+          "mt.addImage",
+          "mt.waitForAll"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getImage": {
+        "calls": [
+          "ImageIO.read",
+          "e.printStackTrace",
+          "graphicsConfiguration.createCompatibleImage",
+          "img.getHeight",
+          "img.getWidth",
+          "out.println",
+          "result.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoImageScale": {
+    "methods_execution": {
+      "ApoImageScale_constructor_2": {
+        "calls": [],
+        "logic_hints": [
+          "srcFile = srcFile",
+          "scale = scale"
+        ],
+        "values_hint": []
+      },
+      "setScale": {
+        "calls": [],
+        "logic_hints": [
+          "scale = scale"
+        ],
+        "values_hint": []
+      },
+      "writeScaledImage": {
+        "calls": [
+          "ImageIO.write",
+          "e.printStackTrace",
+          "writeFile.lastIndexOf",
+          "writeFile.substring"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getDoubleScaledImage": {
+        "calls": [
+          "image.setRGB",
+          "scaler.getScaledData",
+          "srcImage.getHeight",
+          "srcImage.getRGB",
+          "srcImage.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getTrippleScaledImage": {
+        "calls": [
+          "image.setRGB",
+          "scaler.getScaledData",
+          "srcImage.getHeight",
+          "srcImage.getRGB",
+          "srcImage.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoRawScale2x": {
+    "methods_execution": {
+      "ApoRawScale2x_constructor_3": {
+        "calls": [],
+        "logic_hints": [
+          "width = dataWidth",
+          "height = dataHeight",
+          "srcImage = imageData",
+          "dstImage = new int[imageData.length * 4]"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoImageFromValue": {
+    "methods_execution": {
+      "ApoImageFromValue_constructor_0": {
+        "calls": [],
+        "logic_hints": [
+          "image = new ApoImage()"
+        ],
+        "values_hint": []
+      },
+      "getImageFromPath": {
+        "calls": [
+          "image.getPic"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getAndMakeIBackground": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.fillRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iBackground.getGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getButtonImage": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "g.setRenderingHint",
+          "iButton.getGraphics",
+          "iButton.getHeight",
+          "iButton.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20"
+        ]
+      }
+    }
+  },
+  "ApoSounds": {
+    "methods_execution": {
+      "ApoSounds_constructor_0": {
+        "calls": [],
+        "logic_hints": [
+          "sounds = new Hashtable<String, AudioClip>()",
+          "loopingClips = new Vector<AudioClip>()"
+        ],
+        "values_hint": []
+      },
+      "loadSound": {
+        "calls": [
+          "Applet.newAudioClip",
+          "sounds.containsKey",
+          "sounds.put"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "playSound": {
+        "calls": [
+          "audio.play",
+          "sounds.get"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "loopSound": {
+        "calls": [
+          "audio.loop",
+          "loopingClips.add",
+          "sounds.get"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "stopLoopingSound": {
+        "calls": [
+          "c.stop"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoSplashScreen": {
+    "methods_execution": {
+      "ApoSplashScreen_constructor_1": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "ImageIO.read",
+          "Toolkit.getDefaultToolkit",
+          "f.getContentPane",
+          "f.pack",
+          "f.setLocation",
+          "f.setVisible",
+          "image.getHeight",
+          "image.getWidth",
+          "label.setImage",
+          "robot.createScreenCapture",
+          "screenDimension.getHeight",
+          "screenDimension.getWidth",
+          "timer.setCoalesce",
+          "timer.start"
+        ],
+        "logic_hints": [
+          "image = ImageIO.read(url)",
+          "currentImage = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefault",
+          "background = robot.createScreenCapture(rectangle)",
+          "label = new ApoSplashPainter()"
+        ],
+        "values_hint": []
+      },
+      "blendOut": {
+        "calls": [
+          "timer.start"
+        ],
+        "logic_hints": [
+          "isBlendIn = false",
+          "startTime = System.currentTimeMillis()"
+        ],
+        "values_hint": []
+      },
+      "actionPerformed": {
+        "calls": [
+          "SwingUtilities.getWindowAncestor",
+          "label.repaint",
+          "label.setImage",
+          "timer.stop"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "drawImage": {
+        "calls": [
+          "AlphaComposite.getInstance",
+          "currentImage.getGraphics",
+          "g2d.dispose",
+          "g2d.drawImage",
+          "g2d.setComposite"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoSplashPainter": {
+    "methods_execution": {
+      "setImage": {
+        "calls": [
+          "image.getWidth"
+        ],
+        "logic_hints": [
+          "image = image"
+        ],
+        "values_hint": []
+      },
+      "paintComponent": {
+        "calls": [
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoHelp": {
+    "methods_execution": {
+      "rotateImage": {
+        "calls": [
+          "AffineTransform.getRotateInstance",
+          "g.dispose",
+          "g.drawImage",
+          "g.setTransform",
+          "rotatedImage.getGraphics",
+          "src.getHeight",
+          "src.getType",
+          "src.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "rotateImageMethodTwo": {
+        "calls": [
+          "at.preConcatenate",
+          "at.rotate",
+          "g.drawImage",
+          "g.setTransform",
+          "inputImage.getHeight",
+          "inputImage.getWidth",
+          "sourceBI.getGraphics",
+          "sourceBI.getHeight",
+          "sourceBI.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "180",
+          "360"
+        ]
+      },
+      "findTranslation": {
+        "calls": [
+          "Point2D.Double",
+          "at.transform",
+          "bi.getHeight",
+          "p2dout.getX",
+          "p2dout.getY",
+          "tat.translate"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "180",
+          "270"
+        ]
+      },
+      "round": {
+        "calls": [
+          "bigDecimal.setScale"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getAngleBetween2Points": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "180"
+        ]
+      },
+      "getCircleCuts": {
+        "calls": [
+          "out.println",
+          "results.add"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10000"
+        ]
+      },
+      "getTimeToDraw": {
+        "calls": [
+          "msec.length",
+          "sec.length"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "60",
+          "10",
+          "1000",
+          "100"
+        ]
+      }
+    }
+  },
+  "ApoFileFilter": {
+    "methods_execution": {
+      "getExtension": {
+        "calls": [
+          "file.getName",
+          "s1.lastIndexOf",
+          "s1.length",
+          "s1.substring"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "46"
+        ]
+      },
+      "accept": {
+        "calls": [
+          "file.isDirectory",
+          "s.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoCopy": {
+    "methods_execution": {
+      "copyDirectory": {
+        "calls": [
+          "copyDirectory.exists",
+          "copyDirectory.mkdirs",
+          "srcDirectory.exists",
+          "srcDirectory.listFiles"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "copyFile": {
+        "calls": [
+          "e.printStackTrace",
+          "fis.close",
+          "fis.read",
+          "fos.close",
+          "fos.write"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoFileNameFilter": {
+    "methods_execution": {
+      "accept": {
+        "calls": [
+          "s.toLowerCase"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setExtension": {
+        "calls": [],
+        "logic_hints": [
+          "extension = extension"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoInterface": {
+    "methods_execution": {}
+  },
+  "ApoFloatPoint": {
+    "methods_execution": {}
+  },
+  "ApoClassLoader": {
+    "methods_execution": {
+      "setClassname": {
+        "calls": [],
+        "logic_hints": [
+          "classname = classname"
+        ],
+        "values_hint": []
+      },
+      "setPath": {
+        "calls": [],
+        "logic_hints": [
+          "path = path"
+        ],
+        "values_hint": []
+      },
+      "getMyClass": {
+        "calls": [
+          "c.newInstance",
+          "cl.loadClass",
+          "e.printStackTrace",
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoBotImage": {
+    "methods_execution": {
+      "ApoBotImage_constructor_0": {
+        "calls": [],
+        "logic_hints": [
+          "image = new ApoImageFromValue()"
+        ],
+        "values_hint": []
+      },
+      "getImage": {
+        "calls": [
+          "image.getImageFromPath"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "drawString": {
+        "calls": [
+          "g.drawString",
+          "g.getFontMetrics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getLogo": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "iLogo.getGraphics",
+          "iPlayer.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "70"
+        ]
+      },
+      "getIBackground": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "iBackground.getGraphics",
+          "iTile.getSubimage",
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "32",
+          "25",
+          "16"
+        ]
+      },
+      "getButtonWithImage": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.drawRoundRect",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iButton.getGraphics",
+          "iPic.getHeight",
+          "iPic.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getButtonImage": {
+        "calls": [
+          "image.getButtonImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getImageCopy": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "iImage.getHeight",
+          "iImage.getTransparency",
+          "iImage.getWidth",
+          "iNewImage.getGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoBotComponent": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "buttons.init",
+          "fileChooser.setCurrentDirectory",
+          "fileChooser.setFileFilter",
+          "image.getImage",
+          "scale.getDoubleScaledImage"
+        ],
+        "logic_hints": [
+          "fileChooser = = null)) {",
+          "fileChooser = new JFileChooser()",
+          "curLevel = 0",
+          "curHeight = ApoBotConstants.GAME_GAME_HEIGHT"
+        ],
+        "values_hint": []
+      },
+      "levelLoad": {
+        "calls": [
+          "fileChooser.getSelectedFile",
+          "fileChooser.showOpenDialog"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "levelSave": {
+        "calls": [
+          "fileChooser.getSelectedFile",
+          "fileChooser.showSaveDialog",
+          "fileFilter.getLevelName",
+          "s.indexOf",
+          "s.substring"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "46"
+        ]
+      },
+      "setCurLevel": {
+        "calls": [],
+        "logic_hints": [
+          "curLevel = curLevel"
+        ],
+        "values_hint": []
+      },
+      "setIPlayer": {
+        "calls": [],
+        "logic_hints": [
+          "iPlayer = player"
+        ],
+        "values_hint": []
+      },
+      "setLevel": {
+        "calls": [
+          "level.getDirectionView",
+          "level.getLevel",
+          "level.getStartPoint",
+          "player.setStartDir"
+        ],
+        "logic_hints": [
+          "level = level",
+          "player = new ApoBotPlayer(this.iPlayer, this.level.getStartPoint().x,",
+          "levelHeight = startHeight"
+        ],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "setIBackgroundOriginal": {
+        "calls": [],
+        "logic_hints": [
+          "iBackgroundOriginal = iBackgroundOriginal"
+        ],
+        "values_hint": []
+      },
+      "makeBackground": {
+        "calls": [
+          "image.getIBackground"
+        ],
+        "logic_hints": [
+          "iLevel = this.image.getIBackground(this.level, this.iTile, this.level"
+        ],
+        "values_hint": []
+      },
+      "centerCamera": {
+        "calls": [
+          "level.getLevel",
+          "player.getRunX",
+          "player.getRunY",
+          "player.getX",
+          "player.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "setITile": {
+        "calls": [],
+        "logic_hints": [
+          "iTile = tile"
+        ],
+        "values_hint": []
+      },
+      "setLevelHeight": {
+        "calls": [],
+        "logic_hints": [
+          "levelHeight = levelHeight"
+        ],
+        "values_hint": []
+      },
+      "setIBackground": {
+        "calls": [],
+        "logic_hints": [
+          "iBackground = background"
+        ],
+        "values_hint": []
+      },
+      "restart": {
+        "calls": [
+          "level.init",
+          "player.init"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "functionMouse = null",
+          "functionKey = -1"
+        ],
+        "values_hint": []
+      },
+      "setButtonFunction": {
+        "calls": [],
+        "logic_hints": [
+          "functionMouse = function"
+        ],
+        "values_hint": []
+      },
+      "keyReleased": {
+        "calls": [],
+        "logic_hints": [
+          "functionKey = -1"
+        ],
+        "values_hint": []
+      },
+      "keyPressed": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [
+          "functionKey = code"
+        ],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [],
+        "logic_hints": [
+          "bRightMouse = false"
+        ],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "e.getButton",
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "bRightMouse = true",
+          "oldMouseX = e.getX()",
+          "oldMouseY = e.getY()"
+        ],
+        "values_hint": []
+      },
+      "mouseDragged": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "oldMouseX = e.getX()",
+          "oldMouseY = e.getY()"
+        ],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "getStartX": {
+        "calls": [
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "getStartY": {
+        "calls": [
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "renderLevel": {
+        "calls": [
+          "g.drawImage",
+          "iTile.getSubimage",
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "32",
+          "25",
+          "35",
+          "16",
+          "30"
+        ]
+      },
+      "renderPlayer": {
+        "calls": [
+          "level.getLevel",
+          "player.getHeight",
+          "player.getX",
+          "player.getY",
+          "player.render"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "16",
+          "35",
+          "30"
+        ]
+      },
+      "renderOvertile": {
+        "calls": [
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderTile": {
+        "calls": [
+          "g.drawImage",
+          "iTile.getSubimage",
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "32",
+          "25",
+          "35",
+          "16",
+          "30"
+        ]
+      },
+      "setWAIT_TIME_RENDER (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [
+          "thread.setWaitRender"
+        ],
+        "logic_hints": [
+          "WAIT_TIME_RENDER = wait_time_render"
+        ],
+        "values_hint": []
+      },
+      "setButtons (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [],
+        "logic_hints": [
+          "buttons = buttons"
+        ],
+        "values_hint": []
+      },
+      "createBackbuffer (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "backbuffer.flush",
+          "gc.createCompatibleVolatileImage",
+          "ge.getDefaultScreenDevice"
+        ],
+        "logic_hints": [
+          "backbuffer = null",
+          "ge = GraphicsEnvironment.getLocalGraphicsEnvironment()",
+          "gc = this.ge.getDefaultScreenDevice().getDefaultConfiguration()",
+          "backbuffer = this.gc.createCompatibleVolatileImage(getWidth(),\tgetHeight("
+        ],
+        "values_hint": []
+      },
+      "checkBackbuffer (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [
+          "backbuffer.validate"
+        ],
+        "logic_hints": [
+          "backbuffer = = null) {"
+        ],
+        "values_hint": []
+      },
+      "setRestartThreadValues (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [
+          "thread.setRestart"
+        ],
+        "logic_hints": [
+          "thread = = null) {"
+        ],
+        "values_hint": []
+      },
+      "renderFPS (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [
+          "g.drawString"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "start (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [
+          "thread.start"
+        ],
+        "logic_hints": [
+          "thread = = null) && (this.bTimer)) {",
+          "strategy = getBufferStrategy()",
+          "thread = new ApoThread(this, this.WAIT_TIME_THINK, this.WAIT_TIME_REN"
+        ],
+        "values_hint": []
+      },
+      "stop (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [
+          "thread.stop"
+        ],
+        "logic_hints": [
+          "thread = null"
+        ],
+        "values_hint": []
+      },
+      "getFPS (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [
+          "thread.getFps"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setBThink (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRepaint (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [],
+        "logic_hints": [
+          "bRepaint = bRepaint"
+        ],
+        "values_hint": []
+      },
+      "setBDirections (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [],
+        "logic_hints": [
+          "bDirections = bDirections"
+        ],
+        "values_hint": []
+      },
+      "setBBack (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [],
+        "logic_hints": [
+          "bBack = bBack"
+        ],
+        "values_hint": []
+      },
+      "setBLoose (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [],
+        "logic_hints": [
+          "bLoose = bLoose"
+        ],
+        "values_hint": []
+      },
+      "setBWin (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [],
+        "logic_hints": [
+          "bWin = bWin"
+        ],
+        "values_hint": []
+      },
+      "setBHelp (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [],
+        "logic_hints": [
+          "bHelp = bHelp"
+        ],
+        "values_hint": []
+      },
+      "mouseMoved (inherited from ApoComponentBufferedStrategy)": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoBotMain": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "game.getIPlayer",
+          "game.setSize"
+        ],
+        "logic_hints": [
+          "game = new ApoBotGame(true, true, ApoBotConstants.WAIT_TIME_THINK,"
+        ],
+        "values_hint": [
+          "23",
+          "25"
+        ]
+      },
+      "setComponent (inherited from ApoMainBufferedStrategy)": {
+        "calls": [
+          "component.getPreferredSize",
+          "component.init",
+          "component.start",
+          "component.stop"
+        ],
+        "logic_hints": [
+          "component = component",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoBotApplet": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "game.setSize"
+        ],
+        "logic_hints": [
+          "game = new ApoBotGame(true, true, ApoBotConstants.WAIT_TIME_THINK,"
+        ],
+        "values_hint": []
+      },
+      "destroy (inherited from ApoAppletBufferedStrategy)": {
+        "calls": [
+          "component.stop"
+        ],
+        "logic_hints": [
+          "component = null",
+          "currentComponent = null"
+        ],
+        "values_hint": []
+      },
+      "setComponent (inherited from ApoAppletBufferedStrategy)": {
+        "calls": [
+          "component.init",
+          "component.start",
+          "component.stop",
+          "currentComponent.add",
+          "currentComponent.remove",
+          "currentComponent.repaint"
+        ],
+        "logic_hints": [
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component",
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoBotConstants": {
+    "methods_execution": {}
+  },
+  "ApoBotEntity": {
+    "methods_execution": {
+      "setCommand": {
+        "calls": [],
+        "logic_hints": [
+          "command = command"
+        ],
+        "values_hint": []
+      },
+      "init (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = 0.0F"
+        ],
+        "values_hint": []
+      },
+      "setBUse (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "bUse = bUse"
+        ],
+        "values_hint": []
+      },
+      "setVecY (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = vecY"
+        ],
+        "values_hint": []
+      },
+      "setHeight (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "intersects (inherited from ApoEntity)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "contains (inherited from ApoEntity)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getRec (inherited from ApoEntity)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkOpaqueColorCollisions (inherited from ApoEntity)": {
+        "calls": [
+          "entity.getIBackground",
+          "entity.getRec",
+          "img_him.getHeight",
+          "img_him.getRGB",
+          "img_me.getRGB",
+          "img_me.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getSubRec (inherited from ApoEntity)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isOpaque (inherited from ApoEntity)": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "16",
+          "24"
+        ]
+      }
+    }
+  },
+  "ApoBotPlayer": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "bRun = false",
+          "bJump = false",
+          "bUp = true",
+          "curJumpHeight = 0"
+        ],
+        "values_hint": []
+      },
+      "setBUp": {
+        "calls": [],
+        "logic_hints": [
+          "bUp = up"
+        ],
+        "values_hint": []
+      },
+      "setJumpHeight": {
+        "calls": [],
+        "logic_hints": [
+          "curJumpHeight = 0"
+        ],
+        "values_hint": []
+      },
+      "setCurJumpHeight": {
+        "calls": [],
+        "logic_hints": [
+          "curJumpHeight = curJumpHeight"
+        ],
+        "values_hint": []
+      },
+      "setBJump": {
+        "calls": [],
+        "logic_hints": [
+          "bJump = jump"
+        ],
+        "values_hint": []
+      },
+      "setRunY": {
+        "calls": [],
+        "logic_hints": [
+          "runY = runY"
+        ],
+        "values_hint": []
+      },
+      "setBRun": {
+        "calls": [],
+        "logic_hints": [
+          "bRun = run"
+        ],
+        "values_hint": []
+      },
+      "setStartDir": {
+        "calls": [],
+        "logic_hints": [
+          "startDir = startDir"
+        ],
+        "values_hint": []
+      },
+      "setCurDir": {
+        "calls": [],
+        "logic_hints": [
+          "curDir = curDir",
+          "curDir = ApoBotConstants.DIR_NORTH_UPLEFT",
+          "curDir = ApoBotConstants.DIR_WEST_DOWNLEFT"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "curDir = = ApoBotConstants.DIR_SOUTH_DOWNRIGHT) {",
+          "curDir = = ApoBotConstants.DIR_WEST_DOWNLEFT) {",
+          "curDir = = ApoBotConstants.DIR_NORTH_UPLEFT) {",
+          "curDir = = ApoBotConstants.DIR_EAST_UPRIGHT) {"
+        ],
+        "values_hint": [
+          "40",
+          "16"
+        ]
+      },
+      "render": {
+        "calls": [
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setTiles (inherited from ApoAnimation)": {
+        "calls": [],
+        "logic_hints": [
+          "tiles = tiles"
+        ],
+        "values_hint": []
+      },
+      "setFrame (inherited from ApoAnimation)": {
+        "calls": [],
+        "logic_hints": [
+          "frame = frame"
+        ],
+        "values_hint": []
+      },
+      "setCurTime (inherited from ApoAnimation)": {
+        "calls": [],
+        "logic_hints": [
+          "curTime = curTime"
+        ],
+        "values_hint": []
+      },
+      "setTime (inherited from ApoAnimation)": {
+        "calls": [],
+        "logic_hints": [
+          "time = time"
+        ],
+        "values_hint": []
+      },
+      "setBUse (inherited from ApoEntity) (inherited from ApoAnimation)": {
+        "calls": [],
+        "logic_hints": [
+          "bUse = bUse"
+        ],
+        "values_hint": []
+      },
+      "setVecY (inherited from ApoEntity) (inherited from ApoAnimation)": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = vecY"
+        ],
+        "values_hint": []
+      },
+      "setHeight (inherited from ApoEntity) (inherited from ApoAnimation)": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "intersects (inherited from ApoEntity) (inherited from ApoAnimation)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "contains (inherited from ApoEntity) (inherited from ApoAnimation)": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getRec (inherited from ApoEntity) (inherited from ApoAnimation)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkOpaqueColorCollisions (inherited from ApoEntity) (inherited from ApoAnimation)": {
+        "calls": [
+          "entity.getIBackground",
+          "entity.getRec",
+          "img_him.getHeight",
+          "img_him.getRGB",
+          "img_me.getRGB",
+          "img_me.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getSubRec (inherited from ApoEntity) (inherited from ApoAnimation)": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isOpaque (inherited from ApoEntity) (inherited from ApoAnimation)": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "16",
+          "24"
+        ]
+      }
+    }
+  },
+  "ApoBotGame": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "waitTimeRender.clear"
+        ],
+        "logic_hints": [
+          "curFunction = null",
+          "curLevelString = 0",
+          "curCommandDraw = ApoBotConstants.FORWARD",
+          "editor = = null) {"
+        ],
+        "values_hint": []
+      },
+      "loadLevel": {
+        "calls": [
+          "editor.loadLevel",
+          "io.getLevel",
+          "io.readLevel",
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "saveLevel": {
+        "calls": [
+          "editor.saveLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "addLevelToIO": {
+        "calls": [
+          "io.addLevel"
+        ],
+        "logic_hints": [
+          "curLevelString = 3"
+        ],
+        "values_hint": []
+      },
+      "setMenu": {
+        "calls": [],
+        "logic_hints": [
+          "bMenu = true",
+          "bGame = false",
+          "bTutorial = false",
+          "bEditor = false"
+        ],
+        "values_hint": []
+      },
+      "setGame": {
+        "calls": [],
+        "logic_hints": [
+          "bMenu = false",
+          "bGame = true",
+          "bTutorial = false",
+          "bEditor = false"
+        ],
+        "values_hint": [
+          "13",
+          "39"
+        ]
+      },
+      "setTutorial": {
+        "calls": [
+          "tutorial.init"
+        ],
+        "logic_hints": [
+          "bMenu = false",
+          "bGame = false",
+          "bTutorial = true",
+          "bEditor = false"
+        ],
+        "values_hint": [
+          "13"
+        ]
+      },
+      "setEditor": {
+        "calls": [
+          "editor.init"
+        ],
+        "logic_hints": [
+          "bMenu = false",
+          "bGame = false",
+          "bTutorial = false",
+          "bEditor = true"
+        ],
+        "values_hint": [
+          "27",
+          "13",
+          "28"
+        ]
+      },
+      "setKeyFunction": {
+        "calls": [
+          "tutorial.keyPressed"
+        ],
+        "logic_hints": [
+          "bShowFps = !this.bShowFps"
+        ],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "setMouseFunction": {
+        "calls": [
+          "editor.mouseFunction",
+          "function.equals",
+          "function.indexOf",
+          "tutorial.canGo"
+        ],
+        "logic_hints": [
+          "curCommandDraw = ApoBotConstants.FORWARD",
+          "curCommandDraw = ApoBotConstants.LEFT",
+          "curCommandDraw = ApoBotConstants.RIGHT",
+          "curCommandDraw = ApoBotConstants.JUMP"
+        ],
+        "values_hint": []
+      },
+      "nextLevelChange": {
+        "calls": [
+          "editor.getLevels",
+          "io.getLevel",
+          "io.setLevels"
+        ],
+        "logic_hints": [
+          "totalSteps = 0",
+          "curLevelString = 0",
+          "curLevelString = ApoBotConstants.LEVELS.length - 1",
+          "curLevelString = = 3) {"
+        ],
+        "values_hint": []
+      },
+      "nextLevel": {
+        "calls": [
+          "io.getLevel",
+          "io.getMaxLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseWheelMoved": {
+        "calls": [
+          "e.getWheelRotation"
+        ],
+        "logic_hints": [
+          "curCommandDraw = ApoBotConstants.FUNCTION_TWO",
+          "curCommandDraw = ApoBotConstants.FUNCTION_ONE",
+          "curCommandDraw = ApoBotConstants.REDYE",
+          "curCommand = ApoBotConstants.FORWARD"
+        ],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [
+          "curFunction.equals",
+          "e.getButton",
+          "e.getX",
+          "e.getY",
+          "editor.mouseReleased"
+        ],
+        "logic_hints": [
+          "levelCommand = 0",
+          "mouseX = -1",
+          "mouseY = -1",
+          "mouseX = -1"
+        ],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "e.getButton",
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "mouseX = e.getX()",
+          "mouseY = e.getY()",
+          "iMouse = super.getButtons()[i].getIBackground().getSubimage(0, 0, (in",
+          "curFunction = super.getButtons()[i].getFunction()"
+        ],
+        "values_hint": [
+          "12"
+        ]
+      },
+      "mouseDragged": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "mouseX = e.getX()",
+          "mouseY = e.getY()"
+        ],
+        "values_hint": []
+      },
+      "reset": {
+        "calls": [],
+        "logic_hints": [
+          "levelSteps = 0",
+          "point = 0"
+        ],
+        "values_hint": []
+      },
+      "restart": {
+        "calls": [],
+        "logic_hints": [
+          "curInMethod = 0",
+          "curMainCommand = 0",
+          "curFunctionOneCommand = -1",
+          "curFunctionTwoCommand = -1"
+        ],
+        "values_hint": [
+          "13",
+          "39",
+          "44"
+        ]
+      },
+      "getNextCommand": {
+        "calls": [
+          "out.println"
+        ],
+        "logic_hints": [
+          "curInMethod = = 1) {",
+          "curFunctionOneCommand = -1",
+          "curFunctionTwoCommand = -1",
+          "curInMethod = 0"
+        ],
+        "values_hint": []
+      },
+      "setLevel": {
+        "calls": [
+          "level.init"
+        ],
+        "logic_hints": [
+          "curCommandDraw = ApoBotConstants.FORWARD",
+          "levelCommand = 0",
+          "point = 0",
+          "levelSteps = 0"
+        ],
+        "values_hint": [
+          "32",
+          "37",
+          "57",
+          "40",
+          "11",
+          "10"
+        ]
+      },
+      "stopGo": {
+        "calls": [],
+        "logic_hints": [
+          "bGo = false"
+        ],
+        "values_hint": [
+          "13",
+          "39",
+          "44"
+        ]
+      },
+      "think": {
+        "calls": [
+          "tutorial.think"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "60",
+          "80",
+          "50",
+          "100",
+          "70"
+        ]
+      },
+      "thinkMove": {
+        "calls": [],
+        "logic_hints": [
+          "bWinUp = false",
+          "bWinUp = true",
+          "curCommand = nextCommand",
+          "point = 1000 + (this.totalCommand - this.levelCommand) * 15 - this.l"
+        ],
+        "values_hint": [
+          "1000",
+          "16",
+          "15"
+        ]
+      },
+      "nextCommand": {
+        "calls": [
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "300"
+        ]
+      },
+      "render": {
+        "calls": [
+          "ApoHelp.round",
+          "editor.renderEditor",
+          "g.drawImage",
+          "tutorial.renderMenuTutorial"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderFPS": {
+        "calls": [
+          "g.drawString",
+          "g.setColor",
+          "g.setFont",
+          "waitTimeRender.add",
+          "waitTimeRender.clear",
+          "waitTimeRender.get",
+          "waitTimeRender.size"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "125",
+          "105",
+          "20",
+          "3000"
+        ]
+      },
+      "renderMenu": {
+        "calls": [
+          "g.drawImage",
+          "g.drawRect",
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setFont",
+          "io.getMaxLevel"
+        ],
+        "logic_hints": [
+          "curInMethod = = 0) {",
+          "curInMethod = = 1) {",
+          "curInMethod = = 2) {"
+        ],
+        "values_hint": [
+          "32",
+          "25",
+          "185",
+          "39",
+          "37",
+          "75"
+        ]
+      },
+      "renderMouseImage": {
+        "calls": [
+          "g.drawImage",
+          "iMouse.getHeight",
+          "iMouse.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderWin": {
+        "calls": [
+          "g.drawImage",
+          "g.drawRoundRect",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setFont"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "370",
+          "275",
+          "300",
+          "240",
+          "50",
+          "100"
+        ]
+      },
+      "levelLoad (inherited from ApoBotComponent)": {
+        "calls": [
+          "fileChooser.getSelectedFile",
+          "fileChooser.showOpenDialog"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "levelSave (inherited from ApoBotComponent)": {
+        "calls": [
+          "fileChooser.getSelectedFile",
+          "fileChooser.showSaveDialog",
+          "fileFilter.getLevelName",
+          "s.indexOf",
+          "s.substring"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "46"
+        ]
+      },
+      "setCurLevel (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "curLevel = curLevel"
+        ],
+        "values_hint": []
+      },
+      "setIPlayer (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "iPlayer = player"
+        ],
+        "values_hint": []
+      },
+      "setIBackgroundOriginal (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "iBackgroundOriginal = iBackgroundOriginal"
+        ],
+        "values_hint": []
+      },
+      "makeBackground (inherited from ApoBotComponent)": {
+        "calls": [
+          "image.getIBackground"
+        ],
+        "logic_hints": [
+          "iLevel = this.image.getIBackground(this.level, this.iTile, this.level"
+        ],
+        "values_hint": []
+      },
+      "centerCamera (inherited from ApoBotComponent)": {
+        "calls": [
+          "level.getLevel",
+          "player.getRunX",
+          "player.getRunY",
+          "player.getX",
+          "player.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "setITile (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "iTile = tile"
+        ],
+        "values_hint": []
+      },
+      "setLevelHeight (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "levelHeight = levelHeight"
+        ],
+        "values_hint": []
+      },
+      "setIBackground (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "iBackground = background"
+        ],
+        "values_hint": []
+      },
+      "setButtonFunction (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "functionMouse = function"
+        ],
+        "values_hint": []
+      },
+      "keyReleased (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "functionKey = -1"
+        ],
+        "values_hint": []
+      },
+      "keyPressed (inherited from ApoBotComponent)": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [
+          "functionKey = code"
+        ],
+        "values_hint": []
+      },
+      "getStartX (inherited from ApoBotComponent)": {
+        "calls": [
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "getStartY (inherited from ApoBotComponent)": {
+        "calls": [
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "renderLevel (inherited from ApoBotComponent)": {
+        "calls": [
+          "g.drawImage",
+          "iTile.getSubimage",
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "32",
+          "25",
+          "35",
+          "16",
+          "30"
+        ]
+      },
+      "renderPlayer (inherited from ApoBotComponent)": {
+        "calls": [
+          "level.getLevel",
+          "player.getHeight",
+          "player.getX",
+          "player.getY",
+          "player.render"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "16",
+          "35",
+          "30"
+        ]
+      },
+      "renderOvertile (inherited from ApoBotComponent)": {
+        "calls": [
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderTile (inherited from ApoBotComponent)": {
+        "calls": [
+          "g.drawImage",
+          "iTile.getSubimage",
+          "level.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "32",
+          "25",
+          "35",
+          "16",
+          "30"
+        ]
+      },
+      "setWAIT_TIME_RENDER (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [
+          "thread.setWaitRender"
+        ],
+        "logic_hints": [
+          "WAIT_TIME_RENDER = wait_time_render"
+        ],
+        "values_hint": []
+      },
+      "setButtons (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "buttons = buttons"
+        ],
+        "values_hint": []
+      },
+      "createBackbuffer (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "backbuffer.flush",
+          "gc.createCompatibleVolatileImage",
+          "ge.getDefaultScreenDevice"
+        ],
+        "logic_hints": [
+          "backbuffer = null",
+          "ge = GraphicsEnvironment.getLocalGraphicsEnvironment()",
+          "gc = this.ge.getDefaultScreenDevice().getDefaultConfiguration()",
+          "backbuffer = this.gc.createCompatibleVolatileImage(getWidth(),\tgetHeight("
+        ],
+        "values_hint": []
+      },
+      "checkBackbuffer (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [
+          "backbuffer.validate"
+        ],
+        "logic_hints": [
+          "backbuffer = = null) {"
+        ],
+        "values_hint": []
+      },
+      "setRestartThreadValues (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [
+          "thread.setRestart"
+        ],
+        "logic_hints": [
+          "thread = = null) {"
+        ],
+        "values_hint": []
+      },
+      "renderFPS (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [
+          "g.drawString"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "start (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [
+          "thread.start"
+        ],
+        "logic_hints": [
+          "thread = = null) && (this.bTimer)) {",
+          "strategy = getBufferStrategy()",
+          "thread = new ApoThread(this, this.WAIT_TIME_THINK, this.WAIT_TIME_REN"
+        ],
+        "values_hint": []
+      },
+      "stop (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [
+          "thread.stop"
+        ],
+        "logic_hints": [
+          "thread = null"
+        ],
+        "values_hint": []
+      },
+      "getFPS (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [
+          "thread.getFps"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setBThink (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRepaint (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "bRepaint = bRepaint"
+        ],
+        "values_hint": []
+      },
+      "setBDirections (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "bDirections = bDirections"
+        ],
+        "values_hint": []
+      },
+      "setBBack (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "bBack = bBack"
+        ],
+        "values_hint": []
+      },
+      "setBLoose (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "bLoose = bLoose"
+        ],
+        "values_hint": []
+      },
+      "setBWin (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "bWin = bWin"
+        ],
+        "values_hint": []
+      },
+      "setBHelp (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [],
+        "logic_hints": [
+          "bHelp = bHelp"
+        ],
+        "values_hint": []
+      },
+      "mouseMoved (inherited from ApoComponentBufferedStrategy) (inherited from ApoBotComponent)": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoBotEditor": {
+    "methods_execution": {
+      "ApoBotEditor_constructor_1": {
+        "calls": [],
+        "logic_hints": [
+          "game = game",
+          "levelYWidth = 10",
+          "functionTwo = 8",
+          "io = new ApoBotLevelIO()"
+        ],
+        "values_hint": [
+          "10",
+          "16",
+          "12"
+        ]
+      },
+      "init": {
+        "calls": [
+          "game.setLevel",
+          "io.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getLevels": {
+        "calls": [
+          "io.getLevels"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "loadLevel": {
+        "calls": [
+          "game.setLevel",
+          "io.getLevel",
+          "io.readLevel"
+        ],
+        "logic_hints": [
+          "curEditorLevel = 0",
+          "functionTwo = this.io.getLevel(this.curEditorLevel).getFunctionsTwoMenu()",
+          "levelYWidth = this.io.getLevel(this.curEditorLevel).getLevel().length"
+        ],
+        "values_hint": []
+      },
+      "saveLevel": {
+        "calls": [
+          "io.writeLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getLevel": {
+        "calls": [
+          "io.getLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getMaxLevel": {
+        "calls": [
+          "io.getMaxLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setCurTile": {
+        "calls": [],
+        "logic_hints": [
+          "curTile = curTile"
+        ],
+        "values_hint": []
+      },
+      "mouseFunction": {
+        "calls": [
+          "function.equals",
+          "game.addLevelToIO",
+          "game.getLevel",
+          "game.levelLoad",
+          "game.levelSave",
+          "game.setGame",
+          "game.setLevel",
+          "io.addLevel",
+          "io.changeLevel",
+          "io.getLevel",
+          "io.getMaxLevel",
+          "io.removeLevel"
+        ],
+        "logic_hints": [
+          "levelYWidth = 40",
+          "levelYWidth = 3",
+          "functionTwo = 12",
+          "functionTwo = 0"
+        ],
+        "values_hint": [
+          "40",
+          "20",
+          "12"
+        ]
+      },
+      "mouseReleased": {
+        "calls": [
+          "e.getButton",
+          "e.getX",
+          "e.getY",
+          "game.getLevel",
+          "game.getStartX",
+          "game.getStartY",
+          "p.addPoint",
+          "p.intersects"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "mouseClick": {
+        "calls": [
+          "game.getLevel",
+          "game.getPlayer"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "renderEditor": {
+        "calls": [
+          "g.fillRect",
+          "g.setColor",
+          "g.setFont",
+          "game.getILevel",
+          "game.getImage",
+          "game.getLevel",
+          "game.getStartX",
+          "game.getStartY",
+          "game.renderLevel",
+          "io.getMaxLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "32",
+          "25",
+          "42",
+          "107",
+          "18",
+          "15"
+        ]
+      }
+    }
+  },
+  "ApoBotButton": {
+    "methods_execution": {
+      "ApoBotButton_constructor_1": {
+        "calls": [],
+        "logic_hints": [
+          "game = game"
+        ],
+        "values_hint": []
+      },
+      "init": {
+        "calls": [
+          "game.getButtons",
+          "game.getHeight",
+          "game.getIPlayer",
+          "game.getITile",
+          "game.getImage",
+          "game.getWidth",
+          "game.setButtons"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "250",
+          "95",
+          "60",
+          "300",
+          "10",
+          "260"
+        ]
+      }
+    }
+  },
+  "ApoBotTutorial": {
+    "methods_execution": {
+      "ApoBotTutorial_constructor_1": {
+        "calls": [],
+        "logic_hints": [
+          "game = game"
+        ],
+        "values_hint": []
+      },
+      "init": {
+        "calls": [
+          "game.getButtons",
+          "game.loadLevel"
+        ],
+        "logic_hints": [
+          "step = 0",
+          "curString = ApoBotConstants.TUTORIAL_SPEECH[this.step]",
+          "curStringInt = 0",
+          "curDelta = 0"
+        ],
+        "values_hint": [
+          "13",
+          "12"
+        ]
+      },
+      "canGo": {
+        "calls": [],
+        "logic_hints": [
+          "step = = 5) || (this.step == 6) || (this.step == 7) || (this.step =",
+          "step = = 11)) {"
+        ],
+        "values_hint": [
+          "11"
+        ]
+      },
+      "keyPressed": {
+        "calls": [
+          "curString.length",
+          "game.setMenu"
+        ],
+        "logic_hints": [
+          "step = = 5) || (this.step == 6) || (this.step == 7) || (this.step =",
+          "step = = 11)) {",
+          "curStringInt = this.curString.length()"
+        ],
+        "values_hint": [
+          "11"
+        ]
+      },
+      "nextStep": {
+        "calls": [
+          "game.getButtons",
+          "game.isBWin",
+          "game.setButtonFunction",
+          "game.setMenu"
+        ],
+        "logic_hints": [
+          "step = = 5) || (this.step == 6) || (this.step == 7) || (this.step =",
+          "step = = 11)) {",
+          "curString = ApoBotConstants.TUTORIAL_SPEECH[this.step]",
+          "curStringInt = 0"
+        ],
+        "values_hint": [
+          "10",
+          "13",
+          "11",
+          "12"
+        ]
+      },
+      "think": {
+        "calls": [
+          "curString.length",
+          "game.isBWin",
+          "game.thinkMove"
+        ],
+        "logic_hints": [
+          "step = = 5) || (this.step == 6) || (this.step == 7) || (this.step =",
+          "step = = 11)) {"
+        ],
+        "values_hint": [
+          "11"
+        ]
+      },
+      "renderMenuTutorial": {
+        "calls": [
+          "curString.substring",
+          "g.setColor",
+          "g.setFont",
+          "game.getButtons",
+          "game.getImage"
+        ],
+        "logic_hints": [
+          "step = = 3) || (this.step == 4)) {",
+          "step = = 5) {",
+          "step = = 6) {",
+          "step = = 7) {"
+        ],
+        "values_hint": [
+          "32",
+          "35",
+          "16",
+          "11",
+          "50",
+          "10"
+        ]
+      },
+      "drawArrow": {
+        "calls": [
+          "g.fillPolygon",
+          "g.fillRect",
+          "g.setColor",
+          "poly.addPoint"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10",
+          "20"
+        ]
+      },
+      "drawSpeech": {
+        "calls": [
+          "curString.substring",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "strings.add",
+          "strings.get",
+          "strings.set",
+          "strings.size"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "23",
+          "255",
+          "40",
+          "100",
+          "10",
+          "30"
+        ]
+      }
+    }
+  },
+  "ApoBotLevelLevel": {
+    "methods_execution": {
+      "setStartGround": {
+        "calls": [],
+        "logic_hints": [
+          "startGround = startGround"
+        ],
+        "values_hint": []
+      },
+      "setStartHeight": {
+        "calls": [],
+        "logic_hints": [
+          "startHeight = startHeight"
+        ],
+        "values_hint": []
+      },
+      "setGround": {
+        "calls": [],
+        "logic_hints": [
+          "ground = ground"
+        ],
+        "values_hint": []
+      },
+      "setHeight": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoBotLevelIO": {
+    "methods_execution": {
+      "ApoBotLevelIO_constructor_0": {
+        "calls": [],
+        "logic_hints": [
+          "levels = new ArrayList<ApoBotLevel>()"
+        ],
+        "values_hint": []
+      },
+      "getLevel": {
+        "calls": [
+          "levels.get",
+          "levels.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getMaxLevel": {
+        "calls": [
+          "levels.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setLevels": {
+        "calls": [],
+        "logic_hints": [
+          "levels = levels"
+        ],
+        "values_hint": []
+      },
+      "addLevel": {
+        "calls": [
+          "levels.add",
+          "levels.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "changeLevel": {
+        "calls": [
+          "levels.add",
+          "levels.get",
+          "levels.remove",
+          "levels.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "removeLevel": {
+        "calls": [
+          "levels.remove"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "readLevel": {
+        "calls": [
+          "data.readInt",
+          "levels.add"
+        ],
+        "logic_hints": [
+          "levels = new ArrayList<ApoBotLevel>()"
+        ],
+        "values_hint": []
+      },
+      "writeLevel": {
+        "calls": [
+          "data.writeInt",
+          "levels.get",
+          "levels.size"
+        ],
+        "logic_hints": [
+          "levels = = null) && (this.levels.size() <= 0)) {"
+        ],
+        "values_hint": []
+      },
+      "setLevelName (inherited from ApoIO)": {
+        "calls": [],
+        "logic_hints": [
+          "levelName = levelName"
+        ],
+        "values_hint": []
+      },
+      "setFileEnding (inherited from ApoIO)": {
+        "calls": [],
+        "logic_hints": [
+          "fileEnding = fileEnding"
+        ],
+        "values_hint": []
+      },
+      "setCurrentLevel (inherited from ApoIO)": {
+        "calls": [],
+        "logic_hints": [
+          "currentLevel = currentLevel"
+        ],
+        "values_hint": []
+      },
+      "setMaxLevel (inherited from ApoIO)": {
+        "calls": [],
+        "logic_hints": [
+          "maxLevel = maxLevel"
+        ],
+        "values_hint": []
+      },
+      "hasNextLevel (inherited from ApoIO)": {
+        "calls": [
+          "connection.openStream",
+          "data.close"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoBotLevelTest": {
+    "methods_execution": {
+      "ApoBotLevelTest_constructor_0": {
+        "calls": [
+          "testLevels.add"
+        ],
+        "logic_hints": [
+          "testLevels = new ArrayList<ApoBotLevel>()"
+        ],
+        "values_hint": []
+      },
+      "getLevel": {
+        "calls": [
+          "testLevels.get",
+          "testLevels.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeLevelOne": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "13",
+          "14"
+        ]
+      },
+      "getMenuLevel": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "25",
+          "50",
+          "10",
+          "100",
+          "14",
+          "150"
+        ]
+      }
+    }
+  },
+  "ApoBotLevel": {
+    "methods_execution": {
+      "ApoBotLevel_constructor_0": {
+        "calls": [],
+        "logic_hints": [
+          "level = new ApoBotLevelLevel[10][10]",
+          "startPoint = new Point(0, 0)",
+          "directionView = ApoBotConstants.DIR_SOUTH_DOWNRIGHT",
+          "commandsMenu = 16"
+        ],
+        "values_hint": [
+          "10",
+          "16"
+        ]
+      },
+      "ApoBotLevel_constructor_2": {
+        "calls": [],
+        "logic_hints": [
+          "level = new ApoBotLevelLevel[startY][startX]",
+          "startPoint = new Point(0, 0)",
+          "directionView = ApoBotConstants.DIR_SOUTH_DOWNRIGHT",
+          "commandsMenu = 16"
+        ],
+        "values_hint": [
+          "16"
+        ]
+      },
+      "ApoBotLevel_constructor_4": {
+        "calls": [],
+        "logic_hints": [
+          "level = level",
+          "startPoint = startPoint",
+          "directionView = directionView",
+          "commandsMenu = menu[0]"
+        ],
+        "values_hint": []
+      },
+      "setCommandsMenu": {
+        "calls": [],
+        "logic_hints": [
+          "commandsMenu = commandsMenu"
+        ],
+        "values_hint": []
+      },
+      "setFunctionsOneMenu": {
+        "calls": [],
+        "logic_hints": [
+          "functionsOneMenu = functionsOneMenu"
+        ],
+        "values_hint": []
+      },
+      "setFunctionsTwoMenu": {
+        "calls": [],
+        "logic_hints": [
+          "functionsTwoMenu = functionsTwoMenu"
+        ],
+        "values_hint": []
+      },
+      "setLevel": {
+        "calls": [],
+        "logic_hints": [
+          "level = level"
+        ],
+        "values_hint": []
+      },
+      "setStartPoint": {
+        "calls": [],
+        "logic_hints": [
+          "startPoint = startPoint"
+        ],
+        "values_hint": []
+      },
+      "setDirectionView": {
+        "calls": [],
+        "logic_hints": [
+          "directionView = directionView"
+        ],
+        "values_hint": []
+      }
+    }
+  }
+}

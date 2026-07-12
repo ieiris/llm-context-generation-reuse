@@ -1,0 +1,8171 @@
+{
+  "Test2": {
+    "methods_execution": {
+      "think": {
+        "calls": [
+          "player.canJump",
+          "player.jump",
+          "player.runNormal",
+          "player.runRight"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "TestIf": {
+    "methods_execution": {
+      "think": {
+        "calls": [
+          "enemy.getHeight",
+          "enemy.getWidth",
+          "enemy.getX",
+          "enemy.getY",
+          "enemy.isFireballType",
+          "level.getEnemies",
+          "level.getLevelArray",
+          "out.println",
+          "player.drawRect",
+          "player.getHeight",
+          "player.getVecY",
+          "player.getWidth",
+          "player.getX",
+          "player.getY",
+          "player.jump",
+          "player.runFast",
+          "player.runRight",
+          "player.stopGame"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "playerRunFastAndJump": {
+        "calls": [
+          "player.canJump",
+          "player.duck",
+          "player.getVecY",
+          "player.jump",
+          "player.runFast"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "004"
+        ]
+      }
+    }
+  },
+  "Test": {
+    "methods_execution": {
+      "think": {
+        "calls": [
+          "enemy.getWidth",
+          "enemy.getX",
+          "level.getEnemies",
+          "player.canJump",
+          "player.jump",
+          "player.runFast",
+          "player.runRight"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoIO": {
+    "methods_execution": {
+      "setLevelName": {
+        "calls": [],
+        "logic_hints": [
+          "levelName = levelName"
+        ],
+        "values_hint": []
+      },
+      "setFileEnding": {
+        "calls": [],
+        "logic_hints": [
+          "fileEnding = fileEnding"
+        ],
+        "values_hint": []
+      },
+      "setCurrentLevel": {
+        "calls": [],
+        "logic_hints": [
+          "currentLevel = currentLevel"
+        ],
+        "values_hint": []
+      },
+      "setMaxLevel": {
+        "calls": [],
+        "logic_hints": [
+          "maxLevel = maxLevel"
+        ],
+        "values_hint": []
+      },
+      "hasNextLevel": {
+        "calls": [
+          "connection.openStream",
+          "data.close"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "readLevel": {
+        "calls": [
+          "connection.openStream",
+          "data.close",
+          "fileName.lastIndexOf",
+          "fileName.substring",
+          "out.println"
+        ],
+        "logic_hints": [
+          "maxLevel = 0",
+          "currentLevel = 0",
+          "levelName = fileName.substring(fileName.lastIndexOf(File.separator) + 1,",
+          "levelName = fileName.substring(fileName.lastIndexOf(\"/\") + 1, fileName.l"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoThread": {
+    "methods_execution": {
+      "setWaitThinkTicks": {
+        "calls": [],
+        "logic_hints": [
+          "waitThinkTicks = waitThinkTicks",
+          "waitThink = 1000 / this.waitThinkTicks"
+        ],
+        "values_hint": [
+          "1000"
+        ]
+      },
+      "setWaitRenderTicks": {
+        "calls": [],
+        "logic_hints": [
+          "waitRenderTicks = waitRenderTicks",
+          "waitRender = 1000 / this.waitRenderTicks"
+        ],
+        "values_hint": [
+          "1000"
+        ]
+      },
+      "setBThink": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRender": {
+        "calls": [],
+        "logic_hints": [
+          "bRender = bRender"
+        ],
+        "values_hint": []
+      },
+      "setWait": {
+        "calls": [],
+        "logic_hints": [
+          "waitThink = wait"
+        ],
+        "values_hint": []
+      },
+      "setWaitRender": {
+        "calls": [],
+        "logic_hints": [
+          "waitRender = wait"
+        ],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "t.start"
+        ],
+        "logic_hints": [
+          "last = System.nanoTime()"
+        ],
+        "values_hint": []
+      },
+      "setBRunning": {
+        "calls": [],
+        "logic_hints": [
+          "bRunning = bRunning"
+        ],
+        "values_hint": []
+      },
+      "run": {
+        "calls": [
+          "Thread.sleep",
+          "game.renderGraphics",
+          "out.println"
+        ],
+        "logic_hints": [
+          "last = System.currentTimeMillis()",
+          "last = now",
+          "fps = frames"
+        ],
+        "values_hint": [
+          "1000",
+          "10"
+        ]
+      },
+      "think": {
+        "calls": [
+          "game.isBThink",
+          "game.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "game.isBRepaint",
+          "game.render"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setRestart": {
+        "calls": [],
+        "logic_hints": [
+          "last = System.nanoTime()"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoConstants": {
+    "methods_execution": {}
+  },
+  "ApoApplet": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "ApoConstants.setApplet"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "destroy": {
+        "calls": [
+          "component.stop"
+        ],
+        "logic_hints": [
+          "component = null",
+          "currentComponent = null"
+        ],
+        "values_hint": []
+      },
+      "setComponent": {
+        "calls": [
+          "component.init",
+          "component.start",
+          "component.stop",
+          "currentComponent.add",
+          "currentComponent.remove",
+          "currentComponent.repaint"
+        ],
+        "logic_hints": [
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component",
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoComponent": {
+    "methods_execution": {
+      "setTicksRenderer": {
+        "calls": [
+          "thread.setWaitRenderTicks"
+        ],
+        "logic_hints": [
+          "TICKS_RENDER = ticks_render"
+        ],
+        "values_hint": []
+      },
+      "setButtons": {
+        "calls": [],
+        "logic_hints": [
+          "buttons = buttons"
+        ],
+        "values_hint": []
+      },
+      "keyPressed": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "keyReleased": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setRestartThreadValues": {
+        "calls": [
+          "thread.setRestart"
+        ],
+        "logic_hints": [
+          "thread = = null) {"
+        ],
+        "values_hint": []
+      },
+      "renderFPS": {
+        "calls": [
+          "g.drawString"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "thread.start"
+        ],
+        "logic_hints": [
+          "thread = = null) && (this.bTimer)) {",
+          "thread = new ApoThread(this, this.TICKS_THINK, this.TICKS_RENDER)"
+        ],
+        "values_hint": []
+      },
+      "stop": {
+        "calls": [
+          "thread.stop"
+        ],
+        "logic_hints": [
+          "thread = null"
+        ],
+        "values_hint": []
+      },
+      "getFPS": {
+        "calls": [
+          "thread.getFps"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setBThink": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRepaint": {
+        "calls": [],
+        "logic_hints": [
+          "bRepaint = bRepaint"
+        ],
+        "values_hint": []
+      },
+      "setBDirections": {
+        "calls": [],
+        "logic_hints": [
+          "bDirections = bDirections"
+        ],
+        "values_hint": []
+      },
+      "setBBack": {
+        "calls": [],
+        "logic_hints": [
+          "bBack = bBack"
+        ],
+        "values_hint": []
+      },
+      "setBLoose": {
+        "calls": [],
+        "logic_hints": [
+          "bLoose = bLoose"
+        ],
+        "values_hint": []
+      },
+      "setBWin": {
+        "calls": [],
+        "logic_hints": [
+          "bWin = bWin"
+        ],
+        "values_hint": []
+      },
+      "setBHelp": {
+        "calls": [],
+        "logic_hints": [
+          "bHelp = bHelp"
+        ],
+        "values_hint": []
+      },
+      "mouseMoved": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMainBufferedStrategy": {
+    "methods_execution": {
+      "setComponent": {
+        "calls": [
+          "component.init",
+          "component.start",
+          "component.stop"
+        ],
+        "logic_hints": [
+          "component = component",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoAppletBufferedStrategy": {
+    "methods_execution": {
+      "destroy": {
+        "calls": [
+          "component.stop"
+        ],
+        "logic_hints": [
+          "component = null",
+          "currentComponent = null"
+        ],
+        "values_hint": []
+      },
+      "setComponent": {
+        "calls": [
+          "component.init",
+          "component.start",
+          "component.stop",
+          "currentComponent.add",
+          "currentComponent.remove",
+          "currentComponent.repaint"
+        ],
+        "logic_hints": [
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component",
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoNewThread": {
+    "methods_execution": {
+      "setBThink": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRender": {
+        "calls": [],
+        "logic_hints": [
+          "bRender = bRender"
+        ],
+        "values_hint": []
+      },
+      "setWait": {
+        "calls": [],
+        "logic_hints": [
+          "waitThink = wait"
+        ],
+        "values_hint": []
+      },
+      "setWaitRender": {
+        "calls": [],
+        "logic_hints": [
+          "waitRender = wait"
+        ],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "t.start"
+        ],
+        "logic_hints": [
+          "frameAverage = this.waitRender",
+          "lastFrame = System.currentTimeMillis()",
+          "yield = 10000f",
+          "damping = 0.1f"
+        ],
+        "values_hint": []
+      },
+      "setBRunning": {
+        "calls": [],
+        "logic_hints": [
+          "bRunning = bRunning"
+        ],
+        "values_hint": []
+      },
+      "run": {
+        "calls": [
+          "Thread.sleep"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "computeDelta": {
+        "calls": [
+          "Thread.yield",
+          "out.println"
+        ],
+        "logic_hints": [
+          "frameAverage = (this.frameAverage * 10 + (timeNow - this.lastFrame)) / 11",
+          "lastFrame = timeNow",
+          "fps = this.draws",
+          "draws = 0"
+        ],
+        "values_hint": [
+          "1000",
+          "10",
+          "11"
+        ]
+      },
+      "setRestart": {
+        "calls": [],
+        "logic_hints": [
+          "frameAverage = this.waitRender",
+          "lastFrame = System.currentTimeMillis()",
+          "yield = 10000f",
+          "damping = 0.1f"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "game.isBThink",
+          "game.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "game.isBRepaint",
+          "game.render"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMain": {
+    "methods_execution": {
+      "setComponent": {
+        "calls": [
+          "component.getHeight",
+          "component.getWidth",
+          "component.init",
+          "component.start",
+          "component.stop",
+          "currentComponent.add",
+          "currentComponent.remove",
+          "currentComponent.repaint",
+          "currentComponent.setPreferredSize"
+        ],
+        "logic_hints": [
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component",
+          "currentComponent = (JComponent)this.getContentPane()",
+          "component = component"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoTimer": {
+    "methods_execution": {
+      "setBWait": {
+        "calls": [],
+        "logic_hints": [
+          "bWait = bWait"
+        ],
+        "values_hint": []
+      },
+      "setBRender": {
+        "calls": [],
+        "logic_hints": [
+          "bRender = bRender"
+        ],
+        "values_hint": []
+      },
+      "setWait": {
+        "calls": [],
+        "logic_hints": [
+          "wait = wait"
+        ],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "timer.scheduleAtFixedRate"
+        ],
+        "logic_hints": [
+          "timer = = null )",
+          "timer = new Timer()",
+          "delta = System.nanoTime()"
+        ],
+        "values_hint": []
+      },
+      "stop": {
+        "calls": [
+          "timer.cancel"
+        ],
+        "logic_hints": [
+          "timer = null"
+        ],
+        "values_hint": []
+      },
+      "setBRunning": {
+        "calls": [],
+        "logic_hints": [
+          "bRunning = bRunning"
+        ],
+        "values_hint": []
+      },
+      "run": {
+        "calls": [
+          "game.isBRepaint",
+          "game.isBThink",
+          "game.render",
+          "game.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoComponentBufferedStrategy": {
+    "methods_execution": {
+      "setTicksRenderer": {
+        "calls": [
+          "thread.setWaitRenderTicks"
+        ],
+        "logic_hints": [
+          "TICKS_RENDER = ticks_render"
+        ],
+        "values_hint": []
+      },
+      "setButtons": {
+        "calls": [],
+        "logic_hints": [
+          "buttons = buttons"
+        ],
+        "values_hint": []
+      },
+      "keyPressed": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "keyReleased": {
+        "calls": [
+          "e.getKeyCode"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.clearRect",
+          "g.dispose",
+          "strategy.contentsLost",
+          "strategy.contentsRestored",
+          "strategy.getDrawGraphics",
+          "strategy.show"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setRestartThreadValues": {
+        "calls": [
+          "thread.setRestart"
+        ],
+        "logic_hints": [
+          "thread = = null) {"
+        ],
+        "values_hint": []
+      },
+      "renderFPS": {
+        "calls": [
+          "g.drawString"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "start": {
+        "calls": [
+          "thread.start"
+        ],
+        "logic_hints": [
+          "thread = = null) && (this.bTimer)) {",
+          "strategy = super.getBufferStrategy()",
+          "thread = new ApoThread(this, this.TICKS_THINK, this.TICKS_RENDER)"
+        ],
+        "values_hint": []
+      },
+      "stop": {
+        "calls": [
+          "thread.stop"
+        ],
+        "logic_hints": [
+          "thread = null"
+        ],
+        "values_hint": []
+      },
+      "getFPS": {
+        "calls": [
+          "thread.getFps"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setBThink": {
+        "calls": [],
+        "logic_hints": [
+          "bThink = bThink"
+        ],
+        "values_hint": []
+      },
+      "setBRepaint": {
+        "calls": [],
+        "logic_hints": [
+          "bRepaint = bRepaint"
+        ],
+        "values_hint": []
+      },
+      "setBDirections": {
+        "calls": [],
+        "logic_hints": [
+          "bDirections = bDirections"
+        ],
+        "values_hint": []
+      },
+      "setBBack": {
+        "calls": [],
+        "logic_hints": [
+          "bBack = bBack"
+        ],
+        "values_hint": []
+      },
+      "setBLoose": {
+        "calls": [],
+        "logic_hints": [
+          "bLoose = bLoose"
+        ],
+        "values_hint": []
+      },
+      "setBWin": {
+        "calls": [],
+        "logic_hints": [
+          "bWin = bWin"
+        ],
+        "values_hint": []
+      },
+      "setBHelp": {
+        "calls": [],
+        "logic_hints": [
+          "bHelp = bHelp"
+        ],
+        "values_hint": []
+      },
+      "mouseMoved": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderGraphics": {
+        "calls": [
+          "g.dispose",
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoThreadInterface": {
+    "methods_execution": {}
+  },
+  "ApoEntity": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "bSelect = false",
+          "bVisible = true",
+          "vecX = 0.0F",
+          "vecY = 0.0F"
+        ],
+        "values_hint": []
+      },
+      "setStartX": {
+        "calls": [],
+        "logic_hints": [
+          "startX = startX"
+        ],
+        "values_hint": []
+      },
+      "setStartY": {
+        "calls": [],
+        "logic_hints": [
+          "startY = startY"
+        ],
+        "values_hint": []
+      },
+      "setBOpaque": {
+        "calls": [],
+        "logic_hints": [
+          "bOpaque = bOpaque"
+        ],
+        "values_hint": []
+      },
+      "setBVisible": {
+        "calls": [],
+        "logic_hints": [
+          "bVisible = bVisible"
+        ],
+        "values_hint": []
+      },
+      "setBSelect": {
+        "calls": [],
+        "logic_hints": [
+          "bSelect = bSelect"
+        ],
+        "values_hint": []
+      },
+      "setBClose": {
+        "calls": [],
+        "logic_hints": [
+          "bClose = bClose"
+        ],
+        "values_hint": []
+      },
+      "setBUse": {
+        "calls": [],
+        "logic_hints": [
+          "bUse = bUse"
+        ],
+        "values_hint": []
+      },
+      "setVecY": {
+        "calls": [],
+        "logic_hints": [
+          "vecY = vecY"
+        ],
+        "values_hint": []
+      },
+      "setVecX": {
+        "calls": [],
+        "logic_hints": [
+          "vecX = vecX"
+        ],
+        "values_hint": []
+      },
+      "setWidth": {
+        "calls": [],
+        "logic_hints": [
+          "width = width"
+        ],
+        "values_hint": []
+      },
+      "setHeight": {
+        "calls": [],
+        "logic_hints": [
+          "height = height"
+        ],
+        "values_hint": []
+      },
+      "intersects": {
+        "calls": [
+          "ApoHelp.rectangleIntersects",
+          "Rectangle2D.Float",
+          "entity.getHeight",
+          "entity.getIBackground",
+          "entity.getRec",
+          "entity.getWidth",
+          "entity.getX",
+          "entity.getY",
+          "g.drawImage",
+          "g.drawRect",
+          "g.setColor",
+          "img_him.getHeight",
+          "img_him.getRGB",
+          "img_me.getRGB",
+          "img_me.getWidth",
+          "myRec.createIntersection"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "24",
+          "16"
+        ]
+      },
+      "intersects/1": {
+        "calls": [
+          "ApoHelp.rectangleIntersects",
+          "entity.getHeight",
+          "entity.getRec",
+          "entity.getWidth",
+          "entity.getX",
+          "entity.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "contains": {
+        "calls": [
+          "entity.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkOpaqueColorCollisions": {
+        "calls": [
+          "entity.getIBackground",
+          "entity.getRec",
+          "img_him.getHeight",
+          "img_him.getRGB",
+          "img_me.getRGB",
+          "img_me.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getSubRec": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isOpaque": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "24",
+          "16"
+        ]
+      },
+      "render": {
+        "calls": [
+          "g.drawImage",
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoAnimation": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "direction = 0"
+        ],
+        "values_hint": []
+      },
+      "makeImageArray": {
+        "calls": [
+          "g.dispose",
+          "g.drawImage",
+          "image.createGraphics",
+          "out.println"
+        ],
+        "logic_hints": [
+          "images = new BufferedImage[0][0]",
+          "images = new BufferedImage[this.maxDirection][this.tiles]"
+        ],
+        "values_hint": []
+      },
+      "setDirection": {
+        "calls": [],
+        "logic_hints": [
+          "direction = direction"
+        ],
+        "values_hint": []
+      },
+      "setTiles": {
+        "calls": [],
+        "logic_hints": [
+          "tiles = tiles"
+        ],
+        "values_hint": []
+      },
+      "setFrame": {
+        "calls": [],
+        "logic_hints": [
+          "frame = frame"
+        ],
+        "values_hint": []
+      },
+      "setCurTime": {
+        "calls": [],
+        "logic_hints": [
+          "curTime = curTime"
+        ],
+        "values_hint": []
+      },
+      "setTime": {
+        "calls": [],
+        "logic_hints": [
+          "time = time"
+        ],
+        "values_hint": []
+      },
+      "setBLoop": {
+        "calls": [],
+        "logic_hints": [
+          "bLoop = bLoop"
+        ],
+        "values_hint": []
+      },
+      "setBAnimation": {
+        "calls": [],
+        "logic_hints": [
+          "bAnimation = bAnimation"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawImage",
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoButtonText": {
+    "methods_execution": {
+      "setColorPressed": {
+        "calls": [],
+        "logic_hints": [
+          "colorPressed = colorPressed"
+        ],
+        "values_hint": []
+      },
+      "setColorReleased": {
+        "calls": [],
+        "logic_hints": [
+          "colorReleased = colorReleased"
+        ],
+        "values_hint": []
+      },
+      "setFontSize": {
+        "calls": [],
+        "logic_hints": [
+          "font = new Font( \"Dialog\", Font.BOLD, size )"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawImage",
+          "g.drawRect",
+          "g.drawString",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "text.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoTextField": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "curString.length"
+        ],
+        "logic_hints": [
+          "curString = \"\"",
+          "position = this.curString.length()",
+          "bLineOn = true",
+          "time = 0"
+        ],
+        "values_hint": [
+          "15",
+          "20"
+        ]
+      },
+      "setFont": {
+        "calls": [],
+        "logic_hints": [
+          "font = font"
+        ],
+        "values_hint": []
+      },
+      "setMaxLength": {
+        "calls": [],
+        "logic_hints": [
+          "maxLength = maxLength"
+        ],
+        "values_hint": []
+      },
+      "setCurString": {
+        "calls": [],
+        "logic_hints": [
+          "curString = curString"
+        ],
+        "values_hint": []
+      },
+      "setPosition": {
+        "calls": [
+          "curString.length"
+        ],
+        "logic_hints": [
+          "position = position",
+          "position = 0",
+          "position = this.curString.length()"
+        ],
+        "values_hint": []
+      },
+      "deleteTextBackspace": {
+        "calls": [
+          "curString.length",
+          "curString.substring"
+        ],
+        "logic_hints": [
+          "curString = (new StringBuilder(String.valueOf(this.curString.substring(0"
+        ],
+        "values_hint": []
+      },
+      "deleteTextDelete": {
+        "calls": [
+          "curString.length",
+          "curString.substring"
+        ],
+        "logic_hints": [
+          "curString = (new StringBuilder(String.valueOf(this.curString.substring(0"
+        ],
+        "values_hint": []
+      },
+      "addCharacter": {
+        "calls": [
+          "curString.length",
+          "curString.substring"
+        ],
+        "logic_hints": [
+          "curString = (new StringBuilder(String.valueOf(this.curString.substring(0"
+        ],
+        "values_hint": [
+          "127",
+          "37",
+          "20",
+          "39"
+        ]
+      },
+      "showLine": {
+        "calls": [],
+        "logic_hints": [
+          "bLineOn = true",
+          "time = 0"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "time = 0",
+          "bLineOn = !this.bLineOn"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "curString.substring",
+          "g.drawLine",
+          "g.drawRect",
+          "g.drawString",
+          "g.fillRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      }
+    }
+  },
+  "ApoButton": {
+    "methods_execution": {
+      "setBWait": {
+        "calls": [],
+        "logic_hints": [
+          "bWait = bWait"
+        ],
+        "values_hint": []
+      },
+      "setWAIT_DELAY": {
+        "calls": [],
+        "logic_hints": [
+          "WAIT_DELAY = wait_delay"
+        ],
+        "values_hint": []
+      },
+      "setBOver": {
+        "calls": [],
+        "logic_hints": [
+          "bOver = bOver"
+        ],
+        "values_hint": []
+      },
+      "setBPressed": {
+        "calls": [],
+        "logic_hints": [
+          "bPressed = bPressed"
+        ],
+        "values_hint": []
+      },
+      "setFunction": {
+        "calls": [],
+        "logic_hints": [
+          "function = function"
+        ],
+        "values_hint": []
+      },
+      "getMove": {
+        "calls": [],
+        "logic_hints": [
+          "bOver = false",
+          "bPressed = false",
+          "wait = 0",
+          "maxWait = 0"
+        ],
+        "values_hint": []
+      },
+      "getReleased": {
+        "calls": [],
+        "logic_hints": [
+          "wait = 0",
+          "maxWait = 0",
+          "bFirstWait = true"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "bFirstWait = false"
+        ],
+        "values_hint": [
+          "400",
+          "2500"
+        ]
+      },
+      "render": {
+        "calls": [
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoDragObject": {
+    "methods_execution": {
+      "getPressed": {
+        "calls": [],
+        "logic_hints": [
+          "diffX = (int)( x - this.getX() )",
+          "diffY = (int)( y - this.getY() )"
+        ],
+        "values_hint": []
+      },
+      "getReleased": {
+        "calls": [],
+        "logic_hints": [
+          "diffX = 0",
+          "diffY = 0"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.fillRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoRawScale3x": {
+    "methods_execution": {}
+  },
+  "ApoImage": {
+    "methods_execution": {
+      "getPic": {
+        "calls": [
+          "mt.addImage",
+          "mt.waitForAll"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getImage": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "ImageIO.read",
+          "e.printStackTrace",
+          "g.dispose",
+          "g.drawImage",
+          "graphicsConfiguration.createCompatibleImage",
+          "icon.createGraphics",
+          "img.getHeight",
+          "img.getWidth",
+          "out.println",
+          "result.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoImageScale": {
+    "methods_execution": {
+      "setScale": {
+        "calls": [],
+        "logic_hints": [
+          "scale = scale"
+        ],
+        "values_hint": []
+      },
+      "writeScaledImage": {
+        "calls": [
+          "ImageIO.read",
+          "e.printStackTrace"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "writeScaledImage/2": {
+        "calls": [
+          "ImageIO.write",
+          "e.printStackTrace",
+          "writeFile.lastIndexOf",
+          "writeFile.substring"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getDoubleScaledImage": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "image.setRGB",
+          "scaler.getScaledData",
+          "srcImage.getHeight",
+          "srcImage.getRGB",
+          "srcImage.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getTrippleScaledImage": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "image.setRGB",
+          "scaler.getScaledData",
+          "srcImage.getHeight",
+          "srcImage.getRGB",
+          "srcImage.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoRawScale2x": {
+    "methods_execution": {}
+  },
+  "ApoImageFromValue": {
+    "methods_execution": {
+      "drawString": {
+        "calls": [
+          "g.drawString",
+          "g.getFontMetrics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getImageFromPath": {
+        "calls": [
+          "image.getPic"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getAndMakeIBackground": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.fillRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iBackground.getGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getButtonImage": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "15",
+          "100",
+          "255"
+        ]
+      },
+      "getButtonImage/6": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "100",
+          "255"
+        ]
+      },
+      "getButtonImage/7": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "15",
+          "100",
+          "255"
+        ]
+      },
+      "getButtonImage/8": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "15"
+        ]
+      },
+      "getButtonImageColor": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.getStroke",
+          "g.setColor",
+          "g.setFont",
+          "g.setRenderingHint",
+          "g.setStroke",
+          "iButton.getGraphics",
+          "iButton.getHeight",
+          "iButton.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getButtonImage/10": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "g.setRenderingHint",
+          "iButton.getGraphics",
+          "iButton.getHeight",
+          "iButton.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20"
+        ]
+      },
+      "getButtonWithImage": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.drawRoundRect",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iButton.getGraphics",
+          "iPic.getHeight",
+          "iPic.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getButtonImage/9": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "g.setRenderingHint",
+          "iButton.getGraphics",
+          "iButton.getHeight",
+          "iButton.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20"
+        ]
+      },
+      "getImageCopy": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "iImage.getHeight",
+          "iImage.getTransparency",
+          "iImage.getWidth",
+          "iNewImage.getGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "AudioPlayer": {
+    "methods_execution": {
+      "start": {
+        "calls": [
+          "soundThread.start",
+          "t.start"
+        ],
+        "logic_hints": [
+          "soundThread = new ApoSoundThread(this)"
+        ],
+        "values_hint": []
+      },
+      "setBStop": {
+        "calls": [],
+        "logic_hints": [
+          "bStop = stop"
+        ],
+        "values_hint": []
+      },
+      "setBLoop": {
+        "calls": [],
+        "logic_hints": [
+          "bLoop = loop"
+        ],
+        "values_hint": []
+      },
+      "run": {
+        "calls": [
+          "AudioSystem.getAudioInputStream",
+          "AudioSystem.getLine",
+          "DataLine.Info",
+          "audioInputStream.getFormat",
+          "audioInputStream.read",
+          "class.getResourceAsStream",
+          "line.close",
+          "line.drain",
+          "line.open",
+          "line.start",
+          "line.write",
+          "soundThread.isRunning",
+          "soundThread.stop",
+          "soundThread.wait"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      }
+    }
+  },
+  "ApoMidiPlayer": {
+    "methods_execution": {
+      "getSequence": {
+        "calls": [
+          "MidiSystem.getSequence",
+          "ex.printStackTrace",
+          "is.close",
+          "is.markSupported"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "play": {
+        "calls": [
+          "ex.getMessage",
+          "out.println",
+          "sequencer.isOpen",
+          "sequencer.setSequence",
+          "sequencer.start"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "stop": {
+        "calls": [
+          "sequencer.isOpen",
+          "sequencer.setMicrosecondPosition",
+          "sequencer.stop"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "close": {
+        "calls": [
+          "sequencer.close",
+          "sequencer.isOpen"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setPaused": {
+        "calls": [
+          "sequencer.isOpen",
+          "sequencer.start",
+          "sequencer.stop"
+        ],
+        "logic_hints": [
+          "paused = paused"
+        ],
+        "values_hint": []
+      },
+      "setVolume": {
+        "calls": [
+          "e.getMessage",
+          "out.println",
+          "synthesizer.getChannels"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "127"
+        ]
+      }
+    }
+  },
+  "ApoMidi": {
+    "methods_execution": {
+      "addSong": {
+        "calls": [
+          "MidiSystem.getSequence",
+          "MidiSystem.getSequencer",
+          "class.getResourceAsStream",
+          "ex.getMessage",
+          "out.println",
+          "sequencer.open",
+          "songs.add",
+          "songs.clear"
+        ],
+        "logic_hints": [
+          "sequencer = = null) {",
+          "sequencer = MidiSystem.getSequencer()",
+          "sequencer = null"
+        ],
+        "values_hint": []
+      },
+      "startMusic": {
+        "calls": [
+          "sequencer.open",
+          "sequencer.setLoopCount",
+          "sequencer.setSequence",
+          "sequencer.start",
+          "songs.get",
+          "songs.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "stopMusic": {
+        "calls": [
+          "sequencer.close",
+          "sequencer.stop"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setVolume": {
+        "calls": [
+          "e.getMessage",
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "127"
+        ]
+      }
+    }
+  },
+  "ApoSoundThread": {
+    "methods_execution": {
+      "start": {
+        "calls": [
+          "Thread.run",
+          "runner.run",
+          "worker.start",
+          "worker.wait"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "run": {
+        "calls": [
+          "runner.run"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "pause": {
+        "calls": [
+          "worker.notify",
+          "worker.wait"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoSounds": {
+    "methods_execution": {
+      "loadSound": {
+        "calls": [
+          "sounds.containsKey",
+          "sounds.put"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "playSound": {
+        "calls": [
+          "player.start",
+          "sounds.get"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoSplashScreen": {
+    "methods_execution": {
+      "blendOut": {
+        "calls": [
+          "timer.start"
+        ],
+        "logic_hints": [
+          "isBlendIn = false",
+          "startTime = System.currentTimeMillis()"
+        ],
+        "values_hint": []
+      },
+      "actionPerformed": {
+        "calls": [
+          "SwingUtilities.getWindowAncestor",
+          "label.repaint",
+          "label.setImage",
+          "timer.stop"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "drawImage": {
+        "calls": [
+          "AlphaComposite.getInstance",
+          "currentImage.getGraphics",
+          "g2d.dispose",
+          "g2d.drawImage",
+          "g2d.setComposite"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoSplashPainter": {
+    "methods_execution": {
+      "setImage": {
+        "calls": [
+          "image.getWidth"
+        ],
+        "logic_hints": [
+          "image = image"
+        ],
+        "values_hint": []
+      },
+      "paintComponent": {
+        "calls": [
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoHelp": {
+    "methods_execution": {
+      "rotateImage": {
+        "calls": [
+          "AffineTransform.getRotateInstance",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "g.setTransform",
+          "rotatedImage.getGraphics",
+          "src.getHeight",
+          "src.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "rotateImageMethodTwo": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "at.preConcatenate",
+          "at.rotate",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "g.setTransform",
+          "inputImage.getHeight",
+          "inputImage.getWidth",
+          "sourceBI.getGraphics",
+          "sourceBI.getHeight",
+          "sourceBI.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "360",
+          "180"
+        ]
+      },
+      "findTranslation": {
+        "calls": [
+          "Point2D.Double",
+          "at.transform",
+          "bi.getHeight",
+          "p2dout.getX",
+          "p2dout.getY",
+          "tat.translate"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "270",
+          "180"
+        ]
+      },
+      "round": {
+        "calls": [
+          "bigDecimal.setScale"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getAngleBetween2Points": {
+        "calls": [
+          "a.getX",
+          "a.getY",
+          "b.getX",
+          "b.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getAngleBetween2Points/4": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "180"
+        ]
+      },
+      "getCircleCuts": {
+        "calls": [
+          "out.println",
+          "results.add"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10000"
+        ]
+      },
+      "getTimeToDraw": {
+        "calls": [
+          "msec.length",
+          "sec.length"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "1000",
+          "10",
+          "100",
+          "60"
+        ]
+      },
+      "setClipboardContents": {
+        "calls": [
+          "Toolkit.getDefaultToolkit",
+          "clipboard.setContents"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getClipboardContents": {
+        "calls": [
+          "Toolkit.getDefaultToolkit",
+          "clipboard.getContents",
+          "contents.getTransferData",
+          "contents.isDataFlavorSupported"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "rectangleIntersects": {
+        "calls": [
+          "ApoHelp.rectangleContains",
+          "entity.getHeight",
+          "entity.getWidth",
+          "entity.getX",
+          "entity.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "rectangleIntersects/5": {
+        "calls": [
+          "ApoHelp.rectangleIntersects",
+          "entity.getHeight",
+          "entity.getWidth",
+          "entity.getX",
+          "entity.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "rectangleIntersects/2": {
+        "calls": [
+          "ApoHelp.rectangleIntersects",
+          "entity.getHeight",
+          "entity.getWidth",
+          "entity.getX",
+          "entity.getY",
+          "secondEntity.getHeight",
+          "secondEntity.getWidth",
+          "secondEntity.getX",
+          "secondEntity.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoFileFilter": {
+    "methods_execution": {
+      "getExtension": {
+        "calls": [
+          "file.getName",
+          "s1.lastIndexOf",
+          "s1.length",
+          "s1.substring"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "46"
+        ]
+      },
+      "accept": {
+        "calls": [
+          "file.isDirectory",
+          "s.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoCopy": {
+    "methods_execution": {
+      "copyDirectory": {
+        "calls": [
+          "copyDirectory.exists",
+          "copyDirectory.mkdirs",
+          "srcDirectory.exists",
+          "srcDirectory.listFiles"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "copyFile": {
+        "calls": [
+          "e.printStackTrace",
+          "fis.close",
+          "fis.read",
+          "fos.close",
+          "fos.write"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoFileNameFilter": {
+    "methods_execution": {
+      "accept": {
+        "calls": [
+          "s.toLowerCase"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setExtension": {
+        "calls": [],
+        "logic_hints": [
+          "extension = extension"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoInterface": {
+    "methods_execution": {}
+  },
+  "ApoFloatPoint": {
+    "methods_execution": {}
+  },
+  "ApoClassLoader": {
+    "methods_execution": {
+      "setClassname": {
+        "calls": [],
+        "logic_hints": [
+          "classname = classname"
+        ],
+        "values_hint": []
+      },
+      "setPath": {
+        "calls": [],
+        "logic_hints": [
+          "path = path"
+        ],
+        "values_hint": []
+      },
+      "getMyClass": {
+        "calls": [
+          "c.newInstance",
+          "cl.loadClass",
+          "e.printStackTrace",
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioImageContainer": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "ApoMarioImageContainer.setTileSet",
+          "component.getImages",
+          "component.getResizeImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioClassLoader": {
+    "methods_execution": {
+      "getAI": {
+        "calls": [
+          "c.newInstance",
+          "e.printStackTrace",
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "loadClass": {
+        "calls": [
+          "c.getName",
+          "name.replace",
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "loadClassData": {
+        "calls": [
+          "dis.close",
+          "dis.readFully",
+          "f.length"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioImage": {
+    "methods_execution": {
+      "getImage": {
+        "calls": [
+          "image.getImageFromPath"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getLogo": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "iLogo.getGraphics",
+          "iPlayer.getHeight",
+          "iPlayer.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getImageMouseOver": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "255",
+          "230"
+        ]
+      },
+      "getImageMouseOver/2": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "255",
+          "230"
+        ]
+      },
+      "getImageMouseOver/4": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.fillRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iOriginal.getHeight",
+          "iOriginal.getRGB",
+          "iOriginal.getWidth",
+          "iSelect.getGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getBackgroundBack": {
+        "calls": [
+          "ApoHelp.getRandomValue",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "iBackground.getGraphics",
+          "iTiles.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10",
+          "100"
+        ]
+      },
+      "getBackgroundFront": {
+        "calls": [
+          "ApoHelp.getRandomValue",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.setRenderingHint",
+          "iBackground.getGraphics",
+          "iTiles.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "25",
+          "15",
+          "20",
+          "100"
+        ]
+      },
+      "drawBackground": {
+        "calls": [
+          "g.drawImage",
+          "iTile.getHeight",
+          "iTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getButtonImage": {
+        "calls": [
+          "image.getButtonImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getButtonImage/7": {
+        "calls": [
+          "image.getButtonImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getButtonImage/8": {
+        "calls": [
+          "image.getButtonImage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "140",
+          "254"
+        ]
+      },
+      "getButtonImageColor": {
+        "calls": [
+          "image.getButtonImageColor"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "255",
+          "200"
+        ]
+      },
+      "getButtonImage/10": {
+        "calls": [
+          "image.getButtonImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getButtonWithImage": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "13"
+        ]
+      },
+      "getButtonWithImage/8": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "g.setRenderingHint",
+          "iButton.getGraphics",
+          "iPic.getHeight",
+          "iPic.getWidth",
+          "text.length"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      }
+    }
+  },
+  "ApoMarioApplet": {
+    "methods_execution": {
+      "stop": {
+        "calls": [
+          "component.stopSound"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "destroy": {
+        "calls": [
+          "component.stopSound"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "component = new ApoMarioPanel()"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioComponent": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "ApoMarioImageContainer.init",
+          "e.printStackTrace",
+          "fileChooser.setCurrentDirectory",
+          "fileChooser.setFileFilter",
+          "fileChooserEditor.setCurrentDirectory",
+          "fileChooserEditor.setFileFilter",
+          "fileChooserReplay.setCurrentDirectory",
+          "fileChooserReplay.setFileFilter",
+          "sounds.loadSound"
+        ],
+        "logic_hints": [
+          "fileChooser = = null)) {",
+          "fileChooser = new JFileChooser()",
+          "fileChooserReplay = = null)) {",
+          "fileChooserReplay = new JFileChooser()"
+        ],
+        "values_hint": [
+          "256"
+        ]
+      },
+      "addSpeed": {
+        "calls": [],
+        "logic_hints": [
+          "speed = ApoMarioConstants.TIMES_SLOWER_50",
+          "speed = ApoMarioConstants.TIMES_FASTER_10"
+        ],
+        "values_hint": []
+      },
+      "setDebugFrame": {
+        "calls": [],
+        "logic_hints": [
+          "debugFrame = debugFrame"
+        ],
+        "values_hint": []
+      },
+      "setBPause": {
+        "calls": [],
+        "logic_hints": [
+          "bPause = bPause"
+        ],
+        "values_hint": []
+      },
+      "setBTwoPlayers": {
+        "calls": [],
+        "logic_hints": [
+          "bTwoPlayers = bTwoPlayers"
+        ],
+        "values_hint": []
+      },
+      "setBMiddle": {
+        "calls": [],
+        "logic_hints": [
+          "bMiddle = bMiddle"
+        ],
+        "values_hint": []
+      },
+      "getResizeImage": {
+        "calls": [
+          "scale.getDoubleScaledImage",
+          "scale.getTrippleScaledImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setLevel": {
+        "calls": [],
+        "logic_hints": [
+          "level = level"
+        ],
+        "values_hint": []
+      },
+      "setBSound": {
+        "calls": [],
+        "logic_hints": [
+          "bSound = sound"
+        ],
+        "values_hint": []
+      },
+      "playSound": {
+        "calls": [
+          "sounds.playSound"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "levelLoad": {
+        "calls": [
+          "fileChooser.getSelectedFile",
+          "fileChooser.showOpenDialog"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "levelSave": {
+        "calls": [
+          "fileChooser.getSelectedFile",
+          "fileChooser.showSaveDialog",
+          "fileFilter.getLevelName",
+          "s.indexOf",
+          "s.substring"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "46"
+        ]
+      },
+      "keyReleased": {
+        "calls": [
+          "charKeys.add",
+          "e.getKeyChar",
+          "e.getKeyCode",
+          "e.isAltDown",
+          "e.isAltGraphDown",
+          "e.isControlDown",
+          "e.isShiftDown",
+          "releasedKeys.add"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "keyPressed": {
+        "calls": [
+          "e.getKeyCode",
+          "e.isAltDown",
+          "e.isAltGraphDown",
+          "e.isControlDown",
+          "e.isShiftDown"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setChangeX": {
+        "calls": [],
+        "logic_hints": [
+          "changeX = changeX"
+        ],
+        "values_hint": []
+      },
+      "setChangeY": {
+        "calls": [],
+        "logic_hints": [
+          "changeY = changeY"
+        ],
+        "values_hint": []
+      },
+      "setTime": {
+        "calls": [],
+        "logic_hints": [
+          "time = time"
+        ],
+        "values_hint": []
+      },
+      "clearKeys": {
+        "calls": [],
+        "logic_hints": [
+          "keys = new boolean[256]"
+        ],
+        "values_hint": [
+          "256"
+        ]
+      },
+      "setImages": {
+        "calls": [],
+        "logic_hints": [
+          "images = images"
+        ],
+        "values_hint": []
+      },
+      "setButtonFunction": {
+        "calls": [],
+        "logic_hints": [
+          "curMouseFunction = function"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "charKeys.get",
+          "charKeys.remove"
+        ],
+        "logic_hints": [
+          "curMouseFunction = null",
+          "bReleasedMouse = false",
+          "bReleasedMouse = false"
+        ],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [],
+        "logic_hints": [
+          "bReleasedMouse = true"
+        ],
+        "values_hint": []
+      },
+      "mouseMoved": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "mouseX = e.getX()",
+          "mouseY = e.getY()"
+        ],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "e.getButton",
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "bRightMouse = true",
+          "oldMouseX = e.getX()",
+          "oldMouseY = e.getY()"
+        ],
+        "values_hint": []
+      },
+      "mouseDragged": {
+        "calls": [
+          "e.getX",
+          "e.getY"
+        ],
+        "logic_hints": [
+          "mouseX = e.getX()",
+          "mouseY = e.getY()",
+          "oldMouseX = e.getX()",
+          "oldMouseY = e.getY()"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioMain": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "component = new ApoMarioPanel()"
+        ],
+        "values_hint": []
+      },
+      "windowClosingEvent": {
+        "calls": [
+          "ApoMarioConstants.saveProperties"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioConstants": {
+    "methods_execution": {
+      "saveProperties": {
+        "calls": [
+          "out.close",
+          "props.setProperty",
+          "props.store"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "loadProperties": {
+        "calls": [
+          "ApoMarioConstants.setWaitTimeRender",
+          "out.println",
+          "props.getProperty",
+          "props.load"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "100",
+          "50",
+          "10",
+          "5000",
+          "200"
+        ]
+      },
+      "setWaitTimeRender": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "1000"
+        ]
+      },
+      "getStartX": {
+        "calls": [
+          "player.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioSimulate": {
+    "methods_execution": {
+      "setBSimulate": {
+        "calls": [],
+        "logic_hints": [
+          "bSimulate = bSimulate"
+        ],
+        "values_hint": []
+      },
+      "startSimulate": {
+        "calls": [
+          "game.getLevel",
+          "game.setBRepaint",
+          "game.setBThink",
+          "game.setGame"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "simulate": {
+        "calls": [
+          "game.getLevel",
+          "game.thinkLevelGame"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioAnalysis": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "bFade = true",
+          "bFade = false",
+          "iLevel = this.getGame().getBackgroundImage()",
+          "fadeTime = 0"
+        ],
+        "values_hint": []
+      },
+      "makeBackground": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.drawImage",
+          "g.drawRoundRect",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "12",
+          "20",
+          "15",
+          "10",
+          "200",
+          "19"
+        ]
+      },
+      "makeBackgroundAnimation": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "18",
+          "375",
+          "12",
+          "380",
+          "390",
+          "365"
+        ]
+      },
+      "makeRunner": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "makeSearch": {
+        "calls": [
+          "node.addConnectedNode"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10",
+          "11"
+        ]
+      },
+      "keyButtonReleased": {
+        "calls": [
+          "ApoMarioImageContainer.setTileSet"
+        ],
+        "logic_hints": [
+          "bFade = false"
+        ],
+        "values_hint": []
+      },
+      "mouseButtonFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "11"
+        ]
+      },
+      "releasedEnter": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "11"
+        ]
+      },
+      "excecuteFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "saveReplay": {
+        "calls": [
+          "path.indexOf"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "bFade = false"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "AlphaComposite.getInstance",
+          "g.drawImage",
+          "g.drawString",
+          "g.getComposite",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setComposite",
+          "g.setFont",
+          "player.getAi",
+          "player.getCoins",
+          "player.getPlayer",
+          "player.getPoints",
+          "player.isBVisible"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getName": {
+        "calls": [
+          "player.getAi",
+          "player.getPlayer"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderPlayerStats": {
+        "calls": [
+          "g.drawString",
+          "g.getFontMetrics",
+          "playerOne.getCoins",
+          "playerOne.getPoints",
+          "playerTwo.getCoins",
+          "playerTwo.getPoints"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderWinPlayer": {
+        "calls": [
+          "ApoHelp.getTimeToDraw",
+          "g.drawString",
+          "g.getFontMetrics",
+          "player.getAi",
+          "player.getPlayer"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioDestructableWall": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "particle = new ArrayList<ApoEntity>()",
+          "bWall = false"
+        ],
+        "values_hint": []
+      },
+      "setIWall": {
+        "calls": [],
+        "logic_hints": [
+          "iWall = wall"
+        ],
+        "values_hint": []
+      },
+      "makeParticle": {
+        "calls": [
+          "entity.setVecX",
+          "entity.setVecY",
+          "iParticle.getHeight",
+          "iParticle.getWidth",
+          "particle.add"
+        ],
+        "logic_hints": [
+          "particle = new ArrayList<ApoEntity>()"
+        ],
+        "values_hint": []
+      },
+      "damageWall": {
+        "calls": [
+          "level.getPlayers"
+        ],
+        "logic_hints": [
+          "bWall = true",
+          "iWall = = null) || (!(this.getIBackground().equals(this.iWall)))) {",
+          "bWall = true"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "particle.get",
+          "particle.remove",
+          "particle.size"
+        ],
+        "logic_hints": [
+          "iWall = = null) || (!this.getIBackground().equals(this.iWall))) {"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawImage",
+          "iWall.equals",
+          "particle.get",
+          "particle.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioParticle": {
+    "methods_execution": {}
+  },
+  "ApoMarioCoinParticle": {
+    "methods_execution": {}
+  },
+  "ApoMarioFlower": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "bUp = true",
+          "curTimeToShow = this.startTime",
+          "curUpStandTime = 0",
+          "changeY = 0"
+        ],
+        "values_hint": []
+      },
+      "setTimeToShow": {
+        "calls": [],
+        "logic_hints": [
+          "timeToShow = timeToShow"
+        ],
+        "values_hint": []
+      },
+      "setStartTime": {
+        "calls": [],
+        "logic_hints": [
+          "startTime = startTime"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "level.getHeight",
+          "level.getPlayers"
+        ],
+        "logic_hints": [
+          "changeY = = 0)) {",
+          "changeY = this.MAX_CHANGE_Y",
+          "bUp = !this.bUp",
+          "curUpStandTime = 0"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioEntity": {
+    "methods_execution": {
+      "changeDirection": {
+        "calls": [],
+        "logic_hints": [
+          "direction = ApoMarioEntity.RIGHT"
+        ],
+        "values_hint": []
+      },
+      "setDirection": {
+        "calls": [],
+        "logic_hints": [
+          "direction = direction",
+          "direction = ApoMarioEntity.RIGHT",
+          "direction = ApoMarioEntity.LEFT"
+        ],
+        "values_hint": []
+      },
+      "setLevel": {
+        "calls": [],
+        "logic_hints": [
+          "level = level"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "level = level"
+        ],
+        "values_hint": []
+      },
+      "nextYCheck": {
+        "calls": [
+          "Rectangle2D.Float",
+          "level.getHeight",
+          "level.getLevelEntities",
+          "level.getWidth",
+          "myNextRec.createIntersection",
+          "myNextRec.intersects"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "thinkCollision": {
+        "calls": [
+          "level.getHeight",
+          "level.getLevelEntities",
+          "level.getWidth",
+          "points.add",
+          "points.get",
+          "points.size",
+          "rec.createIntersection",
+          "rec.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "xChange": {
+        "calls": [
+          "rec.getWidth",
+          "rec.getX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeParticles": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "PARTICLE.getSubimage",
+          "g.dispose",
+          "g.drawImage",
+          "iParticle.createGraphics",
+          "level.addParticle"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "25",
+          "100"
+        ]
+      },
+      "getMinMax": {
+        "calls": [
+          "level.getPlayers"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isPlayerNear": {
+        "calls": [
+          "level.getPlayers",
+          "recPlayer.getWidth",
+          "recPlayer.getX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderImage": {
+        "calls": [
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioShell": {
+    "methods_execution": {
+      "setPlayer": {
+        "calls": [],
+        "logic_hints": [
+          "player = player"
+        ],
+        "values_hint": []
+      },
+      "thinkJump": {
+        "calls": [
+          "level.getPlayers"
+        ],
+        "logic_hints": [
+          "player = player",
+          "player = player"
+        ],
+        "values_hint": []
+      },
+      "damageCheck": {
+        "calls": [
+          "level.getPlayers",
+          "rec.intersects"
+        ],
+        "logic_hints": [
+          "player = player"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "cannon.getCannons",
+          "level.getCannons",
+          "level.getEnemies",
+          "level.getLevelEntities"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "intersectsWithEnemy": {
+        "calls": [
+          "enemy.die",
+          "enemy.getRec",
+          "enemy.isBDie",
+          "enemy.isBFly",
+          "enemy.isBVisible",
+          "enemy.setBFly",
+          "enemyRec.intersects"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioCoin": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "curY = 0"
+        ],
+        "values_hint": []
+      },
+      "setCurY": {
+        "calls": [],
+        "logic_hints": [
+          "curY = curY"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioGoodieMushroom": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "bStart = true",
+          "curChangeY = 0"
+        ],
+        "values_hint": []
+      },
+      "catchMe": {
+        "calls": [
+          "player.catchMushroom",
+          "player.getPoints",
+          "player.setPoints"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "level.getHeight",
+          "level.getPlayers"
+        ],
+        "logic_hints": [
+          "bStart = false"
+        ],
+        "values_hint": []
+      },
+      "getRec": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getNextRec": {
+        "calls": [
+          "Rectangle2D.Float"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioEnd": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "bUp = true",
+          "curY = 0"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "bUp = !this.bUp",
+          "bUp = !this.bUp"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "TILES_LEVEL.getSubimage",
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "12",
+          "13"
+        ]
+      }
+    }
+  },
+  "ApoMarioFireball": {
+    "methods_execution": {
+      "think": {
+        "calls": [
+          "canon.getCannons",
+          "level.getCannons",
+          "level.getEnemies",
+          "level.getLevelEntities",
+          "rec.getX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkWall": {
+        "calls": [
+          "level.getHeight",
+          "level.getLevelEntities",
+          "level.getWidth",
+          "wall.isBNoCollision",
+          "wall.isBOnlyAboveWall"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "intersectsWithEnemy": {
+        "calls": [
+          "enemy.die",
+          "enemy.getRec",
+          "enemy.isBDie",
+          "enemy.isBFly",
+          "enemy.isBImmortal",
+          "enemy.isBVisible",
+          "enemy.setBFly",
+          "enemyRec.intersects"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioQuestionmark": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "bWall = false"
+        ],
+        "values_hint": []
+      },
+      "damageWall": {
+        "calls": [],
+        "logic_hints": [
+          "bWall = true"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "iWall.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawImage",
+          "iWall.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioCannon": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "cannons.clear"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setShootTime": {
+        "calls": [],
+        "logic_hints": [
+          "shootTime = shootTime"
+        ],
+        "values_hint": []
+      },
+      "setStartTime": {
+        "calls": [],
+        "logic_hints": [
+          "startTime = startTime",
+          "curShootTime = this.startTime"
+        ],
+        "values_hint": []
+      },
+      "thinkCanon": {
+        "calls": [
+          "cannons.get",
+          "cannons.remove",
+          "cannons.size",
+          "level.getPlayers"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeCannon": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "cannon.createGraphics",
+          "cannons.add",
+          "cannons.get",
+          "cannons.size",
+          "g.dispose",
+          "g.drawImage",
+          "iCanon.getHeight",
+          "iCanon.getWidth",
+          "level.getPlayers",
+          "rec.getWidth",
+          "rec.getX"
+        ],
+        "logic_hints": [
+          "cannons = = null) {",
+          "cannons = new ArrayList<ApoMarioCannonCannon>()"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioPlayer": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "lastType = this.getType()",
+          "bLastTypeDamage = false",
+          "bSpeed = false",
+          "changeType = this.getType()"
+        ],
+        "values_hint": []
+      },
+      "setTeamName": {
+        "calls": [],
+        "logic_hints": [
+          "teamName = teamName"
+        ],
+        "values_hint": []
+      },
+      "setAuthor": {
+        "calls": [],
+        "logic_hints": [
+          "author = author"
+        ],
+        "values_hint": []
+      },
+      "addMessage": {
+        "calls": [
+          "messages.add"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "addDrawElement": {
+        "calls": [
+          "drawElements.add",
+          "drawElements.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setCoins": {
+        "calls": [],
+        "logic_hints": [
+          "coins = coins"
+        ],
+        "values_hint": []
+      },
+      "setPoints": {
+        "calls": [],
+        "logic_hints": [
+          "points = points"
+        ],
+        "values_hint": []
+      },
+      "setAi": {
+        "calls": [
+          "ai.getAuthor",
+          "ai.getTeamName",
+          "ai.load",
+          "ai.save"
+        ],
+        "logic_hints": [
+          "ai = ai",
+          "teamName = this.ai.getTeamName()",
+          "author = this.ai.getAuthor()",
+          "pathAI = path"
+        ],
+        "values_hint": []
+      },
+      "saveAI": {
+        "calls": [
+          "ai.save"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setDamageTime": {
+        "calls": [],
+        "logic_hints": [
+          "damageTime = damageTime",
+          "damageTime = 0",
+          "damageTime = ApoMarioConstants.PLAYER_DAMAGE_TIME"
+        ],
+        "values_hint": []
+      },
+      "damagePlayer": {
+        "calls": [],
+        "logic_hints": [
+          "lastType = this.getType()"
+        ],
+        "values_hint": []
+      },
+      "catchMushroom": {
+        "calls": [],
+        "logic_hints": [
+          "lastType = this.getType()"
+        ],
+        "values_hint": []
+      },
+      "catchFireflower": {
+        "calls": [],
+        "logic_hints": [
+          "lastType = this.getType()"
+        ],
+        "values_hint": []
+      },
+      "setType": {
+        "calls": [],
+        "logic_hints": [
+          "type = type",
+          "type = ApoMarioConstants.PLAYER_TYPE_LITTLE"
+        ],
+        "values_hint": []
+      },
+      "playerDie": {
+        "calls": [],
+        "logic_hints": [
+          "bDie = true",
+          "changeY = 0"
+        ],
+        "values_hint": []
+      },
+      "setGoalVecX": {
+        "calls": [
+          "rec.getHeight",
+          "rec.getWidth",
+          "rec.getX",
+          "rec.getY"
+        ],
+        "logic_hints": [
+          "goalVecX = goalVecX"
+        ],
+        "values_hint": []
+      },
+      "setBSpeed": {
+        "calls": [],
+        "logic_hints": [
+          "bSpeed = bSpeed"
+        ],
+        "values_hint": []
+      },
+      "setBDown": {
+        "calls": [],
+        "logic_hints": [
+          "bDown = bDown"
+        ],
+        "values_hint": []
+      },
+      "setBNextJump": {
+        "calls": [],
+        "logic_hints": [
+          "bNextJump = bJump"
+        ],
+        "values_hint": []
+      },
+      "setBJump": {
+        "calls": [],
+        "logic_hints": [
+          "bJump = bJump"
+        ],
+        "values_hint": []
+      },
+      "setEnemyJump": {
+        "calls": [],
+        "logic_hints": [
+          "bEnemyJump = true"
+        ],
+        "values_hint": []
+      },
+      "getNextRec": {
+        "calls": [
+          "rec.getHeight",
+          "rec.getWidth",
+          "rec.getX",
+          "rec.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "thinkAI": {
+        "calls": [
+          "ai.getTeamName",
+          "ai.think",
+          "ex.getCause",
+          "ex.getLocalizedMessage",
+          "ex.getMessage",
+          "ex.printStackTrace",
+          "level.getComponent",
+          "level.getPlayers",
+          "level.getReplay",
+          "level.getReplayPlay",
+          "level.isBReplay",
+          "level.setAnalysis",
+          "messages.add",
+          "messages.clear",
+          "messages.get",
+          "messages.size",
+          "out.println"
+        ],
+        "logic_hints": [
+          "bDuckOld = this.isBDown()",
+          "bDuckOld = this.isBDown()",
+          "goalVecX = -ApoMarioConstants.PLAYER_MAX_VEC_X_FAST",
+          "goalVecX = ApoMarioConstants.PLAYER_MAX_VEC_X_FAST"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "PARTICLE.getSubimage",
+          "drawElements.get",
+          "drawElements.remove",
+          "drawElements.size",
+          "fireballs.add",
+          "fireballs.get",
+          "fireballs.remove",
+          "fireballs.size",
+          "level.getFinish",
+          "level.getReplay",
+          "level.isBReplay",
+          "level.setAnalysis",
+          "rec.getHeight",
+          "rec.getWidth",
+          "rec.getX",
+          "rec.getY"
+        ],
+        "logic_hints": [
+          "ai = = null)) {",
+          "bNextJump = false",
+          "curFireTime = ApoMarioConstants.PLAYER_FIREBALL_TIME",
+          "damageTime = 0"
+        ],
+        "values_hint": []
+      },
+      "thinkSpeedAndMovePlayer": {
+        "calls": [],
+        "logic_hints": [
+          "lastGoalVecX = this.getGoalVecX()"
+        ],
+        "values_hint": []
+      },
+      "yDownCheckEntity": {
+        "calls": [
+          "Rectangle2D.Float",
+          "level.getLevelEntities",
+          "myNextRec.getHeight",
+          "myNextRec.getWidth",
+          "myNextRec.getX",
+          "myNextRec.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "test": {
+        "calls": [
+          "level.getLevelEntities",
+          "wall.isBNoCollision",
+          "wall.isBOnlyAboveWall",
+          "wall.isBVisible"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "testNewY": {
+        "calls": [
+          "level.getComponent",
+          "level.getLevelEntities",
+          "rec.intersects",
+          "wall.getHeight",
+          "wall.getRec",
+          "wall.getWidth",
+          "wall.getX",
+          "wall.getY",
+          "wall.isBNoCollision",
+          "wall.isBOnlyAboveWall",
+          "wall.isBVisible"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "100"
+        ]
+      },
+      "yDownCheck": {
+        "calls": [],
+        "logic_hints": [
+          "bEnemyJump = false"
+        ],
+        "values_hint": []
+      },
+      "coinCheck": {
+        "calls": [
+          "level.getLevelEntities"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "yCheckUp": {
+        "calls": [
+          "level.getLevelEntities"
+        ],
+        "logic_hints": [
+          "bEnemyJump = false"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "dieImage.getHeight",
+          "dieImage.getWidth",
+          "g.drawImage",
+          "g.drawRect",
+          "g.setColor",
+          "iPlayer.getHeight",
+          "iPlayer.getSubimage",
+          "iPlayer.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "drawStringAbove": {
+        "calls": [
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "drawImage": {
+        "calls": [
+          "animation.getWidth",
+          "animation.render"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioEnemy": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "bDie = false",
+          "changeY = 0",
+          "bFly = this.bFlyOriginal"
+        ],
+        "values_hint": []
+      },
+      "setChangeY": {
+        "calls": [],
+        "logic_hints": [
+          "changeY = changeY"
+        ],
+        "values_hint": []
+      },
+      "setBImmortal": {
+        "calls": [],
+        "logic_hints": [
+          "bImmortal = bImmortal"
+        ],
+        "values_hint": []
+      },
+      "setBDie": {
+        "calls": [],
+        "logic_hints": [
+          "bDie = bDie"
+        ],
+        "values_hint": []
+      },
+      "setBFall": {
+        "calls": [],
+        "logic_hints": [
+          "bFall = bFall"
+        ],
+        "values_hint": []
+      },
+      "setBFlyOriginal": {
+        "calls": [],
+        "logic_hints": [
+          "bFlyOriginal = bFlyOriginal"
+        ],
+        "values_hint": []
+      },
+      "setPoints": {
+        "calls": [],
+        "logic_hints": [
+          "points = points"
+        ],
+        "values_hint": []
+      },
+      "setBFly": {
+        "calls": [],
+        "logic_hints": [
+          "bFly = bFly"
+        ],
+        "values_hint": []
+      },
+      "setBFly/2": {
+        "calls": [],
+        "logic_hints": [
+          "bFly = bFly"
+        ],
+        "values_hint": []
+      },
+      "getMirrorImage": {
+        "calls": [
+          "g.dispose",
+          "g.drawImage",
+          "iMirror.getGraphics",
+          "iOriginal.getHeight",
+          "iOriginal.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "level.getHeight"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "die": {
+        "calls": [
+          "level.getPlayers"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "thinkJump": {
+        "calls": [
+          "dieImage.getHeight",
+          "dieImage.getWidth",
+          "g.drawImage",
+          "level.getHeight",
+          "level.getLevelEntities",
+          "level.getPlayers",
+          "level.getWidth",
+          "level.setBStop",
+          "myRec.getHeight",
+          "myRec.getY",
+          "playerRec.getHeight",
+          "playerRec.getWidth",
+          "playerRec.getX",
+          "playerRec.getY",
+          "playerRec.intersects",
+          "rec.getX",
+          "wall.getParticle"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "thinkSpeedAndMoveEnemy": {
+        "calls": [
+          "level.getHeight",
+          "level.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "yDownCheck": {
+        "calls": [
+          "level.setBStop"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "nextYCheck": {
+        "calls": [
+          "level.getHeight",
+          "level.getLevelEntities",
+          "level.getWidth",
+          "rec.getX",
+          "wall.getParticle"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "dieImage.getHeight",
+          "dieImage.getWidth",
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioWall": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "curTimeToRepeat = 0",
+          "curChangeY = 0",
+          "bUp = false",
+          "changeY = 0"
+        ],
+        "values_hint": []
+      },
+      "setTubePoint": {
+        "calls": [],
+        "logic_hints": [
+          "tubePoint = tubePoint"
+        ],
+        "values_hint": []
+      },
+      "setBTube": {
+        "calls": [],
+        "logic_hints": [
+          "bTube = tube"
+        ],
+        "values_hint": []
+      },
+      "setBCanon": {
+        "calls": [],
+        "logic_hints": [
+          "bCanon = canon"
+        ],
+        "values_hint": []
+      },
+      "addGoodie": {
+        "calls": [
+          "ITEMS.getSubimage",
+          "PARTICLE.getSubimage",
+          "TILES_LEVEL.getSubimage",
+          "level.getGoodies",
+          "level.getPlayers"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setBCanBeUp": {
+        "calls": [],
+        "logic_hints": [
+          "bCanBeUp = canBeUp"
+        ],
+        "values_hint": []
+      },
+      "setCurChangeY": {
+        "calls": [],
+        "logic_hints": [
+          "curChangeY = curChangeY"
+        ],
+        "values_hint": []
+      },
+      "setChangeY": {
+        "calls": [],
+        "logic_hints": [
+          "changeY = changeY"
+        ],
+        "values_hint": []
+      },
+      "setBUp": {
+        "calls": [],
+        "logic_hints": [
+          "bUp = up"
+        ],
+        "values_hint": []
+      },
+      "setBNoCollision": {
+        "calls": [],
+        "logic_hints": [
+          "bNoCollision = bNoCollision"
+        ],
+        "values_hint": []
+      },
+      "setBOnlyAboveWall": {
+        "calls": [],
+        "logic_hints": [
+          "bOnlyAboveWall = bOnlyAboveWall"
+        ],
+        "values_hint": []
+      },
+      "enemyCheck": {
+        "calls": [
+          "Rectangle2D.Float",
+          "level.getEnemies",
+          "myRec.intersects"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setGoodie": {
+        "calls": [],
+        "logic_hints": [
+          "goodie = goodie"
+        ],
+        "values_hint": []
+      },
+      "setBDestructable": {
+        "calls": [],
+        "logic_hints": [
+          "bDestructable = bDestructable"
+        ],
+        "values_hint": []
+      },
+      "setTimeToRepeat": {
+        "calls": [],
+        "logic_hints": [
+          "timeToRepeat = timeToRepeat"
+        ],
+        "values_hint": []
+      },
+      "damageWall": {
+        "calls": [
+          "level.getPlayers"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "curTimeToRepeat = this.timeToRepeat"
+        ],
+        "values_hint": []
+      },
+      "thinkBeUp": {
+        "calls": [],
+        "logic_hints": [
+          "changeY = -this.changeY",
+          "curChangeY = 0"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawImage",
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioGoodieFireflower": {
+    "methods_execution": {
+      "catchMe": {
+        "calls": [
+          "player.catchFireflower",
+          "player.getPoints",
+          "player.setPoints"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioGumba": {
+    "methods_execution": {
+      "setBLeft": {
+        "calls": [],
+        "logic_hints": [
+          "bLeft = bLeft"
+        ],
+        "values_hint": []
+      },
+      "setIOriginal": {
+        "calls": [],
+        "logic_hints": [
+          "iOriginal = original"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "ENEMIES.getSubimage",
+          "g.drawImage",
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioKoopa": {
+    "methods_execution": {
+      "die": {
+        "calls": [
+          "ENEMIES.getSubimage",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "iShell.createGraphics",
+          "level.getEnemies"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioCannonCannon": {
+    "methods_execution": {
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioSearchNode": {
+    "methods_execution": {
+      "addConnectedNode": {
+        "calls": [
+          "conntectedNodes.add",
+          "conntectedNodes.indexOf"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "addConnectedNodes": {
+        "calls": [
+          "conntectedNodes.add",
+          "conntectedNodes.indexOf",
+          "nodes.get",
+          "nodes.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioSearchRunner": {
+    "methods_execution": {
+      "setEnd": {
+        "calls": [],
+        "logic_hints": [
+          "endX = x",
+          "endY = y"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioSearch": {
+    "methods_execution": {
+      "addNode": {
+        "calls": [
+          "nodes.add"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getWay": {
+        "calls": [
+          "node.getConntectedNodes",
+          "nodes.get",
+          "sortedNodes.add",
+          "sortedNodes.get",
+          "sortedNodes.size",
+          "way.add",
+          "way.get",
+          "way.remove",
+          "way.size",
+          "ways.get"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "main": {
+        "calls": [
+          "node.addConnectedNode",
+          "out.println",
+          "search.addNode",
+          "search.searchWay",
+          "way.get",
+          "way.size"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "18",
+          "12",
+          "20",
+          "21",
+          "15",
+          "17"
+        ]
+      }
+    }
+  },
+  "ApoMarioDebugFrame": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "area.setEditable",
+          "area.setLineWrap",
+          "debugPanel.setBounds",
+          "label.setLocation",
+          "label.setSize",
+          "playerOneCoins.setLocation",
+          "playerOneCoins.setSize",
+          "playerOneDirection.setLocation",
+          "playerOneDirection.setSize",
+          "playerOneHeight.setLocation",
+          "playerOneHeight.setSize",
+          "playerOneJump.setLocation",
+          "playerOneJump.setSize",
+          "playerOneName.setLocation",
+          "playerOneName.setSize",
+          "playerOnePoints.setLocation",
+          "playerOnePoints.setSize",
+          "playerOneSprint.setLocation",
+          "playerOneSprint.setSize",
+          "playerOneType.setLocation",
+          "playerOneType.setSize",
+          "playerOneVecX.setLocation",
+          "playerOneVecX.setSize",
+          "playerOneVecY.setLocation",
+          "playerOneVecY.setSize",
+          "playerOneWidth.setLocation",
+          "playerOneWidth.setSize",
+          "playerOneX.setLocation",
+          "playerOneX.setSize",
+          "playerOneY.setLocation",
+          "playerOneY.setSize",
+          "playerTwoCoins.setLocation",
+          "playerTwoCoins.setSize",
+          "playerTwoHeight.setLocation",
+          "playerTwoName.setLocation",
+          "playerTwoName.setSize",
+          "playerTwoPoints.setLocation",
+          "playerTwoPoints.setSize",
+          "playerTwoWidth.setLocation",
+          "playerTwoWidth.setSize",
+          "playerTwoX.setLocation",
+          "playerTwoX.setSize",
+          "playerTwoY.setLocation",
+          "playerTwoY.setSize",
+          "scrollPane.setLocation",
+          "scrollPane.setSize",
+          "scrollPane.setWheelScrollingEnabled"
+        ],
+        "logic_hints": [
+          "area = new JTextArea()",
+          "scrollPane = new JScrollPane(this.area)",
+          "debugPanel = new ApoMarioDebugPanel()",
+          "playerOneName = new JLabel(\"\")"
+        ],
+        "values_hint": [
+          "250",
+          "600",
+          "355",
+          "12",
+          "20",
+          "30"
+        ]
+      },
+      "refresh": {
+        "calls": [
+          "debugPanel.setLevel",
+          "game.getChangeX",
+          "game.getChangeY",
+          "game.getLevel",
+          "game.getPlayerSelectCamera",
+          "player.getAi",
+          "player.getCoins",
+          "player.getDirection",
+          "player.getPlayer",
+          "player.getPoints",
+          "player.getRec",
+          "player.getType",
+          "player.getVecX",
+          "player.getVecY",
+          "player.isBJump",
+          "player.isBSpeed",
+          "playerOneCoins.setText",
+          "playerOneDirection.setText",
+          "playerOneHeight.setText",
+          "playerOneJump.setText",
+          "playerOneName.setText",
+          "playerOnePoints.setText",
+          "playerOneSprint.setText",
+          "playerOneType.setText",
+          "playerOneVecX.setText",
+          "playerOneVecY.setText",
+          "playerOneWidth.setText",
+          "playerOneX.setText",
+          "playerOneY.setText",
+          "playerTwoCoins.setText",
+          "playerTwoDirection.setText",
+          "playerTwoHeight.setText",
+          "playerTwoJump.setText",
+          "playerTwoName.setText",
+          "playerTwoPoints.setText",
+          "playerTwoSprint.setText",
+          "playerTwoType.setText",
+          "playerTwoVecX.setText",
+          "playerTwoVecY.setText",
+          "playerTwoWidth.setText",
+          "playerTwoX.setText",
+          "playerTwoY.setText"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "addString": {
+        "calls": [
+          "area.append",
+          "scrollPane.getVerticalScrollBar",
+          "scrollbar.getMaximum",
+          "scrollbar.setValue"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "clear": {
+        "calls": [
+          "area.setText",
+          "playerTwoCoins.setText",
+          "playerTwoDirection.setText",
+          "playerTwoHeight.setText",
+          "playerTwoJump.setText",
+          "playerTwoName.setText",
+          "playerTwoPoints.setText",
+          "playerTwoSprint.setText",
+          "playerTwoType.setText",
+          "playerTwoVecX.setText",
+          "playerTwoVecY.setText",
+          "playerTwoWidth.setText",
+          "playerTwoX.setText",
+          "playerTwoY.setText",
+          "scrollPane.getVerticalScrollBar",
+          "scrollbar.getMaximum",
+          "scrollbar.setValue"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioMiniMap": {
+    "methods_execution": {
+      "makeMiniMap": {
+        "calls": [],
+        "logic_hints": [
+          "iMiniMap = this.getMiniImage()"
+        ],
+        "values_hint": []
+      },
+      "getMiniImage": {
+        "calls": [
+          "g.dispose",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "image.getGraphics",
+          "image.getScaledInstance",
+          "level.getHeight",
+          "level.getLevelEntities",
+          "level.getWidth",
+          "returnImage.getGraphics",
+          "returnImage.getHeight",
+          "returnImage.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawImage",
+          "g.drawString",
+          "g.setColor",
+          "g.setFont",
+          "iMiniMap.getHeight",
+          "iMiniMap.getSubimage",
+          "iMiniMap.getWidth",
+          "level.getHeight",
+          "level.getPlayers",
+          "player.getHeight",
+          "player.getX",
+          "player.getY",
+          "player.isBVisible"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioReplay": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "playerOne = new ApoMarioReplayHelp()",
+          "playerTwo = new ApoMarioReplayHelp()"
+        ],
+        "values_hint": []
+      },
+      "getClone": {
+        "calls": [
+          "playerOne.getClone",
+          "playerTwo.getClone",
+          "replay.setLevel",
+          "replay.setPlayerOne",
+          "replay.setPlayerTwo"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setPlayerOne": {
+        "calls": [],
+        "logic_hints": [
+          "playerOne = playerOne"
+        ],
+        "values_hint": []
+      },
+      "setPlayerTwo": {
+        "calls": [],
+        "logic_hints": [
+          "playerTwo = playerTwo"
+        ],
+        "values_hint": []
+      },
+      "setLevel": {
+        "calls": [],
+        "logic_hints": [
+          "width = width",
+          "difficulty = difficulty",
+          "random = random",
+          "levelString = levelString"
+        ],
+        "values_hint": []
+      },
+      "setPlayerStep": {
+        "calls": [
+          "player.getAi",
+          "player.getDirection",
+          "player.getGoalVecX",
+          "player.getPlayer",
+          "player.isBDown",
+          "player.isBJump",
+          "player.isBSpeed",
+          "playerOne.addNextStep",
+          "playerOne.getName",
+          "playerOne.setAuthor",
+          "playerOne.setName",
+          "playerTwo.addNextStep",
+          "playerTwo.getName",
+          "playerTwo.setAuthor",
+          "playerTwo.setName"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setStep": {
+        "calls": [
+          "playerOne.getMaxSteps",
+          "playerOne.getReplayStep",
+          "playerTwo.getMaxSteps",
+          "playerTwo.getReplayStep",
+          "playerTwo.isBVisible",
+          "playerTwo.setBVisible"
+        ],
+        "logic_hints": [
+          "playerOne = = null) || (this.playerOne.getReplayStep(step) == -1)) {"
+        ],
+        "values_hint": []
+      },
+      "setPlayerStep/2": {
+        "calls": [
+          "player.setBDown",
+          "player.setBNextJump",
+          "player.setBSpeed",
+          "player.setGoalVecX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "load": {
+        "calls": [
+          "e.printStackTrace",
+          "read.close"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "loadLevel": {
+        "calls": [
+          "Long.valueOf",
+          "playerOne.setReplay",
+          "playerTwo.setReplay",
+          "reader.readLine"
+        ],
+        "logic_hints": [
+          "width = Integer.valueOf(reader.readLine())",
+          "difficulty = Integer.valueOf(reader.readLine())",
+          "random = Long.valueOf(reader.readLine())",
+          "random = = -1) {"
+        ],
+        "values_hint": []
+      },
+      "save": {
+        "calls": [
+          "e.printStackTrace",
+          "writer.close"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "saveLevel": {
+        "calls": [
+          "playerOne.getAuthor",
+          "playerOne.getName",
+          "playerOne.getReplay",
+          "playerOne.setReplay",
+          "playerTwo.getAuthor",
+          "playerTwo.getName",
+          "playerTwo.getReplay",
+          "playerTwo.setReplay",
+          "writer.write"
+        ],
+        "logic_hints": [
+          "random = = -1) {"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioReplayHelp": {
+    "methods_execution": {
+      "getClone": {
+        "calls": [
+          "help.setReplay"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setName": {
+        "calls": [],
+        "logic_hints": [
+          "name = name"
+        ],
+        "values_hint": []
+      },
+      "setAuthor": {
+        "calls": [],
+        "logic_hints": [
+          "author = author"
+        ],
+        "values_hint": []
+      },
+      "setReplay": {
+        "calls": [],
+        "logic_hints": [
+          "replay = replay"
+        ],
+        "values_hint": []
+      },
+      "makeReplaySteps": {
+        "calls": [
+          "rep.indexOf",
+          "rep.length",
+          "rep.substring",
+          "replay.length",
+          "replayStep.add",
+          "replayStep.clear"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getMaxSteps": {
+        "calls": [
+          "replayStep.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getReplayStep": {
+        "calls": [
+          "replayStep.get",
+          "replayStep.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioButtons": {
+    "methods_execution": {
+      "makeButtons": {
+        "calls": [
+          "game.getButtons",
+          "game.getImages",
+          "game.setButtons"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "18",
+          "38",
+          "15",
+          "17",
+          "10",
+          "13"
+        ]
+      }
+    }
+  },
+  "ApoMarioReplayPlay": {
+    "methods_execution": {
+      "initReplay": {
+        "calls": [
+          "level.getPlayers",
+          "level.getReplay",
+          "level.makeLevel",
+          "replay.getDifficulty",
+          "replay.getLevelString",
+          "replay.getPlayerOne",
+          "replay.getPlayerTwo",
+          "replay.getRandom",
+          "replay.getWidth"
+        ],
+        "logic_hints": [
+          "step = 0",
+          "curTime = 0",
+          "bShow = true"
+        ],
+        "values_hint": []
+      },
+      "onlyOnePlayer": {
+        "calls": [
+          "level.getReplay"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "nextStep": {
+        "calls": [
+          "level.getPlayers",
+          "level.getReplay",
+          "replay.setStep"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "level.isBReplay"
+        ],
+        "logic_hints": [
+          "bShow = !this.bShow"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawString",
+          "g.setColor",
+          "g.setFont",
+          "level.isBReplay"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20",
+          "10",
+          "60"
+        ]
+      }
+    }
+  },
+  "ApoMarioPanel": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "buttons.makeButtons"
+        ],
+        "logic_hints": [
+          "bInit = true",
+          "bJump = false",
+          "curTime = 0",
+          "bShow = true"
+        ],
+        "values_hint": []
+      },
+      "setBMiddleWall": {
+        "calls": [
+          "middleCount.clear"
+        ],
+        "logic_hints": [
+          "bMiddleWall = middleWall"
+        ],
+        "values_hint": []
+      },
+      "loadProperties": {
+        "calls": [
+          "ApoMarioConstants.loadProperties"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "loadPropertiesPlayer": {
+        "calls": [
+          "playerPath.length"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setDebugMode": {
+        "calls": [
+          "options.setDebugChange"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setSpeedCounter": {
+        "calls": [],
+        "logic_hints": [
+          "speedCounter = speedCounter"
+        ],
+        "values_hint": []
+      },
+      "setBJump": {
+        "calls": [],
+        "logic_hints": [
+          "bJump = bJump"
+        ],
+        "values_hint": []
+      },
+      "setMenu": {
+        "calls": [
+          "menu.init",
+          "options.stopOptions"
+        ],
+        "logic_hints": [
+          "model = this.menu"
+        ],
+        "values_hint": []
+      },
+      "setCredits": {
+        "calls": [
+          "credits.init"
+        ],
+        "logic_hints": [
+          "model = this.credits"
+        ],
+        "values_hint": []
+      },
+      "setSimulation": {
+        "calls": [
+          "simulation.init"
+        ],
+        "logic_hints": [
+          "model = this.simulation"
+        ],
+        "values_hint": []
+      },
+      "loadEditorLevel": {
+        "calls": [
+          "editorIO.readLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "saveEditorLevel": {
+        "calls": [
+          "editorIO.writeLevel",
+          "path.indexOf"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "loadReplay": {
+        "calls": [
+          "editorIO.readLevel"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setReplay": {
+        "calls": [
+          "replay.getClone"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getPlayerSelectCamera": {
+        "calls": [
+          "game.getPlayerSelectCamera"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getBackgroundImage": {
+        "calls": [
+          "g.dispose",
+          "g.setRenderingHint",
+          "iMenuBackground.getGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setBEditor": {
+        "calls": [],
+        "logic_hints": [
+          "bEditor = editor"
+        ],
+        "values_hint": []
+      },
+      "setGame": {
+        "calls": [
+          "game.init"
+        ],
+        "logic_hints": [
+          "model = this.game"
+        ],
+        "values_hint": []
+      },
+      "setEditor": {
+        "calls": [
+          "editor.init"
+        ],
+        "logic_hints": [
+          "model = this.editor"
+        ],
+        "values_hint": []
+      },
+      "setOptions": {
+        "calls": [
+          "options.init",
+          "options.setOptionsDrag"
+        ],
+        "logic_hints": [
+          "model = this.options"
+        ],
+        "values_hint": []
+      },
+      "setAnalysis": {
+        "calls": [
+          "analysis.init"
+        ],
+        "logic_hints": [
+          "model = this.analysis",
+          "iMenuBackground = this.getBackgroundImageWithRect(false)"
+        ],
+        "values_hint": []
+      },
+      "getBackgroundImageWithRect": {
+        "calls": [
+          "g.dispose",
+          "g.drawRoundRect",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "g.setStroke",
+          "iMenuBackground.getGraphics",
+          "iMenuBackground.getHeight",
+          "iMenuBackground.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "254",
+          "40",
+          "12",
+          "50",
+          "200",
+          "30"
+        ]
+      },
+      "setButtons": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "23",
+          "20",
+          "37",
+          "22"
+        ]
+      },
+      "setBSimulate": {
+        "calls": [],
+        "logic_hints": [
+          "bSimulate = bSimulate"
+        ],
+        "values_hint": []
+      },
+      "mouseButtonFunction": {
+        "calls": [
+          "model.mouseButtonFunction"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "keyButtonReleased": {
+        "calls": [
+          "model.keyButtonReleased"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "restartLevel": {
+        "calls": [
+          "middleCount.clear",
+          "miniMap.makeMiniMap"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "newLevel": {
+        "calls": [
+          "game.setPlayerSelectCamera",
+          "middleCount.clear",
+          "miniMap.makeMiniMap"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [
+          "e.getX",
+          "e.getY",
+          "model.mouseButtonReleased"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "e.getButton",
+          "e.getX",
+          "e.getY",
+          "model.mousePressed"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseMoved": {
+        "calls": [
+          "e.getX",
+          "e.getY",
+          "model.mouseMoved"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseDragged": {
+        "calls": [
+          "e.getX",
+          "e.getY",
+          "model.mouseDragged"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "keyReleased": {
+        "calls": [
+          "e.getKeyChar",
+          "e.getKeyCode",
+          "simulation.keyButtonReleased"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "middleCount.add",
+          "middleCount.clear",
+          "middleCount.get",
+          "middleCount.remove",
+          "middleCount.size"
+        ],
+        "logic_hints": [
+          "bShow = !this.bShow",
+          "thinkTime = (int) (System.nanoTime() - t)"
+        ],
+        "values_hint": [
+          "100"
+        ]
+      },
+      "thinkLevelGame": {
+        "calls": [
+          "model.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "ex.printStackTrace",
+          "g.getClip",
+          "g.setClip",
+          "miniMap.render",
+          "model.render",
+          "out.println"
+        ],
+        "logic_hints": [
+          "renderTime = (int)(System.nanoTime() - t)"
+        ],
+        "values_hint": []
+      },
+      "renderSimulate": {
+        "calls": [
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "simulation.getCount",
+          "simulation.getCurRound"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "15",
+          "50",
+          "200"
+        ]
+      },
+      "renderLevelWidthStatistics": {
+        "calls": [
+          "g.drawString",
+          "g.fillRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "player.getX",
+          "player.isBVisible"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "15",
+          "20",
+          "10",
+          "100"
+        ]
+      },
+      "renderFPS": {
+        "calls": [
+          "g.drawString",
+          "g.setColor",
+          "g.setFont"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "25",
+          "15",
+          "45",
+          "35"
+        ]
+      },
+      "renderPause": {
+        "calls": [
+          "g.drawString",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20",
+          "10",
+          "60"
+        ]
+      }
+    }
+  },
+  "ApoMarioDebugPanel": {
+    "methods_execution": {
+      "setLevel": {
+        "calls": [],
+        "logic_hints": [
+          "level = level",
+          "player = player"
+        ],
+        "values_hint": []
+      },
+      "paintComponent": {
+        "calls": [
+          "g.drawRect",
+          "g.drawString",
+          "g.fillRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "level.getChangeX",
+          "level.getEnemies",
+          "level.getEnemyPlayer",
+          "level.getGoodies",
+          "level.getLevelArray",
+          "player.getHeight",
+          "player.getWidth",
+          "player.getX",
+          "player.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "15"
+        ]
+      }
+    }
+  },
+  "ApoMarioSimulationTab": {
+    "methods_execution": {
+      "setChoosen": {
+        "calls": [],
+        "logic_hints": [
+          "bChoose = bChoose"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "Rectangle2D.Float",
+          "g.drawLine",
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getClip",
+          "g.getFontMetrics",
+          "g.setClip",
+          "g.setColor",
+          "g.setFont"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "15"
+        ]
+      }
+    }
+  },
+  "ApoMarioSimulation": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "tabSimulate = = null) {",
+          "tabSimulate = new ApoMarioSimulationTab(size * 2, (int)(size * 2.5), w/2,",
+          "tabAnalysis = = null) {",
+          "tabAnalysis = new ApoMarioSimulationTab(size * 2 + w/2, (int)(size * 2.5),"
+        ],
+        "values_hint": [
+          "24"
+        ]
+      },
+      "setSimulateTab": {
+        "calls": [
+          "tabAnalysis.setChoosen",
+          "tabSimulate.setChoosen"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "36",
+          "27",
+          "34"
+        ]
+      },
+      "setAnalysisTab": {
+        "calls": [
+          "buttons.size",
+          "tabAnalysis.setChoosen",
+          "tabSimulate.setChoosen"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "36",
+          "27",
+          "34"
+        ]
+      },
+      "setDragObjects": {
+        "calls": [
+          "dragCount.setToPercent",
+          "dragDifficulty.setToPercent",
+          "dragWidth.setToPercent"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeBackground": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.drawRoundRect",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20",
+          "24",
+          "15",
+          "10",
+          "200",
+          "19"
+        ]
+      },
+      "makeBackgroundAnimation": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "350",
+          "18",
+          "12",
+          "370",
+          "390",
+          "365"
+        ]
+      },
+      "makeRunner": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "24"
+        ]
+      },
+      "makeSearch": {
+        "calls": [
+          "node.addConnectedNode"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "24"
+        ]
+      },
+      "keyButtonReleased": {
+        "calls": [
+          "ApoMarioImageContainer.setTileSet"
+        ],
+        "logic_hints": [
+          "bBreak = true"
+        ],
+        "values_hint": []
+      },
+      "mouseButtonFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "checkFunction": {
+        "calls": [
+          "buttons.size",
+          "dragCount.setToPercent",
+          "dragDifficulty.setToPercent",
+          "dragWidth.setToPercent",
+          "function.equals"
+        ],
+        "logic_hints": [
+          "count = ApoMarioConstants.MIN_GAMES",
+          "count = ApoMarioConstants.SIM_MAX_ROUNDS",
+          "width = ApoMarioConstants.MIN_WIDTH",
+          "width = ApoMarioConstants.MAX_WIDTH"
+        ],
+        "values_hint": []
+      },
+      "excecuteFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "startSimulation": {
+        "calls": [
+          "buttons.add",
+          "buttons.clear",
+          "help.setPlayerTwo",
+          "level.getDifficulty",
+          "level.getLevelInt",
+          "level.getPlayers",
+          "level.getWidth",
+          "simulate.startSimulate",
+          "t.start"
+        ],
+        "logic_hints": [
+          "bBreak = false",
+          "curRound = 0",
+          "changeX = 0",
+          "finish = finishCount"
+        ],
+        "values_hint": [
+          "15",
+          "14"
+        ]
+      },
+      "run": {
+        "calls": [
+          "buttons.add",
+          "buttons.clear",
+          "help.setPlayerTwo",
+          "level.getDifficulty",
+          "level.getLevelInt",
+          "level.getPlayers",
+          "level.getWidth",
+          "simulate.startSimulate"
+        ],
+        "logic_hints": [
+          "bBreak = false",
+          "curRound = 0",
+          "changeX = 0",
+          "finish = finishCount"
+        ],
+        "values_hint": [
+          "15",
+          "14"
+        ]
+      },
+      "mouseButtonReleased": {
+        "calls": [
+          "buttons.get",
+          "buttons.size",
+          "dragCount.getPercent",
+          "dragCount.isBVisible",
+          "dragCount.mouseReleased",
+          "dragDifficulty.getPercent",
+          "dragDifficulty.isBVisible",
+          "dragDifficulty.mouseReleased",
+          "dragWidth.getPercent",
+          "dragWidth.isBVisible",
+          "dragWidth.mouseReleased",
+          "tabAnalysis.getReleased",
+          "tabAnalysis.isChoosen",
+          "tabSimulate.getReleased"
+        ],
+        "logic_hints": [
+          "difficulty = (int)(this.dragDifficulty.getPercent() / 100f * (ApoMarioCon",
+          "width = (int)(this.dragWidth.getPercent() * (ApoMarioConstants.MAX_W",
+          "count = (int)(this.dragCount.getPercent() / 100f * (ApoMarioConstant"
+        ],
+        "values_hint": []
+      },
+      "mouseMoved": {
+        "calls": [
+          "buttons.get",
+          "buttons.size",
+          "dragCount.isBVisible",
+          "dragCount.mouseMoved",
+          "dragDifficulty.isBVisible",
+          "dragDifficulty.mouseMoved",
+          "dragWidth.isBVisible",
+          "dragWidth.mouseMoved",
+          "tabAnalysis.getMove",
+          "tabAnalysis.isChoosen",
+          "tabSimulate.getMove"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "buttons.get",
+          "buttons.size",
+          "tabAnalysis.getPressed",
+          "tabAnalysis.isChoosen",
+          "tabSimulate.getPressed"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderSimulation": {
+        "calls": [
+          "Rectangle2D.Float",
+          "buttons.get",
+          "buttons.size",
+          "dragCount.render",
+          "dragDifficulty.render",
+          "dragWidth.render",
+          "g.drawString",
+          "g.getClip",
+          "g.getFontMetrics",
+          "g.setClip",
+          "g.setColor",
+          "g.setFont",
+          "tabAnalysis.isChoosen",
+          "tabAnalysis.render",
+          "tabSimulate.isChoosen",
+          "tabSimulate.render"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioMenu": {
+    "methods_execution": {
+      "makeBackground": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.drawImage",
+          "g.setRenderingHint",
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "12",
+          "20",
+          "15",
+          "14",
+          "10",
+          "13"
+        ]
+      },
+      "makeBackgroundAnimation": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "12",
+          "18",
+          "380",
+          "10",
+          "13",
+          "11"
+        ]
+      },
+      "makeRunner": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeSearch": {
+        "calls": [
+          "node.addConnectedNode"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "12",
+          "18",
+          "20",
+          "21",
+          "24",
+          "23"
+        ]
+      },
+      "keyButtonReleased": {
+        "calls": [
+          "ApoMarioImageContainer.setTileSet"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "exit": {
+        "calls": [
+          "ApoMarioConstants.saveProperties"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseButtonFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "18",
+          "24",
+          "15",
+          "25",
+          "22",
+          "19"
+        ]
+      },
+      "releasedEnter": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "18",
+          "24",
+          "15",
+          "25",
+          "22",
+          "19"
+        ]
+      },
+      "excecuteFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.setColor",
+          "g.setFont"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "15",
+          "14",
+          "16",
+          "13"
+        ]
+      },
+      "renderPlayerStats": {
+        "calls": [
+          "g.getFontMetrics",
+          "player.getAi"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "drawString": {
+        "calls": [
+          "g.drawString",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioOptionsTextfield": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "curString.length"
+        ],
+        "logic_hints": [
+          "curString = \"\"",
+          "position = this.curString.length()",
+          "bLineOn = true",
+          "time = 0"
+        ],
+        "values_hint": []
+      },
+      "setMaxLength": {
+        "calls": [],
+        "logic_hints": [
+          "maxLength = maxLength",
+          "maxLength = this.MAX_LENGTH"
+        ],
+        "values_hint": []
+      },
+      "setBEnabled": {
+        "calls": [],
+        "logic_hints": [
+          "bEnabled = bEnabled"
+        ],
+        "values_hint": []
+      },
+      "setFont": {
+        "calls": [],
+        "logic_hints": [
+          "myFont = myFont"
+        ],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [],
+        "logic_hints": [
+          "selectedPosition = new Point(-1, -1)",
+          "selectedPosition = new Point(-1, -1)"
+        ],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [],
+        "logic_hints": [
+          "selectedPosition = new Point(-1, -1)"
+        ],
+        "values_hint": []
+      },
+      "nextSelectedPosition": {
+        "calls": [
+          "curString.length"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getThisPosition": {
+        "calls": [
+          "curString.length",
+          "curString.substring",
+          "myGraphics.getFontMetrics",
+          "myGraphics.setFont",
+          "s.length"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getSelectedString": {
+        "calls": [
+          "curString.substring"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "deleteSelectedString": {
+        "calls": [
+          "curString.substring",
+          "s.length"
+        ],
+        "logic_hints": [
+          "curString = this.curString.substring(0, this.selectedPosition.x) + this.",
+          "selectedPosition = new Point(-1, -1)"
+        ],
+        "values_hint": []
+      },
+      "removeCurStringAndSetCurString": {
+        "calls": [
+          "curString.equals"
+        ],
+        "logic_hints": [
+          "position = 0"
+        ],
+        "values_hint": []
+      },
+      "setCurString": {
+        "calls": [],
+        "logic_hints": [
+          "curString = curString"
+        ],
+        "values_hint": []
+      },
+      "setPosition": {
+        "calls": [
+          "curString.length"
+        ],
+        "logic_hints": [
+          "position = position",
+          "position = 0",
+          "position = this.curString.length()"
+        ],
+        "values_hint": []
+      },
+      "deleteTextBackspace": {
+        "calls": [
+          "curString.length",
+          "curString.substring"
+        ],
+        "logic_hints": [
+          "curString = this.curString.substring(0, position - 1) + this.curString.s"
+        ],
+        "values_hint": []
+      },
+      "deleteTextDelete": {
+        "calls": [
+          "curString.length",
+          "curString.substring"
+        ],
+        "logic_hints": [
+          "curString = this.curString.substring(0, this.getPosition()) + this.curSt"
+        ],
+        "values_hint": []
+      },
+      "addCharacter": {
+        "calls": [
+          "curString.length",
+          "curString.substring",
+          "s.length"
+        ],
+        "logic_hints": [
+          "selectedPosition = new Point(-1, -1)",
+          "selectedPosition = new Point(-1, -1)",
+          "selectedPosition = new Point(-1, -1)",
+          "selectedPosition = new Point(-1, -1)"
+        ],
+        "values_hint": [
+          "33",
+          "126"
+        ]
+      },
+      "showLine": {
+        "calls": [],
+        "logic_hints": [
+          "bLineOn = true",
+          "time = 0"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [
+          "time = 0",
+          "bLineOn = !this.bLineOn"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "curString.substring",
+          "g.drawLine",
+          "g.drawRect",
+          "g.drawString",
+          "g.fillRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont"
+        ],
+        "logic_hints": [
+          "myGraphics = = null) {",
+          "myGraphics = g"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioModelMenu": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "excecuteFunction = null"
+        ],
+        "values_hint": []
+      },
+      "setIBackground": {
+        "calls": [],
+        "logic_hints": [
+          "iBackground = background"
+        ],
+        "values_hint": []
+      },
+      "setSearch": {
+        "calls": [],
+        "logic_hints": [
+          "search = search"
+        ],
+        "values_hint": []
+      },
+      "setExcecuteFunction": {
+        "calls": [],
+        "logic_hints": [
+          "excecuteFunction = excecuteFunction"
+        ],
+        "values_hint": []
+      },
+      "setEndNode": {
+        "calls": [],
+        "logic_hints": [
+          "endNode = endNode"
+        ],
+        "values_hint": []
+      },
+      "setRunner": {
+        "calls": [],
+        "logic_hints": [
+          "runner = runner"
+        ],
+        "values_hint": []
+      },
+      "setWay": {
+        "calls": [],
+        "logic_hints": [
+          "way = way"
+        ],
+        "values_hint": []
+      },
+      "setCurNode": {
+        "calls": [],
+        "logic_hints": [
+          "curNode = curNode"
+        ],
+        "values_hint": []
+      },
+      "setBackgroundAnimation": {
+        "calls": [],
+        "logic_hints": [
+          "backgroundAnimation = backgroundAnimation"
+        ],
+        "values_hint": []
+      },
+      "searchWay": {
+        "calls": [
+          "runner.setEnd",
+          "search.searchWay",
+          "way.get",
+          "way.size"
+        ],
+        "logic_hints": [
+          "way = this.search.searchWay(this.curNode, this.endNode)"
+        ],
+        "values_hint": []
+      },
+      "keyButtonReleasedArrowAndEnter": {
+        "calls": [
+          "connectedNode.getNode",
+          "connectedNode.getX",
+          "connectedNode.getY",
+          "node.getConntectedNodes",
+          "node.getX",
+          "node.getY",
+          "search.getNodes",
+          "way.add"
+        ],
+        "logic_hints": [
+          "way = new ArrayList<ApoMarioSearchNode>()",
+          "endNode = connectedNode.getNode()",
+          "excecuteFunction = null"
+        ],
+        "values_hint": []
+      },
+      "thinkRunnerAndAnimation": {
+        "calls": [
+          "backgroundAnimation.get",
+          "backgroundAnimation.size",
+          "runner.hasReachedEnd",
+          "runner.setEnd",
+          "runner.think",
+          "way.get",
+          "way.remove",
+          "way.size"
+        ],
+        "logic_hints": [
+          "curNode = this.way.get(0).getNode()",
+          "curNode = node"
+        ],
+        "values_hint": []
+      },
+      "renderBackgroundAndAnimation": {
+        "calls": [
+          "backgroundAnimation.get",
+          "backgroundAnimation.size",
+          "g.drawImage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderButtonsAndRunner": {
+        "calls": [
+          "runner.render"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioSimulationHelp": {
+    "methods_execution": {
+      "setPlayerTwo": {
+        "calls": [],
+        "logic_hints": [
+          "nameTwo = nameTwo",
+          "pointsTwo = pointsTwo"
+        ],
+        "values_hint": []
+      },
+      "setInFinish": {
+        "calls": [],
+        "logic_hints": [
+          "bFinish = bFinish"
+        ],
+        "values_hint": []
+      },
+      "setWidth": {
+        "calls": [],
+        "logic_hints": [
+          "width = width"
+        ],
+        "values_hint": []
+      },
+      "setDifficulty": {
+        "calls": [],
+        "logic_hints": [
+          "difficulty = difficulty"
+        ],
+        "values_hint": []
+      },
+      "setRandom": {
+        "calls": [],
+        "logic_hints": [
+          "random = random"
+        ],
+        "values_hint": []
+      },
+      "setNameOne": {
+        "calls": [],
+        "logic_hints": [
+          "nameOne = nameOne"
+        ],
+        "values_hint": []
+      },
+      "setPointsOne": {
+        "calls": [],
+        "logic_hints": [
+          "pointsOne = pointsOne"
+        ],
+        "values_hint": []
+      },
+      "setNameTwo": {
+        "calls": [],
+        "logic_hints": [
+          "nameTwo = nameTwo"
+        ],
+        "values_hint": []
+      },
+      "setPointsTwo": {
+        "calls": [],
+        "logic_hints": [
+          "pointsTwo = pointsTwo"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioGame": {
+    "methods_execution": {
+      "getIStats": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawRoundRect",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iStats.getGraphics",
+          "iStats.getHeight",
+          "iStats.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "180",
+          "15",
+          "215",
+          "10",
+          "60",
+          "198"
+        ]
+      },
+      "setPlayerSelectCamera": {
+        "calls": [],
+        "logic_hints": [
+          "playerSelectCamera = player",
+          "playerCamerEntity = new ApoEntity(null, -1, -1, 8, 50)",
+          "playerSelectCamera = player",
+          "playerCamerEntity = new ApoEntity(null, -1, -1, 8, 50)"
+        ],
+        "values_hint": [
+          "50"
+        ]
+      },
+      "keyButtonReleased": {
+        "calls": [],
+        "logic_hints": [
+          "playerSelectCamera = = ApoMarioGame.PLAYER_ONE) {"
+        ],
+        "values_hint": []
+      },
+      "mouseButtonFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseButtonReleased": {
+        "calls": [
+          "playerCamerEntity.intersects"
+        ],
+        "logic_hints": [
+          "playerSelectCamera = = ApoMarioGame.PLAYER_ONE) {"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "playerCamerEntity.getWidth",
+          "playerCamerEntity.setHeight",
+          "playerCamerEntity.setX",
+          "playerCamerEntity.setY"
+        ],
+        "logic_hints": [
+          "playerSelectCamera = 0"
+        ],
+        "values_hint": [
+          "30",
+          "10",
+          "50"
+        ]
+      },
+      "render": {
+        "calls": [
+          "g.setRenderingHint"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderStatistics": {
+        "calls": [
+          "ApoHelp.getTimeToDraw",
+          "CAMERA.getHeight",
+          "CAMERA.getWidth",
+          "g.drawImage",
+          "g.drawString",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "player.getX",
+          "player.isBVisible"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20"
+        ]
+      },
+      "renderStatisticsPlayer": {
+        "calls": [
+          "TILES_LEVEL.getSubimage",
+          "g.drawImage",
+          "g.drawString",
+          "g.getFontMetrics",
+          "iCoin.getWidth",
+          "player.getCoins",
+          "player.getPoints",
+          "player.getTeamName"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "renderPlayerBar": {
+        "calls": [
+          "g.drawRect",
+          "g.fillRect",
+          "g.setColor",
+          "playerCamerEntity.getHeight",
+          "playerCamerEntity.getWidth",
+          "playerCamerEntity.getX",
+          "playerCamerEntity.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioCredits": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "24"
+        ]
+      },
+      "makeBackground": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.drawRoundRect",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20",
+          "24",
+          "15",
+          "10",
+          "200",
+          "19"
+        ]
+      },
+      "makeBackgroundAnimation": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "350",
+          "18",
+          "12",
+          "370",
+          "390",
+          "365"
+        ]
+      },
+      "makeRunner": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "24"
+        ]
+      },
+      "makeSearch": {
+        "calls": [
+          "node.addConnectedNode"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "24"
+        ]
+      },
+      "keyButtonReleased": {
+        "calls": [
+          "ApoMarioImageContainer.setTileSet"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseButtonFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "excecuteFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderCredits": {
+        "calls": [
+          "g.drawString",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      }
+    }
+  },
+  "ApoMarioOptions": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "myButton.setBActive",
+          "myButtonDebug.setBActive",
+          "myTextfield.removeCurStringAndSetCurString",
+          "myTextfield.setBEnabled",
+          "myTextfield.setFont"
+        ],
+        "logic_hints": [
+          "dragDifficulty = = null) {",
+          "dragDifficulty = new ApoMarioOptionsDrag(x, y, ApoMarioConstants.DRAG_WIDTH,",
+          "dragWidth = = null) {",
+          "dragWidth = new ApoMarioOptionsDrag(x, y, ApoMarioConstants.DRAG_WIDTH,"
+        ],
+        "values_hint": [
+          "24",
+          "15",
+          "20"
+        ]
+      },
+      "makeBackground": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "g.dispose",
+          "g.drawImage",
+          "g.drawRoundRect",
+          "g.fillRoundRect",
+          "g.setColor",
+          "g.setRenderingHint",
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20",
+          "24",
+          "15",
+          "10",
+          "200",
+          "19"
+        ]
+      },
+      "makeBackgroundAnimation": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "350",
+          "18",
+          "12",
+          "380",
+          "370",
+          "390"
+        ]
+      },
+      "makeRunner": {
+        "calls": [
+          "iMenuTile.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "24"
+        ]
+      },
+      "makeSearch": {
+        "calls": [
+          "node.addConnectedNode"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "24"
+        ]
+      },
+      "isFreezeLevelInt": {
+        "calls": [
+          "myButton.isBActive"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "stopOptions": {
+        "calls": [
+          "myTextfield.setBSelect"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setOptionsDrag": {
+        "calls": [
+          "dragDifficulty.setToPercent",
+          "dragWidth.setToPercent"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseButtonFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "excecuteFunction": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [
+          "function.equals"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseButtonReleased": {
+        "calls": [
+          "dragDifficulty.getPercent",
+          "dragDifficulty.mouseReleased",
+          "dragWidth.getPercent",
+          "dragWidth.mouseReleased",
+          "myButton.isBActive",
+          "myButton.mouseReleased",
+          "myButtonDebug.mouseReleased",
+          "myTextfield.intersects",
+          "myTextfield.mouseReleased",
+          "myTextfield.setBEnabled",
+          "myTextfield.setBSelect"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "changeDebug": {
+        "calls": [
+          "myButtonDebug.isBActive"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setDebugChange": {
+        "calls": [
+          "myButtonDebug.setBActive"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "newLevel": {
+        "calls": [
+          "myButton.isBActive",
+          "myTextfield.removeCurStringAndSetCurString"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseMoved": {
+        "calls": [
+          "dragDifficulty.mouseMoved",
+          "dragWidth.mouseMoved",
+          "myButton.getMove",
+          "myButtonDebug.getMove",
+          "myTextfield.getMove"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [
+          "myButton.getPressed",
+          "myButtonDebug.getPressed",
+          "myTextfield.mousePressed"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "mouseDragged": {
+        "calls": [
+          "myTextfield.mouseDragged"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "keyButtonReleased": {
+        "calls": [
+          "ApoHelp.getClipboardContents",
+          "ApoHelp.setClipboardContents",
+          "ApoMarioImageContainer.setTileSet",
+          "Long.valueOf",
+          "myTextfield.addCharacter",
+          "myTextfield.deleteSelectedString",
+          "myTextfield.getCurString",
+          "myTextfield.getPosition",
+          "myTextfield.getSelectedString",
+          "myTextfield.isBSelect",
+          "myTextfield.nextSelectedPosition",
+          "oldString.equals",
+          "s.charAt",
+          "s.length"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "think/1": {
+        "calls": [
+          "myTextfield.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "dragDifficulty.render",
+          "dragWidth.render",
+          "g.drawString",
+          "g.fillRect",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "g.setFont",
+          "myButton.getHeight",
+          "myButton.getX",
+          "myButton.getY",
+          "myButton.isBActive",
+          "myButton.render",
+          "myButtonDebug.getHeight",
+          "myButtonDebug.getWidth",
+          "myButtonDebug.getX",
+          "myButtonDebug.getY",
+          "myButtonDebug.isBActive",
+          "myButtonDebug.render",
+          "myTextfield.render"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "25",
+          "10",
+          "60",
+          "240",
+          "120"
+        ]
+      }
+    }
+  },
+  "ApoMarioEditor": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "g.dispose",
+          "g.drawImage",
+          "iTile.createGraphics",
+          "iTile2.getScaledInstance"
+        ],
+        "logic_hints": [
+          "dragWidth = = null) {",
+          "dragWidth = new ApoMarioOptionsDrag(x, y, ApoMarioConstants.DRAG_WIDTH,",
+          "dragDifficulty = = null) {",
+          "dragDifficulty = new ApoMarioOptionsDrag(x, y, ApoMarioConstants.DRAG_WIDTH,"
+        ],
+        "values_hint": [
+          "128",
+          "20",
+          "10",
+          "29",
+          "255",
+          "150"
+        ]
+      },
+      "mouseButtonReleased": {
+        "calls": [
+          "TILES_LEVEL.getSubimage",
+          "curFunction.equals",
+          "dragDifficulty.mouseReleased",
+          "dragWidth.mouseReleased",
+          "wall.getTubePoint"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "3000",
+          "6000",
+          "2500"
+        ]
+      },
+      "setCurChooseEntity": {
+        "calls": [
+          "button.setBActive",
+          "curChooseEntity.getX",
+          "curChooseEntity.getY",
+          "dWall.getIWall",
+          "gumba.isBFall",
+          "gumba.isBFlyOriginal",
+          "gumba.isBImmortal",
+          "gumba.isBLeft",
+          "wall.getGoodie",
+          "wall.getTubePoint",
+          "wall.isBCanon",
+          "wall.isBTube"
+        ],
+        "logic_hints": [
+          "curChooseEntity = curChooseEntity",
+          "curChooseEntity = curChooseEntity",
+          "curChooseEntity = this.getGame().getLevel().getLevelEntities()[y][x]"
+        ],
+        "values_hint": [
+          "28",
+          "18",
+          "20",
+          "25",
+          "24",
+          "17"
+        ]
+      },
+      "checkFunction": {
+        "calls": [
+          "ENEMIES.getSubimage",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "button.isBActive",
+          "button.setBActive",
+          "dragDifficulty.getPercent",
+          "dragWidth.getPercent",
+          "function.equals",
+          "g.dispose",
+          "g.drawImage",
+          "gumba.setBFall",
+          "gumba.setBFlyOriginal",
+          "gumba.setBImmortal",
+          "gumba.setBLeft",
+          "gumba.setIOriginal",
+          "iFlower.createGraphics",
+          "wall.getTubePoint",
+          "wall.getX",
+          "wall.getY",
+          "wall.isBTube"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "12",
+          "100",
+          "50"
+        ]
+      },
+      "setStartTime": {
+        "calls": [
+          "canon.getStartTime",
+          "canon.setStartTime",
+          "flower.getStartTime",
+          "flower.setStartTime",
+          "wall.getTubePoint",
+          "wall.getX",
+          "wall.getY",
+          "wall.isBCanon",
+          "wall.isBTube"
+        ],
+        "logic_hints": [
+          "curChooseEntity = = null) {"
+        ],
+        "values_hint": [
+          "7000",
+          "10",
+          "1500"
+        ]
+      },
+      "setShootTime": {
+        "calls": [
+          "canon.getShootTime",
+          "canon.setShootTime",
+          "flower.getTimeToShow",
+          "flower.setTimeToShow",
+          "wall.getTubePoint",
+          "wall.getX",
+          "wall.getY",
+          "wall.isBCanon",
+          "wall.isBTube"
+        ],
+        "logic_hints": [
+          "curChooseEntity = = null) {"
+        ],
+        "values_hint": [
+          "8000",
+          "7000",
+          "10",
+          "1500"
+        ]
+      },
+      "getCurChooseImage": {
+        "calls": [
+          "AlphaComposite.getInstance",
+          "ENEMIES.getSubimage",
+          "TILES_LEVEL.getSubimage",
+          "function.equals",
+          "g.dispose",
+          "g.drawImage",
+          "g.setComposite",
+          "iImage.createGraphics",
+          "iImageLoad.getHeight",
+          "iImageLoad.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "14",
+          "10"
+        ]
+      },
+      "setCurChoose": {
+        "calls": [],
+        "logic_hints": [
+          "curChoose = curChoose",
+          "iCurChoose = this.getCurChooseImage(function, true)",
+          "curFunction = function"
+        ],
+        "values_hint": []
+      },
+      "mouseDragged": {
+        "calls": [],
+        "logic_hints": [
+          "mouseX = x",
+          "mouseY = y"
+        ],
+        "values_hint": []
+      },
+      "mouseMoved": {
+        "calls": [
+          "dragDifficulty.mouseMoved",
+          "dragWidth.mouseMoved"
+        ],
+        "logic_hints": [
+          "mouseX = x",
+          "mouseY = y"
+        ],
+        "values_hint": []
+      },
+      "mousePressed": {
+        "calls": [],
+        "logic_hints": [
+          "bRight = bRight"
+        ],
+        "values_hint": []
+      },
+      "think": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "24",
+          "20",
+          "10"
+        ]
+      },
+      "render": {
+        "calls": [
+          "canon.getShootTime",
+          "canon.getStartTime",
+          "curChooseEntity.getCurFrameImage",
+          "curChooseEntity.getX",
+          "curChooseEntity.getY",
+          "dragDifficulty.getPercent",
+          "dragDifficulty.getY",
+          "dragDifficulty.render",
+          "dragWidth.getPercent",
+          "dragWidth.getY",
+          "dragWidth.render",
+          "flower.getStartTime",
+          "flower.getTimeToShow",
+          "g.drawImage",
+          "g.drawLine",
+          "g.drawRect",
+          "g.drawString",
+          "g.fillRect",
+          "g.getClip",
+          "g.getFontMetrics",
+          "g.setClip",
+          "g.setColor",
+          "g.setFont",
+          "g.setRenderingHint",
+          "iImage.getWidth",
+          "out.println",
+          "wall.getX",
+          "wall.getY",
+          "wall.isBCanon",
+          "wall.isBTube"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "12",
+          "20",
+          "22",
+          "16",
+          "11"
+        ]
+      },
+      "renderGrid": {
+        "calls": [
+          "g.drawImage",
+          "g.drawRect",
+          "g.setColor",
+          "iCurChoose.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioModel": {
+    "methods_execution": {}
+  },
+  "ApoMarioOptionsButton": {
+    "methods_execution": {
+      "init": {
+        "calls": [],
+        "logic_hints": [
+          "bActive = false"
+        ],
+        "values_hint": []
+      },
+      "setBActive": {
+        "calls": [],
+        "logic_hints": [
+          "bActive = bActive"
+        ],
+        "values_hint": []
+      },
+      "mouseReleased": {
+        "calls": [],
+        "logic_hints": [
+          "bActive = !this.bActive"
+        ],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "g.drawLine",
+          "g.drawRoundRect",
+          "g.drawString",
+          "g.fillRoundRect",
+          "g.getFontMetrics",
+          "g.getStroke",
+          "g.setColor",
+          "g.setStroke"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "160",
+          "254"
+        ]
+      }
+    }
+  },
+  "ApoMarioSimulationButton": {
+    "methods_execution": {
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.drawString",
+          "g.fillRect",
+          "g.getFontMetrics",
+          "g.setColor",
+          "help.getDifficulty",
+          "help.getNameOne",
+          "help.getNameTwo",
+          "help.getPointsOne",
+          "help.getPointsTwo",
+          "help.getRandom",
+          "help.getReplay",
+          "help.getWidth",
+          "help.isInFinish"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioEditorIO": {
+    "methods_execution": {
+      "readLevel": {
+        "calls": [
+          "TILES_LEVEL.getSubimage",
+          "data.readBoolean",
+          "data.readInt",
+          "ex.printStackTrace",
+          "level.getEnemies",
+          "level.makeBoxCoin",
+          "level.makeBoxQuestionMark",
+          "level.makeCanon",
+          "level.makeFlower",
+          "level.makeGroundCorrect",
+          "level.makeGroundCorrectNoCollision",
+          "level.makeGroundWall",
+          "level.makeGumba",
+          "level.makeImmortal",
+          "level.makeKoopa",
+          "level.makeWall",
+          "level.setLevelEntities",
+          "level.setLevelInt",
+          "level.setLevelString",
+          "level.setPlayerAndFinish",
+          "level.setWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "writeLevel": {
+        "calls": [
+          "data.writeBoolean",
+          "data.writeInt",
+          "ex.printStackTrace",
+          "flower.getStartTime",
+          "flower.getTimeToShow",
+          "gumba.getX",
+          "gumba.getY",
+          "gumba.isBFall",
+          "gumba.isBFly",
+          "gumba.isBImmortal",
+          "gumba.isBLeft",
+          "level.getEnemies",
+          "level.getLevelEntities",
+          "level.setLevelString",
+          "q.getGoodie",
+          "w.getGoodie",
+          "w.getIWall",
+          "w.getTubePoint",
+          "w.isBCanon",
+          "w.isBGround",
+          "w.isBNoCollision",
+          "w.isBOnlyAboveWall",
+          "w.isBTube"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isThereAnEnemy": {
+        "calls": [
+          "level.getEnemies"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioOptionsDrag": {
+    "methods_execution": {
+      "mouseMoved": {
+        "calls": [
+          "myRealRec.contains"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getPercent": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "100"
+        ]
+      },
+      "setToPercent": {
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [
+          "100"
+        ]
+      },
+      "render": {
+        "calls": [
+          "g.drawOval",
+          "g.drawPolygon",
+          "g.drawRect",
+          "g.fillOval",
+          "g.fillPolygon",
+          "g.fillRect",
+          "g.setColor",
+          "myRealRec.getHeight",
+          "myRealRec.getWidth",
+          "myRealRec.getX",
+          "myRealRec.getY",
+          "p.addPoint"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioAIEnemy": {
+    "methods_execution": {
+      "isFlyingEnemy": {
+        "calls": [
+          "enemy.isBFly"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isImmortalEnemy": {
+        "calls": [
+          "enemy.isBImmortal"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getPoints": {
+        "calls": [
+          "enemy.getPoints"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioAIEntity": {
+    "methods_execution": {
+      "setStartX": {
+        "calls": [],
+        "logic_hints": [
+          "startX = startX"
+        ],
+        "values_hint": []
+      },
+      "isVisible": {
+        "calls": [
+          "entity.isBVisible"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getID": {
+        "calls": [
+          "entity.getId"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getX": {
+        "calls": [
+          "rec.getX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getY": {
+        "calls": [
+          "level.getComponent",
+          "rec.getY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getWidth": {
+        "calls": [
+          "rec.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getHeight": {
+        "calls": [
+          "rec.getHeight"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getVecX": {
+        "calls": [
+          "entity.getVecX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getVecY": {
+        "calls": [
+          "entity.getVecY"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioAIGoodie": {
+    "methods_execution": {
+      "getPoints": {
+        "calls": [
+          "goodie.getPoints"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioAIPlayer": {
+    "methods_execution": {
+      "getType": {
+        "calls": [
+          "player.getType"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "runFast": {
+        "calls": [
+          "player.setBSpeed"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "runNormal": {
+        "calls": [
+          "player.setBSpeed"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "runLeft": {
+        "calls": [
+          "player.setGoalVecX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "runRight": {
+        "calls": [
+          "player.setGoalVecX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "runStand": {
+        "calls": [
+          "player.setGoalVecX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "duck": {
+        "calls": [
+          "player.setBDown"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "canJump": {
+        "calls": [
+          "player.canJump"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "jump": {
+        "calls": [
+          "player.setBNextJump"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isImmortal": {
+        "calls": [
+          "player.getDamageTime"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "stopGame": {
+        "calls": [
+          "level.getComponent"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "drawLine": {
+        "calls": [
+          "level.getComponent",
+          "player.addDrawElement"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "drawCircle": {
+        "calls": [
+          "level.getComponent",
+          "player.addDrawElement"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "drawRect": {
+        "calls": [
+          "level.getComponent",
+          "player.addDrawElement"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "addMessage": {
+        "calls": [
+          "player.addMessage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioAI": {
+    "methods_execution": {}
+  },
+  "ApoMarioAIConstants": {
+    "methods_execution": {}
+  },
+  "ApoMarioAILevel": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "ApoMarioConstants.getStartX",
+          "Rectangle2D.Double",
+          "cannon.getCannons",
+          "coin.isBVisible",
+          "enemies.add",
+          "ex.getCause",
+          "ex.getMessage",
+          "flower.getMyChangeY",
+          "goodies.add",
+          "level.getComponent",
+          "level.getEnemies",
+          "level.getFinish",
+          "level.getGoodies",
+          "level.getLevelEntities",
+          "level.getPlayers",
+          "level.getWidth",
+          "myPlayer.getRec",
+          "out.println",
+          "question.isBVisible",
+          "question.isBWall",
+          "wall.getParticle",
+          "wall.isBNoCollision",
+          "wall.isBOnlyAboveWall",
+          "wall.isBVisible",
+          "wall.isBWall"
+        ],
+        "logic_hints": [
+          "enemies = new ArrayList<ApoMarioAIEnemy>()",
+          "goodies = new ArrayList<ApoMarioAIGoodie>()",
+          "levelArray = new byte[height][width]"
+        ],
+        "values_hint": []
+      },
+      "getChangeX": {
+        "calls": [
+          "level.getPlayers",
+          "myPlayer.getRec"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getStartTime": {
+        "calls": [
+          "level.getStartTime"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getTimeLeft": {
+        "calls": [
+          "level.getTime"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getDifficulty": {
+        "calls": [
+          "level.getDifficulty"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getLevelWidth": {
+        "calls": [
+          "level.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getLevelRandom": {
+        "calls": [
+          "level.getLevelInt"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getEnemyPlayer": {
+        "calls": [
+          "enemyPlayer.isVisible"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioLevelIO": {
+    "methods_execution": {
+      "readLevel": {
+        "calls": [
+          "TILES_LEVEL.getSubimage",
+          "data.readBoolean",
+          "data.readInt",
+          "iWall.getSubimage",
+          "level.makeBoxCoin",
+          "level.makeBoxQuestionMark",
+          "level.makeCanon",
+          "level.makeEmptyLevel",
+          "level.makeFinish",
+          "level.makeFlower",
+          "level.makeGroundWall",
+          "level.makeGumba",
+          "level.makeImmortal",
+          "level.makeKoopa",
+          "level.makePlayer",
+          "level.makeWall",
+          "level.setTime"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "writeLevel": {
+        "calls": [
+          "cannon.getMyHeight",
+          "cannon.getShootTime",
+          "cannon.getStartTime",
+          "data.writeBoolean",
+          "data.writeInt",
+          "flower.getStartTime",
+          "flower.getTimeToShow",
+          "flower.getX",
+          "flower.getY",
+          "gumba.getX",
+          "gumba.getY",
+          "gumba.isBFall",
+          "gumba.isBFlyOriginal",
+          "gumba.isBImmortal",
+          "gumba.isBLeft",
+          "koopa.getX",
+          "koopa.getY",
+          "koopa.isBFall",
+          "koopa.isBFlyOriginal",
+          "koopa.isBGreen",
+          "koopa.isBLeft",
+          "level.getDifficulty",
+          "level.getEnemies",
+          "level.getFinish",
+          "level.getHeight",
+          "level.getLevelEntities",
+          "level.getPlayers",
+          "level.getTime",
+          "level.getWidth",
+          "wall.getGoodie",
+          "wall.getIWall",
+          "wall.isBDestructable",
+          "wall.isBNoCollision",
+          "wall.isBOnlyAboveWall"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioRandomLevel": {
+    "methods_execution": {
+      "setLastRandom": {
+        "calls": [],
+        "logic_hints": [
+          "lastRandom = lastRandom"
+        ],
+        "values_hint": []
+      },
+      "setWidth": {
+        "calls": [],
+        "logic_hints": [
+          "width = width"
+        ],
+        "values_hint": []
+      },
+      "setDifficulty": {
+        "calls": [],
+        "logic_hints": [
+          "difficulty = difficulty"
+        ],
+        "values_hint": []
+      },
+      "setTime": {
+        "calls": [],
+        "logic_hints": [
+          "time = time"
+        ],
+        "values_hint": []
+      },
+      "makeRandomLevel": {
+        "calls": [
+          "level.getPlayers",
+          "level.getWidth",
+          "level.makeGroundCorrect",
+          "level.setPlayerAndFinish",
+          "random.nextInt"
+        ],
+        "logic_hints": [
+          "lastRandom = lastRandom",
+          "random = new Random(lastRandom)",
+          "time = 60000 + this.width * 400"
+        ],
+        "values_hint": [
+          "30",
+          "400",
+          "10",
+          "60000"
+        ]
+      },
+      "makeBFull": {
+        "calls": [],
+        "logic_hints": [
+          "bFull = new boolean[this.width]"
+        ],
+        "values_hint": []
+      },
+      "makeGround": {
+        "calls": [
+          "level.getHeight",
+          "level.getWidth",
+          "level.makeGroundWall",
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "makeIncreaseWall": {
+        "calls": [
+          "TILES_LEVEL.getSubimage",
+          "iWall.getSubimage",
+          "level.getHeight",
+          "level.getLevelEntities",
+          "level.makeWall",
+          "random.nextInt",
+          "wall.isBNoCollision",
+          "wall.isBOnlyAboveWall"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "15"
+        ]
+      },
+      "isEmpty": {
+        "calls": [
+          "level.getHeight",
+          "level.getLevelEntities"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeHole": {
+        "calls": [
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "30",
+          "100",
+          "50"
+        ]
+      },
+      "makeHoleOnly": {
+        "calls": [
+          "level.getHeight",
+          "level.getLevelEntities"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isFull": {
+        "calls": [
+          "level.getHeight",
+          "level.getLevelEntities",
+          "wall.isBNoCollision",
+          "wall.isBOnlyAboveWall"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeCannon": {
+        "calls": [
+          "level.makeCanon",
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "2000",
+          "10",
+          "200"
+        ]
+      },
+      "makeFlower": {
+        "calls": [
+          "level.makeFlower",
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "100",
+          "10",
+          "200",
+          "60",
+          "2000"
+        ]
+      },
+      "canJump": {
+        "calls": [
+          "level.getLevelEntities"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "getHeight": {
+        "calls": [
+          "level.getHeight",
+          "level.getLevelEntities",
+          "wall.isBGround",
+          "wall.isBNoCollision",
+          "wall.isBOnlyAboveWall"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isOneHeight": {
+        "calls": [
+          "level.getHeight",
+          "level.getLevelEntities"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeWalls": {
+        "calls": [
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "25",
+          "10",
+          "100",
+          "50"
+        ]
+      },
+      "canMakeWalls": {
+        "calls": [
+          "level.getHeight",
+          "level.getLevelEntities",
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeDestructableWall": {
+        "calls": [
+          "level.makeWall",
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "30",
+          "80",
+          "10",
+          "100"
+        ]
+      },
+      "makeQuestionmark": {
+        "calls": [
+          "level.makeBoxQuestionMark",
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "40",
+          "100"
+        ]
+      },
+      "makeCoin": {
+        "calls": [
+          "level.makeBoxCoin",
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "makeEnemy": {
+        "calls": [
+          "level.makeGumba",
+          "level.makeImmortal",
+          "level.makeKoopa",
+          "random.nextInt"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "20",
+          "100",
+          "50",
+          "15",
+          "60",
+          "30"
+        ]
+      }
+    }
+  },
+  "ApoMarioLevel": {
+    "methods_execution": {
+      "init": {
+        "calls": [
+          "randomLevel.getLastRandom",
+          "replay.setLevel"
+        ],
+        "logic_hints": [
+          "thinkPlayerOne = new ArrayList<Long>()",
+          "thinkPlayerTwo = new ArrayList<Long>()",
+          "replay = new ApoMarioReplay()",
+          "bAnalysis = false"
+        ],
+        "values_hint": [
+          "344",
+          "100",
+          "528"
+        ]
+      },
+      "setBReplay": {
+        "calls": [],
+        "logic_hints": [
+          "bReplay = bReplay"
+        ],
+        "values_hint": []
+      },
+      "setReplay": {
+        "calls": [],
+        "logic_hints": [
+          "replay = replay"
+        ],
+        "values_hint": []
+      },
+      "setBStop": {
+        "calls": [],
+        "logic_hints": [
+          "bStop = bStop"
+        ],
+        "values_hint": []
+      },
+      "makeEmptyLevel": {
+        "calls": [
+          "enemies.clear",
+          "goodies.clear"
+        ],
+        "logic_hints": [
+          "steps = 0",
+          "bIcarus = false",
+          "enemies = = null) {",
+          "enemies = new ArrayList<ApoMarioEnemy>()"
+        ],
+        "values_hint": []
+      },
+      "setLevelEntities": {
+        "calls": [],
+        "logic_hints": [
+          "levelEntities = levelEntities"
+        ],
+        "values_hint": []
+      },
+      "makeLevel": {
+        "calls": [
+          "cannons.clear",
+          "enemies.clear",
+          "enemies.get",
+          "enemies.remove",
+          "enemies.size",
+          "goodies.clear",
+          "players.get",
+          "players.size",
+          "randomLevel.getDifficulty",
+          "randomLevel.getTime",
+          "randomLevel.makeRandomLevel",
+          "randomLevel.setDifficulty",
+          "randomLevel.setWidth",
+          "thinkPlayerOne.clear",
+          "thinkPlayerTwo.clear"
+        ],
+        "logic_hints": [
+          "steps = 0",
+          "bIcarus = false",
+          "particle = new ArrayList<ApoMarioParticle>()",
+          "bStop = false"
+        ],
+        "values_hint": [
+          "60000",
+          "500",
+          "100",
+          "15",
+          "400"
+        ]
+      },
+      "setLevelInt": {
+        "calls": [],
+        "logic_hints": [
+          "levelInt = levelInt"
+        ],
+        "values_hint": []
+      },
+      "setTime": {
+        "calls": [],
+        "logic_hints": [
+          "time = time"
+        ],
+        "values_hint": []
+      },
+      "makeMyBackground": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "component.getImages",
+          "g.dispose",
+          "g.drawImage",
+          "iBackground.getWidth",
+          "iBackgroundFront.getHeight",
+          "iBackgroundFront.getWidth",
+          "iBoth.getGraphics"
+        ],
+        "logic_hints": [
+          "iBackground = this.component.getImages().getBackgroundBack(ApoMarioImageCo",
+          "iBackgroundFront = this.component.getImages().getBackgroundFront(ApoMarioImageC",
+          "iBoth = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefault"
+        ],
+        "values_hint": [
+          "20",
+          "40",
+          "32"
+        ]
+      },
+      "setWidth": {
+        "calls": [],
+        "logic_hints": [
+          "width = width"
+        ],
+        "values_hint": []
+      },
+      "setDifficulty": {
+        "calls": [],
+        "logic_hints": [
+          "difficulty = difficulty"
+        ],
+        "values_hint": []
+      },
+      "makeFinish": {
+        "calls": [],
+        "logic_hints": [
+          "finish = new ApoMarioEnd(x, y - height, 3 * ApoMarioConstants.TILE_SI"
+        ],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "makeBoxQuestionMark": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "TILES_LEVEL.getSubimage",
+          "g.dispose",
+          "g.drawImage",
+          "image.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeBoxCoin": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "PARTICLE.getSubimage",
+          "TILES_LEVEL.getSubimage",
+          "g.dispose",
+          "g.drawImage",
+          "image.createGraphics",
+          "particle.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makePlayer": {
+        "calls": [
+          "players.add",
+          "players.get",
+          "players.size"
+        ],
+        "logic_hints": [
+          "players = = null) {",
+          "players = new ArrayList<ApoMarioPlayer>()"
+        ],
+        "values_hint": []
+      },
+      "makeGroundWall": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "TILES_LEVEL.getSubimage",
+          "g.dispose",
+          "g.drawImage",
+          "iWall.getGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setNames": {
+        "calls": [
+          "players.get",
+          "players.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeGroundCorrect": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "TILES_LEVEL.getSubimage",
+          "g.dispose",
+          "g.drawImage",
+          "iLeft.getHeight",
+          "iLeft.getSubimage",
+          "iLeft.getWidth",
+          "iNew.getGraphics",
+          "iRight.getHeight",
+          "iRight.getSubimage",
+          "iRight.getWidth",
+          "wall.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeGroundCorrectNoCollision": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "TILES_LEVEL.getSubimage",
+          "g.dispose",
+          "g.drawImage",
+          "iLeft.getHeight",
+          "iLeft.getSubimage",
+          "iLeft.getWidth",
+          "iNew.getGraphics",
+          "iRight.getHeight",
+          "iRight.getSubimage",
+          "iRight.getWidth",
+          "wall.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "isGroundWallNoCollision": {
+        "calls": [
+          "wall.isBNoCollision",
+          "wall.isBOnlyAboveWall"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeWall": {
+        "calls": [
+          "TILES_LEVEL.getSubimage"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeWall/5": {
+        "calls": [
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "TILES_LEVEL.getSubimage",
+          "g.dispose",
+          "g.drawImage",
+          "image.createGraphics",
+          "wall.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "1000"
+        ]
+      },
+      "makeKoopa": {
+        "calls": [
+          "ENEMIES.getSubimage",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "enemies.add",
+          "g.dispose",
+          "g.drawImage",
+          "iEnemy.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeGumba": {
+        "calls": [
+          "ENEMIES.getSubimage",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "enemies.add",
+          "g.dispose",
+          "g.drawImage",
+          "iGumba.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "100",
+          "50"
+        ]
+      },
+      "makeImmortal": {
+        "calls": [
+          "ENEMIES.getSubimage",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "enemies.add",
+          "enemies.get",
+          "enemies.size",
+          "g.dispose",
+          "g.drawImage",
+          "iImmortal.createGraphics"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "makeCanon": {
+        "calls": [
+          "ENEMIES.getSubimage",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "TILES_LEVEL.getSubimage",
+          "cannons.add",
+          "canon.setBCanon",
+          "canon.setTubePoint",
+          "g.dispose",
+          "g.drawImage",
+          "iCanon.createGraphics",
+          "iCanonCanon.createGraphics",
+          "iWall.createGraphics",
+          "iWallWall.createGraphics",
+          "wall.setBCanon",
+          "wall.setTubePoint"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "14",
+          "11"
+        ]
+      },
+      "makeFlower": {
+        "calls": [
+          "ENEMIES.getSubimage",
+          "GraphicsEnvironment.getLocalGraphicsEnvironment",
+          "TILES_LEVEL.getSubimage",
+          "enemies.add",
+          "g.dispose",
+          "g.drawImage",
+          "iFlower.createGraphics",
+          "iWallLeft.createGraphics",
+          "iWallLeftLeft.createGraphics",
+          "iWallRight.createGraphics",
+          "iWallRightRight.createGraphics",
+          "wall.setBTube",
+          "wall.setTubePoint"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "10",
+          "12",
+          "11"
+        ]
+      },
+      "unloadPlayer": {
+        "calls": [
+          "players.get"
+        ],
+        "logic_hints": [
+          "playerOneAI = this.HUMAN_NO_PLAYER",
+          "AIOne = null",
+          "playerTwoAI = this.HUMAN_NO_PLAYER",
+          "AITwo = null"
+        ],
+        "values_hint": []
+      },
+      "changePlayerOneAI": {
+        "calls": [],
+        "logic_hints": [
+          "playerOneAI = this.TEST_CHEATER",
+          "playerOneAI = this.TEST_SHORTI",
+          "playerOneAI = 0",
+          "playerOneAI = 0"
+        ],
+        "values_hint": []
+      },
+      "setPlayerOneAI": {
+        "calls": [],
+        "logic_hints": [
+          "playerOneAI = ai"
+        ],
+        "values_hint": []
+      },
+      "setPlayerTwoAI": {
+        "calls": [],
+        "logic_hints": [
+          "playerTwoAI = ai"
+        ],
+        "values_hint": []
+      },
+      "changePlayerTwoAI": {
+        "calls": [
+          "players.get"
+        ],
+        "logic_hints": [
+          "playerTwoAI = this.TEST_CHEATER",
+          "playerTwoAI = this.TEST_SHORTI",
+          "playerTwoAI = 0",
+          "playerTwoAI = 0"
+        ],
+        "values_hint": []
+      },
+      "loadPlayer": {
+        "calls": [
+          "res.lastIndexOf",
+          "res.length",
+          "res.substring"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "loadPlayer/4": {
+        "calls": [
+          "ApoMarioConstants.saveProperties",
+          "classN.indexOf",
+          "classN.length",
+          "e.printStackTrace",
+          "out.println"
+        ],
+        "logic_hints": [
+          "AIOne = apoMarioAI",
+          "AITwo = apoMarioAI"
+        ],
+        "values_hint": []
+      },
+      "addParticle": {
+        "calls": [
+          "particle.add"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "levelRestart": {
+        "calls": [
+          "randomLevel.getLastRandom",
+          "replay.getLevelString",
+          "replay.init",
+          "replay.setLevel",
+          "replayPlay.initReplay"
+        ],
+        "logic_hints": [
+          "bAnalysis = true"
+        ],
+        "values_hint": []
+      },
+      "restart": {
+        "calls": [
+          "component.setChangeX"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "newLevel": {
+        "calls": [],
+        "logic_hints": [
+          "levelString = null"
+        ],
+        "values_hint": []
+      },
+      "newSameLevel": {
+        "calls": [],
+        "logic_hints": [
+          "levelString = null"
+        ],
+        "values_hint": []
+      },
+      "setLevelString": {
+        "calls": [
+          "replay.setLevel"
+        ],
+        "logic_hints": [
+          "levelString = levelString",
+          "width = width",
+          "difficulty = 0",
+          "levelString = levelString"
+        ],
+        "values_hint": []
+      },
+      "getPassedTime": {
+        "calls": [
+          "randomLevel.getTime"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "setAnalysis": {
+        "calls": [
+          "component.setBWin",
+          "game.isBEditor",
+          "game.setAnalysis",
+          "game.setEditor",
+          "out.println",
+          "playerOne.getCoins",
+          "playerOne.getPoints",
+          "playerOne.getX",
+          "playerOne.isBVisible",
+          "playerOne.setPoints",
+          "playerTwo.getCoins",
+          "playerTwo.getPoints",
+          "playerTwo.getX",
+          "playerTwo.isBVisible",
+          "playerTwo.setPoints"
+        ],
+        "logic_hints": [
+          "bAnalysis = false"
+        ],
+        "values_hint": []
+      },
+      "thinkTime": {
+        "calls": [
+          "replayPlay.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "thinkPlayer": {
+        "calls": [
+          "out.print",
+          "out.println",
+          "players.get",
+          "players.size",
+          "rec.getX",
+          "rec.getY",
+          "thinkPlayerOne.add",
+          "thinkPlayerOne.clear",
+          "thinkPlayerOne.get",
+          "thinkPlayerOne.size",
+          "thinkPlayerTwo.add",
+          "thinkPlayerTwo.clear",
+          "thinkPlayerTwo.get",
+          "thinkPlayerTwo.size"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "50"
+        ]
+      },
+      "dieIcarus": {
+        "calls": [
+          "fireAnimation.think",
+          "icarus.getVecY",
+          "icarus.getY",
+          "icarus.setX",
+          "icarus.setY",
+          "player.getTeamName",
+          "player.getX"
+        ],
+        "logic_hints": [
+          "bIcarus = true",
+          "icarus = player",
+          "icarusLastY = this.icarus.getY()",
+          "icarusLastVecY = this.icarus.getVecY()"
+        ],
+        "values_hint": [
+          "10"
+        ]
+      },
+      "thinkFinish": {
+        "calls": [
+          "finish.think"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "thinkParticle": {
+        "calls": [
+          "particle.get",
+          "particle.remove",
+          "particle.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "thinkEnemies": {
+        "calls": [
+          "enemies.get",
+          "enemies.size",
+          "ex.getMessage",
+          "ex.printStackTrace",
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "thinkGoodies": {
+        "calls": [
+          "goodies.get",
+          "goodies.remove",
+          "goodies.size",
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "thinkLevelEntities": {
+        "calls": [
+          "canon.think",
+          "canon.thinkCanon",
+          "component.getChangeY",
+          "players.get"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "render": {
+        "calls": [
+          "component.isBMiddle",
+          "replayPlay.render"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderBackgroundImage": {
+        "calls": [
+          "g.drawImage",
+          "iBackground.getWidth"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderParticle": {
+        "calls": [
+          "particle.get",
+          "particle.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderFinish": {
+        "calls": [
+          "finish.getX",
+          "finish.render"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderPlayer": {
+        "calls": [
+          "players.get",
+          "players.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderEnemies": {
+        "calls": [
+          "enemies.get",
+          "enemies.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderGoodies": {
+        "calls": [
+          "goodies.get",
+          "goodies.size"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderTiles": {
+        "calls": [
+          "canon.getCannons",
+          "canon.render",
+          "out.println"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      },
+      "renderIcarus": {
+        "calls": [
+          "g.drawLine",
+          "g.fillOval",
+          "g.getStroke",
+          "g.setColor",
+          "g.setStroke",
+          "icarus.drawImage",
+          "icarus.drawStringAbove"
+        ],
+        "logic_hints": [],
+        "values_hint": [
+          "120",
+          "90",
+          "150",
+          "60"
+        ]
+      }
+    }
+  },
+  "ApoMarioPlayerDrawRect": {
+    "methods_execution": {
+      "render": {
+        "calls": [
+          "g.drawRect",
+          "g.fillRect",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioPlayerDraw": {
+    "methods_execution": {
+      "setTime": {
+        "calls": [],
+        "logic_hints": [
+          "time = time"
+        ],
+        "values_hint": []
+      },
+      "setColor": {
+        "calls": [],
+        "logic_hints": [
+          "color = color"
+        ],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioPlayerDrawLine": {
+    "methods_execution": {
+      "render": {
+        "calls": [
+          "g.drawLine",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  },
+  "ApoMarioPlayerDrawCircle": {
+    "methods_execution": {
+      "render": {
+        "calls": [
+          "g.drawOval",
+          "g.fillOval",
+          "g.setColor"
+        ],
+        "logic_hints": [],
+        "values_hint": []
+      }
+    }
+  }
+}

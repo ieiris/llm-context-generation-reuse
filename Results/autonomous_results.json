@@ -1,0 +1,1788 @@
+[
+  {
+    "prompt_id": 0,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "None",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "4/5 failed",
+    "tests_passed": 1,
+    "tests_failed": 4,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "FAIL",
+      "recordedNameIsTheRealPlayersName": "FAIL",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "FAIL"
+    },
+    "test_failure_messages": {
+      "runEndRecordsScoreWithoutHelp": "java.lang.AssertionError: no live ApoMarioHighscore instance reachable from the running game (searched panel/level fields and class statics) \u2014 feature state is not connected",
+      "recordedNameIsTheRealPlayersName": "java.lang.AssertionError: no live ApoMarioHighscore instance reachable from the running game (searched panel/level fields and class statics) \u2014 feature state is not connected",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: no live ApoMarioHighscore instance reachable from the running game (searched panel/level fields and class statics) \u2014 feature state is not connected",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "java.lang.AssertionError: no live ApoMarioHighscore instance reachable from the running game (searched panel/level fields and class statics) \u2014 feature state is not connected"
+    }
+  },
+  {
+    "prompt_id": 1,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 4,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 7,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S+F+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 9,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 13,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "F+B",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 5",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "ERROR",
+      "recordedNameIsTheRealPlayersName": "ERROR",
+      "noPhantomEntriesWithoutRunEnd": "ERROR",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "ERROR",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 14,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S+F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 5",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "ERROR",
+      "recordedNameIsTheRealPlayersName": "ERROR",
+      "noPhantomEntriesWithoutRunEnd": "ERROR",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "ERROR",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 17,
+    "run": 1,
+    "task": "Achievements",
+    "context_label": "S",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "PASS",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "PASS",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 19,
+    "run": 1,
+    "task": "Achievements",
+    "context_label": "B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "PASS",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "FAIL",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {
+      "d_realPointsUnlockPointsGoalOnRunEnd": "java.lang.AssertionError: 20000 real points at run end must unlock POINTS_GOAL via the game's own wiring; got [ENEMIES_GOAL]"
+    }
+  },
+  {
+    "prompt_id": 29,
+    "run": 1,
+    "task": "Achievements",
+    "context_label": "F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "PASS",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "PASS",
+      "e_realSixtySecondRunUnlocksTimeGoal": "FAIL"
+    },
+    "test_failure_messages": {
+      "e_realSixtySecondRunUnlocksTimeGoal": "java.lang.AssertionError: surviving 60s in a real run must unlock TIME_GOAL via the game's own wiring (no test call); got [ENEMIES_GOAL, POINTS_GOAL]"
+    }
+  },
+  {
+    "prompt_id": 31,
+    "run": 1,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/5 failed",
+    "tests_passed": 3,
+    "tests_failed": 2,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "FAIL",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "java.lang.AssertionError: 20000 real points at run end must unlock POINTS_GOAL via the game's own wiring; got []"
+    }
+  },
+  {
+    "prompt_id": 32,
+    "run": 1,
+    "task": "Options",
+    "context_label": "None",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 34,
+    "run": 1,
+    "task": "Options",
+    "context_label": "F",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 35,
+    "run": 1,
+    "task": "Options",
+    "context_label": "B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 38,
+    "run": 1,
+    "task": "Options",
+    "context_label": "S+F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "va.lang.NullPointerException: Cannot invoke \"org.apogames.entity.ApoButton.setBVisible(boolean)\" because \"apoBot.ApoBotComponent.getButtons()[<local1>]\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 39,
+    "run": 1,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 40,
+    "run": 1,
+    "task": "Options",
+    "context_label": "None",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 42,
+    "run": 1,
+    "task": "Options",
+    "context_label": "F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 46,
+    "run": 1,
+    "task": "Options",
+    "context_label": "S+F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 47,
+    "run": 1,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 1,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "S",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 2,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "F",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 4,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "java.awt.image.RasterFormatException: (y + height) is outside raster",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "ERROR",
+      "recordedNameIsTheRealPlayersName": "ERROR",
+      "noPhantomEntriesWithoutRunEnd": "ERROR",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "ERROR",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 10,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "F",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 12,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 16,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "None",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "3/5 failed",
+    "tests_passed": 2,
+    "tests_failed": 3,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "FAIL",
+      "e_realSixtySecondRunUnlocksTimeGoal": "FAIL"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "java.lang.AssertionError: 20000 real points at run end must unlock POINTS_GOAL via the game's own wiring; got []",
+      "e_realSixtySecondRunUnlocksTimeGoal": "java.lang.AssertionError: surviving 60s in a real run must unlock TIME_GOAL via the game's own wiring (no test call); got []"
+    }
+  },
+  {
+    "prompt_id": 24,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "None",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "java.lang.NullPointerException: Cannot invoke \"apoMario.game.panels.ApoMarioStateAchievements.beginRun()\" because \"this.achievements\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "ERROR",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "ERROR",
+      "c_threeRealKillsUnlockEnemiesGoal": "ERROR",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "ERROR",
+      "e_realSixtySecondRunUnlocksTimeGoal": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 25,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "S",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "PASS",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "PASS",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 26,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "F",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "PASS",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []"
+    }
+  },
+  {
+    "prompt_id": 30,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "S+F",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "PASS",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "PASS",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 32,
+    "run": 2,
+    "task": "Options",
+    "context_label": "None",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 34,
+    "run": 2,
+    "task": "Options",
+    "context_label": "F",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 35,
+    "run": 2,
+    "task": "Options",
+    "context_label": "B",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "java.lang.NullPointerException: Cannot invoke \"org.apogames.entity.ApoButton.getX()\" because \"apoBot.ApoBotComponent.getButtons()[9]\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 37,
+    "run": 2,
+    "task": "Options",
+    "context_label": "F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 38,
+    "run": 2,
+    "task": "Options",
+    "context_label": "S+F",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 40,
+    "run": 2,
+    "task": "Options",
+    "context_label": "None",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 41,
+    "run": 2,
+    "task": "Options",
+    "context_label": "S",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 46,
+    "run": 2,
+    "task": "Options",
+    "context_label": "S+F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 47,
+    "run": 2,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 3,
+    "run": 3,
+    "task": "Highscore",
+    "context_label": "B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 4,
+    "run": 3,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 13,
+    "run": 3,
+    "task": "Highscore",
+    "context_label": "F+B",
+    "wiring_outcome": "compile-fail",
+    "wiring_pass": false,
+    "detail": "apoMario/game/panels/ApoMarioHighscoreWiringTest.java:20: error: cannot find symbol | private ApoMarioHighscore locate() { | ^",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 20,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "S+B",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "ullPointerException: Cannot invoke \"apoMario.level.ApoMarioLevel.getComponent()\" because the return value of \"apoMario.entity.ApoMarioPlayer.getLevel()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "ERROR",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "ERROR",
+      "c_threeRealKillsUnlockEnemiesGoal": "ERROR",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "ERROR",
+      "e_realSixtySecondRunUnlocksTimeGoal": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 23,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/5 failed",
+    "tests_passed": 3,
+    "tests_failed": 2,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "PASS",
+      "e_realSixtySecondRunUnlocksTimeGoal": "FAIL"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []",
+      "e_realSixtySecondRunUnlocksTimeGoal": "java.lang.AssertionError: surviving 60s in a real run must unlock TIME_GOAL via the game's own wiring (no test call); got [POINTS_GOAL]"
+    }
+  },
+  {
+    "prompt_id": 24,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "None",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "3/5 failed",
+    "tests_passed": 2,
+    "tests_failed": 3,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "FAIL",
+      "e_realSixtySecondRunUnlocksTimeGoal": "FAIL"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "java.lang.AssertionError: 20000 real points at run end must unlock POINTS_GOAL via the game's own wiring; got []",
+      "e_realSixtySecondRunUnlocksTimeGoal": "java.lang.AssertionError: surviving 60s in a real run must unlock TIME_GOAL via the game's own wiring (no test call); got []"
+    }
+  },
+  {
+    "prompt_id": 25,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "S",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "5/5 failed",
+    "tests_passed": 0,
+    "tests_failed": 5,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "FAIL",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "FAIL",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "FAIL",
+      "e_realSixtySecondRunUnlocksTimeGoal": "FAIL"
+    },
+    "test_failure_messages": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "java.lang.NullPointerException: Cannot invoke \"java.awt.geom.Rectangle2D$Float.getX()\" because the return value of \"apoMario.entity.ApoMarioPlayer.getRec()\" is null",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "java.lang.NullPointerException: Cannot invoke \"java.awt.geom.Rectangle2D$Float.getX()\" because the return value of \"apoMario.entity.ApoMarioPlayer.getRec()\" is null",
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.NullPointerException: Cannot invoke \"java.awt.geom.Rectangle2D$Float.getX()\" because the return value of \"apoMario.entity.ApoMarioPlayer.getRec()\" is null",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "java.lang.AssertionError: 20000 real points at run end must unlock POINTS_GOAL via the game's own wiring; got []",
+      "e_realSixtySecondRunUnlocksTimeGoal": "java.lang.NullPointerException: Cannot invoke \"java.awt.geom.Rectangle2D$Float.getX()\" because the return value of \"apoMario.entity.ApoMarioPlayer.getRec()\" is null"
+    }
+  },
+  {
+    "prompt_id": 31,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "3/5 failed",
+    "tests_passed": 2,
+    "tests_failed": 3,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "FAIL",
+      "e_realSixtySecondRunUnlocksTimeGoal": "FAIL"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "java.lang.AssertionError: 20000 real points at run end must unlock POINTS_GOAL via the game's own wiring; got []",
+      "e_realSixtySecondRunUnlocksTimeGoal": "java.lang.AssertionError: surviving 60s in a real run must unlock TIME_GOAL via the game's own wiring (no test call); got []"
+    }
+  },
+  {
+    "prompt_id": 37,
+    "run": 3,
+    "task": "Options",
+    "context_label": "F+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 38,
+    "run": 3,
+    "task": "Options",
+    "context_label": "S+F",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 39,
+    "run": 3,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 41,
+    "run": 3,
+    "task": "Options",
+    "context_label": "S",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 42,
+    "run": 3,
+    "task": "Options",
+    "context_label": "F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 46,
+    "run": 3,
+    "task": "Options",
+    "context_label": "S+F",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 6,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "S+F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "java.lang.NullPointerException: Cannot load from object array because the return value of \"apoMario.game.ApoMarioPanel.getButtons()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "ERROR",
+      "recordedNameIsTheRealPlayersName": "ERROR",
+      "noPhantomEntriesWithoutRunEnd": "ERROR",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "ERROR",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 9,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "S",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 10,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "F",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 11,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 13,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "F+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 18,
+    "run": 4,
+    "task": "Achievements",
+    "context_label": "F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "java.lang.NullPointerException: Cannot load from object array because the return value of \"apoMario.game.ApoMarioPanel.getButtons()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "ERROR",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "ERROR",
+      "c_threeRealKillsUnlockEnemiesGoal": "ERROR",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "ERROR",
+      "e_realSixtySecondRunUnlocksTimeGoal": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 23,
+    "run": 4,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/5 failed",
+    "tests_passed": 3,
+    "tests_failed": 2,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "PASS",
+      "e_realSixtySecondRunUnlocksTimeGoal": "FAIL"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []",
+      "e_realSixtySecondRunUnlocksTimeGoal": "java.lang.AssertionError: surviving 60s in a real run must unlock TIME_GOAL via the game's own wiring (no test call); got [POINTS_GOAL]"
+    }
+  },
+  {
+    "prompt_id": 29,
+    "run": 4,
+    "task": "Achievements",
+    "context_label": "F+B",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "n: Cannot invoke \"apoMario.game.panels.ApoMarioStateAchievements.beginRun()\" because the return value of \"apoMario.game.ApoMarioPanel.getAchievements()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "ERROR",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "ERROR",
+      "c_threeRealKillsUnlockEnemiesGoal": "ERROR",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "ERROR",
+      "e_realSixtySecondRunUnlocksTimeGoal": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 34,
+    "run": 4,
+    "task": "Options",
+    "context_label": "F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "java.lang.ArrayIndexOutOfBoundsException: Index 48 out of bounds for length 48",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 35,
+    "run": 4,
+    "task": "Options",
+    "context_label": "B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 36,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 38,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S+F",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 39,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 41,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 42,
+    "run": 4,
+    "task": "Options",
+    "context_label": "F",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 43,
+    "run": 4,
+    "task": "Options",
+    "context_label": "B",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 45,
+    "run": 4,
+    "task": "Options",
+    "context_label": "F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 46,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S+F",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "va.lang.NullPointerException: Cannot invoke \"org.apogames.entity.ApoButton.setBVisible(boolean)\" because \"apoBot.ApoBotComponent.getButtons()[<local1>]\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 1,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 4,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 7,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S+F+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 8,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "None",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 9,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 10,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "F",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "FAIL",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedNameIsTheRealPlayersName": "org.junit.ComparisonFailure: the recorded name must be the player's real getTeamName(); names=[Player1, Player1] expected:<[Luigi]> but was:<[Player1]>"
+    }
+  },
+  {
+    "prompt_id": 11,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 12,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "FAIL",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {
+      "recordedSurvivalTimeIsTheRealElapsedTime": "java.lang.AssertionError: recorded survival time must be the run's real elapsed time (between 300 and 300ms), not 0 or a wall-clock value; got 0"
+    }
+  },
+  {
+    "prompt_id": 13,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "F+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 14,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S+F",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "5 tests",
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "test_results": {
+      "runEndRecordsScoreWithoutHelp": "PASS",
+      "recordedNameIsTheRealPlayersName": "PASS",
+      "noPhantomEntriesWithoutRunEnd": "PASS",
+      "recordedSurvivalTimeIsTheRealElapsedTime": "PASS",
+      "secondRunAlsoRecordedAndBoardSortedDescending": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 17,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "S",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "java.lang.NullPointerException: Cannot invoke \"org.apogames.entity.ApoButton.getX()\" because \"apoMario.game.ApoMarioPanel.getButtons()[6]\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "ERROR",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "ERROR",
+      "c_threeRealKillsUnlockEnemiesGoal": "ERROR",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "ERROR",
+      "e_realSixtySecondRunUnlocksTimeGoal": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 20,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "S+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "PASS",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []"
+    }
+  },
+  {
+    "prompt_id": 25,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "S",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "PASS",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []"
+    }
+  },
+  {
+    "prompt_id": 26,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "F",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/5 failed",
+    "tests_passed": 3,
+    "tests_failed": 2,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "FAIL",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "FAIL",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {
+      "c_threeRealKillsUnlockEnemiesGoal": "java.lang.AssertionError: 3 real enemy.die() kills in one run must unlock ENEMIES_GOAL via the game's own wiring (no test call); got []",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "java.lang.AssertionError: 20000 real points at run end must unlock POINTS_GOAL via the game's own wiring; got []"
+    }
+  },
+  {
+    "prompt_id": 31,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "1/5 failed",
+    "tests_passed": 4,
+    "tests_failed": 1,
+    "test_results": {
+      "a_nothingUnlocksWithoutReachingAnyGoal": "PASS",
+      "b_twoRealKillsDoNotUnlockEnemiesGoal": "PASS",
+      "c_threeRealKillsUnlockEnemiesGoal": "PASS",
+      "d_realPointsUnlockPointsGoalOnRunEnd": "FAIL",
+      "e_realSixtySecondRunUnlocksTimeGoal": "PASS"
+    },
+    "test_failure_messages": {
+      "d_realPointsUnlockPointsGoalOnRunEnd": "java.lang.AssertionError: 20000 real points at run end must unlock POINTS_GOAL via the game's own wiring; got [ENEMIES_GOAL]"
+    }
+  },
+  {
+    "prompt_id": 37,
+    "run": 5,
+    "task": "Options",
+    "context_label": "F+B",
+    "wiring_outcome": "FAIL",
+    "wiring_pass": false,
+    "detail": "2/2 failed",
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "FAIL",
+      "englishVisiblyRestores": "FAIL"
+    },
+    "test_failure_messages": {
+      "germanVisiblyChangesLiveMenuButtons": "java.lang.AssertionError: applyTo(de) must make the language visible in the LIVE game: the menu buttons (tutorial/game/menu) must be rebuilt or re-rendered; none changed",
+      "englishVisiblyRestores": "java.lang.AssertionError: switching back to English must visibly re-render the live menu buttons again"
+    }
+  },
+  {
+    "prompt_id": 38,
+    "run": 5,
+    "task": "Options",
+    "context_label": "S+F",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 39,
+    "run": 5,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 40,
+    "run": 5,
+    "task": "Options",
+    "context_label": "None",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 41,
+    "run": 5,
+    "task": "Options",
+    "context_label": "S",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "va.lang.NullPointerException: Cannot invoke \"org.apogames.entity.ApoButton.setBVisible(boolean)\" because \"apoBot.ApoBotComponent.getButtons()[<local1>]\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 42,
+    "run": 5,
+    "task": "Options",
+    "context_label": "F",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 43,
+    "run": 5,
+    "task": "Options",
+    "context_label": "B",
+    "wiring_outcome": "boot-error",
+    "wiring_pass": false,
+    "detail": "lang.NullPointerException: Cannot invoke \"apoBot.game.ApoBotOptions.getMenuLanguage()\" because the return value of \"apoBot.game.ApoBotGame.getOptions()\" is null",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "ERROR",
+      "englishVisiblyRestores": "ERROR"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 45,
+    "run": 5,
+    "task": "Options",
+    "context_label": "F+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 47,
+    "run": 5,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "wiring_outcome": "PASS",
+    "wiring_pass": true,
+    "detail": "2 tests",
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "test_results": {
+      "germanVisiblyChangesLiveMenuButtons": "PASS",
+      "englishVisiblyRestores": "PASS"
+    },
+    "test_failure_messages": {}
+  }
+]

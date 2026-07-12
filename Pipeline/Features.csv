@@ -1,0 +1,396 @@
+﻿Task,Description,Detailed Description,Effort Level,Reuse/Generation Priority,Appears in,Missing in,Unit tests skeleton
+Options,Options is a mechanism allowing players to configure settings of the game,"Options is a mechanism allowing players to configure two settings of the game: 
+Language: the game's menu text is shown in either English or German only.
+Sound: whether sound is triggered or not when clicking menu's buttons.
+The settings are displayed and modified in a dedicated panel/view in the game's menu.
+The chosen preferences are persisted across sessions. Default preferences are English for language and On for sound.
+After applying the changes to the game, the selected preferences are applied to the live game - the menu's language matches the chosen language and the menu's buttons sound is ON/OFF, matching the chosen option.
+German menu buttons: ""Menü"", ""Spiel"","" Tutorial"", ""Editor"".","Low
+
+Core classes: ApoSimpleOptions,  ApoSimplePanel
+
+Total Method Count: 14 (init, keyButtonReleased, mouseButtonFunction, mouseButtonReleased, mousePressed, mouseMoved, mouseDragged, think, render, drawOverlay, isBActive, setBActive, writeLevel, readLevel)
+
+Structural Dependencies: 3 (ApoSimpleConstants, ApoSimpleEntityMenu, ApoButton)
+","* Priority: Reuse
+* Explanation: Most settings (Sound, Music, Display) interact with the global ApoConstants or ApoSettings classes. Reusing the structural backbone of the options menu ensures that the UI toggles are correctly mapped to the existing engine-wide configuration variables.","* ApoDefence
+* ApoMario
+* ApoNotSoSimple
+* ApoPongBeat
+* ApoRelax
+* ApoSimple","* ApoBot
+* ApoCheating
+* ApoCommando
+* ApoIcarus
+* ApoSkunkman
+* ApoSlitherLink
+* ApoSnake","import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.nio.file.Path;
+import org.junit.Test;
+
+public class ApoBotOptionsTest {
+
+    private static final String GERMAN = ""de"";
+    private static final String ENGLISH = ""en"";
+
+    private static Path freshStore() throws Exception {
+        File store = File.createTempFile(""apoBotOptions"", "".dat"");
+        store.delete();
+        store.deleteOnExit();
+        return store.toPath();
+    }
+
+    @Test
+    public void defaultsToEnglishAndSoundOn() throws Exception {
+        ApoBotOptions options = new ApoBotOptions(freshStore());
+        assertEquals(""default menu language must be English ('en'); got '"" + options.getMenuLanguage() + ""'"",
+                ENGLISH, options.getMenuLanguage());
+        assertTrue(""sound must be ON by default; isSoundTriggered() returned "" + options.isSoundTriggered(),
+                options.isSoundTriggered());
+    }
+
+    @Test
+    public void selectingGermanActivatesGerman() throws Exception {
+        ApoBotOptions options = new ApoBotOptions(freshStore());
+        options.setMenuLanguage(GERMAN);
+        assertEquals(""after setMenuLanguage('de'), getMenuLanguage() must return 'de'; got '""
+                + options.getMenuLanguage() + ""'"", GERMAN, options.getMenuLanguage());
+    }
+
+    @Test
+    public void selectingEnglishActivatesEnglish() throws Exception {
+        ApoBotOptions options = new ApoBotOptions(freshStore());
+        options.setMenuLanguage(GERMAN); // because english is default
+        options.setMenuLanguage(ENGLISH);
+        assertEquals(""after setting 'de' then 'en', getMenuLanguage() must return 'en'; got '""
+                + options.getMenuLanguage() + ""'"", ENGLISH, options.getMenuLanguage());
+    }
+
+    @Test
+    public void unsupportedLanguageIsIgnored() throws Exception {
+        ApoBotOptions options = new ApoBotOptions(freshStore());
+        options.setMenuLanguage(GERMAN);
+        options.setMenuLanguage(""fr"");
+        assertEquals(""an unsupported language ('fr') must leave the current language unchanged ('de'); got '""
+                + options.getMenuLanguage() + ""'"", GERMAN, options.getMenuLanguage());
+    }
+
+    @Test
+    public void soundCanBeTurnedOff() throws Exception {
+        ApoBotOptions options = new ApoBotOptions(freshStore());
+        options.setSound(false);
+        assertFalse(""after setSound(false), isSoundTriggered() must be false; got "" + options.isSoundTriggered(),
+                options.isSoundTriggered());
+    }
+
+    @Test
+    public void soundCanBeTurnedOn() throws Exception {
+        ApoBotOptions options = new ApoBotOptions(freshStore());
+        options.setSound(false); // because on is default
+        options.setSound(true);
+        assertTrue(""after setSound(false) then setSound(true), isSoundTriggered() must be true; got ""
+                + options.isSoundTriggered(), options.isSoundTriggered());
+    }
+
+    @Test
+    public void preferencesSurviveAReloadInANewSession() throws Exception {
+        Path store = freshStore();
+
+        ApoBotOptions session1 = new ApoBotOptions(store);
+        session1.setMenuLanguage(GERMAN);
+        session1.setSound(false);
+        session1.persistAcrossSessions();
+
+        ApoBotOptions session2 = new ApoBotOptions(store);
+        assertEquals(""language set+persisted in session 1 must be restored in session 2 ('de'); got '""
+                + session2.getMenuLanguage() + ""'"", GERMAN, session2.getMenuLanguage());
+        assertFalse(""sound set OFF+persisted in session 1 must be restored OFF in session 2; got ""
+                + session2.isSoundTriggered(), session2.isSoundTriggered());
+    }
+
+    @Test
+    public void preferencesAreOnlyRestoredAfterPersist() throws Exception {
+        Path store = freshStore();
+
+        ApoBotOptions session1 = new ApoBotOptions(store);
+        session1.setMenuLanguage(GERMAN);
+        session1.setSound(false);
+
+        ApoBotOptions session2 = new ApoBotOptions(store);
+        assertEquals(""without persistAcrossSessions(), language must stay at default 'en' in a new session; got '""
+                + session2.getMenuLanguage() + ""'"", ENGLISH, session2.getMenuLanguage());
+        assertTrue(""without persistAcrossSessions(), sound must stay at default ON in a new session; got ""
+                + session2.isSoundTriggered(), session2.isSoundTriggered());
+    }
+}"
+Highscore,Highscore is a mechanism for tracking and displaying players performance.,"Highscore is a mechanism for tracking and displaying players performance.
+Upon finishing a run/level (clearing a level/losing), the running game itself must record the player's real score, name, and survival time (mm:ss).
+The highscore board is displayed in a dedicated panel/view in the game's menu, along with the player's name and is persisted across runs. The names are sorted by points, descending.","High 
+
+Core classes: ApoHighscore, ApoJumpStateHighscore, ApoJumpLevel, ApoJumpPanel, ApoJumpStateGame
+
+Total Method Count: 14 (clear, save, load, makeBackground, loadHighscore, load, getPosition, sortList, nextHighscore, keyButtonReleased, mouseButtonFunction, mouseButtonReleased, think, render)
+
+Structural Dependencies: 3 (ApoJumpConstants, ApoJumpImageContainer, ApoJumpStateMenu)
+","* Priority: Reuse
+* Explanation: This feature is infrastructure-heavy, involving complex Network I/O, XML parsing, and data encoding. These components are largely game-agnostic and stable across the engine. Reusing existing, tested classes prevents common errors in stream management and data transmission.","* ApoDefence
+* ApoIcarus
+* ApoPongBeat
+* ApoSimple","* ApoBot
+* ApoCheating
+* ApoCommando
+* ApoMario
+* ApoSlitherLink
+* ApoSkunkman
+* ApoRelax
+* ApoNotSoSimple
+* ApoSnake","import org.junit.Test;
+import static org.junit.Assert.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+public class ApoMarioHighscoreTest {
+
+    private ApoMarioHighscore fresh() throws Exception {
+        return new ApoMarioHighscore(Files.createTempDirectory(""hs"").resolve(""highscores.dat""));
+    }
+
+    @Test public void emptyBoardInitially() throws Exception {
+        ApoMarioHighscore h = fresh();
+        assertTrue(""fresh board must have no names; got "" + h.getPlayersNames(), h.getPlayersNames().isEmpty());
+        assertTrue(""fresh board must have no scores; got "" + h.getPlayersScores(), h.getPlayersScores().isEmpty());
+        assertTrue(""fresh board must have no survival times; got "" + h.getSurvivalTimes(), h.getSurvivalTimes().isEmpty());
+    }
+
+    @Test public void saveAddsEntry() throws Exception {
+        ApoMarioHighscore h = fresh();
+        h.storeRun(1000, 42, ""Alice"");
+        assertEquals(""storeRun must add exactly one entry; names="" + h.getPlayersNames(), 1, h.getPlayersNames().size());
+        int i = h.getPlayersNames().indexOf(""Alice"");
+        assertTrue(""stored player 'Alice' must be retrievable; names="" + h.getPlayersNames(), i >= 0);
+        assertEquals(""score for 'Alice' must equal the value passed to storeRun; scores="" + h.getPlayersScores(),
+                Integer.valueOf(1000), h.getPlayersScores().get(i));
+        assertEquals(""survival time for 'Alice' must equal the value passed to storeRun (check score/time not swapped); times=""
+                + h.getSurvivalTimes(), Integer.valueOf(42), h.getSurvivalTimes().get(i));
+    }
+
+    @Test public void parallelListsAligned() throws Exception {
+        ApoMarioHighscore h = fresh();
+        h.storeRun(500, 30, ""Bob"");
+        h.storeRun(900, 60, ""Carol"");
+        int n = h.getPlayersNames().size();
+        assertEquals(""names and scores must be the same length; names="" + h.getPlayersNames() + "" scores=""
+                + h.getPlayersScores(), n, h.getPlayersScores().size());
+        assertEquals(""names and survival-times must be the same length; names="" + h.getPlayersNames() + "" times=""
+                + h.getSurvivalTimes(), n, h.getSurvivalTimes().size());
+        int i = h.getPlayersNames().indexOf(""Carol"");
+        assertEquals(""score must stay index-aligned with 'Carol'; scores="" + h.getPlayersScores(),
+                Integer.valueOf(900), h.getPlayersScores().get(i));
+        assertEquals(""survival time must stay index-aligned with 'Carol'; times="" + h.getSurvivalTimes(),
+                Integer.valueOf(60), h.getSurvivalTimes().get(i));
+    }
+
+    @Test public void boardSortedDescendingByPoints() throws Exception {
+        ApoMarioHighscore h = fresh();
+        h.storeRun(300, 10, ""C""); h.storeRun(900, 40, ""A""); h.storeRun(600, 25, ""B"");
+        List<Integer> pts = h.getPlayersScores();
+        for (int i = 1; i < pts.size(); i++)
+            assertTrue(""scores must be in non-increasing order; scores="" + pts, pts.get(i - 1) >= pts.get(i));
+        assertEquals(""highest score (900, 'A') must be first; names="" + h.getPlayersNames(),
+                ""A"", h.getPlayersNames().get(0));
+    }
+
+    @Test public void entriesPersistAcrossSessions() throws Exception {
+        Path s = Files.createTempDirectory(""hs"").resolve(""highscores.dat"");
+        ApoMarioHighscore h = new ApoMarioHighscore(s);
+        h.storeRun(1500, 70, ""Eve""); h.persistAcrossRuns();
+        ApoMarioHighscore r = new ApoMarioHighscore(s);
+        assertEquals(""a persisted run must survive into a new session; reloaded names="" + r.getPlayersNames(),
+                1, r.getPlayersNames().size());
+        assertEquals(""persisted player name must be restored; reloaded names="" + r.getPlayersNames(),
+                ""Eve"", r.getPlayersNames().get(0));
+        assertEquals(""persisted score must be restored; reloaded scores="" + r.getPlayersScores(),
+                Integer.valueOf(1500), r.getPlayersScores().get(0));
+    }
+
+    @Test public void emptyPersistRobust() throws Exception {
+        Path s = Files.createTempDirectory(""hs"").resolve(""highscores.dat"");
+        new ApoMarioHighscore(s);
+        List<String> u = new ApoMarioHighscore(s).getPlayersNames();
+        assertTrue(""constructing on an empty/never-written store must yield an empty board (no crash); got "" + u,
+                u.isEmpty());
+    }
+
+    @Test public void rankingPreservedAfterReload() throws Exception {
+        Path s = Files.createTempDirectory(""hs"").resolve(""highscores.dat"");
+        ApoMarioHighscore h = new ApoMarioHighscore(s);
+        h.storeRun(400, 20, ""p400""); h.storeRun(1200, 55, ""p1200""); h.storeRun(800, 35, ""p800""); h.persistAcrossRuns();
+        ApoMarioHighscore r = new ApoMarioHighscore(s);
+        assertEquals(""after reload, highest score (1200, 'p1200') must be first; reloaded names="" + r.getPlayersNames(),
+                ""p1200"", r.getPlayersNames().get(0));
+        List<Integer> pts = r.getPlayersScores();
+        for (int i = 1; i < pts.size(); i++)
+            assertTrue(""after reload, scores must still be non-increasing; reloaded scores="" + pts,
+                    pts.get(i - 1) >= pts.get(i));
+    }
+}"
+Achievements, Achievements is a mechanism for tracking in-game milestones,"Achievements is a mechanism for tracking three in-game milestones:
+POINTS_GOAL is triggered when the player reaches 20,000 points in a single run.
+ENEMIES_GOAL is triggered when the player kills at least 3 enemies during the run
+TIME_GOAL is triggered when the player survives in one game for more than 60 seconds (60000 ms).
+Achievements must unlock from real gameplay by the game itself - the achievement unlocks as soon as its threshold is reached during the run and per-run progress does not carry accross runs.
+Unlocked achievements are stored and saved across sessions, so the player's progress is preserved between plays.
+The achievements are displayed in a dedicated panel/view in the game's menu.","Medium
+
+Core Class: ApoJumpStateAchievements, ApoJumpLevel, ApoJumpPanel
+
+Total Method Count: 10 (init, loadAchievements, saveAchievements, makeBackground, addAchievements, keyButtonReleased, mouseButtonFunction, mouseButtonReleased, think, render)
+
+Structural Dependencies: 2 (ApoJumpStateMenu, ApoJumpConstants)","* Priority: Generation
+* Explanation: The ""Heart"" of an achievement system is its ability to monitor varied behavioral events (e.g., ""reaching a high score"" or ""finishing a level without jumping""). Because these events are unique to each game's mechanics, the AI must generate custom ""hooks"" and conditions for the host game's specific methods.",* ApoIcarus,"* ApoBot
+* ApoCheating
+* ApoCommando
+* ApoDefence
+* ApoIcarus
+* ApoMario
+* ApoNotSoSimple
+* ApoPongBeat
+* ApoSimple
+* ApoSkunkman
+* ApoSlitherLink
+* ApoSnake","import org.junit.Test;
+import static org.junit.Assert.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+public class ApoMarioAchievementsTest {
+    private static final int  POINTS_GOAL  = 20000;
+    private static final int  ENEMIES_GOAL = 3;
+    private static final long TIME_GOAL_MS = 60000L;
+    private static final int  TICK         = 16;
+
+    private ApoMarioStateAchievements fresh() throws Exception {
+        return new ApoMarioStateAchievements(Files.createTempDirectory(""ach"").resolve(""achievements.dat""));
+    }
+    private long count(List<String> l, String id) {
+        long c = 0; for (String s : l) if (s.equals(id)) c++; return c;
+    }
+
+    @Test public void pointsUnlocksAtGoal() throws Exception {
+        ApoMarioStateAchievements a = fresh(); a.beginRun(); a.addPoints(POINTS_GOAL);
+        assertTrue(""reaching "" + POINTS_GOAL + "" points in a run must unlock 'POINTS_GOAL'; got ""
+                + a.getUnlockedAchievements(), a.getUnlockedAchievements().contains(""POINTS_GOAL""));
+    }
+    @Test public void killsUnlockAtGoal() throws Exception {
+        ApoMarioStateAchievements a = fresh(); a.beginRun();
+        for (int i = 0; i < ENEMIES_GOAL; i++) a.addEnemyKilled();
+        assertTrue(""killing "" + ENEMIES_GOAL + "" enemies in a run must unlock 'ENEMIES_GOAL'; got ""
+                + a.getUnlockedAchievements(), a.getUnlockedAchievements().contains(""ENEMIES_GOAL""));
+    }
+    @Test public void timerUnlocksPastGoal() throws Exception {
+        ApoMarioStateAchievements a = fresh(); a.beginRun(); a.addTimeSurvived(TIME_GOAL_MS + 2L * TICK);
+        assertTrue(""surviving more than "" + TIME_GOAL_MS + ""ms must unlock 'TIME_GOAL'; got ""
+                + a.getUnlockedAchievements(), a.getUnlockedAchievements().contains(""TIME_GOAL""));
+    }
+
+    @Test public void pointsBelowGoalLocked() throws Exception {
+        ApoMarioStateAchievements a = fresh(); a.beginRun(); a.addPoints(POINTS_GOAL - 1);
+        assertFalse(""only "" + (POINTS_GOAL - 1) + "" points must NOT unlock 'POINTS_GOAL'; got ""
+                + a.getUnlockedAchievements(), a.getUnlockedAchievements().contains(""POINTS_GOAL""));
+    }
+    @Test public void killsBelowGoalLocked() throws Exception {
+        ApoMarioStateAchievements a = fresh(); a.beginRun();
+        for (int i = 0; i < ENEMIES_GOAL - 1; i++) a.addEnemyKilled();
+        assertFalse(""only "" + (ENEMIES_GOAL - 1) + "" kills must NOT unlock 'ENEMIES_GOAL'; got ""
+                + a.getUnlockedAchievements(), a.getUnlockedAchievements().contains(""ENEMIES_GOAL""));
+    }
+    @Test public void timeBelowGoalLocked() throws Exception {
+        ApoMarioStateAchievements a = fresh(); a.beginRun(); a.addTimeSurvived(TIME_GOAL_MS - 2L * TICK);
+        assertFalse(""only "" + (TIME_GOAL_MS - 2L * TICK) + ""ms must NOT unlock 'TIME_GOAL'; got ""
+                + a.getUnlockedAchievements(), a.getUnlockedAchievements().contains(""TIME_GOAL""));
+    }
+
+    @Test public void pointsDoNotCombineAcrossRuns() throws Exception {
+        ApoMarioStateAchievements a = fresh();
+        int half = POINTS_GOAL / 2, rest = POINTS_GOAL - half;
+        a.beginRun(); a.addPoints(rest);
+        a.beginRun(); a.addPoints(half);
+        assertFalse(""points must reset on beginRun() - "" + rest + "" then "" + half
+                        + "" in separate runs must NOT unlock 'POINTS_GOAL'; got "" + a.getUnlockedAchievements(),
+                a.getUnlockedAchievements().contains(""POINTS_GOAL""));
+    }
+    @Test public void killsDoNotCarryAcrossRuns() throws Exception {
+        ApoMarioStateAchievements a = fresh();
+        a.beginRun(); for (int i = 0; i < ENEMIES_GOAL - 1; i++) a.addEnemyKilled();
+        a.beginRun(); a.addEnemyKilled();
+        assertFalse(""kills must reset on beginRun() - "" + (ENEMIES_GOAL - 1)
+                        + "" then 1 in separate runs must NOT unlock 'ENEMIES_GOAL'; got "" + a.getUnlockedAchievements(),
+                a.getUnlockedAchievements().contains(""ENEMIES_GOAL""));
+    }
+    @Test public void timerResetsEachRun() throws Exception {
+        ApoMarioStateAchievements a = fresh();
+        a.beginRun(); a.addTimeSurvived(TIME_GOAL_MS - 2L * TICK);
+        a.beginRun(); a.addTimeSurvived(2L * TICK);
+        assertFalse(""survival time must reset on beginRun() - two sub-threshold runs must NOT unlock 'TIME_GOAL'; got ""
+                + a.getUnlockedAchievements(), a.getUnlockedAchievements().contains(""TIME_GOAL""));
+    }
+
+    @Test public void lockedStaysLockedAfterRestart() throws Exception {
+        Path s = Files.createTempDirectory(""ach"").resolve(""achievements.dat"");
+        new ApoMarioStateAchievements(s).saveAcrossSessions();
+        List<String> u = new ApoMarioStateAchievements(s).getUnlockedAchievements();
+        assertTrue(""saving with nothing unlocked, then reloading, must give an EMPTY list; got "" + u, u.isEmpty());
+    }
+    @Test public void multipleAchievementsPersist() throws Exception {
+        Path s = Files.createTempDirectory(""ach"").resolve(""achievements.dat"");
+        ApoMarioStateAchievements a = new ApoMarioStateAchievements(s);
+        a.beginRun(); a.addPoints(POINTS_GOAL);
+        for (int i = 0; i < ENEMIES_GOAL; i++) a.addEnemyKilled();
+        a.addTimeSurvived(TIME_GOAL_MS + 2L * TICK); a.saveAcrossSessions();
+        List<String> u = new ApoMarioStateAchievements(s).getUnlockedAchievements();
+        assertTrue(""all three milestones, once saved, must survive into a new session; reloaded "" + u,
+                u.contains(""POINTS_GOAL"") && u.contains(""ENEMIES_GOAL"") && u.contains(""TIME_GOAL""));
+    }
+
+    @Test public void reHitSameRunNoDuplicate() throws Exception {
+        ApoMarioStateAchievements a = fresh();
+        a.beginRun(); a.addPoints(POINTS_GOAL); a.addPoints(500); a.addTimeSurvived(2L * TICK);
+        assertEquals(""'POINTS_GOAL' must appear exactly once after re-crossing the threshold in one run; got ""
+                + a.getUnlockedAchievements(), 1L, count(a.getUnlockedAchievements(), ""POINTS_GOAL""));
+    }
+    @Test public void reUnlockLaterRunNoDuplicate() throws Exception {
+        ApoMarioStateAchievements a = fresh();
+        a.beginRun(); for (int i = 0; i < ENEMIES_GOAL; i++) a.addEnemyKilled();
+        a.beginRun(); for (int i = 0; i < ENEMIES_GOAL; i++) a.addEnemyKilled();
+        assertEquals(""'ENEMIES_GOAL' must appear exactly once even when re-earned in a later run; got ""
+                + a.getUnlockedAchievements(), 1L, count(a.getUnlockedAchievements(), ""ENEMIES_GOAL""));
+    }
+
+    @Test public void multipleUnlockInOneRun() throws Exception {
+        ApoMarioStateAchievements a = fresh();
+        a.beginRun(); a.addPoints(POINTS_GOAL);
+        for (int i = 0; i < ENEMIES_GOAL; i++) a.addEnemyKilled();
+        List<String> u = a.getUnlockedAchievements();
+        assertTrue(""one run hitting points AND kills must unlock both 'POINTS_GOAL' and 'ENEMIES_GOAL'; got "" + u,
+                u.contains(""POINTS_GOAL"") && u.contains(""ENEMIES_GOAL""));
+    }
+    @Test public void unlockingOneDoesNotAffectOthers() throws Exception {
+        ApoMarioStateAchievements a = fresh();
+        a.beginRun(); for (int i = 0; i < ENEMIES_GOAL; i++) a.addEnemyKilled();
+        List<String> u = a.getUnlockedAchievements();
+        assertTrue(""reaching only the kill goal must unlock 'ENEMIES_GOAL'; got "" + u, u.contains(""ENEMIES_GOAL""));
+        assertFalse(""reaching only the kill goal must NOT unlock 'POINTS_GOAL'; got "" + u, u.contains(""POINTS_GOAL""));
+        assertFalse(""reaching only the kill goal must NOT unlock 'TIME_GOAL'; got "" + u, u.contains(""TIME_GOAL""));
+    }
+
+    @Test public void startsEmpty() throws Exception {
+        List<String> u = fresh().getUnlockedAchievements();
+        assertTrue(""a fresh instance must have no unlocked achievements; got "" + u, u.isEmpty());
+    }
+}"

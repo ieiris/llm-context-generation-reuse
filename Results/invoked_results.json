@@ -1,0 +1,1784 @@
+[
+  {
+    "prompt_id": 0,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "None",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "FAIL",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealPlayerName": "org.junit.ComparisonFailure: recordRunEnd must record the player's real getTeamName(); names=[Player] expected:<[Mario]> but was:<[Player]>"
+    }
+  },
+  {
+    "prompt_id": 1,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "2/4 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 2,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Player] expected:<1> but was:<2>",
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 4,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 7,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S+F+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Player 1] expected:<1> but was:<2>"
+    }
+  },
+  {
+    "prompt_id": 9,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 13,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "F+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "2/4 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 2,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Player] expected:<1> but was:<2>",
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 14,
+    "run": 1,
+    "task": "Highscore",
+    "context_label": "S+F",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 17,
+    "run": 1,
+    "task": "Achievements",
+    "context_label": "S",
+    "coupling_outcome": "compile-fail",
+    "coupling_pass": false,
+    "detail": "apoMario/game/panels/ApoMarioAchievementsCouplingTest.java:31: error: constructor ApoMarioStateAchievements in class ApoMarioStateAchievements cannot be applied to given types; | return new ApoMarioStateAchievements(Files.createTempDirectory(\"ach\").resolve(\"a.dat\")); | ^",
+    "compile_error": "apoMario/game/panels/ApoMarioAchievementsCouplingTest.java:31: error: constructor ApoMarioStateAchievements in class ApoMarioStateAchievements cannot be applied to given types; | return new ApoMarioStateAchievements(Files.createTempDirectory(\"ach\").resolve(\"a.dat\")); | ^",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 19,
+    "run": 1,
+    "task": "Achievements",
+    "context_label": "B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 29,
+    "run": 1,
+    "task": "Achievements",
+    "context_label": "F+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 31,
+    "run": 1,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 32,
+    "run": 1,
+    "task": "Options",
+    "context_label": "None",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 34,
+    "run": 1,
+    "task": "Options",
+    "context_label": "F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 35,
+    "run": 1,
+    "task": "Options",
+    "context_label": "B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 38,
+    "run": 1,
+    "task": "Options",
+    "context_label": "S+F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 39,
+    "run": 1,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 40,
+    "run": 1,
+    "task": "Options",
+    "context_label": "None",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 42,
+    "run": 1,
+    "task": "Options",
+    "context_label": "F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 46,
+    "run": 1,
+    "task": "Options",
+    "context_label": "S+F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 47,
+    "run": 1,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 1,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "S",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Player] expected:<1> but was:<2>"
+    }
+  },
+  {
+    "prompt_id": 2,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "F",
+    "coupling_outcome": "PASS",
+    "coupling_pass": true,
+    "detail": "4 tests",
+    "compile_error": "",
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 4,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "2/4 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 2,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Player] expected:<1> but was:<2>",
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 10,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "F",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 12,
+    "run": 2,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 16,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "None",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 24,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "None",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 25,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "S",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 26,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "F",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 30,
+    "run": 2,
+    "task": "Achievements",
+    "context_label": "S+F",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/7 failed",
+    "compile_error": "",
+    "tests_passed": 6,
+    "tests_failed": 1,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "PASS",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "PASS",
+      "unlockPersistsAcrossSessions": "PASS",
+      "noDuplicateOnRepeatedRecord": "PASS",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []"
+    }
+  },
+  {
+    "prompt_id": 32,
+    "run": 2,
+    "task": "Options",
+    "context_label": "None",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 34,
+    "run": 2,
+    "task": "Options",
+    "context_label": "F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 35,
+    "run": 2,
+    "task": "Options",
+    "context_label": "B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 37,
+    "run": 2,
+    "task": "Options",
+    "context_label": "F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 38,
+    "run": 2,
+    "task": "Options",
+    "context_label": "S+F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 40,
+    "run": 2,
+    "task": "Options",
+    "context_label": "None",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 41,
+    "run": 2,
+    "task": "Options",
+    "context_label": "S",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 46,
+    "run": 2,
+    "task": "Options",
+    "context_label": "S+F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 47,
+    "run": 2,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 3,
+    "run": 3,
+    "task": "Highscore",
+    "context_label": "B",
+    "coupling_outcome": "PASS",
+    "coupling_pass": true,
+    "detail": "4 tests",
+    "compile_error": "",
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 4,
+    "run": 3,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Player] expected:<1> but was:<2>"
+    }
+  },
+  {
+    "prompt_id": 13,
+    "run": 3,
+    "task": "Highscore",
+    "context_label": "F+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "FAIL",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealPlayerName": "org.junit.ComparisonFailure: recordRunEnd must record the player's real getTeamName(); names=[Unknown] expected:<[Mario]> but was:<[Unknown]>"
+    }
+  },
+  {
+    "prompt_id": 20,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "S+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 23,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "coupling_outcome": "compile-fail",
+    "coupling_pass": false,
+    "detail": "apoMario/game/panels/ApoMarioAchievementsCouplingTest.java:31: error: constructor ApoMarioStateAchievements in class ApoMarioStateAchievements cannot be applied to given types; | return new ApoMarioStateAchievements(Files.createTempDirectory(\"ach\").resolve(\"a.dat\")); | ^",
+    "compile_error": "apoMario/game/panels/ApoMarioAchievementsCouplingTest.java:31: error: constructor ApoMarioStateAchievements in class ApoMarioStateAchievements cannot be applied to given types; | return new ApoMarioStateAchievements(Files.createTempDirectory(\"ach\").resolve(\"a.dat\")); | ^",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 24,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "None",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 25,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "S",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 31,
+    "run": 3,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 37,
+    "run": 3,
+    "task": "Options",
+    "context_label": "F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 38,
+    "run": 3,
+    "task": "Options",
+    "context_label": "S+F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 39,
+    "run": 3,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 41,
+    "run": 3,
+    "task": "Options",
+    "context_label": "S",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 42,
+    "run": 3,
+    "task": "Options",
+    "context_label": "F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 46,
+    "run": 3,
+    "task": "Options",
+    "context_label": "S+F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 6,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "S+F",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "2/4 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 2,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Player] expected:<1> but was:<2>",
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 9,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "S",
+    "coupling_outcome": "PASS",
+    "coupling_pass": true,
+    "detail": "4 tests",
+    "compile_error": "",
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 10,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "F",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 11,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Unknown] expected:<1> but was:<2>"
+    }
+  },
+  {
+    "prompt_id": 13,
+    "run": 4,
+    "task": "Highscore",
+    "context_label": "F+B",
+    "coupling_outcome": "PASS",
+    "coupling_pass": true,
+    "detail": "4 tests",
+    "compile_error": "",
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 18,
+    "run": 4,
+    "task": "Achievements",
+    "context_label": "F",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 23,
+    "run": 4,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/7 failed",
+    "compile_error": "",
+    "tests_passed": 6,
+    "tests_failed": 1,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "PASS",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "PASS",
+      "unlockPersistsAcrossSessions": "PASS",
+      "noDuplicateOnRepeatedRecord": "PASS",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []"
+    }
+  },
+  {
+    "prompt_id": 29,
+    "run": 4,
+    "task": "Achievements",
+    "context_label": "F+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 34,
+    "run": 4,
+    "task": "Options",
+    "context_label": "F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 35,
+    "run": 4,
+    "task": "Options",
+    "context_label": "B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 36,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 38,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S+F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 39,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 41,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 42,
+    "run": 4,
+    "task": "Options",
+    "context_label": "F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 43,
+    "run": 4,
+    "task": "Options",
+    "context_label": "B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 45,
+    "run": 4,
+    "task": "Options",
+    "context_label": "F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 46,
+    "run": 4,
+    "task": "Options",
+    "context_label": "S+F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 1,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Player] expected:<1> but was:<2>"
+    }
+  },
+  {
+    "prompt_id": 4,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "coupling_outcome": "compile-fail",
+    "coupling_pass": false,
+    "detail": "apoMario/game/panels/ApoMarioHighscoreCouplingTest.java:19: error: incompatible types: Path cannot be converted to File | return new ApoMarioHighscore(Files.createTempDirectory(\"hs\").resolve(\"hs.dat\")); | ^",
+    "compile_error": "apoMario/game/panels/ApoMarioHighscoreCouplingTest.java:19: error: incompatible types: Path cannot be converted to File | return new ApoMarioHighscore(Files.createTempDirectory(\"hs\").resolve(\"hs.dat\")); | ^",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 7,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S+F+B",
+    "coupling_outcome": "PASS",
+    "coupling_pass": true,
+    "detail": "4 tests",
+    "compile_error": "",
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 8,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "None",
+    "coupling_outcome": "compile-fail",
+    "coupling_pass": false,
+    "detail": "apoMario/game/panels/ApoMarioHighscoreCouplingTest.java:24: error: cannot find symbol | ApoMarioHighscore h = fresh(); h.recordRunEnd(d.level()); | ^",
+    "compile_error": "apoMario/game/panels/ApoMarioHighscoreCouplingTest.java:24: error: cannot find symbol | ApoMarioHighscore h = fresh(); h.recordRunEnd(d.level()); | ^",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 9,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 10,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "F",
+    "coupling_outcome": "compile-fail",
+    "coupling_pass": false,
+    "detail": "apoMario/game/panels/ApoMarioHighscoreCouplingTest.java:24: error: cannot find symbol | ApoMarioHighscore h = fresh(); h.recordRunEnd(d.level()); | ^",
+    "compile_error": "apoMario/game/panels/ApoMarioHighscoreCouplingTest.java:24: error: cannot find symbol | ApoMarioHighscore h = fresh(); h.recordRunEnd(d.level()); | ^",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 11,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 12,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "FAIL",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {
+      "recordsRealSurvivalTime": "java.lang.AssertionError: recordRunEnd must record level.getPassedTime() (elapsed), NOT getTime(); times=[0] expected:<500> but was:<0>"
+    }
+  },
+  {
+    "prompt_id": 13,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "F+B",
+    "coupling_outcome": "PASS",
+    "coupling_pass": true,
+    "detail": "4 tests",
+    "compile_error": "",
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "PASS"
+    },
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 14,
+    "run": 5,
+    "task": "Highscore",
+    "context_label": "S+F",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "1/4 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "test_results": {
+      "recordsRealScore": "PASS",
+      "recordsRealSurvivalTime": "PASS",
+      "recordsRealPlayerName": "PASS",
+      "recordRunEndAddsExactlyOneEntry": "FAIL"
+    },
+    "test_failure_messages": {
+      "recordRunEndAddsExactlyOneEntry": "java.lang.AssertionError: one run-end must add exactly one board entry; names=[tester, Player] expected:<1> but was:<2>"
+    }
+  },
+  {
+    "prompt_id": 17,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "S",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 20,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "S+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 25,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "S",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 26,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "F",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "4/7 failed",
+    "compile_error": "",
+    "tests_passed": 3,
+    "tests_failed": 4,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "PASS"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 31,
+    "run": 5,
+    "task": "Achievements",
+    "context_label": "S+F+B",
+    "coupling_outcome": "FAIL",
+    "coupling_pass": false,
+    "detail": "5/7 failed",
+    "compile_error": "",
+    "tests_passed": 2,
+    "tests_failed": 5,
+    "test_results": {
+      "pointsGoalUnlocksAtThreshold": "FAIL",
+      "pointsGoalLockedBelowThreshold": "PASS",
+      "timeGoalLockedOnShortRun": "PASS",
+      "onlyReachedGoalUnlocks": "FAIL",
+      "unlockPersistsAcrossSessions": "FAIL",
+      "noDuplicateOnRepeatedRecord": "FAIL",
+      "timeGoalUnlocksAfterLongRun": "FAIL"
+    },
+    "test_failure_messages": {
+      "pointsGoalUnlocksAtThreshold": "java.lang.AssertionError: 20000 real points must unlock POINTS_GOAL (reads getPoints); got []",
+      "timeGoalUnlocksAfterLongRun": "java.lang.AssertionError: a long run (getPassedTime>=60000) must unlock TIME_GOAL \u2014 proves it reads getPassedTime, not getTime; elapsed=70000 got []",
+      "onlyReachedGoalUnlocks": "java.lang.AssertionError: points goal reached must unlock POINTS_GOAL; got []",
+      "noDuplicateOnRepeatedRecord": "java.lang.AssertionError: POINTS_GOAL must appear exactly once after two recordRunEnd calls; got [] expected:<1> but was:<0>",
+      "unlockPersistsAcrossSessions": "java.lang.AssertionError: a saved POINTS_GOAL must survive into a new session; reloaded []"
+    }
+  },
+  {
+    "prompt_id": 37,
+    "run": 5,
+    "task": "Options",
+    "context_label": "F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 38,
+    "run": 5,
+    "task": "Options",
+    "context_label": "S+F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 39,
+    "run": 5,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 40,
+    "run": 5,
+    "task": "Options",
+    "context_label": "None",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 41,
+    "run": 5,
+    "task": "Options",
+    "context_label": "S",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 42,
+    "run": 5,
+    "task": "Options",
+    "context_label": "F",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 43,
+    "run": 5,
+    "task": "Options",
+    "context_label": "B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 45,
+    "run": 5,
+    "task": "Options",
+    "context_label": "F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  },
+  {
+    "prompt_id": 47,
+    "run": 5,
+    "task": "Options",
+    "context_label": "S+F+B",
+    "coupling_outcome": "no-coupling-test",
+    "coupling_pass": false,
+    "detail": "",
+    "compile_error": "",
+    "tests_passed": 0,
+    "tests_failed": 0,
+    "test_results": {},
+    "test_failure_messages": {}
+  }
+]

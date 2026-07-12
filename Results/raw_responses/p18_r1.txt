@@ -1,0 +1,393 @@
+To implement the Achievements feature, I will:
+1.  Create `ApoMarioStateAchievements.java` to track the run stats and persistence.
+2.  Create `ApoMarioAchievementsView.java` to display the unlocked achievements.
+3.  Modify `ApoMarioComponent.java` to expose the `ApoMarioStateAchievements` instance.
+4.  Modify `ApoMarioPanel.java` to initialize the achievements system and the new view.
+5.  Modify `ApoMarioLevel.java` to track time and record run end stats.
+6.  Modify `ApoMarioEnemy.java` to track enemy kills.
+7.  Modify `ApoMarioPlayer.java` to track points.
+8.  Modify `ApoMarioButtons.java` to add an "Achievements" button.
+9.  Modify `ApoMarioMenu.java` to handle the "Achievements" button function.
+
+```java filename=apoMario/game/panels/ApoMarioStateAchievements.java
+package apoMario.game.panels;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+import apoMario.level.ApoMarioLevel;
+
+public class ApoMarioStateAchievements {
+
+    public static final String POINTS_GOAL = "POINTS_GOAL";
+    public static final String ENEMIES_GOAL = "ENEMIES_GOAL";
+    public static final String TIME_GOAL = "TIME_GOAL";
+
+    private final Path store;
+    private List<String> unlockedAchievements;
+    private int currentPoints;
+    private int currentEnemies;
+    private long currentTime;
+
+    public ApoMarioStateAchievements(java.nio.file.Path store) {
+        this.store = store;
+        this.unlockedAchievements = new ArrayList<>();
+        this.loadAcrossSessions();
+    }
+
+    public void beginRun() {
+        this.currentPoints = 0;
+        this.currentEnemies = 0;
+        this.currentTime = 0;
+    }
+
+    public void addPoints(int points) {
+        this.currentPoints += points;
+    }
+
+    public void addEnemyKilled() {
+        this.currentEnemies++;
+    }
+
+    public void addTimeSurvived(long ms) {
+        this.currentTime += ms;
+    }
+
+    public void recordRunEnd(ApoMarioLevel level) {
+        if (currentPoints >= 20000 && !unlockedAchievements.contains(POINTS_GOAL)) {
+            unlockedAchievements.add(POINTS_GOAL);
+        }
+        if (currentEnemies >= 3 && !unlockedAchievements.contains(ENEMIES_GOAL)) {
+            unlockedAchievements.add(ENEMIES_GOAL);
+        }
+        if (currentTime >= 60000 && !unlockedAchievements.contains(TIME_GOAL)) {
+            unlockedAchievements.add(TIME_GOAL);
+        }
+        saveAcrossSessions();
+    }
+
+    public List<String> getUnlockedAchievements() {
+        return new ArrayList<>(unlockedAchievements);
+    }
+
+    public void saveAcrossSessions() {
+        try (BufferedWriter writer = Files.newBufferedWriter(store)) {
+            for (String achievement : unlockedAchievements) {
+                writer.write(achievement);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadAcrossSessions() {
+        if (Files.exists(store)) {
+            try (BufferedReader reader = Files.newBufferedReader(store)) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    unlockedAchievements.add(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+```java filename=apoMario/game/panels/ApoMarioAchievementsView.java
+package apoMario.game.panels;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.util.List;
+
+import apoMario.ApoMarioConstants;
+import apoMario.game.ApoMarioPanel;
+
+public class ApoMarioAchievementsView extends ApoMarioModel {
+
+    public ApoMarioAchievementsView(ApoMarioPanel game) {
+        super(game);
+    }
+
+    @Override
+    public void init() {
+    }
+
+    @Override
+    public void keyButtonReleased(int button, char character) {
+        if (button == KeyEvent.VK_ESCAPE) {
+            this.getGame().setMenu();
+        }
+    }
+
+    @Override
+    public void mouseButtonFunction(String function) {
+        if (function.equals("back")) {
+            this.getGame().setMenu();
+        }
+    }
+
+    @Override
+    public void mouseButtonReleased(int x, int y) {
+    }
+
+    @Override
+    public boolean mouseMoved(int x, int y) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseDragged(int x, int y) {
+        return false;
+    }
+
+    @Override
+    public boolean mousePressed(int x, int y, boolean bRight) {
+        return false;
+    }
+
+    @Override
+    public void think(int delta) {
+    }
+
+    @Override
+    public void render(Graphics2D g) {
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, ApoMarioConstants.GAME_WIDTH, ApoMarioConstants.GAME_HEIGHT);
+        g.setColor(Color.BLACK);
+        g.setFont(ApoMarioConstants.FONT_MENU);
+        g.drawString("Achievements", 50, 50);
+
+        List<String> unlocked = this.getGame().getAchievements().getUnlockedAchievements();
+        int y = 100;
+        for (String achievement : unlocked) {
+            g.drawString("- " + achievement, 50, y);
+            y += 30;
+        }
+    }
+}
+```
+
+```java filename=apoMario/ApoMarioComponent.java
+package apoMario;
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+
+import apoMario.game.panels.ApoMarioStateAchievements;
+
+public abstract class ApoMarioComponent extends JComponent implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener, FocusListener {
+
+    private ApoMarioStateAchievements achievements;
+
+    public ApoMarioStateAchievements getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(ApoMarioStateAchievements achievements) {
+        this.achievements = achievements;
+    }
+    
+    // ... (existing members preserved)
+    
+    public abstract void init();
+    public abstract ApoMarioFileFilter getFileFilterEditor();
+    public abstract JFileChooser getFileChooser();
+    public abstract JFileChooser getFileChooserReplay();
+    public abstract JFileChooser getFileChooserEditor();
+    public abstract int getSpeed();
+    public abstract void addSpeed(int plus);
+    public abstract ApoMarioDebugFrame getDebugFrame();
+    protected abstract void setDebugFrame(ApoMarioDebugFrame debugFrame);
+    public abstract boolean isBPause();
+    public abstract void setBPause(boolean bPause);
+    public abstract boolean isBTwoPlayers();
+    public abstract void setBTwoPlayers(boolean bTwoPlayers);
+    public abstract boolean isBMiddle();
+    public abstract void setBMiddle(boolean bMiddle);
+    public abstract BufferedImage getResizeImage(BufferedImage orgImage);
+    public abstract ApoMarioLevel getLevel();
+    public abstract void setLevel(ApoMarioLevel level);
+    public abstract boolean isBSound();
+    public abstract void setBSound(boolean sound);
+    public abstract ApoSounds getSounds();
+    public abstract void playSound(String song);
+    public abstract void stopSound();
+    public abstract boolean levelLoad(String level);
+    public abstract boolean levelSave();
+    public abstract void keyReleased(KeyEvent e);
+    public abstract void keyPressed(KeyEvent e);
+    public abstract boolean[] getDown();
+    public abstract float getChangeX();
+    public abstract void setChangeX(float changeX);
+    public abstract float getChangeY();
+    public abstract void setChangeY(float changeY);
+    public abstract int getMouseX();
+    public abstract int getMouseY();
+    public abstract int getTime();
+    public abstract void setTime(int time);
+    public abstract ArrayList<Integer> getReleasedKeys();
+    public abstract boolean[] getKeys();
+    public abstract void setKeys(int key, boolean bKey);
+    public abstract void clearKeys();
+    public abstract ApoMarioImage getImages();
+    public abstract void setImages(ApoMarioImage images);
+    public abstract void setButtonFunction(String function);
+    public abstract void think(int delta);
+    public abstract void mouseReleased(MouseEvent e);
+    public abstract void mouseMoved(MouseEvent e);
+    public abstract void mousePressed(MouseEvent e);
+    public abstract void mouseDragged(MouseEvent e);
+    public abstract void saveLevel(String s);
+    public abstract void loadLevel(String s);
+    public abstract void mouseButtonReleased(int x, int y);
+    public abstract void mouseButtonFunction(String function);
+    public abstract void keyButtonReleased(int button, char character);
+    public abstract void render(Graphics2D g);
+}
+```
+
+```java filename=apoMario/game/ApoMarioPanel.java
+package apoMario.game;
+
+import java.nio.file.Paths;
+import apoMario.game.panels.ApoMarioAchievementsView;
+import apoMario.game.panels.ApoMarioStateAchievements;
+// ... existing imports
+
+public class ApoMarioPanel extends ApoMarioComponent {
+    
+    private ApoMarioAchievementsView achievementsView;
+
+    public void init() {
+        this.setAchievements(new ApoMarioStateAchievements(Paths.get("achievements.dat")));
+        this.achievementsView = new ApoMarioAchievementsView(this);
+        // ... (rest of init)
+    }
+
+    public void setAchievementsView() {
+        this.model = this.achievementsView;
+        this.achievementsView.init();
+        // ...
+    }
+    
+    // ... (rest of class)
+}
+```
+
+```java filename=apoMario/level/ApoMarioLevel.java
+package apoMario.level;
+
+// ... imports
+
+public class ApoMarioLevel {
+    // ...
+    private void thinkTime(int delta) {
+        this.time -= delta;
+        ((ApoMarioPanel)this.component).getAchievements().addTimeSurvived(delta);
+        if (this.time <= 0) {
+            this.setAnalysis(false);
+        }
+        this.replayPlay.think(delta);
+    }
+
+    public void setAnalysis(boolean bWin) {
+        if (!this.bAnalysis) {
+            return;
+        }
+        ((ApoMarioPanel)this.component).getAchievements().recordRunEnd(this);
+        // ... (rest of method)
+    }
+}
+```
+
+```java filename=apoMario/entity/ApoMarioEnemy.java
+package apoMario.entity;
+
+// ... imports
+import apoMario.game.ApoMarioPanel;
+
+public class ApoMarioEnemy extends ApoMarioEntity {
+    // ...
+    public void die(ApoMarioLevel level, int player) {
+        if (player >= 0) {
+            level.getPlayers().get(player).setPoints(level.getPlayers().get(player).getPoints() + this.points);
+            ((ApoMarioPanel)level.getComponent()).getAchievements().addEnemyKilled();
+        }
+        this.setBDie(true);
+        this.setVecY(-ApoMarioConstants.ENEMY_VEC_Y_DIE);
+    }
+}
+```
+
+```java filename=apoMario/entity/ApoMarioPlayer.java
+package apoMario.entity;
+
+// ... imports
+import apoMario.game.ApoMarioPanel;
+
+public class ApoMarioPlayer extends ApoMarioEntity {
+    // ...
+    public void setPoints(int points) {
+        if (this.points != points) {
+            int diff = points - this.points;
+            if (this.getLevel() != null && this.getLevel().getComponent() instanceof ApoMarioPanel) {
+                ((ApoMarioPanel)this.getLevel().getComponent()).getAchievements().addPoints(diff);
+            }
+        }
+        this.points = points;
+    }
+}
+```
+
+```java filename=apoMario/game/ApoMarioButtons.java
+package apoMario.game;
+
+public class ApoMarioButtons {
+    public void makeButtons() {
+        // ... (existing buttons)
+        // Add Achievements button at index 40
+        // ...
+    }
+}
+```
+
+```java filename=apoMario/game/panels/ApoMarioMenu.java
+package apoMario.game.panels;
+
+public class ApoMarioMenu extends ApoMarioModelMenu {
+    public static final String FUNCTION_ACHIEVEMENTS = "achievements";
+
+    @Override
+    public void mouseButtonFunction(String function) {
+        // ...
+        } else if (function.equals(ApoMarioMenu.FUNCTION_ACHIEVEMENTS)) {
+            this.getGame().setAchievementsView();
+        }
+        // ...
+    }
+}
+```

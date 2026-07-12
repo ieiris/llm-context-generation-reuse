@@ -1,0 +1,20 @@
+{
+  "features_csv":      "Features.csv",
+  "prompts_csv":       "Prompts.csv",
+  "context_jsons_dir": "contexts",
+  "output_dir":        "Results",
+  "lib_dir":           "lib",
+
+  "game_projects": {
+    "ApoBot":    "ApoBot",
+    "ApoMario":  "ApoMario",
+    "ApoIcarus": "ApoIcarus",
+    "ApoSimple": "ApoSimple"
+  },
+
+  "num_runs":             5,
+  "delay_between_calls":  7,
+  "gemini_model":         "gemini-3.1-flash-lite",
+  "temperature":          0.7,
+  "max_output_tokens":    65536
+}

@@ -1,0 +1,1791 @@
+To implement the "Options" feature, I will:
+
+1.  **Create `ApoBotOptions.java`**: This class will encapsulate the language and sound settings, handle persistence using `java.util.Properties`, and provide an `applyTo` method to update the game.
+2.  **Modify `ApoBotConstants.java`**: Add a new button index for "Options" and include the German translations for menu buttons.
+3.  **Modify `ApoBotButton.java`**: Update the `init()` method to dynamically render button text based on the game's current language.
+4.  **Modify `ApoBotGame.java`**: Integrate the options feature by:
+    *   Adding an `ApoBotOptions` instance and state (language, sound).
+    *   Adding an Options menu state.
+    *   Updating `renderMenu` to include the options screen and button.
+    *   Updating `setMouseFunction` to handle the new Options button.
+    *   Implementing a `playSound` method that respects the sound setting.
+
+```java filename=ApoBotOptions.java
+package apoBot.game;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Properties;
+
+public class ApoBotOptions {
+    private Path store;
+    private String language = "en";
+    private boolean sound = true;
+
+    public ApoBotOptions(java.nio.file.Path store) {
+        this.store = store;
+        load();
+    }
+
+    private void load() {
+        Properties props = new Properties();
+        try (FileInputStream in = new FileInputStream(store.toFile())) {
+            props.load(in);
+            this.language = props.getProperty("language", "en");
+            this.sound = Boolean.parseBoolean(props.getProperty("sound", "true"));
+        } catch (IOException e) {
+            this.language = "en";
+            this.sound = true;
+        }
+    }
+
+    public void persistAcrossSessions() {
+        Properties props = new Properties();
+        props.setProperty("language", this.language);
+        props.setProperty("sound", String.valueOf(this.sound));
+        try (FileOutputStream out = new FileOutputStream(store.toFile())) {
+            props.store(out, "ApoBot Options");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getMenuLanguage() {
+        return this.language;
+    }
+
+    public void setMenuLanguage(String language) {
+        this.language = language;
+    }
+
+    public boolean isSoundTriggered() {
+        return this.sound;
+    }
+
+    public void setSound(boolean sound) {
+        this.sound = sound;
+    }
+
+    public void applyTo(ApoBotGame game) {
+        game.setLanguage(this.language);
+        game.setSound(this.sound);
+        game.reinitButtons();
+    }
+}
+```
+
+```java filename=ApoBotConstants.java
+package apoBot;
+
+import java.awt.Font;
+
+public class ApoBotConstants {
+	
+	public static final int SIZE = 2;
+	
+	public static final int WAIT_TIME_THINK = 20;
+	public static final int WAIT_TIME_RENDER = 20;
+
+	public static final int GAME_WIDTH = 640;
+	public static final int GAME_HEIGHT = 480;
+	
+	public static final int GAME_GAME_WIDTH = 480;
+	public static final int GAME_GAME_HEIGHT = 480;
+	
+	public static final int GAME_MENU_WIDTH = GAME_WIDTH - GAME_GAME_WIDTH;
+	public static final int GAME_MENU_HEIGHT = 480;
+	
+	public static final int ANIMATION_TIME = 200;
+	
+	public static final int TILE_WIDTH = 23;
+	public static final int TILE_HEIGHT = 35;
+	
+	public static final int GROUND_EMPTY = 0;
+	public static final int GROUND_ORIGINAL = 1;
+	public static final int GROUND_GOAL = 2;
+	public static final int GROUND_REAL_EMPTY = 3;
+	public static final int PLAYER = 4;
+	
+	public static final int DIR_NORTH_UPLEFT = 0;
+	public static final int DIR_EAST_UPRIGHT = 1;
+	public static final int DIR_SOUTH_DOWNRIGHT = 2;
+	public static final int DIR_WEST_DOWNLEFT = 3;
+	
+	public static final boolean[] BUTTON_MENU = new boolean[] {true, true, true, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true};
+	public static final boolean[] BUTTON_EDITOR = new boolean[] {false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false};
+	public static final boolean[] BUTTON_GAME = new boolean[] {false, false, false, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, false, false, false};
+	public static final boolean[] BUTTON_TUTORIAL = new boolean[] {false, false, false, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+
+	public static final String[] LEVELS = new String[] {"easy", "middle", "hard", "editor", "tutorial"};
+	
+	public static final Font FONT_MENU = new Font("Dialog", Font.BOLD, 15);
+	public static final Font FONT_WIN = new Font("Dialog", Font.BOLD, 20);
+	
+	public static final int FORWARD = 0;
+	public static final int LEFT = 1;
+	public static final int RIGHT = 2;
+	public static final int JUMP = 3;
+	public static final int REDYE = 4;
+	public static final int FUNCTION_ONE = 5;
+	public static final int FUNCTION_TWO = 6;
+	
+	public static final String[] TUTORIAL_SPEECH = new String[] {
+		"Artificial Intelligence is hard to program. Not every bot ever created can maneuver and function on its own.",
+		"Rather some bots run along a path that the programmer presets for them for various situations.",
+		"In ApoBot your job is to redye the blue tiles into red ones by the commands you issue to the ApoBot.",
+		"You can drag the commands with the mouse to the empty commandfield.",
+		"At first you need to go forward and redye the blue tile. Drag the commands to the main-method. If you want to delete a command ..",
+		"press the right mouse button. Finally press the go button to start the bot.",
+		"Great. Now you have to turn your bot. Use the left and right commands to turn your direction. Please try it now and solve the level.",
+		"Another command is the \"jump\". Wih the jump-command you can reach a higher level. Try it out and redye all blue tiles.",
+		"Sometimes you need to create and use functions to solve the levels. You can drag the f1-command into the main method",
+		"and all commands in the f1-menu will be used. You can reuse the f1-command as many times as you want. Try it now.",
+		"If the level is to big then you can hold down the right mouse button and scroll the map.",
+		"The last level is a tricky one. You can try to solve or press the menu button.",
+		"That's all for now. Try the puzzles and have FUN."
+	};
+}
+```
+
+```java filename=ApoBotButton.java
+package apoBot.game;
+
+import java.awt.Color;
+import java.awt.Font;
+
+import org.apogames.entity.ApoButton;
+
+import apoBot.ApoBotComponent;
+import apoBot.ApoBotConstants;
+
+public class ApoBotButton {
+
+	private ApoBotComponent game;
+	
+	public ApoBotButton(ApoBotComponent game) {
+		this.game = game;
+	}
+	
+	public void init() {
+		this.init(null);
+	}
+	
+	public void init(String language) {
+		if (this.game.getButtons() == null) {
+			this.game.setButtons(new ApoButton[47]);
+		}
+		
+		String lang = (language == null) ? "en" : language;
+		boolean de = lang.equals("de");
+		
+		Font write = new Font("Dialog", Font.BOLD, 28);
+		
+		String text = de ? "Beenden" : "quit";
+		String function = "quit";
+		int width = 300;
+		int height = 50;
+		int x = this.game.getWidth()/2 - width/2;
+		int y = this.game.getHeight() - 1 * height - 1 * 5;
+		this.game.getButtons()[0] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, new Color(255, 255, 255, 150), Color.black, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100), write), x, y, width, height, function );
+		
+		text = de ? "Tutorial" : "tutorial";
+		function = "tutorial";
+		y = 50;
+		this.game.getButtons()[1] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, new Color(255, 255, 255, 150), Color.black, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100), write), x, y, width, height, function );
+		
+		text = de ? "Spiel" : "game";
+		function = "game";
+		y = 150;
+		this.game.getButtons()[2] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, new Color(255, 255, 255, 150), Color.black, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100), write), x, y, width, height, function );
+		
+		text = de ? "Menü" : "menu";
+		function = "menu";
+		width = 60;
+		height = 20;
+		x = this.game.getWidth() - 5 - width;
+		y = this.game.getHeight() - 1 * height - 1 * 5;
+		this.game.getButtons()[3] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+		
+		text = "Go";
+		function = "go";
+		width = 80;
+		height = 20;
+		x = this.game.getWidth() - 240;
+		y = this.game.getHeight() - 1 * height - 1 * 5;
+		this.game.getButtons()[4] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "i";
+		function = "forward";
+		width = 32;
+		height = 32;
+		x = this.game.getWidth() - 450;
+		y = 1 * 5;
+		this.game.getButtons()[5] = new ApoButton(this.game.getImage().getImage("images/button_forward.png", false), x, y, width, height, function );
+
+		text = "->";
+		function = "left";
+		x = this.game.getWidth() - 450 + 1 * 5 + width * 1;
+		y = 1 * 5;
+		this.game.getButtons()[6] = new ApoButton(this.game.getImage().getImage("images/button_left.png", false), x, y, width, height, function );
+
+		text = "<-";
+		function = "right";
+		x = this.game.getWidth() - 450 + 2 * 5 + width * 2;
+		y = 1 * 5;
+		this.game.getButtons()[7] = new ApoButton(this.game.getImage().getImage("images/button_right.png", false), x, y, width, height, function );
+
+		text = "ju";
+		function = "jump";
+		x = this.game.getWidth() - 450 + 3 * 5 + width * 3;
+		y = 1 * 5;
+		this.game.getButtons()[8] = new ApoButton(this.game.getImage().getImage("images/button_jump.png", false), x, y, width, height, function );
+
+		text = "re";
+		function = "redye";
+		x = this.game.getWidth() - 450 + 4 * 5 + width * 4;
+		y = 1 * 5;
+		this.game.getButtons()[9] = new ApoButton(this.game.getImage().getImage("images/button_redye.png", false), x, y, width, height, function );
+
+		text = "f1";
+		function = "functionOne";
+		x = this.game.getWidth() - 450 + 5 * 5 + width * 5;
+		y = 1 * 5;
+		this.game.getButtons()[10] = new ApoButton(this.game.getImage().getImage("images/button_functionOne.png", false), x, y, width, height, function );
+
+		text = "f2";
+		function = "functionTwo";
+		x = this.game.getWidth() - 450 + 6 * 5 + width * 6;
+		y = 1 * 5;
+		this.game.getButtons()[11] = new ApoButton(this.game.getImage().getImage("images/button_functionTwo.png", false), x, y, width, height, function );
+
+		text = de ? "Zurücksetzen" : "Reset";
+		function = "reset";
+		width = 80;
+		height = 20;
+		x = 10;
+		y = this.game.getHeight() - 1 * height - 1 * 5;
+		this.game.getButtons()[12] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "Stop";
+		function = "stop";
+		x = this.game.getWidth() - 240;
+		y = this.game.getHeight() - 1 * height - 1 * 5;
+		this.game.getButtons()[13] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+		
+		text = de ? "Editor" : "editor";
+		function = "editor";
+		width = 300;
+		height = 50;
+		x = this.game.getWidth()/2 - width/2;
+		y = 250;
+		this.game.getButtons()[14] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, new Color(255, 255, 255, 150), Color.black, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100), write), x, y, width, height, function );
+
+		text = "ground";
+		function = "editorGround";
+		width = 35;
+		height = 35;
+		x = ApoBotConstants.GAME_WIDTH - 35 * 3 - 5 * 3;
+		y = 100;
+		this.game.getButtons()[15] = new ApoButton(this.game.getImage().getButtonWithImage( width * 3, height, this.game.getITile().getSubimage(0, 0, 32, 25), Color.gray, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+		
+		text = "original";
+		function = "editorOriginal";
+		width = 35;
+		height = 35;
+		x = ApoBotConstants.GAME_WIDTH - 35 * 2 - 5 * 2;
+		y = 100;
+		this.game.getButtons()[16] = new ApoButton(this.game.getImage().getButtonWithImage( width * 3, height, this.game.getITile().getSubimage(1 * 32, 0, 32, 25), Color.gray, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "goal";
+		function = "editorGoal";
+		width = 35;
+		height = 35;
+		x = ApoBotConstants.GAME_WIDTH - 35 * 1 - 5 * 1;
+		y = 100;
+		this.game.getButtons()[17] = new ApoButton(this.game.getImage().getButtonWithImage( width * 3, height, this.game.getITile().getSubimage(2 * 32, 0, 32, 25), Color.gray, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "<";
+		function = "editorLevelXLeft";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 1 * 5;
+		y = 25;
+		this.game.getButtons()[18] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = ">";
+		function = "editorLevelXRight";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_WIDTH - 1 * 5 - 1 * width;
+		y = 25;
+		this.game.getButtons()[19] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "set";
+		function = "editorSet";
+		width = 80;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + ApoBotConstants.GAME_MENU_WIDTH/2 - width/2;
+		y = 70;
+		this.game.getButtons()[20] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "<";
+		function = "editorMainLeft";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 1 * 5;
+		y = 160;
+		this.game.getButtons()[21] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = ">";
+		function = "editorMainRight";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_WIDTH - 1 * 5 - 1 * width;
+		y = 160;
+		this.game.getButtons()[22] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "<";
+		function = "editorFunctionOneLeft";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 1 * 5;
+		y = 210;
+		this.game.getButtons()[23] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = ">";
+		function = "editorFunctionOneRight";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_WIDTH - 1 * 5 - 1 * width;
+		y = 210;
+		this.game.getButtons()[24] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "<";
+		function = "editorFunctionTwoLeft";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 1 * 5;
+		y = 260;
+		this.game.getButtons()[25] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = ">";
+		function = "editorFunctionTwoRight";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_WIDTH - 1 * 5 - 1 * width;
+		y = 260;
+		this.game.getButtons()[26] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "load";
+		function = "editorLoad";
+		width = 70;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 5;
+		y = 400;
+		this.game.getButtons()[27] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "save";
+		function = "editorSave";
+		width = 70;
+		height = 20;
+		x = ApoBotConstants.GAME_WIDTH - width - 5;
+		y = 400;
+		this.game.getButtons()[28] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "<";
+		function = "editorLevelYLeft";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 1 * 5;
+		y = 50;
+		this.game.getButtons()[29] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = ">";
+		function = "editorLevelYRight";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_WIDTH - 1 * 5 - 1 * width;
+		y = 50;
+		this.game.getButtons()[30] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "test";
+		function = "editorTest";
+		width = 70;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 5;
+		y = ApoBotConstants.GAME_HEIGHT - height * 1 - 5 * 1;
+		this.game.getButtons()[31] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "player";
+		function = "editorPlayer";
+		width = 35;
+		height = 35;
+		x = ApoBotConstants.GAME_WIDTH - 35 * 4 - 5 * 4;
+		y = 100;
+		this.game.getButtons()[32] = new ApoButton(this.game.getImage().getButtonWithImage( width * 3, height, this.game.getIPlayer().getSubimage(0, 70, 23, 25), Color.gray, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+	
+		text = "add";
+		function = "editorAdd";
+		width = 70;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 5;
+		y = 340;
+		this.game.getButtons()[33] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "rem";
+		function = "editorRemove";
+		width = 70;
+		height = 20;
+		x = ApoBotConstants.GAME_WIDTH - width - 5;
+		y = 340;
+		this.game.getButtons()[34] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "<";
+		function = "editorLevelLeft";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 1 * 5;
+		y = 365;
+		this.game.getButtons()[35] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = ">";
+		function = "editorLevelRight";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_WIDTH - 1 * 5 - 1 * width;
+		y = 365;
+		this.game.getButtons()[36] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "<";
+		function = "editorLevelChangeLeft";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_GAME_WIDTH + 2 * 5 + 1 * width;
+		y = 365;
+		this.game.getButtons()[37] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = ">";
+		function = "editorLevelChangeRight";
+		width = 20;
+		height = 20;
+		x = ApoBotConstants.GAME_WIDTH - 2 * 5 - 2 * width;
+		y = 365;
+		this.game.getButtons()[38] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "load";
+		function = "gameLoad";
+		width = 70;
+		height = 20;
+		x = 25;
+		y = 10;
+		this.game.getButtons()[39] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "<";
+		function = "gameLevelChangeLeft";
+		width = 20;
+		height = 20;
+		x = 5;
+		y = 35;
+		this.game.getButtons()[40] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = ">";
+		function = "gameLevelChangeRight";
+		width = 20;
+		height = 20;
+		x = 95;
+		y = 35;
+		this.game.getButtons()[41] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "<";
+		function = "gameLevelLeft";
+		width = 20;
+		height = 20;
+		x = 5;
+		y = 60;
+		this.game.getButtons()[42] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = ">";
+		function = "gameLevelRight";
+		width = 20;
+		height = 20;
+		x = 95;
+		y = 60;
+		this.game.getButtons()[43] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, Color.gray, Color.white, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100)), x, y, width, height, function );
+
+		text = "->";
+		function = "leftView";
+		width = 32;
+		height = 32;
+		x = this.game.getWidth() - 450 - 1 * 5 - width * 1;
+		y = 1 * 15;
+		this.game.getButtons()[44] = new ApoButton(this.game.getImage().getImage("images/button_left.png", false), x, y, width, height, function );
+
+		text = "->";
+		function = "rightView";
+		width = 32;
+		height = 32;
+		x = this.game.getWidth() - 450 + 7 * 5 + width * 7;
+		y = 1 * 15;
+		this.game.getButtons()[45] = new ApoButton(this.game.getImage().getImage("images/button_left.png", false), x, y, width, height, function );
+
+		text = de ? "Optionen" : "options";
+		function = "options";
+		width = 300;
+		height = 50;
+		x = this.game.getWidth()/2 - width/2;
+		y = 350;
+		this.game.getButtons()[46] = new ApoButton(this.game.getImage().getButtonImage( width * 3, height, text, new Color(255, 255, 255, 150), Color.black, Color.black, new Color(255, 255, 0, 100), new Color(255, 0, 0, 100), write), x, y, width, height, function );
+	}
+}
+```
+
+```java filename=ApoBotGame.java
+package apoBot.game;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import org.apogames.ApoConstants;
+import org.apogames.help.ApoHelp;
+import org.apogames.sound.ApoSounds;
+
+import apoBot.ApoBotComponent;
+import apoBot.ApoBotConstants;
+import apoBot.entity.ApoBotEntity;
+import apoBot.level.ApoBotLevel;
+import apoBot.level.ApoBotLevelIO;
+import apoBot.level.ApoBotLevelTest;
+
+public class ApoBotGame extends ApoBotComponent {
+
+	private static final long serialVersionUID = 1L;
+	
+	private final int FPS_COUNT = 2;
+	
+	private boolean bMenu;
+	private boolean bGame;
+	private boolean bTutorial;
+	private boolean bEditor;
+	private boolean bOptions;
+
+	private boolean bGo;
+
+	private ApoBotEditor editor;
+	private ApoBotOptions options;
+	private ApoSounds sounds;
+	
+	private ArrayList<Float> waitTimeRender;
+	
+	private int waitTime;
+	
+	private int levelSteps;
+	private int levelCommand;
+	private int totalCommand;
+	private int totalSteps;
+	
+	private int point;
+	
+	private ApoBotEntity[] mainCommands;
+	private ApoBotEntity[] functionOneCommands;
+	private ApoBotEntity[] functionTwoCommands;
+	
+	private int curCommand = 0;
+
+	private int curMainCommand = 0;
+	private int curFunctionOneCommand = 0;
+	private int curFunctionTwoCommand = 0;
+	private int curInMethod = 0;
+	
+	private BufferedImage iMouse;
+	
+	private String curFunction;
+	
+	private int mouseX;
+	private int mouseY;
+	
+	private int curLevelString;
+	
+	private ApoBotLevelIO io;
+	
+	private boolean bWinUp;
+	
+	private float winUp;
+	
+	private ApoBotTutorial tutorial;
+	
+	private int curCommandDraw;
+	
+	private boolean bShowFps;
+	
+	private String language = "en";
+	private boolean sound = true;
+	
+	public ApoBotGame(boolean mouse, boolean key, int wait_time_think, int wait_time_render) {
+		super(mouse, key, wait_time_think, wait_time_render);
+	}
+
+	public void init() {
+		super.init();
+		
+		if (super.getIBackgroundOriginal() == null) {
+			super.setIBackgroundOriginal(super.getImage().getImage("images/background.png", false));
+		}
+		
+		this.options = new ApoBotOptions(Paths.get("options.properties"));
+		this.options.applyTo(this);
+		
+		this.sounds = new ApoSounds();
+		
+		this.curFunction = null;
+		this.curLevelString = 0;
+		this.curCommandDraw = ApoBotConstants.FORWARD;
+		
+		if (this.editor == null) {
+			this.editor = new ApoBotEditor(this);
+		}
+		
+		if (this.tutorial == null) {
+			this.tutorial = new ApoBotTutorial(this);
+		}
+		
+		if (this.waitTimeRender == null) {
+			this.waitTimeRender = new ArrayList<Float>();
+		} else {
+			this.waitTimeRender.clear();
+		}
+	
+		if (this.mainCommands == null) {
+			this.mainCommands = new ApoBotEntity[1];
+		}
+
+		if (this.functionOneCommands == null) {
+			this.functionOneCommands = new ApoBotEntity[1];
+		}
+		
+		if (this.functionTwoCommands == null) {
+			this.functionTwoCommands = new ApoBotEntity[1];
+		}
+		
+		this.curInMethod = 0;
+		this.curMainCommand = 0;
+		this.curFunctionOneCommand = -1;
+		this.curFunctionTwoCommand = -1;
+		this.curCommand = 0;
+		
+		super.setBWin(false);
+		
+		this.bGo = false;
+		
+		this.waitTime = 0;
+		this.totalSteps = 0;
+		
+		if (this.io == null) {
+			this.io = new ApoBotLevelIO();
+			if (ApoConstants.B_APPLET) {
+				this.loadLevel(ApoBotComponent.APPLET_LEVEL + "/" + ApoBotConstants.LEVELS[this.curLevelString] + ".bot");
+			} else {
+				this.loadLevel(System.getProperty("user.dir") + File.separator + "levels" + File.separator + ApoBotConstants.LEVELS[this.curLevelString] + ".bot");
+			}
+		}
+		
+		this.setMenu();
+	}
+	
+	public void reinitButtons() {
+		ApoBotButton buttons = new ApoBotButton(this);
+		buttons.init(this.language);
+	}
+	
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	
+	public void setSound(boolean sound) {
+		this.sound = sound;
+	}
+	
+	public void playSound(String name) {
+		if (this.sound) {
+			this.sounds.playSound(name);
+		}
+	}
+	
+	public void loadLevel(String fileName) {
+		if (this.bEditor) {
+			this.editor.loadLevel(fileName);
+		} else {
+			if (this.io.readLevel(fileName)) {
+				this.setCurLevel(0);
+				this.setLevel(this.io.getLevel(this.getCurLevel()));
+				System.out.println(fileName);
+			}
+		}
+	}
+
+	public void saveLevel(String fileName) {
+		if (this.bEditor) {
+			this.editor.saveLevel(fileName);
+		}
+	}
+	
+	public void addLevelToIO(ApoBotLevel level) {
+		this.curLevelString = 3;
+		this.io.addLevel(level, 0);
+	}
+	
+	protected void setMenu() {
+		super.setBWin(false);
+		this.bMenu = true;
+		this.bGame = false;
+		this.bTutorial = false;
+		this.bEditor = false;
+		this.bOptions = false;
+		for (int i = 0; i < ApoBotConstants.BUTTON_MENU.length && i < super.getButtons().length; i++) {
+			super.getButtons()[i].setBVisible(ApoBotConstants.BUTTON_MENU[i]);
+		}
+		if (ApoConstants.B_APPLET) {
+			super.getButtons()[0].setBVisible(false);
+		}
+		this.setLevel(new ApoBotLevelTest().getMenuLevel());
+	}
+	
+	protected void setOptions() {
+		this.bMenu = false;
+		this.bGame = false;
+		this.bTutorial = false;
+		this.bEditor = false;
+		this.bOptions = true;
+		for (int i = 0; i < super.getButtons().length; i++) {
+			super.getButtons()[i].setBVisible(false);
+		}
+		super.getButtons()[3].setBVisible(true);
+	}
+
+	protected void setGame() {
+		super.setBWin(false);
+		this.bMenu = false;
+		this.bGame = true;
+		this.bTutorial = false;
+		this.bEditor = false;
+		this.bOptions = false;
+		for (int i = 0; i < ApoBotConstants.BUTTON_GAME.length && i < super.getButtons().length; i++) {
+			super.getButtons()[i].setBVisible(ApoBotConstants.BUTTON_GAME[i]);
+		}
+		if (ApoConstants.B_APPLET) {
+			super.getButtons()[0].setBVisible(false);
+			super.getButtons()[39].setBVisible(false);
+		}
+		if (super.getButtons()[13].isBVisible()) {
+			if (this.bGo) {
+				super.getButtons()[4].setBVisible(false);
+			} else {
+				super.getButtons()[13].setBVisible(false);
+			}
+		}
+		this.nextLevelChange(0);
+	}
+	
+	private void setTutorial() {
+		super.setBWin(false);
+		this.bMenu = false;
+		this.bGame = false;
+		this.bTutorial = true;
+		this.bEditor = false;
+		this.bOptions = false;
+		for (int i = 0; i < ApoBotConstants.BUTTON_TUTORIAL.length && i < super.getButtons().length; i++) {
+			super.getButtons()[i].setBVisible(ApoBotConstants.BUTTON_TUTORIAL[i]);
+		}
+		if (ApoConstants.B_APPLET) {
+			super.getButtons()[0].setBVisible(false);
+		}
+		if (super.getButtons()[13].isBVisible()) {
+			if (this.bGo) {
+				super.getButtons()[4].setBVisible(false);
+			} else {
+				super.getButtons()[13].setBVisible(false);
+			}
+		}
+		this.tutorial.init();
+	}
+
+	private void setEditor() {
+		super.setBWin(false);
+		this.bMenu = false;
+		this.bGame = false;
+		this.bTutorial = false;
+		this.bEditor = true;
+		this.bOptions = false;
+		this.editor.init();
+		for (int i = 0; i < ApoBotConstants.BUTTON_EDITOR.length && i < super.getButtons().length; i++) {
+			super.getButtons()[i].setBVisible(ApoBotConstants.BUTTON_EDITOR[i]);
+		}
+		if (ApoConstants.B_APPLET) {
+			super.getButtons()[0].setBVisible(false);
+			super.getButtons()[27].setBVisible(false);
+			super.getButtons()[28].setBVisible(false);
+		}
+		super.getButtons()[4].setBVisible(false);
+		super.getButtons()[13].setBVisible(false);
+	}
+	
+	@Override
+	public void setKeyFunction(int function) {
+		if (this.bTutorial) {
+			this.tutorial.keyPressed(function);
+		}
+		if (function == KeyEvent.VK_F) {
+			this.bShowFps = !this.bShowFps;
+		}
+		if ((this.bTutorial) || (this.bGame) || (this.bEditor)) {
+			int w = 16 * ApoBotConstants.SIZE;
+			if ((function == KeyEvent.VK_LEFT) || (function == KeyEvent.VK_RIGHT)) {
+				if (super.isLevelToWidth()) {
+					if (function == KeyEvent.VK_LEFT) {
+						super.setCurX(this.getCurX() + 3);
+					} else if (function == KeyEvent.VK_RIGHT) {
+						super.setCurX(this.getCurX() - 3);
+					}
+					if (this.getCurX() + this.getCurWidth() - 1 * w / 2 >= this.getLevelWidth()) {
+						this.setCurX(this.getLevelWidth() - this.getCurWidth() + 1 * w / 2 - 1);
+					}
+					if (this.getCurX() < -1 * w/2) {
+						this.setCurX(-1 * w/2 + 1);
+					}
+				}
+			} else if ((function == KeyEvent.VK_DOWN) || (function == KeyEvent.VK_UP)) {
+				if (super.isLevelToHeight()) {
+					if (function == KeyEvent.VK_UP) {
+						super.setCurY(this.getCurY() + 3);
+					} else if (function == KeyEvent.VK_DOWN) {
+						super.setCurY(this.getCurY() - 3);
+					}
+					if (this.getCurY() + this.getCurHeight() - 2 * w >= this.getLevelHeight()) {
+						this.setCurY(this.getLevelHeight() - this.getCurHeight() + 2 * w - 1);
+					}
+					if (this.getCurY() < -2 * w) {
+						this.setCurY(-2 * w + 1);
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public void setMouseFunction(String function) {
+		if (function.equals("quit")) {
+			System.exit(0);
+		} else if (function.equals("menu")) {
+			this.setMenu();
+		} else if (function.equals("game")) {
+			this.setGame();
+		} else if (function.equals("tutorial")) {
+			this.setTutorial();
+		} else if (function.equals("editor")) {
+			this.setEditor();
+		} else if (function.equals("options")) {
+			this.setOptions();
+		} else if (function.equals("toggle_lang")) {
+			this.options.setMenuLanguage(this.options.getMenuLanguage().equals("en") ? "de" : "en");
+			this.options.applyTo(this);
+		} else if (function.equals("toggle_sound")) {
+			this.options.setSound(!this.options.isSoundTriggered());
+			this.options.applyTo(this);
+		} else if (function.equals("forward")) {
+			this.curCommandDraw = ApoBotConstants.FORWARD;
+		} else if (function.equals("left")) {
+			this.curCommandDraw = ApoBotConstants.LEFT;
+		} else if (function.equals("right")) {
+			this.curCommandDraw = ApoBotConstants.RIGHT;
+		} else if (function.equals("jump")) {
+			this.curCommandDraw = ApoBotConstants.JUMP;
+		} else if (function.equals("redye")) {
+			this.curCommandDraw = ApoBotConstants.REDYE;
+		} else if (function.equals("functionOne")) {
+			this.curCommandDraw = ApoBotConstants.FUNCTION_ONE;
+		} else if (function.equals("functionTwo")) {
+			this.curCommandDraw = ApoBotConstants.FUNCTION_TWO;
+		} else if (function.equals("go")) {
+			if (this.bTutorial) {
+				if (this.tutorial.canGo()) {
+					this.restart();
+				}
+			} else {
+				this.restart();
+			}
+		} else if (function.equals("gameLoad")) {
+			super.levelLoad(null);
+		} else if (function.equals("reset")) {
+			this.reset();
+		} else if (function.equals("gameLevelLeft")) {
+			this.nextLevel(-1);
+		} else if (function.equals("gameLevelRight")) {
+			this.nextLevel(+1);
+		} else if (function.equals("gameLevelChangeLeft")) {
+			this.nextLevelChange(-1);
+		} else if (function.equals("gameLevelChangeRight")) {
+			this.nextLevelChange(+1);
+		} else if (function.equals("stop")) {
+			this.stopGo();
+		} else if ((this.bEditor) && (function.indexOf("editor") != -1)) {
+			this.editor.mouseFunction(function);
+		}
+	}
+
+	private void nextLevelChange(int next) {
+		if (this.curLevelString > -1) {
+			this.totalSteps = 0;
+			this.curLevelString += next;
+			if (this.curLevelString >= ApoBotConstants.LEVELS.length) {
+				this.curLevelString = 0;;
+			} else if (this.curLevelString < 0) {
+				this.curLevelString = ApoBotConstants.LEVELS.length - 1;
+			}
+			if (this.curLevelString == 3) {
+				super.setCurLevel(0);
+				if ((this.editor.getLevels() == null) || (this.editor.getLevels().size() <= 0)) {
+					this.nextLevelChange(next);
+					return;
+				}
+				this.io.setLevels(this.editor.getLevels());
+				this.setLevel(this.io.getLevel(this.getCurLevel()));
+			} else {
+				if (ApoConstants.B_APPLET) {
+					this.loadLevel(ApoBotComponent.APPLET_LEVEL + "/" + ApoBotConstants.LEVELS[this.curLevelString] + ".bot");
+				} else {
+					this.loadLevel(System.getProperty("user.dir") + File.separator + "levels" + File.separator + ApoBotConstants.LEVELS[this.curLevelString] + ".bot");
+				}
+				this.setLevel(this.io.getLevel(super.getCurLevel()));
+			}
+		}
+	}
+
+	private void nextLevel(int next) {
+		if (super.getCurLevel() > -1) {
+			super.setCurLevel(super.getCurLevel() + next);
+			if (super.getCurLevel() < 0) {
+				super.setCurLevel(this.io.getMaxLevel() - 1);
+			} else if (super.getCurLevel() >= this.io.getMaxLevel()) {
+				super.setCurLevel(0);
+			}
+			this.setLevel(this.io.getLevel(super.getCurLevel()));
+		}
+	}
+
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		int change = e.getWheelRotation();
+		this.curCommandDraw += change;
+		if (this.curCommandDraw < ApoBotConstants.FORWARD) {
+			this.curCommandDraw = ApoBotConstants.FUNCTION_TWO;
+			if (this.functionTwoCommands.length <= 0) {
+				this.curCommandDraw = ApoBotConstants.FUNCTION_ONE;
+				if (this.functionOneCommands.length <= 0) {
+					this.curCommandDraw = ApoBotConstants.REDYE;				
+				}
+			}
+		} else if (this.curCommandDraw > ApoBotConstants.FUNCTION_TWO) {
+			this.curCommand = ApoBotConstants.FORWARD;
+		}
+		if (this.curCommandDraw >= ApoBotConstants.FUNCTION_ONE) {
+			if (this.curCommandDraw == ApoBotConstants.FUNCTION_ONE) {
+				if (this.functionOneCommands.length <= 0) {
+					this.curCommandDraw = ApoBotConstants.FUNCTION_TWO;				
+				}
+			}
+			if (this.curCommandDraw == ApoBotConstants.FUNCTION_TWO) {
+				if (this.functionTwoCommands.length <= 0) {
+					this.curCommandDraw = ApoBotConstants.FORWARD;				
+				}
+			}
+		}
+		if (this.curCommandDraw > ApoBotConstants.FUNCTION_TWO) {
+			this.curCommandDraw = ApoBotConstants.FORWARD;
+		}
+	}
+	
+	public void mouseReleased(MouseEvent e) {
+		super.mouseReleased(e);
+		if ((this.bMenu)) {
+			return;
+		}
+		if (this.bEditor) {
+			this.editor.mouseReleased(e);
+		} else {
+			int x = e.getX();
+			int y = e.getY();
+			this.levelCommand = 0;
+			if (e.getButton() == MouseEvent.BUTTON3) {
+				for (int i = 0; i < this.mainCommands.length; i++) {
+					if (this.mainCommands[i].intersects(x, y)) {
+						this.mainCommands[i].setCommand(-1);
+					}
+					if (this.mainCommands[i].getCommand() != -1) {
+						this.levelCommand += 1;
+					}
+				}
+				for (int i = 0; i < this.functionOneCommands.length; i++) {
+					if (this.functionOneCommands[i].intersects(x, y)) {
+						this.functionOneCommands[i].setCommand(-1);
+					}
+					if (this.functionOneCommands[i].getCommand() != -1) {
+						this.levelCommand += 1;
+					}
+				}
+				for (int i = 0; i < this.functionTwoCommands.length; i++) {
+					if (this.functionTwoCommands[i].intersects(x, y)) {
+						this.functionTwoCommands[i].setCommand(-1);
+					}
+					if (this.functionTwoCommands[i].getCommand() != -1) {
+						this.levelCommand += 1;
+					}
+				}
+			} else if (e.getButton() == MouseEvent.BUTTON1) {
+				int command = -1;
+				if (this.curFunction != null) {
+					if (this.curFunction.equals("forward")) {
+						command = ApoBotConstants.FORWARD;
+					} else if (this.curFunction.equals("left")) {
+						command = ApoBotConstants.LEFT;
+					} else if (this.curFunction.equals("right")) {
+						command = ApoBotConstants.RIGHT;
+					} else if (this.curFunction.equals("jump")) {
+						command = ApoBotConstants.JUMP;
+					} else if (this.curFunction.equals("redye")) {
+						command = ApoBotConstants.REDYE;
+					} else if (this.curFunction.equals("functionOne")) {
+						command = ApoBotConstants.FUNCTION_ONE;
+					} else if (this.curFunction.equals("functionTwo")) {
+						command = ApoBotConstants.FUNCTION_TWO;
+					}
+				}
+				for (int i = 0; i < this.mainCommands.length; i++) {
+					if (this.mainCommands[i].intersects(x, y)) {
+						if ((command == -1) && (this.mainCommands[i].getCommand() == -1)) {
+							this.mainCommands[i].setCommand(this.curCommandDraw);
+						} else {
+							if ((this.mouseX != -1) && (this.mouseY != -1)) {
+								this.mainCommands[i].setCommand(command);
+							}
+							this.mouseX = -1;
+							this.mouseY = -1;
+						}
+					}
+					if (this.mainCommands[i].getCommand() != -1) {
+						this.levelCommand += 1;
+					}
+				}
+				for (int i = 0; i < this.functionOneCommands.length; i++) {
+					if (this.functionOneCommands[i].intersects(x, y)) {
+						if ((command == -1) && (this.functionOneCommands[i].getCommand() == -1)) {
+							this.functionOneCommands[i].setCommand(this.curCommandDraw);
+						} else {
+							if ((this.mouseX != -1) && (this.mouseY != -1)) {
+								if (command != ApoBotConstants.FUNCTION_ONE) {
+									this.functionOneCommands[i].setCommand(command);
+								} else {
+									this.functionOneCommands[i].setCommand(-1);
+								}
+								this.mouseX = -1;
+								this.mouseY = -1;
+							}
+						}
+					}
+					if (this.functionOneCommands[i].getCommand() != -1) {
+						this.levelCommand += 1;
+					}
+				}
+				for (int i = 0; i < this.functionTwoCommands.length; i++) {
+					if (this.functionTwoCommands[i].intersects(x, y)) {
+						if ((command == -1) && (this.functionTwoCommands[i].getCommand() == -1)) {
+							this.functionTwoCommands[i].setCommand(this.curCommandDraw);
+						} else {
+							if ((this.mouseX != -1) && (this.mouseY != -1)) {
+								if (command != ApoBotConstants.FUNCTION_TWO) {
+									this.functionTwoCommands[i].setCommand(command);
+								} else {
+									this.functionTwoCommands[i].setCommand(-1);
+								}
+								this.mouseX = -1;
+								this.mouseY = -1;
+							}
+						}
+					}
+					if (this.functionTwoCommands[i].getCommand() != -1) {
+						this.levelCommand += 1;
+					}
+				}
+				this.mouseX = -1;
+				this.mouseY = -1;
+			}
+		}
+	}
+	
+	public void mousePressed(MouseEvent e) {
+		if (super.isBWin()) {
+			this.nextLevel(+1);
+			return;
+		}
+		super.mousePressed(e);
+		if (!this.bGo) {
+			if (e.getButton() == MouseEvent.BUTTON1) {
+				this.mouseX = e.getX();
+				this.mouseY = e.getY();
+				for (int i = 5; i < 12; i++) {
+					if (super.getButtons()[i].isBPressed()) {
+						this.iMouse = super.getButtons()[i].getIBackground().getSubimage(0, 0, (int)(super.getButtons()[i].getWidth()), (int)(super.getButtons()[i].getHeight()));
+						this.curFunction = super.getButtons()[i].getFunction();
+						return;
+					}
+				}
+				for (int i = 0; i < this.mainCommands.length; i++) {
+					if ((this.mainCommands[i].intersects(this.mouseX, this.mouseY)) && (this.mainCommands[i].getCommand() != -1)) {
+						this.iMouse = super.getButtons()[this.mainCommands[i].getCommand() + 5].getIBackground().getSubimage(0, 0, (int)(super.getButtons()[this.mainCommands[i].getCommand() + 5].getWidth()), (int)(super.getButtons()[this.mainCommands[i].getCommand() + 5].getHeight()));
+						this.curFunction = super.getButtons()[this.mainCommands[i].getCommand() + 5].getFunction();
+						this.mainCommands[i].setCommand(-1);
+						return;
+					}
+				}
+				for (int i = 0; i < this.functionOneCommands.length; i++) {
+					if ((this.functionOneCommands[i].intersects(this.mouseX, this.mouseY)) && (this.functionOneCommands[i].getCommand() != -1)) {
+						this.iMouse = super.getButtons()[this.functionOneCommands[i].getCommand() + 5].getIBackground().getSubimage(0, 0, (int)(super.getButtons()[this.functionOneCommands[i].getCommand() + 5].getWidth()), (int)(super.getButtons()[this.functionOneCommands[i].getCommand() + 5].getHeight()));
+						this.curFunction = super.getButtons()[this.functionOneCommands[i].getCommand() + 5].getFunction();
+						this.functionOneCommands[i].setCommand(-1);
+						return;
+					}
+				}
+				for (int i = 0; i < this.functionTwoCommands.length; i++) {
+					if ((this.functionTwoCommands[i].intersects(this.mouseX, this.mouseY)) && (this.functionTwoCommands[i].getCommand() != -1)) {
+						this.iMouse = super.getButtons()[this.functionTwoCommands[i].getCommand() + 5].getIBackground().getSubimage(0, 0, (int)(super.getButtons()[this.functionTwoCommands[i].getCommand() + 5].getWidth()), (int)(super.getButtons()[this.functionTwoCommands[i].getCommand() + 5].getHeight()));
+						this.curFunction = super.getButtons()[this.functionTwoCommands[i].getCommand() + 5].getFunction();
+						this.functionTwoCommands[i].setCommand(-1);
+						return;
+					}
+				}
+				this.mouseX = -1;
+				this.mouseY = -1;
+				this.curFunction = null;
+			}
+		}
+	}
+	
+	public void mouseDragged(MouseEvent e) {
+		super.mouseDragged(e);
+		if ((this.mouseX != -1) && (this.mouseY != -1)) {
+			this.mouseX = e.getX();
+			this.mouseY = e.getY();
+		}
+	}
+	
+	public void reset() {
+		super.restart();
+		super.setBWin(false);
+		this.stopGo();
+		this.levelSteps = 0;
+		this.point = 0;
+	}
+	
+	public void restart() {
+		super.restart();
+		this.curInMethod = 0;
+		this.curMainCommand = 0;
+		this.curFunctionOneCommand = -1;
+		this.curFunctionTwoCommand = -1;
+		this.levelSteps = 0;
+		super.setBWin(false);
+		super.getButtons()[4].setBVisible(false);
+		super.getButtons()[13].setBVisible(true);
+		for (int i = 39; i < 44; i++) {
+			super.getButtons()[i].setBVisible(false);
+		}
+		if (ApoConstants.B_APPLET) {
+			super.getButtons()[0].setBVisible(false);
+			super.getButtons()[39].setBVisible(false);
+		}
+		this.bGo = true;
+	}
+	
+	private int getNextCommand() {
+		int command = -1;
+		if (this.curInMethod == 1) {
+			if (curFunctionOneCommand >= this.functionOneCommands.length) {
+				this.curFunctionOneCommand = -1;
+				this.curFunctionTwoCommand = -1;
+				this.curInMethod = 0;
+				return this.getNextCommand();
+			}
+			command = this.functionOneCommands[this.curFunctionOneCommand].getCommand();
+			if (command == ApoBotConstants.FUNCTION_ONE) {
+				this.curInMethod = 1;
+				this.curFunctionOneCommand = 0;
+			} else if (command == ApoBotConstants.FUNCTION_TWO) {
+				this.curInMethod = 2;
+				this.curFunctionTwoCommand = 0;
+				this.curFunctionOneCommand += 1;
+			} else if (this.curFunctionOneCommand + 1 >= this.functionOneCommands.length) {
+				this.curFunctionOneCommand = -1;
+				if (this.curFunctionTwoCommand < 0) {
+					this.curInMethod = 0;
+				} else {
+					this.curInMethod = 2;
+				}
+			} else {
+				this.curFunctionOneCommand += 1;				
+			}
+		} else if (this.curInMethod == 2) {
+			if (curFunctionTwoCommand >= this.functionTwoCommands.length) {
+				this.curFunctionOneCommand = -1;
+				this.curFunctionTwoCommand = -1;
+				this.curInMethod = 0;
+				return this.getNextCommand();
+			}
+			command = this.functionTwoCommands[this.curFunctionTwoCommand].getCommand();
+			if (command == ApoBotConstants.FUNCTION_ONE) {
+				this.curInMethod = 1;
+				this.curFunctionOneCommand = 0;
+				this.curFunctionTwoCommand += 1;
+			} else if (command == ApoBotConstants.FUNCTION_TWO) {
+				this.curInMethod = 2;
+				this.curFunctionTwoCommand = 0;
+			} else if (this.curFunctionTwoCommand + 1 >= this.functionTwoCommands.length) {
+				this.curInMethod = 0;
+				this.curFunctionTwoCommand = -1;
+				if (this.curFunctionOneCommand < 0) {
+					this.curInMethod = 0;
+				} else {
+					this.curInMethod = 1;
+				}
+			} else {
+				this.curFunctionTwoCommand += 1;
+			}
+		} else if (this.curInMethod == 0) {
+			if (this.curMainCommand >= this.mainCommands.length) {
+				this.curFunctionOneCommand = -1;
+				this.curFunctionTwoCommand = -1;
+				return -1;
+			}
+			command = this.mainCommands[this.curMainCommand].getCommand();
+			if (command == ApoBotConstants.FUNCTION_ONE) {
+				this.curFunctionOneCommand = 0;
+				this.curInMethod = 1;
+				this.curMainCommand += 1;
+			} else if (command == ApoBotConstants.FUNCTION_TWO) {
+				this.curInMethod = 2;
+				this.curFunctionTwoCommand = 0;
+				this.curMainCommand += 1;
+			} else if (this.curMainCommand + 1 > this.mainCommands.length) {
+				this.curFunctionOneCommand = -1;
+				this.curFunctionTwoCommand = -1;
+				return -1;
+			} else {
+				this.curMainCommand += 1;
+			}
+		}
+		if (command == -1) {
+			return this.getNextCommand();
+		}
+		return command;
+	}
+	
+	public void setLevel(ApoBotLevel level) {
+		level.init();
+		this.curCommandDraw = ApoBotConstants.FORWARD;
+		this.levelCommand = 0;
+		this.point = 0;
+		this.levelSteps = 0;
+		this.totalCommand = 0;
+		super.setLevel(level);
+		super.setBWin(false);
+		this.mainCommands = new ApoBotEntity[super.getLevel().getCommandsMenu()];
+		this.totalCommand += this.mainCommands.length;
+		int startX = ApoBotConstants.GAME_WIDTH - 32 * 4 - 4 * 5;
+		int x = startX;
+		int y = 30;
+		for (int i = 0; i < this.mainCommands.length; i++) {
+			this.mainCommands[i] = new ApoBotEntity(-1, x, y, 32, 32);
+			x += 32 + 5;
+			if ((x >= ApoBotConstants.GAME_WIDTH) && (i < this.mainCommands.length - 1)) {
+				x = startX;
+				y += 37;
+			}
+		}
+		x = startX;
+		y += 57;
+
+		int endX = (int)(super.getButtons()[9].getX() + super.getButtons()[9].getWidth());
+		this.functionOneCommands = new ApoBotEntity[super.getLevel().getFunctionsOneMenu()];
+		this.totalCommand += this.functionOneCommands.length;
+		for (int i = 0; i < this.functionOneCommands.length; i++) {
+			this.functionOneCommands[i] = new ApoBotEntity(-1, x, y, 32, 32);
+			x += 32 + 5;
+			if ((x >= ApoBotConstants.GAME_WIDTH) && (i < this.functionOneCommands.length - 1)) {
+				x = startX;
+				y += 37;
+			}
+		}
+		if ((this.bGame) || (this.bTutorial)) {
+			if (super.getLevel().getFunctionsOneMenu() <= 0) {
+				super.getButtons()[10].setBVisible(false);
+			} else {
+				super.getButtons()[10].setBVisible(true);
+				endX = (int)(super.getButtons()[10].getX() + super.getButtons()[10].getWidth());
+			}
+		}
+
+		x = startX;
+		y += 57;
+		this.functionTwoCommands = new ApoBotEntity[super.getLevel().getFunctionsTwoMenu()];
+		this.totalCommand += this.functionTwoCommands.length;
+		for (int i = 0; i < this.functionTwoCommands.length; i++) {
+			this.functionTwoCommands[i] = new ApoBotEntity(-1, x, y, 32, 32);
+			x += 32 + 5;
+			if (x >= ApoBotConstants.GAME_WIDTH) {
+				x = startX;
+				y += 37;
+			}
+		}
+		if ((this.bGame) || (this.bTutorial)) {
+			if (super.getLevel().getFunctionsTwoMenu() <= 0) {
+				super.getButtons()[11].setBVisible(false);
+			} else {
+				super.getButtons()[11].setBVisible(true);
+				endX = (int)(super.getButtons()[11].getX() + super.getButtons()[11].getWidth());
+			}
+		}
+		int height = (int)this.mainCommands[this.mainCommands.length - 1].getY();
+		if (this.functionTwoCommands.length > 0) {
+			height = (int)this.functionTwoCommands[this.functionTwoCommands.length - 1].getY();
+		} else if (this.functionOneCommands.length > 0) {
+			height = (int)this.functionOneCommands[this.functionOneCommands.length - 1].getY();
+		}
+		super.setIBackground(super.getImage().getIBackground(super.getIBackgroundOriginal(), 4 * 32 + 5 * 5, height + 40, (int)(super.getButtons()[5].getX()), (int)(super.getButtons()[5].getY()), (int)(endX - super.getButtons()[5].getX())));
+	}
+	
+	public void stopGo() {
+		this.bGo = false;
+		if (!this.bEditor) {
+			super.getButtons()[4].setBVisible(true);
+			super.getButtons()[13].setBVisible(false);
+			if (!this.bTutorial) {
+				for (int i = 39; i < 44; i++) {
+					super.getButtons()[i].setBVisible(true);
+				}
+				if (ApoConstants.B_APPLET) {
+					super.getButtons()[0].setBVisible(false);
+					super.getButtons()[39].setBVisible(false);
+				}
+			}
+		}
+	}
+	
+	private boolean isLevelWin() {
+		for (int y = 0; y < this.getLevel().getLevel().length; y++) {
+			for (int x = 0; x < this.getLevel().getLevel()[0].length; x++) {
+				if (this.getLevel().getLevel()[y][x].getGround() == ApoBotConstants.GROUND_ORIGINAL) {
+					return false;
+				}
+			}	
+		}
+		return true;
+	}
+	
+	public void think(int delta) {
+		super.think(delta);
+		if (this.bTutorial) {
+			this.tutorial.think(delta);
+		} else if (this.bMenu) {
+			super.centerCamera();
+			if ((this.getPlayer().isBRun()) || (this.getPlayer().isBJump())) {
+				this.getPlayer().think(delta);
+				this.waitTime -= delta;
+			} else {
+				if (this.waitTime > 0) {
+					this.waitTime -= delta;
+				} else {
+					int nextCommand = (int)(Math.random() * 100);
+					if (nextCommand < 50) {
+						nextCommand = ApoBotConstants.FORWARD;
+					} else if (nextCommand < 60) {
+						nextCommand = ApoBotConstants.LEFT;
+					} else if (nextCommand < 70) {
+						nextCommand = ApoBotConstants.RIGHT;
+					} else if (nextCommand < 80) {
+						nextCommand = ApoBotConstants.REDYE;
+					} else {
+						nextCommand = ApoBotConstants.JUMP;
+					}
+					if (nextCommand == ApoBotConstants.FORWARD) {
+						if (!this.canPlayerRun()) {
+							if (this.canPlayerJump()) {
+								nextCommand = ApoBotConstants.JUMP;
+							} else {
+								nextCommand += 1;
+							}
+						}
+					} else if (nextCommand == ApoBotConstants.REDYE) {
+						if (this.getLevel().getLevel()[(int)this.getPlayer().getY()][(int)this.getPlayer().getX()].getGround() == ApoBotConstants.GROUND_EMPTY) {
+							nextCommand += 1;
+						}
+					}
+					this.nextCommand(nextCommand);
+				}
+			}
+		} else if (this.bEditor) {
+			
+		} else {
+			this.thinkMove(delta);
+		}
+	}
+
+	protected void thinkMove(int delta) {
+		if (super.isBWin()) {
+			if (this.bWinUp) {
+				this.winUp += (float)delta * 0.05f;
+				if (this.winUp >= 16) {
+					this.bWinUp = false;
+				}
+			} else {
+				this.winUp -= (float)delta * 0.05f;
+				if (this.winUp <= 0) {
+					this.bWinUp = true;
+				}
+			}
+			return;
+		}
+		if (this.bGo) {
+			this.centerCamera();
+			if ((this.getPlayer().isBRun()) || (this.getPlayer().isBJump())) {
+				this.getPlayer().think(delta);
+				this.waitTime -= delta;
+			} else {
+				if (this.waitTime > 0) {
+					this.waitTime -= delta;
+				} else {
+					int nextCommand = this.getNextCommand();
+					if (nextCommand != -1) {
+						this.levelSteps += 1;
+						this.totalSteps += 1;
+						this.curCommand = nextCommand;
+						this.nextCommand(this.curCommand);
+					} else {
+						if (this.isLevelWin()) {
+							this.point = 1000 + (this.totalCommand - this.levelCommand) * 15 - this.levelSteps * 3;
+							this.setBWin(true);
+							this.bWinUp = true;
+							this.winUp = 0;
+						} else {
+							this.stopGo();
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void nextCommand(int command) {
+		if (command == ApoBotConstants.FORWARD) {
+			if (this.canPlayerRun()) {
+				this.getPlayer().setBRun(true);
+			}
+			this.waitTime += 300;
+		} else if (command == ApoBotConstants.REDYE) {
+			if (this.getLevel().getLevel()[(int)this.getPlayer().getY()][(int)this.getPlayer().getX()].getGround() == ApoBotConstants.GROUND_GOAL) {
+				this.getLevel().getLevel()[(int)this.getPlayer().getY()][(int)this.getPlayer().getX()].setGround(ApoBotConstants.GROUND_ORIGINAL);
+			} else if (this.getLevel().getLevel()[(int)this.getPlayer().getY()][(int)this.getPlayer().getX()].getGround() == ApoBotConstants.GROUND_ORIGINAL) {
+				this.getLevel().getLevel()[(int)this.getPlayer().getY()][(int)this.getPlayer().getX()].setGround(ApoBotConstants.GROUND_GOAL);
+			}
+			this.makeBackground();
+			this.waitTime += 300;
+		} else if (command == ApoBotConstants.LEFT) {
+			this.getPlayer().setCurDir(this.getPlayer().getCurDir() - 1);
+			this.waitTime += 300;
+		} else if (command == ApoBotConstants.RIGHT) {
+			this.getPlayer().setCurDir(this.getPlayer().getCurDir() + 1);
+			this.waitTime += 300;
+		} else if (command == ApoBotConstants.JUMP) {
+			if (this.canPlayerJump()) {
+				this.getPlayer().setBRun(true);				
+			} else {
+				this.getPlayer().setJumpHeight(0);
+			}
+			this.getPlayer().setBJump(true);
+			this.waitTime += 300;
+		}
+	}
+	
+	private boolean canPlayerRun() {
+		int x = (int)this.getPlayer().getX();
+		int y = (int)this.getPlayer().getY();
+		int height = this.getLevel().getLevel()[y][x].getHeight();
+		if (this.getPlayer().getCurDir() == ApoBotConstants.DIR_SOUTH_DOWNRIGHT) {
+			x += 1;
+		} else if (this.getPlayer().getCurDir() == ApoBotConstants.DIR_NORTH_UPLEFT) {
+			x -= 1;
+		} else if (this.getPlayer().getCurDir() == ApoBotConstants.DIR_WEST_DOWNLEFT) {
+			y -= 1;
+		} else if (this.getPlayer().getCurDir() == ApoBotConstants.DIR_EAST_UPRIGHT) {
+			y += 1;
+		}
+		if ((x < 0) || (y < 0) || (x >= this.getLevel().getLevel()[0].length) || (y >= this.getLevel().getLevel().length)) {
+			return false;
+		} else if (this.getLevel().getLevel()[y][x].getGround() == ApoBotConstants.GROUND_REAL_EMPTY) {
+			return false;
+		}
+		if (height == this.getLevel().getLevel()[y][x].getHeight()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean canPlayerJump() {
+		int x = (int)this.getPlayer().getX();
+		int y = (int)this.getPlayer().getY();
+		int height = this.getLevel().getLevel()[y][x].getHeight();
+		if (this.getPlayer().getCurDir() == ApoBotConstants.DIR_SOUTH_DOWNRIGHT) {
+			x += 1;
+		} else if (this.getPlayer().getCurDir() == ApoBotConstants.DIR_NORTH_UPLEFT) {
+			x -= 1;
+		} else if (this.getPlayer().getCurDir() == ApoBotConstants.DIR_WEST_DOWNLEFT) {
+			y -= 1;
+		} else if (this.getPlayer().getCurDir() == ApoBotConstants.DIR_EAST_UPRIGHT) {
+			y += 1;
+		}
+		if ((x < 0) || (y < 0) || (x >= this.getLevel().getLevel()[0].length) || (y >= this.getLevel().getLevel().length)) {
+			return false;
+		} else if (this.getLevel().getLevel()[y][x].getGround() == ApoBotConstants.GROUND_REAL_EMPTY) {
+			return false;
+		}
+		if ((height + 1 >= this.getLevel().getLevel()[y][x].getHeight()) && (height != this.getLevel().getLevel()[y][x].getHeight())) {
+			this.getPlayer().setJumpHeight((this.getLevel().getLevel()[y][x].getHeight() - height) * 8);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public void render(Graphics2D g) {
+		long time = System.nanoTime();
+		
+		BufferedImage iBackground = super.getIBackground();
+		if ((this.bMenu) || (this.bEditor) || (this.bOptions)) {
+			iBackground = super.getIBackgroundOriginal();
+		}
+		if (iBackground != null) {
+			g.drawImage(iBackground, 0, 0, null);
+		}
+		if (this.bMenu) {
+			super.renderLevel(g, super.getILevel(), super.getLevel());
+		} else if (this.bOptions) {
+			this.renderOptions(g);
+		} else if (this.bGame) {
+			super.renderLevel(g, super.getILevel(), super.getLevel());
+			try {
+				this.renderMenu(g);
+			} catch (Exception e) {
+				
+			}
+		} else if (this.bTutorial) {
+			super.renderLevel(g, super.getILevel(), super.getLevel());
+			try {
+				this.renderMenu(g);
+			} catch (Exception e) {
+				
+			}
+			this.tutorial.renderMenuTutorial(g);
+		} else if (this.bEditor) {
+			this.editor.renderEditor(g);
+		}
+		super.renderButtons(g);
+		
+		this.renderMouseImage(g);
+		this.renderWin(g);
+		
+		float renderTime = ApoHelp.round(((System.nanoTime() - time)/1000000f), 2);
+		this.renderFPS(g, renderTime);
+	}
+	
+	private void renderOptions(Graphics2D g) {
+		g.setFont(ApoBotConstants.FONT_WIN);
+		g.setColor(Color.white);
+		this.getImage().drawString(g, this.language.equals("de") ? "Optionen" : "Options", 320, 100, 0);
+		
+		g.setFont(ApoBotConstants.FONT_MENU);
+		this.getImage().drawString(g, (this.language.equals("de") ? "Sprache: " : "Language: ") + this.language.toUpperCase(), 320, 200, 0);
+		this.getImage().drawString(g, (this.language.equals("de") ? "Sound: " : "Sound: ") + (this.sound ? "ON" : "OFF"), 320, 250, 0);
+	}
+	
+	private void renderFPS(Graphics2D g, float renderTime) {
+		g.setColor(Color.black);
+		g.setFont(ApoBotConstants.FONT_MENU);
+		if (this.bShowFps) {
+			super.renderFPS(g, 5, 105);
+			g.drawString(""+renderTime, 5, 125);
+		}
+		this.waitTimeRender.add(renderTime);
+		if (this.waitTimeRender.size() > 3000 / super.getWAIT_TIME_RENDER()) {
+			float all = 0;
+			for (int i = 0; i < this.waitTimeRender.size(); i++) {
+				all += this.waitTimeRender.get(i);
+			}
+			if (all / this.waitTimeRender.size() > super.getWAIT_TIME_RENDER()) {
+				super.setWAIT_TIME_RENDER((int)(all / this.waitTimeRender.size() + 2));
+			} else if ((all / this.waitTimeRender.size() < super.getWAIT_TIME_RENDER() - this.FPS_COUNT - 1) &&
+						(super.getWAIT_TIME_RENDER() - this.FPS_COUNT >= 20)){
+				super.setWAIT_TIME_RENDER(super.getWAIT_TIME_RENDER() - this.FPS_COUNT);
+			} else if ((all / this.waitTimeRender.size() < super.getWAIT_TIME_RENDER() - this.FPS_COUNT - 1)){
+				super.setWAIT_TIME_RENDER(20);
+			}
+			this.waitTimeRender.clear();
+		}
+	}
+	
+	private void renderMenu(Graphics2D g) {
+		g.setFont(ApoBotConstants.FONT_MENU);
+		
+		g.setColor(Color.yellow);
+		if (this.curInMethod == 0) {
+			if ((this.curMainCommand > 0) && (this.curMainCommand < this.mainCommands.length)) {
+				g.drawRect((int)(this.mainCommands[this.curMainCommand - 1].getX() - 1), (int)(this.mainCommands[this.curMainCommand - 1].getY() - 1), (int)(this.mainCommands[this.curMainCommand - 1].getWidth() + 2), (int)(this.mainCommands[this.curMainCommand - 1].getHeight() + 2));
+			}
+		} else if (this.curInMethod == 1) {
+			if ((this.curFunctionOneCommand > 0) && (this.curFunctionOneCommand < this.functionOneCommands.length)) {
+				g.drawRect((int)(this.functionOneCommands[this.curFunctionOneCommand - 1].getX() - 1), (int)(this.functionOneCommands[this.curFunctionOneCommand - 1].getY() - 1), (int)(this.functionOneCommands[this.curFunctionOneCommand - 1].getWidth() + 2), (int)(this.functionOneCommands[this.curFunctionOneCommand - 1].getHeight() + 2));
+			}
+		} else if (this.curInMethod == 2) {
+			if ((this.curFunctionTwoCommand > 0) && (this.curFunctionTwoCommand < this.functionTwoCommands.length)) {
+				g.drawRect((int)(this.functionTwoCommands[this.curFunctionTwoCommand - 1].getX() - 1), (int)(this.functionTwoCommands[this.curFunctionTwoCommand - 1].getY() - 1), (int)(this.functionTwoCommands[this.curFunctionTwoCommand - 1].getWidth() + 2), (int)(this.functionTwoCommands[this.curFunctionTwoCommand - 1].getHeight() + 2));
+			}
+		}
+
+		g.setColor(Color.yellow);
+		g.drawRect((int)(super.getButtons()[this.curCommandDraw + 5].getX() - 1), (int)(super.getButtons()[this.curCommandDraw + 5].getY() - 1), (int)(super.getButtons()[this.curCommandDraw + 5].getWidth() + 2), (int)(super.getButtons()[this.curCommandDraw + 5].getHeight() + 2));
+		
+		g.setColor(Color.black);
+		int x = ApoBotConstants.GAME_WIDTH - 32 * 2 - 2 * 5;
+		int y = 25;
+		this.getImage().drawString(g, "Main-Method", x, y, 0);
+		y += 5;
+		int count = this.mainCommands.length - 1;
+		int curX = ApoBotConstants.GAME_WIDTH - 32 * 4 - 4 * 5;
+		while (count >= 0) {
+			if ((this.mainCommands.length >= this.getLevel().getCommandsMenu() - count) &&
+				(this.mainCommands[this.mainCommands.length - 1 - count].getCommand() > -1)) {
+				g.drawImage(super.getButtons()[5+this.mainCommands[this.mainCommands.length - 1 - count].getCommand()].getIBackground().getSubimage(0, 0, 32, 32), curX, y, null);
+			} else {
+				g.drawImage(this.getIButtonEmpty(), curX, y, null);
+			}
+			curX += 32 * 1 + 1 * 5;
+			count--;
+			if ((count >= 0) && (curX >= ApoBotConstants.GAME_WIDTH)) {
+				curX = ApoBotConstants.GAME_WIDTH - 32 * 4 - 4 * 5;
+				y += 37;
+			}
+		}
+		
+		if (this.functionOneCommands.length > 0) {
+			y += 52;
+			this.getImage().drawString(g, "Function-One", x, y, 0);
+			y += 5;
+			count = this.functionOneCommands.length - 1;
+			curX = ApoBotConstants.GAME_WIDTH - 32 * 4 - 4 * 5;
+			while (count >= 0) {
+				if ((this.functionOneCommands.length >= this.getLevel().getFunctionsOneMenu() - count) &&
+						(this.functionOneCommands[this.functionOneCommands.length - 1 - count].getCommand() != -1)){
+					g.drawImage(super.getButtons()[5+this.functionOneCommands[this.functionOneCommands.length - 1 - count].getCommand()].getIBackground().getSubimage(0, 0, 32, 32), curX, y, null);
+				} else {
+					g.drawImage(this.getIButtonEmpty(), curX, y, null);
+				}
+				curX += 32 * 1 + 1 * 5;
+				count--;
+				if ((count >= 0) && (curX >= ApoBotConstants.GAME_WIDTH)) {
+					curX = ApoBotConstants.GAME_WIDTH - 32 * 4 - 4 * 5;
+					y += 37;
+				}
+			}
+		}
+
+		if (this.functionTwoCommands.length > 0) {
+			y += 52;
+			this.getImage().drawString(g, "Function-Two", x, y, 0);
+			y += 5;
+			count = this.functionTwoCommands.length - 1;
+			curX = ApoBotConstants.GAME_WIDTH - 32 * 4 - 4 * 5;
+			while (count >= 0) {
+				if ((this.functionTwoCommands.length >= this.getLevel().getFunctionsTwoMenu() - count) &&
+						(this.functionTwoCommands[this.functionTwoCommands.length - 1 - count].getCommand() > -1)){
+					g.drawImage(super.getButtons()[5+this.functionTwoCommands[this.functionTwoCommands.length - 1 - count].getCommand()].getIBackground().getSubimage(0, 0, 32, 32), curX, y, null);
+				} else {
+					g.drawImage(this.getIButtonEmpty(), curX, y, null);
+				}
+				curX += 32 * 1 + 1 * 5;
+				count--;
+				if ((count >= 0) && (curX >= ApoBotConstants.GAME_WIDTH)) {
+					curX = ApoBotConstants.GAME_WIDTH - 32 * 4 - 4 * 5;
+					y += 37;
+				}
+			}
+		}
+
+		if (!this.bTutorial) {
+			if (!this.bGo) {
+				g.setColor(Color.white);
+				g.fillRoundRect((int)(super.getButtons()[40].getX() - 3), (int)(super.getButtons()[39].getY() - 5), (int)(115), (int)(84), 30, 30);
+				g.setColor(Color.black);
+				g.drawRoundRect((int)(super.getButtons()[40].getX() - 3), (int)(super.getButtons()[39].getY() - 5), (int)(115), (int)(84), 30, 30);
+
+				this.getImage().drawString(g, ""+ApoBotConstants.LEVELS[this.curLevelString], 60, 50, 0);
+				this.getImage().drawString(g, ""+(super.getCurLevel() + 1)+" / "+this.io.getMaxLevel(), 60, 75, 0);
+			}
+
+			g.setColor(Color.white);
+			g.fillRoundRect((int)(2), (int)(ApoBotConstants.GAME_HEIGHT - 110), (int)(185), (int)(70), 30, 30);
+			g.setColor(Color.black);
+			g.drawRoundRect((int)(2), (int)(ApoBotConstants.GAME_HEIGHT - 110), (int)(185), (int)(70), 30, 30);
+			g.drawString("Level Commands: "+this.levelCommand+" / "+this.totalCommand, 5, ApoBotConstants.GAME_HEIGHT - 90);
+			g.drawString("Level Steps: "+this.levelSteps, 5, ApoBotConstants.GAME_HEIGHT - 70);
+			g.drawString("Total Steps: "+this.totalSteps, 5, ApoBotConstants.GAME_HEIGHT - 50);
+		}
+	}
+
+	private void renderMouseImage(Graphics2D g) {
+		if ((this.mouseX >= 0) && (this.mouseY >= 0) && (this.iMouse != null)) {
+			g.drawImage(this.iMouse, this.mouseX - this.iMouse.getWidth()/2, this.mouseY - this.iMouse.getHeight()/2, null);
+		}
+	}
+	
+	private void renderWin(Graphics2D g) {
+		if (super.isBWin()) {
+			g.setColor(new Color(0, 0, 0));
+			g.fillRoundRect(100, 100, ApoBotConstants.GAME_GAME_WIDTH - 200, ApoBotConstants.GAME_GAME_HEIGHT - 200, 20, 20);
+			g.setColor(Color.white);
+			g.drawRoundRect(100, 100, ApoBotConstants.GAME_GAME_WIDTH - 200, ApoBotConstants.GAME_GAME_HEIGHT - 200, 20, 20);
+
+			g.setFont(ApoBotConstants.FONT_WIN);
+			int x = ApoBotConstants.GAME_GAME_WIDTH/2;
+			this.getImage().drawString(g, "Congratulation", x, 140, 0);
+
+			g.setFont(ApoBotConstants.FONT_MENU);
+			this.getImage().drawString(g, "You passed the level in "+this.levelSteps+" steps", x, 190, 0);
+			this.getImage().drawString(g, "and you needed "+this.levelCommand+" commands", x, 210, 0);
+			this.getImage().drawString(g, "Press a mousebutton to start", x, 350, 0);
+			this.getImage().drawString(g, "the next level", x, 370, 0);
+
+			g.setFont(ApoBotConstants.FONT_WIN);
+			this.getImage().drawString(g, "Points", x, 275, 0);
+			this.getImage().drawString(g, ""+this.point, x, 300, 0);
+
+			g.drawImage(this.getPlayer().getIBackground().getSubimage( (int)(0 * ApoBotConstants.TILE_WIDTH * ApoBotConstants.SIZE ), 2 * ApoBotConstants.TILE_HEIGHT * ApoBotConstants.SIZE, (int)ApoBotConstants.TILE_WIDTH * ApoBotConstants.SIZE, (int)(ApoBotConstants.TILE_HEIGHT * ApoBotConstants.SIZE) ), (int)(x - 100), (int)(240 - this.winUp), null);
+			g.drawImage(this.getPlayer().getIBackground().getSubimage( (int)(0 * ApoBotConstants.TILE_WIDTH * ApoBotConstants.SIZE ), 3 * ApoBotConstants.TILE_HEIGHT * ApoBotConstants.SIZE, (int)ApoBotConstants.TILE_WIDTH * ApoBotConstants.SIZE, (int)(ApoBotConstants.TILE_HEIGHT * ApoBotConstants.SIZE) ), (int)(x + 50), (int)(240 - this.winUp), null);
+		}
+	}
+}
+```

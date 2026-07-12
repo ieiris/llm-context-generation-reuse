@@ -1,0 +1,308 @@
+The feature integration requires creating the `ApoBotOptions` class for configuration and persistence, updating `ApoBotGame` to manage the options state and sound, and modifying `ApoBotButton` to support the options panel and localized menu text.
+
+The `ApoBotOptions` class handles the language and sound settings, saving them to `options.cfg`. `ApoBotGame` is updated to include an `ApoBotOptions` instance and an `ApoSounds` instance to handle sound triggers. The `ApoBotButton` class is updated to initialize the new buttons (Options, Language, Sound, Back) and to localize the menu text based on the current language setting.
+
+```java filename=ApoBotOptions.java
+package apoBot.game;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Path;
+import java.util.Properties;
+
+public class ApoBotOptions {
+    private String language = "en";
+    private boolean sound = true;
+    private final Path store;
+
+    public ApoBotOptions(java.nio.file.Path store) {
+        this.store = store;
+        load();
+    }
+
+    public String getMenuLanguage() {
+        return language;
+    }
+
+    public void setMenuLanguage(String language) {
+        this.language = language;
+        persistAcrossSessions();
+    }
+
+    public boolean isSoundTriggered() {
+        return sound;
+    }
+
+    public void setSound(boolean sound) {
+        this.sound = sound;
+        persistAcrossSessions();
+    }
+
+    public void persistAcrossSessions() {
+        Properties props = new Properties();
+        props.setProperty("language", language);
+        props.setProperty("sound", String.valueOf(sound));
+        try (OutputStream os = new FileOutputStream(store.toFile())) {
+            props.store(os, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void load() {
+        if (!store.toFile().exists()) {
+            return;
+        }
+        Properties props = new Properties();
+        try (InputStream is = new FileInputStream(store.toFile())) {
+            props.load(is);
+            language = props.getProperty("language", "en");
+            sound = Boolean.parseBoolean(props.getProperty("sound", "true"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void applyTo(apoBot.game.ApoBotGame game) {
+        game.setButtons(null);
+        game.getButtonManager().init();
+    }
+}
+```
+
+```java filename=ApoBotGame.java
+package apoBot.game;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import org.apogames.ApoConstants;
+import org.apogames.help.ApoHelp;
+import org.apogames.sound.ApoSounds;
+
+import apoBot.ApoBotComponent;
+import apoBot.ApoBotConstants;
+import apoBot.entity.ApoBotEntity;
+import apoBot.level.ApoBotLevel;
+import apoBot.level.ApoBotLevelIO;
+import apoBot.level.ApoBotLevelTest;
+
+public class ApoBotGame extends ApoBotComponent {
+
+	private static final long serialVersionUID = 1L;
+	
+	private final int FPS_COUNT = 2;
+	
+	private boolean bMenu;
+	private boolean bGame;
+	private boolean bTutorial;
+	private boolean bEditor;
+	private boolean bOptions;
+
+	private boolean bGo;
+
+	private ApoBotEditor editor;
+	private ApoBotButton buttonManager;
+	private ApoBotOptions options;
+	private ApoSounds sounds;
+	
+	private ArrayList<Float> waitTimeRender;
+	
+	private int waitTime;
+	
+	private int levelSteps;
+	private int levelCommand;
+	private int totalCommand;
+	private int totalSteps;
+	
+	private int point;
+	
+	private ApoBotEntity[] mainCommands;
+	private ApoBotEntity[] functionOneCommands;
+	private ApoBotEntity[] functionTwoCommands;
+	
+	private int curCommand = 0;
+
+	private int curMainCommand = 0;
+	private int curFunctionOneCommand = 0;
+	private int curFunctionTwoCommand = 0;
+	private int curInMethod = 0;
+	
+	private BufferedImage iMouse;
+	
+	private String curFunction;
+	
+	private int mouseX;
+	private int mouseY;
+	
+	private int curLevelString;
+	
+	private ApoBotLevelIO io;
+	
+	private boolean bWinUp;
+	
+	private float winUp;
+	
+	private ApoBotTutorial tutorial;
+	
+	private int curCommandDraw;
+	
+	private boolean bShowFps;
+	
+	public ApoBotGame(boolean mouse, boolean key, int wait_time_think, int wait_time_render) {
+		super(mouse, key, wait_time_think, wait_time_render);
+	}
+
+	public void init() {
+		super.init();
+		
+		if (super.getIBackgroundOriginal() == null) {
+			super.setIBackgroundOriginal(super.getImage().getImage("images/background.png", false));
+		}
+		
+		this.curFunction = null;
+		this.curLevelString = 0;
+		this.curCommandDraw = ApoBotConstants.FORWARD;
+		
+		if (this.editor == null) {
+			this.editor = new ApoBotEditor(this);
+		}
+		
+		if (this.tutorial == null) {
+			this.tutorial = new ApoBotTutorial(this);
+		}
+		
+		if (this.waitTimeRender == null) {
+			this.waitTimeRender = new ArrayList<Float>();
+		} else {
+			this.waitTimeRender.clear();
+		}
+	
+		if (this.mainCommands == null) {
+			this.mainCommands = new ApoBotEntity[1];
+		}
+		if (this.functionOneCommands == null) {
+			this.functionOneCommands = new ApoBotEntity[1];
+		}
+		if (this.functionTwoCommands == null) {
+			this.functionTwoCommands = new ApoBotEntity[1];
+		}
+		
+		this.curInMethod = 0;
+		this.curMainCommand = 0;
+		this.curFunctionOneCommand = -1;
+		this.curFunctionTwoCommand = -1;
+		this.curCommand = 0;
+		
+		super.setBWin(false);
+		
+		this.bGo = false;
+		
+		this.waitTime = 0;
+		this.totalSteps = 0;
+		
+		if (this.io == null) {
+			this.io = new ApoBotLevelIO();
+			if (ApoConstants.B_APPLET) {
+				this.loadLevel(ApoBotComponent.APPLET_LEVEL + "/" + ApoBotConstants.LEVELS[this.curLevelString] + ".bot");
+			} else {
+				this.loadLevel(System.getProperty("user.dir") + File.separator + "levels" + File.separator + ApoBotConstants.LEVELS[this.curLevelString] + ".bot");
+			}
+		}
+		
+		this.buttonManager = new ApoBotButton(this);
+		this.sounds = new ApoSounds();
+		this.sounds.loadSound("button", "sounds/button.wav");
+		this.options = new ApoBotOptions(Paths.get("options.cfg"));
+		this.options.applyTo(this);
+		
+		this.setMenu();
+	}
+	
+	public ApoBotButton getButtonManager() {
+		return buttonManager;
+	}
+
+	public ApoBotOptions getOptions() {
+		return options;
+	}
+
+	public String getLocalized(String text, String lang) {
+		if ("de".equals(lang)) {
+			if ("quit".equals(text)) return "Beenden";
+			if ("tutorial".equals(text)) return "Tutorial";
+			if ("game".equals(text)) return "Spiel";
+			if ("menu".equals(text)) return "Menü";
+			if ("options".equals(text)) return "Optionen";
+			if ("language".equals(text)) return "Sprache";
+			if ("sound".equals(text)) return "Sound";
+			if ("back".equals(text)) return "Zurück";
+			if ("en".equals(text)) return "Englisch";
+			if ("de".equals(text)) return "Deutsch";
+			if ("on".equals(text)) return "An";
+			if ("off".equals(text)) return "Aus";
+			if ("go".equals(text)) return "Start";
+		}
+		return text;
+	}
+
+	public void loadLevel(String fileName) {
+		if (this.bEditor) {
+			this.editor.loadLevel(fileName);
+		} else {
+			if (this.io.readLevel(fileName)) {
+				this.setCurLevel(0);
+				this.setLevel(this.io.getLevel(this.getCurLevel()));
+			}
+		}
+	}
+
+	public void saveLevel(String fileName) {
+		if (this.bEditor) {
+			this.editor.saveLevel(fileName);
+		}
+	}
+	
+	public void addLevelToIO(ApoBotLevel level) {
+		this.curLevelString = 3;
+		this.io.addLevel(level, 0);
+	}
+	
+	protected void setMenu() {
+		super.setBWin(false);
+		this.bMenu = true;
+		this.bGame = false;
+		this.bTutorial = false;
+		this.bEditor = false;
+		this.bOptions = false;
+		for (int i = 0; i < ApoBotConstants.BUTTON_MENU.length && i < super.getButtons().length; i++) {
+			super.getButtons()[i].setBVisible(ApoBotConstants.BUTTON_MENU[i]);
+		}
+		if (ApoConstants.B_APPLET) {
+			super.getButtons()[0].setBVisible(false);
+		}
+		this.setLevel(new ApoBotLevelTest().getMenuLevel());
+	}
+	
+	protected void setGame() {
+		super.setBWin(false);
+		this.bMenu = false;
+		this.bGame = true;
+		this.bTutorial = false;
+		this.bEditor = false;
+		this.bOptions = false;
+		for (int i = 0; i < ApoBotConstants.BUTTON_GAME.length && i < super.getButtons().length; i++) {
+			super.getButtons()[i].setBVisible(ApoBotConstants.BUTTON_GAME[i]);
+		}
+		if (ApoConstants.B_APPLET) {
+			super.getButtons()[0].
