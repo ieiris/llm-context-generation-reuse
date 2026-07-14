@@ -194,10 +194,8 @@ A list of 240 records, one per run:
 
 ## 7. Reproducibility notes
 
-- LLM responses are stochastic (temperature 0.7); exact numbers will not reproduce run-for-run, and the model version may drift. `raw_responses/` therefore contains the verbatim outputs behind the reported results.
+- LLM responses are non-deterministic; exact numbers will not reproduce run-for-run, and the model version may drift. `raw_responses/` therefore contains the verbatim outputs behind the reported results.
 - Contexts were extracted automatically with regex-based static analysis, which may introduce noise (a threat to validity discussed in the paper).
-- Test suites are small (16/8/7 unit tests) and cover correctness only — not maintainability, security, or architectural conformance.
-- Semantic correctness is conditional on compilation; conditions in which no run compiled are undefined, and several cell means rest on one or two runs and should be read as indicative.
 
 ## 8. Citation
 
