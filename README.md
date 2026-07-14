@@ -1,170 +1,216 @@
-# Research Files — LLM Code-Generation Pipeline
+# LLM-assisted Code Generation and Reuse: An Exploratory Study on Contextual Information
 
-This repo runs an experiment that asks Gemini to generate Java code for features of
-small game projects (ApoBot, ApoMario, ApoIcarus, ApoSimple), then automatically
-compiles the generated code against the real game source and runs JUnit tests
-against it. Results (compilation status, test pass/fail, error categories, token
-usage, etc.) are recorded to JSON for analysis.
+Replication package for the paper *"LLM-assisted Code Generation and Reuse: An Exploratory Study on Contextual Information"* by Iris Reinhartz-Berger, Nurit Gal-Oz, Marina Litvak, and Aviram Morad, published at **VARIABILITY 2026**.
 
-## Layout
+The study investigates how different **types of contextual information** (structural, behavioral, functional) affect the effectiveness of **LLM-assisted code generation and reuse**, when the produced code must be integrated into an existing Java system rather than written as a standalone artifact. It is instantiated on the [apo-games](https://doi.org/10.1145/3233027.3236403) product-line benchmark (Krüger et al., SPLC 2018).
 
-```
-Pipeline/
-  run.py               Main experiment driver (prompts Gemini, compiles, tests)
-  Context_gen.py        Generates Structural/Functional/Behavioral JSON "context" files from a game's source zip
-  autonomous_runner.py  Re-grades already-generated code against a stricter, hidden "autonomous" test suite
-  invoked_runner.py     Re-grades already-generated code against an "invoked" test suite (ApoMario only)
-  project_config.json   Paths, game project locations, Gemini model/params
-  task_config.json      Per-task target game/package/test-class settings
-  Features.csv          One row per feature/task (description, effort, unit test skeleton, ...)
-  Prompts.csv           One row per prompt variant (task, method, context types, files to attach, prompt text)
-Contexts/                Pre-generated *_Structural.json / *_Functional.json / *_Behavioral.json context files
-Results/                 Output: experiment_results.json, raw_responses/, xlsx report, autonomous/invoked results
-Tests/                   JUnit test sources (regular, Autonomous, Invoked variants) + IntegrationDriver.java
-```
+---
 
-The actual game projects (`ApoBot`, `ApoMario`, `ApoIcarus`, `ApoSimple`) are **not**
-part of this repo — they live in an external directory pointed to by
-`APOGAMES_PROJECT_BASE` (see below).
+## 1. Study at a glance
 
-## Prerequisites
+| Dimension | Levels |
+|---|---|
+| **Tasks** (3) | Achievements (ApoIcarus → ApoMario), Options (ApoSimple → ApoBot), Highscore (ApoIcarus → ApoMario) |
+| **Strategies** (2) | Generation (implement the feature from scratch), Reuse (adapt the source game's feature implementation) |
+| **Contexts** (8) | None, S, F, B, S+F, S+B, F+B, S+F+B |
+| **Repetitions** | 5 runs per condition |
+| **Total** | 3 × 2 × 8 × 5 = **240 single-shot runs** |
+| **Model** | Gemini 3.1 Flash Lite (temperature 0.7) |
+| **Dependent variables** | Syntactic validity (project compiles) and semantic correctness (percentages of automated tests passed, conditional on compilation) |
 
-- Python 3.10+
-- `google-genai` Python package: `pip install google-genai`
-- A JDK on `PATH` (`javac`/`java`) — used to compile and run generated code
-- A Gemini API key
-- The game projects (ApoBot/ApoMario/ApoIcarus/ApoSimple source trees) available on disk
+Context types:
 
-`run.py` auto-downloads `junit-4.13.2.jar` and `hamcrest-core-1.3.jar` into the
-configured `lib_dir` on first run if they aren't already there (requires internet
-access).
+- **S — Structural**: class hierarchy, parent, fields, constants, assets, method signatures.
+- **B — Behavioral**: per-method call graphs, logic hints, numeric literals, execution flow.
+- **F — Functional**: inferred role tags, method capabilities, documented intent.
 
-## Configuration
+---
 
-### Environment variables
+## 2. Repository structure
 
 ```
-export GEMINI_API_KEY="your-key-here"
-export APOGAMES_PROJECT_BASE="/path/to/folder/containing/ApoBot/ApoMario/ApoIcarus/ApoSimple"
+.
+├── Pipeline/                       # experiment code and inputs
+│   ├── Context_gen.py              # static-analysis context extractor (S/F/B JSONs + feature slicing)
+│   ├── run.py                      # main driver: prompt → Gemini → integrate → compile → JUnit
+│   ├── autonomous_runner.py        # supplementary grading: feature integrated into the live game loop
+│   ├── invoked_runner.py           # supplementary grading: feature integrated into (invoked from) real game objects
+│   ├── project_config.json         # model, #runs, paths to games/contexts/libs
+│   ├── task_config.json            # per-task target game, package, test class
+│   ├── Features.csv                # the 3 feature specifications (descriptions, test skeletons)
+│   └── Prompts.csv                 # the 48 assembled prompts (one per condition) + attachment refs
+├── Contexts/                       # extracted typed contexts for the two target games
+│   ├── ApoBot_{Structural,Functional,Behavioral}.json
+│   └── ApoMario_{Structural,Functional,Behavioral}.json
+├── Tests/                          # evaluation suites
+│   ├── ApoMarioAchievements{Test, InvokedTest, AutonomousTest}.java
+│   ├── ApoMarioHighscore{Test, InvokedTest, AutonomousTest}.java
+│   ├── ApoBotOptions{Test, AutonomousTest}.java
+│   └── IntegrationDriver.java		# integration test driver
+└── Results/                        # outputs of the reported experiment
+    ├── raw_responses/p{ID}_r{RUN}.txt   # verbatim LLM responses (240 files)
+    ├── experiment_results.json     # 240 runs: prompts, tokens, compilation, tests, error categories
+    ├── autonomous_results.json     # supplementary wiring evaluation
+    └── invoked_results.json        # supplementary coupling evaluation
 ```
 
-`run.py` reads `PROJECT_BASE` from `APOGAMES_PROJECT_BASE`, then joins it with the
-relative paths configured in `Pipeline/project_config.json` (`game_projects`,
-`features_csv`, `prompts_csv`, `context_jsons_dir`, `output_dir`, `lib_dir`).
+### Not included
 
-### `Pipeline/project_config.json`
+The apo-games sources themselves (`ApoBot`, `ApoMario`, `ApoIcarus`, `ApoSimple`) are **not** shipped here — obtain them from the apo-games benchmark and place them under a project base directory (see below). 
 
-Controls where inputs live, which game projects are available, and Gemini call
-parameters (`num_runs`, `delay_between_calls`, `gemini_model`, `temperature`,
-`max_output_tokens`). Adjust `game_projects` to match the folder names under
-`APOGAMES_PROJECT_BASE`, and `context_jsons_dir`/`output_dir`/`lib_dir` if you want
-different locations than the defaults (`contexts`, `Results`, `lib` — note the repo's
-context folder is actually named `Contexts`, so update this value or rename the
-folder to match on case-sensitive filesystems).
+---
 
-### `Pipeline/task_config.json`
+## 3. Prerequisites
 
-One entry per task (e.g. `Options`, `Highscore`, `Achievements`) describing which
-game the generated code targets, the package/directory it should land in, the name
-of the JUnit test class to compile against, and any import patterns that should be
-stripped from copied source before compiling.
-
-### `Pipeline/Features.csv` / `Pipeline/Prompts.csv`
-
-- **Features.csv** — one row per feature/task: description, detailed description,
-  high-level test cases, and a JUnit "unit tests skeleton" (`unit_tests`) that gets
-  compiled against the generated code.
-- **Prompts.csv** — one row per prompt variant: `Task`, `Method`, `Source`/`Target`
-  game, the `Prompt` text itself, which context types to attach (`Structural`,
-  `Functional`, `Behavioral` columns — any non-empty value names the source game
-  whose context JSON to attach), and `Reuse Files`/`Source Code` (semicolon- or
-  newline-separated `Game.ClassName` refs) of existing `.java` files to attach as-is.
-
-## Running the main experiment
+- **Python** 3.14.2 
+- **JDK** 
+- A **Gemini API key**.
+- Internet access on the first run: `run.py` downloads `junit-4.13.2.jar` and `hamcrest-core-1.3.jar` from Maven Central into the configured `lib_dir` if they are not already there.
 
 ```bash
-cd Pipeline
-python run.py
+pip install google-genai
 ```
 
-This will, in order:
-1. Validate the API key, `javac`, config files, game project paths, and CSVs.
-2. Download JUnit/Hamcrest jars if missing.
-3. Load `Features.csv` and `Prompts.csv`, pre-upload every referenced context JSON
-   and source `.java` file to the Gemini Files API.
-4. For each prompt × `num_runs`, send the prompt (+ attachments) to Gemini, extract
-   any ` ```java filename=X.java ` code blocks from the response, copy the target
-   game project to a temp dir, drop the generated file(s) in, auto-fix/inject
-   imports, compile with `javac`, compile the task's JUnit test class against it,
-   and run the tests with `JUnitCore`.
-5. Append one JSON entry per (prompt, run) to `Results/experiment_results.json`
-   after every call, and save the raw model response to
-   `Results/raw_responses/p<id>_r<run>.txt`.
+## 4. Setup
 
-The run is resumable: it skips any `(prompt_id, run)` pair already present in
-`experiment_results.json`, so re-running `run.py` continues where it left off.
+1. Lay out a project base directory that contains the game sources, the libraries, and this package's inputs:
 
-Each result entry records: compilation success/errors (with an auto-classified
-`primary_error` category), per-test pass/fail with failure messages, response
-timing/length, token usage, and whether the response was truncated.
+```
+$APOGAMES_PROJECT_BASE/
+├── ApoBot/  ApoMario/  ApoIcarus/  ApoSimple/    # game sources (not included)
+├── lib/                                          # JUnit + Hamcrest jars (auto-downloaded on first run)
+├── Features.csv, Prompts.csv                     # from Pipeline/
+├── contexts/                                     # from Contexts/  (name must match project_config.json)
+└── Results/                                      # output dir (raw_responses/ is created inside)
+```
 
-## Generating/updating context files
+Paths are resolved from `Pipeline/project_config.json` relative to `APOGAMES_PROJECT_BASE`. Note that `context_jsons_dir` is declared there as `contexts` (lowercase) — on case-sensitive file systems, either rename the directory or edit the config.
 
-`Context_gen.py` parses a game's `.java` sources (from a zip) with regexes to build
-per-class metadata (fields, methods, signatures, call graphs, javadocs, roles),
-then splits it into `Structural` / `Functional` / `Behavioral` JSON views used as
-prompt context. Run it directly:
+2. Export the environment variables and point `run.py` at the two config files (the `PROJECT_CONFIG_FILE` and `TASK_CONFIG_FILE` constants at the top of the script are intentionally left blank):
 
 ```bash
-# Full context + all Structural/Functional/Behavioral subtype files
-python Pipeline/Context_gen.py generate ApoMario /path/to/ApoMario.zip Contexts/
-
-# Combine specific subtypes (e.g. S_hierarchy + F_roles) into one file
-python Pipeline/Context_gen.py combine ApoMario Contexts/ApoMario_Context.json --subtypes S_hierarchy F_roles --out Contexts/
-
-# Slice the context down to a set of classes (+ their dependencies)
-python Pipeline/Context_gen.py slice Contexts/ApoMario_Context.json HighscorePanel --out Contexts/slice.json
+export GEMINI_API_KEY="..."
+export APOGAMES_PROJECT_BASE="/path/to/project_base"
 ```
-
-The resulting `<Game>_Structural.json` / `<Game>_Functional.json` /
-`<Game>_Behavioral.json` files are what `Prompts.csv`'s Structural/Functional/
-Behavioral columns reference (matched by game name).
-
-## Grading generated code further (optional, after `run.py`)
-
-`autonomous_runner.py` and `invoked_runner.py` re-run already-generated,
-already-compiled code from `Results/experiment_results.json` against a second,
-stricter set of hidden tests (the `*AutonomousTest.java` / `*InvokedTest.java`
-files in `Tests/`). Both scripts have their path variables hardcoded as empty
-strings at the top of the file (`BASE`, `RESULTS_DIR`, `TESTS_DIR`/`INVOKED_DIR`,
-`GEN`, `LIB`, etc.) — fill these in before running, e.g.:
 
 ```python
-# autonomous_runner.py
-BASE        = "/path/to/game/projects/root"
-RESULTS_DIR = "/path/to/Results"
-TESTS_DIR   = "/path/to/Tests"
-GEN         = "/path/to/Pipeline/run.py"
-LIB         = "/path/to/Pipeline/lib"
+PROJECT_CONFIG_FILE = "/path/to/Pipeline/project_config.json"
+TASK_CONFIG_FILE    = "/path/to/Pipeline/task_config.json"
 ```
 
-Then run:
+No manual test setup is needed: the unit-test suite of each task is stored in the `Unit tests skeleton` column of `Features.csv`, and `run.py` materializes it inside the temporary project as `<test_class>.java` (`task_config.json`: `ApoBotOptionsTest`, `ApoMarioHighscoreTest`, `ApoMarioAchievementsTest`), fixing its package and imports on the fly. The same suites are also kept as readable standalone files in `Tests/`.
+
+## 5. Running
+
+### 5.1 Regenerating the typed contexts (optional — the JSONs are provided)
 
 ```bash
-python Pipeline/autonomous_runner.py   # writes Results/autonomous_results.json
-python Pipeline/invoked_runner.py      # writes Results/invoked_results.json (ApoMario Highscore/Achievements only)
+# full context + the Structural / Functional / Behavioral views
+python Pipeline/Context_gen.py generate ApoMario /path/to/ApoMario.zip Contexts/
+
+# merge selected subtypes into a single context file
+python Pipeline/Context_gen.py combine ApoMario Contexts/ApoMario_Context.json --subtypes S_hierarchy F_roles --out Contexts/
+
+# narrow a context to a set of classes and their dependencies
+python Pipeline/Context_gen.py slice Contexts/ApoMario_Context.json Highscore --out Contexts/slice.json
 ```
 
-Both only process entries whose `compilation_success` was already `true` in
-`experiment_results.json`, and print a pass-rate summary broken down by task ×
-context type (and, for `invoked_runner.py`, by individual test).
+`generate` parses every `.java` file, propagates inherited fields, and writes `<Game>_{Context,Structural,Functional,Behavioral}.json`. `slice` narrows a context to the classes relevant to a feature (used to build the reuse attachments), and `combine` merges selected subtypes into one file.
 
-## Output files
+### 5.2 Main experiment
+
+```bash
+python Pipeline/run.py
+```
+
+For each of the 48 prompts × 5 runs, the script: assembles the prompt text with its context JSONs and Java attachments (Gemini Files API), calls the model, extracts the ```java fenced files from the response, sanitizes them (package fixing, import auto-fix/injection, reserved-keyword and brace checks), copies the target game into a temp workspace, integrates the generated files, compiles with `javac`, runs the task's JUnit suite, and appends one record to `Results/experiment_results.json`.
+
+The run is **resumable**: completed `(prompt_id, run)` pairs found in `experiment_results.json` are skipped, so the script can be interrupted and restarted. Rate limiting (HTTP 429) is retried with exponential backoff, and `delay_between_calls` (7 s) throttles requests.
+
+No manual post-processing, correction, or iterative prompting is performed — this is a deliberately single-shot setting.
+
+### 5.3 Supplementary integration grading
+
+Beyond the unit tests reported in the paper, two further suites grade whether the feature is actually *wired into* the game rather than merely present as a class. Both scripts re-grade only the runs that compiled and require their path constants (`BASE`, `RESULTS_DIR`, `TESTS_DIR`, `GEN`, `LIB`, …) to be filled in at the top of the file:
+
+```python
+# e.g. autonomous_runner.py
+BASE        = "/path/to/project_base"   # holds ApoBot/, ApoMario/, ...
+RESULTS_DIR = "/path/to/Results"        # experiment_results.json + raw_responses/
+TESTS_DIR   = "/path/to/Tests"          # *AutonomousTest.java, IntegrationDriver.java
+GEN         = "/path/to/Pipeline/run.py"
+LIB         = "/path/to/lib"
+```
+
+```bash
+python Pipeline/autonomous_runner.py   # *AutonomousTest: feature reacts to the live game loop (via IntegrationDriver)
+                                       # → Results/autonomous_results.json
+python Pipeline/invoked_runner.py      # *InvokedTest: feature invoked with the real game's objects/values
+                                       # → Results/invoked_results.json (ApoMario Highscore/Achievements only)
+```
+
+Both print a pass-rate summary broken down by task × context type.
+
+## 6. Data formats
+
+### `Pipeline/Prompts.csv`
+
+One row per condition; the row index is the `prompt_id` used throughout the results (`0–47`). Columns: `Task, Method, Source, Target, Prompt, Structural, Functional, Behavioral, Reuse Files, Source Code`. The three context columns hold the *game name* whose context JSON is attached (empty = that context type is not supplied), which is how the eight context configurations are encoded. `Reuse Files` and `Source Code` list `Game.Class` references that are uploaded as attachments.
+
+Prompt-ID layout (each block of 8 walks the contexts None, S, F, B, S+B, F+B, S+F, S+F+B):
+
+| IDs | Task | Strategy |
+|---|---|---|
+| 0–7 | Highscore | Reuse |
+| 8–15 | Highscore | Generation |
+| 16–23 | Achievements | Reuse |
+| 24–31 | Achievements | Generation |
+| 32–39 | Options | Reuse |
+| 40–47 | Options | Generation |
+
+### `Results/experiment_results.json`
+
+A list of 240 records, one per run:
+
+| Field | Meaning |
+|---|---|
+| `prompt_id`, `run` | condition identifier and repetition (1–5); the pair keys `raw_responses/p{prompt_id}_r{run}.txt` |
+| `task`, `method`, `source_game`, `target_game` | condition metadata |
+| `context_label`, `context_types` | e.g. `"S+F"`, `["S","F"]` |
+| `prompt_length`, `prompt_tokens`, `output_tokens`, `thinking_tokens`, `response_time_sec`, `finish_reason`, `response_truncated` | delivery metrics |
+| `generated_files` | class files extracted from the response |
+| `compilation_success` | **syntactic validity** |
+| `compile_error_type`, `primary_error`, `error_categories`, `total_errors`, `compilation_errors` | categorized `javac` diagnostics (e.g. missing symbols, type mismatches, unresolved references) |
+| `tests_run`, `tests_passed`, `tests_failed`, `test_results` | **semantic correctness**, per-test PASS/FAIL |
+
+`Results/experiment_results_report.xlsx` aggregates these into the sheets *Overview, Compile Rate, Pass Rate, Reuse vs Generation, Compile Failure Analysis, Test Failure Analysis, Per-Test Breakdown, Tier Breakdown, Context Effect, Delivery & Errors, Raw Data*.
+
+### Where each output comes from
 
 | File | Produced by | Contents |
 |---|---|---|
-| `Results/experiment_results.json` | `run.py` | Per (prompt, run): compile/test outcome, error categories, timing, tokens |
-| `Results/raw_responses/p<id>_r<run>.txt` | `run.py` | Full raw Gemini response text |
-| `Results/autonomous_results.json` | `autonomous_runner.py` | Pass/fail against hidden autonomous tests |
-| `Results/invoked_results.json` | `invoked_runner.py` | Pass/fail against invoked tests |
-| `Results/experiment_results_report.xlsx` | (manual/external analysis) | Spreadsheet summary of results |
+| `Results/experiment_results.json` | `run.py` | Per (prompt, run): compilation and test outcome, error categories, timing, tokens |
+| `Results/raw_responses/p{ID}_r{RUN}.txt` | `run.py` | Verbatim Gemini response |
+| `Results/autonomous_results.json` | `autonomous_runner.py` | Wiring outcome against the autonomous suite (compiled runs only) |
+| `Results/invoked_results.json` | `invoked_runner.py` | Coupling outcome against the invoked suite (compiled runs only) |
+| `Results/experiment_results_report.xlsx` | offline analysis | Aggregated tables behind the paper |
+
+## 7. Reproducibility notes
+
+- LLM responses are stochastic (temperature 0.7); exact numbers will not reproduce run-for-run, and the model version may drift. `raw_responses/` therefore contains the verbatim outputs behind the reported results.
+- Contexts were extracted automatically with regex-based static analysis, which may introduce noise (a threat to validity discussed in the paper).
+- Test suites are small (16/8/7 unit tests) and cover correctness only — not maintainability, security, or architectural conformance.
+- Semantic correctness is conditional on compilation; conditions in which no run compiled are undefined, and several cell means rest on one or two runs and should be read as indicative.
+
+## 8. Citation
+
+```bibtex
+@inproceedings{ReinhartzBerger2026LLMContext,
+  author    = {Reinhartz-Berger, Iris and Gal-Oz, Nurit and Litvak, Marina and Morad, Aviram},
+  title     = {{LLM}-assisted Code Generation and Reuse: An Exploratory Study on Contextual Information},
+  booktitle = {VARIABILITY 2026},
+  year      = {2026}
+}
+```
+
+The apo-games benchmark should be cited as: J. Krüger, W. Fenske, T. Thüm, D. Aporius, G. Saake, T. Leich. *Apo-games: A Case Study for Reverse Engineering Variability from Cloned Java Variants*. SPLC 2018, 251–256.
