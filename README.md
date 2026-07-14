@@ -183,8 +183,6 @@ A list of 240 records, one per run:
 | `compile_error_type`, `primary_error`, `error_categories`, `total_errors`, `compilation_errors` | categorized `javac` diagnostics (e.g. missing symbols, type mismatches, unresolved references) |
 | `tests_run`, `tests_passed`, `tests_failed`, `test_results` | **semantic correctness**, per-test PASS/FAIL |
 
-`Results/experiment_results_report.xlsx` aggregates these into the sheets *Overview, Compile Rate, Pass Rate, Reuse vs Generation, Compile Failure Analysis, Test Failure Analysis, Per-Test Breakdown, Tier Breakdown, Context Effect, Delivery & Errors, Raw Data*.
-
 ### Where each output comes from
 
 | File | Produced by | Contents |
@@ -193,7 +191,6 @@ A list of 240 records, one per run:
 | `Results/raw_responses/p{ID}_r{RUN}.txt` | `run.py` | Verbatim Gemini response |
 | `Results/autonomous_results.json` | `autonomous_runner.py` | Wiring outcome against the autonomous suite (compiled runs only) |
 | `Results/invoked_results.json` | `invoked_runner.py` | Coupling outcome against the invoked suite (compiled runs only) |
-| `Results/experiment_results_report.xlsx` | offline analysis | Aggregated tables behind the paper |
 
 ## 7. Reproducibility notes
 
