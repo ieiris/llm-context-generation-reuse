@@ -17,7 +17,8 @@ The study investigates how different **types of contextual information** (struct
 | **Total** | 3 × 2 × 8 × 5 = **240 single-shot runs** |
 | **Model** | Gemini 3.1 Flash Lite (temperature 0.7) |
 | **Dependent variables** | Syntactic validity (project compiles) and semantic correctness (percentages of automated tests passed, conditional on compilation) |
-
+| **Tests** | Unit tests (`Test`) and integration tests (`InvokedTest`: use of real game objects and values; `AutonomousTest`: activation through the live game loop) |
+ 
 Context types:
 
 - **S — Structural**: class hierarchy, parent, fields, constants, assets, method signatures.
@@ -131,7 +132,7 @@ No manual post-processing, correction, or iterative prompting is performed — t
 
 ### 5.3 Supplementary integration grading
 
-Beyond the unit tests reported in the paper, two further suites grade whether the feature is actually *wired into* the game rather than merely present as a class. Both scripts re-grade only the runs that compiled and require their path constants (`BASE`, `RESULTS_DIR`, `TESTS_DIR`, `GEN`, `LIB`, …) to be filled in at the top of the file:
+In addition to the unit tests, the repository stores integration-oriented evaluations separately: InvokedTest checks whether the feature uses real game objects and values, while AutonomousTest checks whether it is activated through the live game loop. Both scripts re-grade only the runs that compiled and require their path constants (`BASE`, `RESULTS_DIR`, `TESTS_DIR`, `GEN`, `LIB`, …) to be filled in at the top of the file:
 
 ```python
 # e.g. autonomous_runner.py
@@ -189,8 +190,8 @@ A list of 240 records, one per run:
 |---|---|---|
 | `Results/experiment_results.json` | `run.py` | Per (prompt, run): compilation and test outcome, error categories, timing, tokens |
 | `Results/raw_responses/p{ID}_r{RUN}.txt` | `run.py` | Verbatim Gemini response |
-| `Results/autonomous_results.json` | `autonomous_runner.py` | Wiring outcome against the autonomous suite (compiled runs only) |
-| `Results/invoked_results.json` | `invoked_runner.py` | Coupling outcome against the invoked suite (compiled runs only) |
+| `Results/autonomous_results.json` | `autonomous_runner.py` | Integration outcome against the autonomous suite (activation through the live game loop; compiled runs only) |
+| `Results/invoked_results.json` | `invoked_runner.py` | Integration outcome against the invoked suite (use of real game objects and values; compiled runs only) |
 
 ## 7. Reproducibility notes
 
