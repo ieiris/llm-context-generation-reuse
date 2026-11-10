@@ -50,7 +50,10 @@ EXPECTED = {
     "OneLetter.java":            _header("A", "org.example.game", "class", "Base", []),
     "Annotated.java":            _header("Annotated", "org.example.ui", "class", "JPanel", []),
     "NoType.java":               None,
-    "Broken.java":               _header("Broken", "org.example.game", "class", "Base", ["Runnable"]),
+    # Annotation types (@interface) are not context modules in stage A (known difference A1-L4).
+    "AnnotationType.java":       None,
+    "AnnotationTypeSpaced.java": None,
+    "Broken.java":              _header("Broken", "org.example.game", "class", "Base", ["Runnable"]),
 }
 
 # Intentional fixes of regex bugs: the only samples where AST may differ from regex.
@@ -84,6 +87,12 @@ KNOWN_DEVIATIONS = {
     "OneLetter.java": {
         "regex": None,
         "reason": "CLASS_PAT requires a name of 2+ chars starting with A-Z, so the file is dropped",
+    },
+    # Known difference, not a fix (A1-L4, to be decided in stage B): regex skips the usual
+    # `@interface` (no whitespace before `interface`), same as AST, but takes `@ interface`.
+    "AnnotationTypeSpaced.java": {
+        "regex": _header("AnnotationTypeSpaced", "org.example.game", "abstract interface", None, []),
+        "reason": "CLASS_PAT matches `interface` after whitespace, so `@ interface` looks like an interface",
     },
 }
 
