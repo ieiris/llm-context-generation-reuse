@@ -1,0 +1,3 @@
+# Extra dependencies for the AST parser work (Pipeline/compare_contexts.py, Pipeline/tests/).
+# Install: python -m pip install -r Pipeline/requirements-ast.txt
+tiktoken==0.14.0
