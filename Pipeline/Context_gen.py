@@ -161,7 +161,7 @@ def analyze_java_file(content, filename):
         constants[cname] = {"type": ctype, "value": cvalue}
 
     # Assets
-    assets = list(set(ASSET_PAT.findall(content)))
+    assets = list(dict.fromkeys(ASSET_PAT.findall(content)))
 
     methods = {}
 
@@ -178,7 +178,7 @@ def analyze_java_file(content, filename):
         
         calls = extract_method_calls(body)
         logic = extract_logic_hints(body, known_fields)
-        numerics = list(set(NUMERIC_PAT.findall(body)))[:6]
+        numerics = list(dict.fromkeys(NUMERIC_PAT.findall(body)))[:6]
         javadoc = get_javadoc_before(content, m.start())
 
         mods = [mod for mod in ('public','protected','private') if mod in raw_mods]
@@ -219,7 +219,7 @@ def analyze_java_file(content, filename):
         
         calls     = extract_method_calls(body)
         logic     = extract_logic_hints(body, known_fields)
-        numerics  = list(set(NUMERIC_PAT.findall(body)))[:6]
+        numerics  = list(dict.fromkeys(NUMERIC_PAT.findall(body)))[:6]
         javadoc   = get_javadoc_before(content, m.start())
 
         methods[mname] = {
