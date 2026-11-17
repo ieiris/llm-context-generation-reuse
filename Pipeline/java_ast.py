@@ -10,8 +10,8 @@ Stage A of the migration: reproduce the regex rules, except for documented regex
 Filled so far:
     A1  module, package, type, parent, implements
     A2  fields, constants, assets
+    A3  methods and constructors (signatures, javadoc; bodies are empty lists)
 To do:
-    A3  methods and constructors (signatures, javadoc)
     A4  calls
     A5  logic_hints, values_hint
 
@@ -378,6 +378,217 @@ def extract_assets(root, src):
     return list(dict.fromkeys(found))
 
 
+# --- A3: methods and constructors (without bodies) ---------------------------------
+#
+# Methods are taken from the main type, including its nested, enum, anonymous and local classes
+# (as regex, B3), but not from other top-level types, comments or string literals (fixes A3-n).
+# The dict is built in three passes in the regex order, because the key order goes into
+# `method_signatures` of S:
+#   1. constructors of the main type      key `Name_constructor_<number of params>`
+#   2. methods with a body                key = name; abstract False
+#   3. methods without a body + `abstract` key = name; abstract True, overwrite pass 2
+# A repeated key keeps its first position and gets the last value (overloads and constructors of
+# the same arity overwrite each other, as regex; B2). A method named like the module is skipped.
+# Interface methods without `abstract` and `native` methods are not taken (as regex, B1).
+#
+# `modifiers` and `return_type` are written correctly (decision 8, 16.11): the model does not see
+# them. `signature` and `javadoc` are visible to the model and repeat regex (_regex_compat_*).
+
+# Same pattern as Context_gen.JAVADOC_PAT (a test checks this).
+JAVADOC_PAT = re.compile(r'/\*\*.*?\*/', re.DOTALL)
+_JAVADOC_WINDOW = 400      # Context_gen.get_javadoc_before: characters searched before the match
+_JAVADOC_MAX = 120         # ... and length of the cleaned javadoc
+_JAVADOC_JUNK = re.compile(r'[\n\r\t/*]+')
+# METHOD_CONCRETE_PAT: the modifiers and the return type are made of these characters only.
+_CONCRETE_PREFIX_CHAR = re.compile(r'[\w<>\[\].,\s]')
+# METHOD_ABSTRACT_PAT: the match starts with a chain of these words before `abstract`.
+_ABSTRACT_CHAIN_WORD = re.compile(r'(?:public|protected|abstract|static)\s+$')
+_ABSTRACT_CHAIN_LOOKBACK = 200
+# METHOD_ABSTRACT_PAT: modifiers that reach the abstract signature, in this order.
+_ABSTRACT_SIGNATURE_MODIFIERS = ("public", "protected", "static")
+PARAM_TYPES = ("formal_parameter", "spread_parameter", "receiver_parameter")
+
+
+def _char_pos(src, content, byte_pos):
+    """Node offsets are bytes in UTF-8; the regex parser works with character offsets."""
+    if len(src) == len(content):        # ASCII only
+        return byte_pos
+    return len(src[:byte_pos].decode("utf-8"))
+
+
+def _child_of_type(node, type_):
+    return next((c for c in node.children if c.type == type_), None)
+
+
+def _params(decl, src):
+    """Parameter texts without comments, whitespace collapsed (= Context_gen.clean_params on
+    normal code). Fix (A3-n): regex keeps comments that are inside the parameter list."""
+    params = decl.child_by_field_name("parameters")
+    return [_clean_node(p, src) for p in params.named_children if p.type in PARAM_TYPES]
+
+
+def _return_type(decl, src):
+    """Declared return type; C-style brackets after the parameters (`int foo()[]`) are added."""
+    text = _clean_node(decl.child_by_field_name("type"), src)
+    dims = decl.child_by_field_name("dimensions")
+    return text + (_clean_node(dims, src).replace(" ", "") if dims is not None else "")
+
+
+def _type_parameters(decl, src):
+    tp = decl.child_by_field_name("type_parameters")
+    return _clean_node(tp, src) if tp is not None else ""
+
+
+def _has_override(decl, src):
+    mods = _child_of_type(decl, "modifiers")
+    return mods is not None and any(
+        c.type == "marker_annotation" and node_text(c.child_by_field_name("name"), src) == "Override"
+        for c in mods.children)
+
+
+def _regex_compat_signature(decl, tokens, name, params, src):
+    """regex compat -> B7. Signature of a method with a body as METHOD_CONCRETE_PAT builds it: its
+    return type group starts after `@` of the annotation, so `Override` comes first
+    (`Override public void init()`). Modifiers in source order, then `<T>` and the return type.
+    Fix (A3-n): other marker annotations (`@Deprecated`), comments and words of a line comment
+    before the method do not get into the signature."""
+    words = (["Override"] if _has_override(decl, src) else []) + tokens
+    words += [w for w in (_type_parameters(decl, src), _return_type(decl, src)) if w]
+    return f"{' '.join(words)} {name}({', '.join(params)})"
+
+
+def _regex_compat_abstract_signature(decl, tokens, name, params, src):
+    """regex compat -> B7. Signature of an abstract method as Context_gen builds it: `abstract`,
+    then public / protected / static in this fixed order, then `<T>` and the return type. Without
+    other modifiers there are two spaces after `abstract` (`abstract  int score()`)."""
+    mods = " ".join(m for m in _ABSTRACT_SIGNATURE_MODIFIERS if m in tokens)
+    ret = " ".join(w for w in (_type_parameters(decl, src), _return_type(decl, src)) if w)
+    return f"abstract {mods} {ret} {name}({', '.join(params)})".strip()
+
+
+def _concrete_match_start(content, name_pos):
+    """Where METHOD_CONCRETE_PAT starts its match: right after the last character before the name
+    that cannot be part of the modifiers / return type group (`@`, `)`, `/`, `;`, `{`, `}`, ...)."""
+    pos = name_pos
+    while pos > 0 and _CONCRETE_PREFIX_CHAR.match(content, pos - 1):
+        pos -= 1
+    return pos
+
+
+def _constructor_match_start(content, access_pos, access_end, name_pos):
+    """Where CONSTRUCTOR_PAT `(?:^|\\s)((?:public|protected|private)\\s+)?Name(` starts its match:
+    the whitespace character before the access modifier (or before the name if there is no
+    modifier right before it)."""
+    if (access_pos is not None and access_end < name_pos and content[access_end:name_pos].isspace()
+            and (access_pos == 0 or content[access_pos - 1].isspace())):
+        return max(access_pos - 1, 0)
+    if name_pos > 0 and content[name_pos - 1].isspace():
+        return name_pos - 1
+    return name_pos
+
+
+def _abstract_match_start(content, abstract_pos):
+    """Where METHOD_ABSTRACT_PAT starts its match: the first word of the chain
+    `public|protected|abstract|static` (separated by whitespace) that ends with `abstract`."""
+    pos = abstract_pos
+    while True:
+        m = _ABSTRACT_CHAIN_WORD.search(content, max(0, pos - _ABSTRACT_CHAIN_LOOKBACK), pos)
+        if m is None:
+            return pos
+        pos = m.start()
+
+
+def _regex_compat_javadoc(content, match_start):
+    """regex compat -> B10 (Context_gen.get_javadoc_before): the last `/** */` that lies entirely in
+    the 400 characters before the position where the regex match starts, cleaned, at most 120
+    characters. It may belong to a neighbouring method, and a long javadoc is not found."""
+    preceding = content[max(0, match_start - _JAVADOC_WINDOW):match_start]
+    matches = list(JAVADOC_PAT.finditer(preceding))
+    if not matches:
+        return ""
+    return _JAVADOC_JUNK.sub(" ", matches[-1].group(0)).strip()[:_JAVADOC_MAX]
+
+
+def _method_entry(abstract, modifiers, return_type, params, signature, javadoc):
+    """Same keys in the same order as Context_gen; the body fields are filled in A4 / A5."""
+    return {
+        "abstract": abstract,
+        "modifiers": modifiers,
+        "return_type": return_type,
+        "params": params,
+        "signature": signature,
+        "javadoc": javadoc,
+        "calls": [],
+        "logic_hints": [],
+        "values_hint": [],
+    }
+
+
+def _modifier_node_pos(decl, keywords, src, content):
+    """(start, end) character offsets of the first modifier token of `decl` in `keywords`,
+    or (None, None)."""
+    mods = _child_of_type(decl, "modifiers")
+    if mods is not None:
+        for c in mods.children:
+            if c.type in keywords:
+                return _char_pos(src, content, c.start_byte), _char_pos(src, content, c.end_byte)
+    return None, None
+
+
+def extract_methods(type_node, module, src, content):
+    """Methods and constructors of the main type, as Context_gen.analyze_java_file builds them
+    (three passes, see the comment above); `calls`, `logic_hints`, `values_hint` are empty
+    until A4 / A5."""
+    decls = list(_iter_nodes(type_node, ("constructor_declaration", "method_declaration")))
+    methods = {}
+
+    for decl in decls:                                       # pass 1: constructors
+        if decl.type != "constructor_declaration":
+            continue
+        name_node = decl.child_by_field_name("name")
+        if node_text(name_node, src) != module:
+            continue
+        tokens = _modifier_tokens(decl)
+        params = _params(decl, src)
+        access_pos, access_end = _modifier_node_pos(decl, ACCESS_MODIFIERS, src, content)
+        start = _constructor_match_start(content, access_pos, access_end,
+                                         _char_pos(src, content, name_node.start_byte))
+        methods[f"{module}_constructor_{len(params)}"] = _method_entry(
+            False, tokens, "", params, " ".join(tokens + [f"{module}({', '.join(params)})"]),
+            _regex_compat_javadoc(content, start))
+
+    for decl in decls:                                       # pass 2: methods with a body
+        if decl.type != "method_declaration" or decl.child_by_field_name("body") is None:
+            continue
+        name_node = decl.child_by_field_name("name")
+        name = node_text(name_node, src)
+        if name == module:
+            continue
+        tokens = _modifier_tokens(decl)
+        params = _params(decl, src)
+        start = _concrete_match_start(content, _char_pos(src, content, name_node.start_byte))
+        methods[name] = _method_entry(
+            False, tokens, _return_type(decl, src), params,
+            _regex_compat_signature(decl, tokens, name, params, src),
+            _regex_compat_javadoc(content, start))
+
+    for decl in decls:                                       # pass 3: abstract methods
+        if decl.type != "method_declaration" or decl.child_by_field_name("body") is not None:
+            continue
+        tokens = _modifier_tokens(decl)
+        name = node_text(decl.child_by_field_name("name"), src)
+        if "abstract" not in tokens or name == module:
+            continue
+        params = _params(decl, src)
+        abstract_pos, _ = _modifier_node_pos(decl, ("abstract",), src, content)
+        methods[name] = _method_entry(
+            True, tokens, _return_type(decl, src), params,
+            _regex_compat_abstract_signature(decl, tokens, name, params, src),
+            _regex_compat_javadoc(content, _abstract_match_start(content, abstract_pos)))
+
+    return methods
+
+
 # --- entry point -----------------------------------------------------------------
 
 def analyze_java_file_ast(content, filename):
@@ -399,10 +610,10 @@ def analyze_java_file_ast(content, filename):
     if type_node is None:
         return None
 
-    name = type_node.child_by_field_name("name")
+    module = node_text(type_node.child_by_field_name("name"), src)
     fields, constants = extract_fields_and_constants(type_node, src)
     return {
-        "module":     node_text(name, src),
+        "module":     module,
         "package":    extract_package(root, src),
         "type":       extract_type_kind(type_node),
         "parent":     extract_parent(type_node, src),
@@ -410,5 +621,5 @@ def analyze_java_file_ast(content, filename):
         "fields":     fields,
         "constants":  constants,
         "assets":     extract_assets(root, src),
-        "methods":    {},   # A3-A5
+        "methods":    extract_methods(type_node, module, src, content),  # bodies: A4-A5
     }

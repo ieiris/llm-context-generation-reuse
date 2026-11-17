@@ -271,8 +271,9 @@ def test_dict_shape(name):
     assert all(isinstance(k, str) and list(v) == ["type", "value"]
                and all(isinstance(x, str) for x in v.values()) for k, v in ast["constants"].items())
     assert isinstance(ast["assets"], list) and all(isinstance(a, str) for a in ast["assets"])
-    # Not filled until A3-A5, but already of the regex type.
-    assert ast["methods"] == {}
+    # A3: methods {key: entry}; entry contents are checked in test_java_ast_a3.py.
+    assert isinstance(ast["methods"], dict)
+    assert all(isinstance(k, str) and isinstance(v, dict) for k, v in ast["methods"].items())
 
 
 def test_empty_source_returns_none():
