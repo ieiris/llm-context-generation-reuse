@@ -266,9 +266,13 @@ def test_dict_shape(name):
     assert ast["parent"] is None or isinstance(ast["parent"], str)
     assert isinstance(ast["implements"], list)
     assert all(isinstance(i, str) for i in ast["implements"])
-    # Not filled until A2-A5, but already of the regex types.
-    assert ast["fields"] == {} and ast["constants"] == {}
-    assert ast["assets"] == [] and ast["methods"] == {}
+    # A2: fields {name: type}, constants {name: {"type", "value"}}, assets [str].
+    assert all(isinstance(k, str) and isinstance(v, str) for k, v in ast["fields"].items())
+    assert all(isinstance(k, str) and list(v) == ["type", "value"]
+               and all(isinstance(x, str) for x in v.values()) for k, v in ast["constants"].items())
+    assert isinstance(ast["assets"], list) and all(isinstance(a, str) for a in ast["assets"])
+    # Not filled until A3-A5, but already of the regex type.
+    assert ast["methods"] == {}
 
 
 def test_empty_source_returns_none():

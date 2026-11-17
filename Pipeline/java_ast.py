@@ -9,8 +9,8 @@ Stage A of the migration: reproduce the regex rules, except for documented regex
 
 Filled so far:
     A1  module, package, type, parent, implements
-To do:
     A2  fields, constants, assets
+To do:
     A3  methods and constructors (signatures, javadoc)
     A4  calls
     A5  logic_hints, values_hint
@@ -207,6 +207,177 @@ def extract_implements(type_node, src):
     return [type_name(t, src) for t in _type_list(interfaces)]
 
 
+# --- A2: fields, constants, assets -------------------------------------------------
+#
+# Fields and constants are taken from the main type, including its nested, enum, anonymous and
+# local classes (as regex, which runs over the whole text; decision 17.11, to be revisited in B3),
+# but not from other top-level types, comments or string literals (fixes A2-n).
+#
+# Functions named _regex_compat_* repeat regex bugs that occur in the 4 games and reach the
+# model (decision 17.11). Each one is removed separately in stage B4, with a measurement.
+
+ACCESS_MODIFIERS = ("public", "protected", "private")
+FIELD_DECLS = ("field_declaration", "constant_declaration")   # constant_declaration: interface body
+ANNOTATION_TYPES = ("marker_annotation", "annotation")
+
+# Same pattern as Context_gen.ASSET_PAT (a test checks this).
+ASSET_PAT = re.compile(r'"([^"]+\.(?:png|jpg|wav|mp3|gif|ttf))"')
+
+# Names Context_gen.analyze_java_file never reports as fields (plus any one-letter name).
+_REGEX_SKIPPED_FIELD_NAMES = frozenset({
+    "int", "void", "boolean", "String", "true", "false", "null", "new", "return", "class"})
+
+# Context_gen.CONST_PAT: constant value cut to this many characters.
+_CONST_VALUE_MAX = 60
+
+
+def _iter_nodes(node, types, descend_into_matches=True):
+    """Nodes of the given types inside `node`, in source order (pre-order)."""
+    stack = [node]
+    while stack:
+        cur = stack.pop()
+        if cur.type in types:
+            yield cur
+            if not descend_into_matches:
+                continue
+        stack.extend(reversed(cur.children))
+
+
+def _clean_span(src, start, end, scope):
+    """Source text between byte offsets `start`..`end` without comments, whitespace collapsed
+    (as Context_gen.clean_type). `scope` is a node that contains the span (comments are looked
+    up inside it)."""
+    parts = []
+    pos = start
+    for c in _iter_nodes(scope, COMMENT_TYPES):
+        if start <= c.start_byte and c.end_byte <= end:
+            parts.append(src[pos:c.start_byte])
+            pos = c.end_byte
+    parts.append(src[pos:end])
+    return _WS.sub(" ", b"".join(parts).decode("utf-8")).strip()
+
+
+def _clean_node(node, src):
+    return _clean_span(src, node.start_byte, node.end_byte, node)
+
+
+def _modifier_tokens(decl):
+    """Modifier keywords of a declaration in source order; annotations and comments left out."""
+    for child in decl.children:
+        if child.type == "modifiers":
+            return [m.type for m in child.children if not m.is_named]
+    return []
+
+
+def _declarators(decl):
+    return [c for c in decl.children if c.type == "variable_declarator"]
+
+
+def _dimensions(declarator, src):
+    """C-style brackets after the name (`int grid[]` -> `[]`), "" if none."""
+    for c in declarator.children:
+        if c.type == "dimensions":
+            return _clean_node(c, src).replace(" ", "")
+    return ""
+
+
+def _regex_compat_declarator(declarators):
+    """regex compat -> B4. FIELD_PAT keeps one declarator of `int a, b = 1, c;`: the first one
+    with an initializer, otherwise the last one; the others are lost."""
+    for d in declarators:
+        if d.child_by_field_name("value") is not None:
+            return d
+    return declarators[-1]
+
+
+def _regex_compat_type_modifiers(tokens):
+    """regex compat -> B4. FIELD_PAT starts at the access modifier and then skips an optional
+    `static`, `final`, `static`; the modifiers after that become part of the type
+    (`private volatile boolean` -> `volatile boolean`). Modifiers before the access modifier
+    are not seen."""
+    access = next(i for i, t in enumerate(tokens) if t in ACCESS_MODIFIERS)
+    rest = tokens[access + 1:]
+    for kw in ("static", "final", "static"):
+        if rest and rest[0] == kw:
+            rest = rest[1:]
+    return rest
+
+
+def _regex_compat_field_type(decl, declarator, tokens, src):
+    """regex compat -> B4. Field type as FIELD_PAT reports it: modifiers left in the type
+    (_regex_compat_type_modifiers) + the text from the type to the name of the kept declarator,
+    so `int a, b;` gives `int a,` for `b`.
+
+    Fix (A2-n): with C-style brackets on the kept declarator (`int grid[]`) regex loses the field;
+    here the type is the declared type plus the brackets (`int[]`)."""
+    type_node = decl.child_by_field_name("type")
+    dims = _dimensions(declarator, src)
+    if dims:
+        text = _clean_node(type_node, src) + dims
+    else:
+        name = declarator.child_by_field_name("name")
+        text = _clean_span(src, type_node.start_byte, name.start_byte, decl)
+    return " ".join(_regex_compat_type_modifiers(tokens) + [text])
+
+
+def _regex_compat_field_name_ok(name):
+    """regex compat -> B4. analyze_java_file drops one-letter names (`x`, `y`) and a few words."""
+    return len(name) >= 2 and name not in _REGEX_SKIPPED_FIELD_NAMES
+
+
+def _regex_compat_is_constant(tokens):
+    """regex compat -> B4. CONST_PAT needs the modifiers in the order `public static final`
+    (`public final static` is not a constant). Annotations and comments between them do not
+    matter (fix A2-n: regex loses such a constant)."""
+    return any(tokens[i:i + 3] == ["public", "static", "final"] for i in range(len(tokens)))
+
+
+def _regex_compat_constant_value(value, src):
+    """regex compat -> B4. CONST_PAT value: raw text from the initializer to the first `;`, even
+    inside a string literal (`"a;b"` -> `"a`) or past the next declarator (`1, MAX = 9`),
+    stripped, at most 60 characters."""
+    end = src.find(b";", value.start_byte)
+    if end == -1:
+        end = value.end_byte
+    return src[value.start_byte:end].decode("utf-8").strip()[:_CONST_VALUE_MAX]
+
+
+def extract_fields_and_constants(type_node, src):
+    """(fields, constants) of the main type, as Context_gen.analyze_java_file builds them:
+    fields {name: type}: declarations with an access modifier (package-private and interface
+    fields without written modifiers are skipped, as regex);
+    constants {name: {"type", "value"}}: `public static final` with an initializer; only the first
+    declarator (regex compat). A repeated name keeps its first position and the last value."""
+    fields, constants = {}, {}
+    for decl in _iter_nodes(type_node, FIELD_DECLS):
+        declarators = _declarators(decl)
+        if not declarators:
+            continue
+        tokens = _modifier_tokens(decl)
+        if any(t in ACCESS_MODIFIERS for t in tokens):
+            kept = _regex_compat_declarator(declarators)
+            name = node_text(kept.child_by_field_name("name"), src)
+            if _regex_compat_field_name_ok(name):
+                fields[name] = _regex_compat_field_type(decl, kept, tokens, src)
+        if _regex_compat_is_constant(tokens):
+            first = declarators[0]
+            value = first.child_by_field_name("value")
+            if value is not None:
+                ctype = _clean_node(decl.child_by_field_name("type"), src) + _dimensions(first, src)
+                constants[node_text(first.child_by_field_name("name"), src)] = {
+                    "type": ctype, "value": _regex_compat_constant_value(value, src)}
+    return fields, constants
+
+
+def extract_assets(root, src):
+    """Asset file names (ASSET_PAT) from the string literals of the whole file, without repeats,
+    in order of first occurrence (decision 11). Fix (A2-n): regex also takes them from comments."""
+    found = []
+    for lit in _iter_nodes(root, ("string_literal",), descend_into_matches=False):
+        found.extend(ASSET_PAT.findall(node_text(lit, src)))
+    return list(dict.fromkeys(found))
+
+
 # --- entry point -----------------------------------------------------------------
 
 def analyze_java_file_ast(content, filename):
@@ -229,14 +400,15 @@ def analyze_java_file_ast(content, filename):
         return None
 
     name = type_node.child_by_field_name("name")
+    fields, constants = extract_fields_and_constants(type_node, src)
     return {
         "module":     node_text(name, src),
         "package":    extract_package(root, src),
         "type":       extract_type_kind(type_node),
         "parent":     extract_parent(type_node, src),
         "implements": extract_implements(type_node, src),
-        "fields":     {},   # A2
-        "constants":  {},   # A2
-        "assets":     [],   # A2
+        "fields":     fields,
+        "constants":  constants,
+        "assets":     extract_assets(root, src),
         "methods":    {},   # A3-A5
     }
