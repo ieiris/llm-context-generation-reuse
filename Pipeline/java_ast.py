@@ -10,10 +10,10 @@ Stage A of the migration: reproduce the regex rules, except for documented regex
 Filled so far:
     A1  module, package, type, parent, implements
     A2  fields, constants, assets
-    A3  methods and constructors (signatures, javadoc; bodies are empty lists)
-To do:
+    A3  methods and constructors (signatures, javadoc)
     A4  calls
-    A5  logic_hints, values_hint
+To do:
+    A5  logic_hints, values_hint (empty lists until then)
 
 Parse errors: tree-sitter always returns a tree, even for broken code. If the tree has errors,
 analyze_java_file_ast issues a JavaParseWarning (file name, line:column of each error). An error
@@ -509,8 +509,8 @@ def _regex_compat_javadoc(content, match_start):
     return _JAVADOC_JUNK.sub(" ", matches[-1].group(0)).strip()[:_JAVADOC_MAX]
 
 
-def _method_entry(abstract, modifiers, return_type, params, signature, javadoc):
-    """Same keys in the same order as Context_gen; the body fields are filled in A4 / A5."""
+def _method_entry(abstract, modifiers, return_type, params, signature, javadoc, calls):
+    """Same keys in the same order as Context_gen; logic_hints / values_hint are filled in A5."""
     return {
         "abstract": abstract,
         "modifiers": modifiers,
@@ -518,7 +518,7 @@ def _method_entry(abstract, modifiers, return_type, params, signature, javadoc):
         "params": params,
         "signature": signature,
         "javadoc": javadoc,
-        "calls": [],
+        "calls": calls,
         "logic_hints": [],
         "values_hint": [],
     }
@@ -537,8 +537,8 @@ def _modifier_node_pos(decl, keywords, src, content):
 
 def extract_methods(type_node, module, src, content):
     """Methods and constructors of the main type, as Context_gen.analyze_java_file builds them
-    (three passes, see the comment above); `calls`, `logic_hints`, `values_hint` are empty
-    until A4 / A5."""
+    (three passes, see the comment above); `calls` from A4, `logic_hints` and `values_hint` are
+    empty until A5."""
     decls = list(_iter_nodes(type_node, ("constructor_declaration", "method_declaration")))
     methods = {}
 
@@ -555,7 +555,7 @@ def extract_methods(type_node, module, src, content):
                                          _char_pos(src, content, name_node.start_byte))
         methods[f"{module}_constructor_{len(params)}"] = _method_entry(
             False, tokens, "", params, " ".join(tokens + [f"{module}({', '.join(params)})"]),
-            _regex_compat_javadoc(content, start))
+            _regex_compat_javadoc(content, start), extract_calls(decl, src))
 
     for decl in decls:                                       # pass 2: methods with a body
         if decl.type != "method_declaration" or decl.child_by_field_name("body") is None:
@@ -570,7 +570,7 @@ def extract_methods(type_node, module, src, content):
         methods[name] = _method_entry(
             False, tokens, _return_type(decl, src), params,
             _regex_compat_signature(decl, tokens, name, params, src),
-            _regex_compat_javadoc(content, start))
+            _regex_compat_javadoc(content, start), extract_calls(decl, src))
 
     for decl in decls:                                       # pass 3: abstract methods
         if decl.type != "method_declaration" or decl.child_by_field_name("body") is not None:
@@ -584,9 +584,104 @@ def extract_methods(type_node, module, src, content):
         methods[name] = _method_entry(
             True, tokens, _return_type(decl, src), params,
             _regex_compat_abstract_signature(decl, tokens, name, params, src),
-            _regex_compat_javadoc(content, _abstract_match_start(content, abstract_pos)))
+            _regex_compat_javadoc(content, _abstract_match_start(content, abstract_pos)), [])
 
     return methods
+
+
+# --- A4: calls ---------------------------------------------------------------------
+#
+# `calls` of a method or constructor: the calls in its body, written as Context_gen writes them
+# (`receiver.name`, without repeats, sorted). Unlike regex, which runs CALL_PAT `(\w+)\.(\w+)\(`
+# over the body text cut out by counting braces, only AST nodes are read, so calls in comments and
+# string literals are not taken and braces in comments / literals do not move the end of the body
+# (fixes A4-1..A4-4, decision 17.11). Calls of nested, anonymous and local classes and lambdas
+# also go to the enclosing method (as regex, B3); an abstract method has none.
+# What regex can and cannot see is repeated by the _regex_compat_* functions below
+# (B5b; the receiver filter: B5a).
+
+# Context_gen.extract_method_calls drops calls on these receivers (a test checks the tuple).
+REGEX_CALL_FILTER = ('this', 'super', 'self', 'Math', 'System', 'String', 'Integer', 'Boolean',
+                     'Object')
+_CALL_NODES = ("method_invocation", "object_creation_expression")
+_WORD = re.compile(r"\w+")
+_WORD_SUFFIX = re.compile(r"\w+$")
+
+
+def _regex_compat_receiver(obj, src):
+    """regex compat -> B5b. (receiver, node that ends with it): the name CALL_PAT sees right before
+    the dot. identifier -> its text; field access -> the field (`this.x.foo()` -> `x`,
+    `System.out.println()` -> `out`, `Outer.this.foo()` -> `this`); this / super -> `this` /
+    `super`; class literal `X.class` -> `class`. (None, None) for what regex cannot see: chains
+    `a().foo()`, `arr[i].foo()`, `(x).foo()`, `new X().foo()`, literals, no receiver at all."""
+    if obj is None:
+        return None, None
+    if obj.type in ("identifier", "this", "super"):
+        last = obj
+    elif obj.type == "field_access":
+        last = obj.child_by_field_name("field")
+    elif obj.type == "class_literal":
+        return "class", obj
+    else:
+        return None, None
+    m = _WORD_SUFFIX.search(node_text(last, src))     # `a$b` -> `b`, as `(\w+)`
+    return (m.group(), last) if m else (None, None)
+
+
+def _regex_compat_adjacent(last, name, src):
+    """regex compat -> B5b. CALL_PAT needs `receiver.name(` written without anything in between:
+    a space, line break, comment or type arguments (`x.<T>foo(`) lose the call."""
+    return (src[last.end_byte:name.start_byte] == b"."
+            and src[name.end_byte:name.end_byte + 1] == b"("
+            and _WORD.fullmatch(node_text(name, src)) is not None)
+
+
+def _regex_compat_qualified_new(node, src):
+    """regex compat -> B5b. A constructor call with a qualified type is taken by CALL_PAT for a
+    method call: `new Rectangle2D.Float(...)` -> ("Rectangle2D", "Float"), `new java.awt.Point()`
+    -> ("awt", "Point"). None for a simple or generic type (`new Point(`, `new a.B<T>(`)."""
+    type_node = node.child_by_field_name("type")
+    if type_node is None or type_node.type != "scoped_type_identifier":
+        return None
+    parts = _non_comment_children(type_node)
+    prefix, name = parts[0], parts[-1]
+    if prefix.type == "scoped_type_identifier":
+        prefix = _non_comment_children(prefix)[-1]
+    if prefix.type != "type_identifier" or not _regex_compat_adjacent(prefix, name, src):
+        return None
+    m = _WORD_SUFFIX.search(node_text(prefix, src))
+    return (m.group(), node_text(name, src)) if m else None
+
+
+def _regex_compat_receiver_dropped(receiver):
+    """regex compat -> B5a. Context_gen.extract_method_calls drops calls on this / super and on a
+    few receiver names (REGEX_CALL_FILTER), also when they are variables."""
+    return receiver in REGEX_CALL_FILTER
+
+
+def _call_candidates(body, src):
+    """(receiver, method name) of every call in `body` that CALL_PAT would see, before the
+    receiver filter, in source order (with repeats)."""
+    for node in _iter_nodes(body, _CALL_NODES):
+        if node.type == "object_creation_expression":
+            pair = _regex_compat_qualified_new(node, src)
+            if pair is not None:
+                yield pair
+            continue
+        name = node.child_by_field_name("name")
+        receiver, last = _regex_compat_receiver(node.child_by_field_name("object"), src)
+        if receiver is not None and _regex_compat_adjacent(last, name, src):
+            yield receiver, node_text(name, src)
+
+
+def extract_calls(decl, src):
+    """`calls` of a method or constructor declaration: `receiver.name`, unique, sorted; [] without
+    a body."""
+    body = decl.child_by_field_name("body")
+    if body is None:
+        return []
+    return sorted({f"{receiver}.{name}" for receiver, name in _call_candidates(body, src)
+                   if not _regex_compat_receiver_dropped(receiver)})
 
 
 # --- entry point -----------------------------------------------------------------
@@ -621,5 +716,5 @@ def analyze_java_file_ast(content, filename):
         "fields":     fields,
         "constants":  constants,
         "assets":     extract_assets(root, src),
-        "methods":    extract_methods(type_node, module, src, content),  # bodies: A4-A5
+        "methods":    extract_methods(type_node, module, src, content),  # logic / values: A5
     }
