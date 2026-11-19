@@ -348,7 +348,13 @@ def split_contexts(full_context):
     return structural, functional, behavioral
 
 
-def generate_context(zip_path, game_name, output_dir="."):
+def generate_context(zip_path, game_name, output_dir=".", parser="regex"):
+    if parser == "regex":
+        analyze = analyze_java_file
+    elif parser == "ast":
+        from java_ast import analyze_java_file_ast as analyze  # tree-sitter needed only for AST
+    else:
+        raise ValueError(f"Unknown parser: {parser!r} (expected 'regex' or 'ast')")
     print(f"Processing {game_name} from {zip_path}...")
     full_context = {}
 
@@ -366,7 +372,7 @@ def generate_context(zip_path, game_name, output_dir="."):
                 try:
                     with open(fpath, 'r', encoding='utf-8', errors='ignore') as f:
                         content = f.read()
-                    data = analyze_java_file(content, fname)
+                    data = analyze(content, fname)
                     if data:
                         full_context[data["module"]] = data
                 except Exception as e:
@@ -613,7 +619,8 @@ if __name__ == "__main__":
         zip_path   = args[2]
         output_dir = args[3] if len(args) > 3 and not args[3].startswith("--") else "."
         subtypes   = get_multi_flag(args, "--subtypes") or None
-        paths = generate_context(zip_path, game_name, output_dir)
+        parser     = get_flag(args, "--parser") or "regex"
+        paths = generate_context(zip_path, game_name, output_dir, parser)
         with open(paths["Context"]) as f:
             full_context = json.load(f)
         generate_subtype_files(full_context, game_name, subtypes, output_dir)
