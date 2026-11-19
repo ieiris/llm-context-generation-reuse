@@ -30,7 +30,8 @@ OTHER_SAMPLE_DIRS = [os.path.join(HERE, "java_samples", d) for d in ("a1", "a2")
 ENTRY_KEYS = ["abstract", "modifiers", "return_type", "params", "signature", "javadoc",
               "calls", "logic_hints", "values_hint"]
 VISIBLE = ("abstract", "params", "signature", "javadoc")   # what reaches S / F / B
-PINNED_BODY_FIELDS = ("logic_hints", "values_hint")    # `calls`: A4 (test_java_ast_a4.py)
+# Values checked in A4 (`calls`, test_java_ast_a4.py) and A5 (test_java_ast_a5.py); here only the type.
+BODY_FIELDS = ("calls", "logic_hints", "values_hint")
 
 pytestmark = pytest.mark.filterwarnings("ignore::java_ast.JavaParseWarning")
 
@@ -382,8 +383,8 @@ def test_entry_shape(name):
         assert isinstance(entry["return_type"], str)
         assert all(isinstance(p, str) for p in entry["params"])
         assert isinstance(entry["signature"], str) and isinstance(entry["javadoc"], str)
-        for field in PINNED_BODY_FIELDS:         # filled in A5
-            assert entry[field] == []
+        for field in BODY_FIELDS:
+            assert isinstance(entry[field], list) and all(isinstance(v, str) for v in entry[field])
 
 
 # A1 / A2 samples where the methods differ on purpose; "regex" pins the visible regex output.

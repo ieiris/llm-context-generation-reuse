@@ -12,8 +12,7 @@ Filled so far:
     A2  fields, constants, assets
     A3  methods and constructors (signatures, javadoc)
     A4  calls
-To do:
-    A5  logic_hints, values_hint (empty lists until then)
+    A5  logic_hints, values_hint
 
 Parse errors: tree-sitter always returns a tree, even for broken code. If the tree has errors,
 analyze_java_file_ast issues a JavaParseWarning (file name, line:column of each error). An error
@@ -509,8 +508,9 @@ def _regex_compat_javadoc(content, match_start):
     return _JAVADOC_JUNK.sub(" ", matches[-1].group(0)).strip()[:_JAVADOC_MAX]
 
 
-def _method_entry(abstract, modifiers, return_type, params, signature, javadoc, calls):
-    """Same keys in the same order as Context_gen; logic_hints / values_hint are filled in A5."""
+def _method_entry(abstract, modifiers, return_type, params, signature, javadoc, calls,
+                  logic_hints, values_hint):
+    """Same keys in the same order as Context_gen."""
     return {
         "abstract": abstract,
         "modifiers": modifiers,
@@ -519,8 +519,8 @@ def _method_entry(abstract, modifiers, return_type, params, signature, javadoc, 
         "signature": signature,
         "javadoc": javadoc,
         "calls": calls,
-        "logic_hints": [],
-        "values_hint": [],
+        "logic_hints": logic_hints,
+        "values_hint": values_hint,
     }
 
 
@@ -535,10 +535,10 @@ def _modifier_node_pos(decl, keywords, src, content):
     return None, None
 
 
-def extract_methods(type_node, module, src, content):
+def extract_methods(type_node, module, src, content, known_fields):
     """Methods and constructors of the main type, as Context_gen.analyze_java_file builds them
-    (three passes, see the comment above); `calls` from A4, `logic_hints` and `values_hint` are
-    empty until A5."""
+    (three passes, see the comment above); `calls` from A4, `logic_hints` (only fields in
+    `known_fields`) and `values_hint` from A5."""
     decls = list(_iter_nodes(type_node, ("constructor_declaration", "method_declaration")))
     methods = {}
 
@@ -555,7 +555,8 @@ def extract_methods(type_node, module, src, content):
                                          _char_pos(src, content, name_node.start_byte))
         methods[f"{module}_constructor_{len(params)}"] = _method_entry(
             False, tokens, "", params, " ".join(tokens + [f"{module}({', '.join(params)})"]),
-            _regex_compat_javadoc(content, start), extract_calls(decl, src))
+            _regex_compat_javadoc(content, start), extract_calls(decl, src),
+            extract_logic_hints(decl, src, known_fields), extract_values_hint(decl, src))
 
     for decl in decls:                                       # pass 2: methods with a body
         if decl.type != "method_declaration" or decl.child_by_field_name("body") is None:
@@ -570,7 +571,8 @@ def extract_methods(type_node, module, src, content):
         methods[name] = _method_entry(
             False, tokens, _return_type(decl, src), params,
             _regex_compat_signature(decl, tokens, name, params, src),
-            _regex_compat_javadoc(content, start), extract_calls(decl, src))
+            _regex_compat_javadoc(content, start), extract_calls(decl, src),
+            extract_logic_hints(decl, src, known_fields), extract_values_hint(decl, src))
 
     for decl in decls:                                       # pass 3: abstract methods
         if decl.type != "method_declaration" or decl.child_by_field_name("body") is not None:
@@ -584,7 +586,7 @@ def extract_methods(type_node, module, src, content):
         methods[name] = _method_entry(
             True, tokens, _return_type(decl, src), params,
             _regex_compat_abstract_signature(decl, tokens, name, params, src),
-            _regex_compat_javadoc(content, _abstract_match_start(content, abstract_pos)), [])
+            _regex_compat_javadoc(content, _abstract_match_start(content, abstract_pos)), [], [], [])
 
     return methods
 
@@ -684,6 +686,135 @@ def extract_calls(decl, src):
                    if not _regex_compat_receiver_dropped(receiver)})
 
 
+# --- A5: logic_hints, values_hint ------------------------------------------------------
+#
+# Context_gen runs two patterns over the body text (cut out by counting braces):
+#   logic_hints  ASSIGN_PAT `(this\.\w+)\s*=\s*([^;\n]{1,60})` -> "field = expr", only fields in
+#                known_fields, repeats kept, at most 4;
+#   values_hint  NUMERIC_PAT `\b(\d{2,5})\b` -> numbers without repeats, in order of first
+#                occurrence, at most 6 (decision 11).
+# Here the candidates come from AST nodes of the body: `this.f` field accesses and literals. So
+# comments (decision 19.11, fix A5-1) and string literals are not searched, and the body ends where
+# the method ends (decision 17.11, as in A4). What regex sees in the 4 games is repeated by the
+# _regex_compat_* functions below (removed in stage B11, with a measurement).
+
+# Context_gen.ASSIGN_PAT is `(this\.\w+)` + this pattern (a test checks it).
+_ASSIGN_TAIL = re.compile(r'\s*=\s*([^;\n]{1,60})')
+# The expression after the `=` of an assignment regex cannot see (fix A5-n): same text rule.
+_ASSIGN_EXPR = re.compile(r'\s*([^;\n]{1,60})')
+# Same pattern as Context_gen.NUMERIC_PAT (a test checks this).
+NUMERIC_PAT = re.compile(r'\b(\d{2,5})\b')
+_MAX_LOGIC_HINTS = 4     # Context_gen.extract_logic_hints: hints[:4]
+_MAX_VALUES = 6          # Context_gen.analyze_java_file: [:6]
+_NUMBER_LITERALS = ("decimal_integer_literal", "hex_integer_literal", "octal_integer_literal",
+                    "binary_integer_literal", "decimal_floating_point_literal",
+                    "hex_floating_point_literal")
+_TEXT_LITERALS = ("string_literal", "character_literal")
+
+
+def _body_text(body, src):
+    """(text of the body, function: byte offset in src -> character offset in that text).
+    The regex parser matches on the body text, so positions are characters of the body."""
+    raw = src[body.start_byte:body.end_byte]
+    text = raw.decode("utf-8")
+    if len(raw) == len(text):        # ASCII only
+        return text, lambda byte_pos: byte_pos - body.start_byte
+    return text, lambda byte_pos: len(raw[:byte_pos - body.start_byte].decode("utf-8"))
+
+
+def _regex_compat_this_token(field_access):
+    """regex compat -> B11. The `this` that ASSIGN_PAT sees before the field: `this.f`, and also
+    `Outer.this.f` (a field of the outer class written from an anonymous class; 11 in the games).
+    None for other objects (`other.f`, `this.a.f`, `super.f`)."""
+    obj = field_access.child_by_field_name("object")
+    if obj is None:
+        return None
+    if obj.type == "this":
+        return obj
+    if obj.type == "field_access":
+        last = obj.child_by_field_name("field")
+        if last is not None and last.type == "this":
+            return last
+    return None
+
+
+def _regex_compat_assign_tail(text, pos):
+    """regex compat -> B11. ASSIGN_PAT after `this.name` (`pos` = right after the name): `=` with
+    optional whitespace around it (line breaks too), then the expression = raw text up to the first
+    `;` or line end, at most 60 characters. So `this.f == x` is taken as `f = = x) {` (252 hints
+    in the games), a long expression is cut, the text may run past the expression (`) {`) and a
+    `;` inside a string literal cuts it (`"a;b"` -> `"a`). Returns the match or None."""
+    return _ASSIGN_TAIL.match(text, pos)
+
+
+def _plain_assignment_operator(field_access):
+    """The `=` token of `field_access = ...` (not `+=` etc.), or None."""
+    parent = field_access.parent
+    if (parent is None or parent.type != "assignment_expression"
+            or parent.child_by_field_name("left") != field_access):
+        return None
+    op = parent.child_by_field_name("operator")
+    return op if op is not None and op.type == "=" else None
+
+
+def extract_logic_hints(decl, src, known_fields):
+    """`logic_hints` of a method or constructor: "field = expr" for `this.field = expr` in the body,
+    as Context_gen.extract_logic_hints (only fields in `known_fields`, repeats kept, at most 4);
+    [] without a body.
+
+    regex compat -> B11 (_regex_compat_*): `Outer.this.f`, `this.f == x`, the expression text, and
+    the non-overlapping matches of findall: a candidate that starts inside the text of the previous
+    match is skipped (`this.a == 1 || this.a == 2` gives one hint; 38 in the games), also when the
+    previous match was not kept by the known_fields filter.
+    Fixes: nothing from comments (A5-1) or string literals; `this . f = 1` and `this.f /* c */ = 1`
+    are taken (A5-n: regex cannot see them)."""
+    body = decl.child_by_field_name("body")
+    if body is None:
+        return []
+    text, char_pos = _body_text(body, src)
+    hints, consumed = [], 0
+    for fa in _iter_nodes(body, ("field_access",)):
+        this = _regex_compat_this_token(fa)
+        if this is None or char_pos(this.start_byte) < consumed:
+            continue
+        field = fa.child_by_field_name("field")
+        m = None
+        if src[this.end_byte:field.start_byte] == b".":
+            m = _regex_compat_assign_tail(text, char_pos(field.end_byte))
+        if m is None:
+            op = _plain_assignment_operator(fa)
+            if op is None:
+                continue
+            m = _ASSIGN_EXPR.match(text, char_pos(op.end_byte))
+            if m is None:
+                continue
+        consumed = m.end()
+        name = node_text(field, src)
+        if name in known_fields:
+            hints.append(f"{name} = {m.group(1).strip()}")
+    return hints[:_MAX_LOGIC_HINTS]
+
+
+def _regex_compat_numbers(literal_text):
+    """regex compat -> B11. NUMERIC_PAT over the text of one literal: numbers of 2-5 digits, also
+    inside string literals (`"200"` -> `200`) and the parts of a decimal number (`1000.0` -> `1000`,
+    `0.004` -> `004`); a literal with a suffix (`100f`, `10L`) gives nothing."""
+    return NUMERIC_PAT.findall(literal_text)
+
+
+def extract_values_hint(decl, src):
+    """`values_hint` of a method or constructor: the numbers of its number, string and character
+    literals (_regex_compat_numbers), without repeats, in order of first occurrence, at most 6
+    (decision 11); [] without a body. Fix A5-1: numbers in comments are not taken."""
+    body = decl.child_by_field_name("body")
+    if body is None:
+        return []
+    found = []
+    for lit in _iter_nodes(body, _NUMBER_LITERALS + _TEXT_LITERALS, descend_into_matches=False):
+        found.extend(_regex_compat_numbers(node_text(lit, src)))
+    return list(dict.fromkeys(found))[:_MAX_VALUES]
+
+
 # --- entry point -----------------------------------------------------------------
 
 def analyze_java_file_ast(content, filename):
@@ -716,5 +847,6 @@ def analyze_java_file_ast(content, filename):
         "fields":     fields,
         "constants":  constants,
         "assets":     extract_assets(root, src),
-        "methods":    extract_methods(type_node, module, src, content),  # logic / values: A5
+        # known_fields = the field names (as Context_gen: the same set as the keys of `fields`)
+        "methods":    extract_methods(type_node, module, src, content, set(fields)),
     }
